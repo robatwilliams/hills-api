@@ -8,9 +8,13 @@ const resolvers = {
   },
 };
 
+const hillsDB = new HillsDBDataSource();
+hillsDB.start();
+
 const server = new ApolloServer({
   dataSources() {
-    return { hillsDB: new HillsDBDataSource() };
+    // This is called by Apollo on every request
+    return { hillsDB };
   },
   resolvers,
   typeDefs: schema

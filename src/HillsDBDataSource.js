@@ -8,8 +8,12 @@ const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
 class HillsDBDataSource {
 
-  initialize(config) {
+  start() {
     this.hills = this.loadData();
+  }
+
+  initialize(config) {
+    // Called by Apollo
   }
 
   async loadData() {
