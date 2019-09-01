@@ -7,6 +7,6 @@ module.exports = gql`
   }
 
   type Hill {
-    Name: String!
+    name: String!
   }
 `;

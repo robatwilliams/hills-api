@@ -14,13 +14,19 @@ class HillsDBDataSource {
 
   async loadData() {
     const textContent = await readFile(DATA_FILE_PATH, 'utf8');
-    return csvParse(textContent, { columns: true });
+    return csvParse(textContent, { columns: true }).map(parseHill);
   }
 
   getAllHills() {
     return this.hills;
   }
 
+}
+
+function parseHill(hill) {
+  return {
+    name: hill.Name,
+  };
 }
 
 module.exports = HillsDBDataSource;
