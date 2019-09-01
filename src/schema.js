@@ -7,5 +7,12 @@ type Query {
 
 type Hill {
   name: String!
+  lists: [List!]!
+}
+
+enum List {
+  HEWITT
+  MUNRO
+  WAINWRIGHT
 }
 `;

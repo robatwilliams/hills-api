@@ -19,7 +19,9 @@ class HillsDBDataSource {
   async loadData() {
     console.log('Loading hills data');
     const textContent = await readFile(DATA_FILE_PATH, 'utf8');
-    return csvParse(textContent, { columns: true }).map(parseHill);
+    return csvParse(textContent, { columns: true })
+      .map(parseHill)
+      .filter(Boolean); // exclude those not parsed
   }
 
   getAll() {
@@ -28,9 +30,25 @@ class HillsDBDataSource {
 
 }
 
+const LIST_CODES = {
+  Hew: 'HEWITT',
+  M: 'MUNRO',
+  W: 'WAINWRIGHT',
+};
+
 function parseHill(hill) {
+  const lists = hill.Classification.split(',')
+    .map(code => LIST_CODES[code])
+    .filter(Boolean); // mapping is incomplete
+
+  if (lists.length === 0) {
+    // Constrain volume of data so it's easier to look at & navigate
+    return undefined;
+  }
+
   return {
     name: hill.Name,
+    lists,
   };
 }
 

@@ -6,6 +6,8 @@ Experimental and incomplete.
 ## Notes
 The GraphQL Playground doesn't work when deployed due to [this issue](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128).
 
+[Field formats](http://www.hills-database.co.uk/database_notes.html#fields) for the database.
+
 
 ## License
 This project is not licensed.
