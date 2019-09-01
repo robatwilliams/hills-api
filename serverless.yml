@@ -10,6 +10,15 @@ plugins:
   - serverless-offline
 
 functions:
+  graphql:
+    handler: graphql.graphqlHandler
+    events:
+    - http:
+        path: graphql
+        method: post
+    - http:
+        path: graphql
+        method: get
   hello:
     handler: handler.hello
     events:
