@@ -22,7 +22,7 @@ class HillsDBDataSource {
     return csvParse(textContent, { columns: true }).map(parseHill);
   }
 
-  getAllHills() {
+  getAll() {
     return this.hills;
   }
 
