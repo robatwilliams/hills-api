@@ -1,5 +1,5 @@
 # hills-api
-> Serverless GraphQL API for *The Database of British and Irish Hills*
+> GraphQL API for *The Database of British and Irish Hills*, serverless on AWS Lambda
 
 Experimental and incomplete.
 
