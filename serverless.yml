@@ -6,6 +6,9 @@ provider:
   reservedConcurrency: 1  # default is account concurrency limit, which is 1000 by default
   timeout: 1  # seconds, default is 6
 
+plugins:
+  - serverless-offline
+
 functions:
   hello:
     handler: handler.hello

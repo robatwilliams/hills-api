@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy",
+    "start": "serverless offline"
   },
   "devDependencies": {
-    "serverless": "^1.51.0"
+    "serverless": "^1.51.0",
+    "serverless-offline": "^5.10.1"
   }
 }
