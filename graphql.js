@@ -4,7 +4,6 @@ const schema = require('./src/schema');
 
 const resolvers = {
   Query: {
-    hello: () => 'Hello world!',
     hills: (obj, args, { dataSources }) => dataSources.hillsDB.getAllHills(),
   },
 };
