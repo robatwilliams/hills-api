@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "deploy": "serverless deploy",
-    "start": "serverless offline --printOutput"
+    "start": "serverless offline --printOutput",
+    "undeploy": "serverless remove"
   },
   "devDependencies": {
     "serverless": "^1.51.0",
