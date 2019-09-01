@@ -19,7 +19,13 @@ class HillsDBDataSource {
   async loadData() {
     console.log('Loading hills data');
     const textContent = await readFile(DATA_FILE_PATH, 'utf8');
-    return csvParse(textContent, { columns: true })
+
+    const options = {
+      cast: value => value === '' ? undefined : value,
+      columns: true,
+    }
+
+    return csvParse(textContent, options)
       .map(parseHill)
       .filter(Boolean); // exclude those not parsed
   }
@@ -74,6 +80,10 @@ function parseHill(hill) {
 }
 
 function parseMaps(maps) {
+  if (!maps) {
+    return [];
+  }
+
   return maps.split(' ')
     .map(sheet => ({ sheet }));
 }
