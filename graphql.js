@@ -16,6 +16,12 @@ const server = new ApolloServer({
     // This is called by Apollo on every request
     return { hillsDB };
   },
+  playground: {
+    settings: {
+      // Reduce from 2s; prevent high server CPU usage when running locally
+      'schema.polling.interval': 30000,
+    },
+  },
   resolvers,
   typeDefs: schema
 });
