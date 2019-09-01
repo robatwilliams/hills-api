@@ -4,7 +4,7 @@ provider:
   name: aws
   runtime: nodejs10.x
   reservedConcurrency: 1  # default is account concurrency limit, which is 1000 by default
-  timeout: 1  # seconds, default is 6
+  timeout: 6  # seconds, default is 6
 
 plugins:
   - serverless-offline
