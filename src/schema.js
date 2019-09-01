@@ -7,9 +7,17 @@ type Query {
 
 type Hill {
   name: String!
+  countries: [Country!]!
   heightMetres: Float!
   lists: [List!]!
   maps: Maps!
+}
+
+enum Country {
+  ENGLAND
+  IRELAND
+  SCOTLAND
+  WALES
 }
 
 enum List {

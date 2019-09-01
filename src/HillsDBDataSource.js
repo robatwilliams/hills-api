@@ -31,6 +31,14 @@ class HillsDBDataSource {
 
 }
 
+const COUNTRIES_CODES = {
+  E: ['ENGLAND'],
+  ES: ['ENGLAND', 'SCOTLAND'],
+  I: ['IRELAND'],
+  S: ['SCOTLAND'],
+  W: ['WALES'],
+};
+
 const LIST_CODES = {
   Hew: 'HEWITT',
   M: 'MUNRO',
@@ -49,6 +57,7 @@ function parseHill(hill) {
 
   return {
     name: hill.Name,
+    countries: COUNTRIES_CODES[hill.Country],
     heightMetres: hill.Metres,
     lists,
     maps: {
