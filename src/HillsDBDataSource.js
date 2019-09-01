@@ -24,8 +24,9 @@ class HillsDBDataSource {
       .filter(Boolean); // exclude those not parsed
   }
 
-  getAll() {
-    return this.hills;
+  async query({ list }) {
+    const hills = await this.hills;
+    return hills.filter(hill => list === undefined || hill.lists.includes(list));
   }
 
 }

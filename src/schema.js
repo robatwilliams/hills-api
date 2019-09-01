@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-lambda');
 
 module.exports = gql`
 type Query {
-  hills: [Hill!]!
+  hills(list: List): [Hill!]!
 }
 
 type Hill {
