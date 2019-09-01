@@ -51,7 +51,16 @@ function parseHill(hill) {
     name: hill.Name,
     heightMetres: hill.Metres,
     lists,
+    maps: {
+      scale25k: parseMaps(hill['Map 1:25k']),
+      scale50k: parseMaps(hill['Map 1:50k']),
+    },
   };
+}
+
+function parseMaps(maps) {
+  return maps.split(' ')
+    .map(sheet => ({ sheet }));
 }
 
 module.exports = HillsDBDataSource;
