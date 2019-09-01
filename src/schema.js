@@ -8,9 +8,12 @@ type Query {
 type Hill {
   name: String!
   countries: [Country!]!
+  county: String!
   heightMetres: Float!
+  island: String
   lists: [List!]!
   maps: Maps!
+  region: String!
 }
 
 enum Country {
