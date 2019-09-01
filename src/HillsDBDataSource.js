@@ -49,6 +49,7 @@ function parseHill(hill) {
 
   return {
     name: hill.Name,
+    heightMetres: hill.Metres,
     lists,
   };
 }

@@ -7,6 +7,7 @@ type Query {
 
 type Hill {
   name: String!
+  heightMetres: Float!
   lists: [List!]!
 }
 
