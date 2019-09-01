@@ -1,0 +1,11 @@
+{
+  "name": "hills-api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "deploy": "serverless deploy"
+  },
+  "devDependencies": {
+    "serverless": "^1.51.0"
+  }
+}
