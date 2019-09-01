@@ -13,6 +13,7 @@ class HillsDBDataSource {
   }
 
   async loadData() {
+    console.log('Loading hills data');
     const textContent = await readFile(DATA_FILE_PATH, 'utf8');
     return csvParse(textContent, { columns: true }).map(parseHill);
   }
