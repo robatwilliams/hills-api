@@ -48,8 +48,7 @@ function parseMaps(maps) {
     return [];
   }
 
-  return maps.split(' ')
-    .map(sheet => ({ sheet }));
+  return maps.split(' ').map(sheet => ({ sheet }));
 }
 
 module.exports = parseHill;

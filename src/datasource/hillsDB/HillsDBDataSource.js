@@ -8,7 +8,6 @@ const readFile = util.promisify(fs.readFile);
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
 class HillsDBDataSource {
-
   start() {
     this.hills = this.loadData();
   }
@@ -22,7 +21,7 @@ class HillsDBDataSource {
     const textContent = await readFile(DATA_FILE_PATH, 'utf8');
 
     const options = {
-      cast: value => value === '' ? undefined : value,
+      cast: value => (value === '' ? undefined : value),
       columns: true,
     };
 
@@ -40,7 +39,6 @@ class HillsDBDataSource {
     const hills = await this.hills;
     return hills.find(hill => hill.number === number);
   }
-
 }
 
 module.exports = HillsDBDataSource;

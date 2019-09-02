@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "check:prettier": "prettier --check src/**/*.js",
     "deploy": "serverless deploy",
     "start": "serverless offline --printOutput",
     "undeploy": "serverless remove"
   },
   "devDependencies": {
+    "prettier": "1.18.2",
     "serverless": "^1.51.0",
     "serverless-offline": "^5.10.1"
   },
