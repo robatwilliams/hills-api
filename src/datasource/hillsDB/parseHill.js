@@ -1,9 +1,10 @@
+// https://en.wikipedia.org/wiki/List_of_ISO_3166_country_codes
 const COUNTRIES_CODES = {
-  E: ['ENGLAND'],
-  ES: ['ENGLAND', 'SCOTLAND'],
-  I: ['IRELAND'],
-  S: ['SCOTLAND'],
-  W: ['WALES'],
+  E: ['GB-ENG'],
+  ES: ['GB-ENG', 'GB-SCT'],
+  I: ['IE'],
+  S: ['GB-SCT'],
+  W: ['GB-WAL'],
 };
 
 const LIST_CODES = {
@@ -22,12 +23,14 @@ function parseHill(hill) {
     return undefined;
   }
 
+  const countries = COUNTRIES_CODES[hill.Country].map(code => ({ code }));
+
   // Without the section number prefix
   const region = hill.Region.split(': ')[1];
 
   return {
     name: hill.Name,
-    countries: COUNTRIES_CODES[hill.Country],
+    countries,
     county: hill.County,
     heightMetres: hill.Metres,
     island: hill.Island,

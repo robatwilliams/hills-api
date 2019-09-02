@@ -16,11 +16,8 @@ type Hill {
   region: String!
 }
 
-enum Country {
-  ENGLAND
-  IRELAND
-  SCOTLAND
-  WALES
+type Country {
+  code: String!
 }
 
 enum List {
