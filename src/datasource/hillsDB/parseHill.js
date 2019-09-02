@@ -38,6 +38,7 @@ function parseHill(hill) {
       scale25k: parseMaps(hill['Map 1:25k']),
       scale50k: parseMaps(hill['Map 1:50k']),
     },
+    number: Number(hill.Number),
     region,
   };
 }

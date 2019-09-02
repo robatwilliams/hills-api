@@ -2,17 +2,19 @@ const { gql } = require('apollo-server-lambda');
 
 module.exports = gql`
 type Query {
+  hill(number: Int): Hill
   hills(list: List): [Hill!]!
 }
 
 type Hill {
-  name: String!
   countries: [Country!]!
   county: String!
   heightMetres: Float!
   island: String
   lists: [List!]!
   maps: Maps!
+  name: String!
+  number: Int!
   region: String!
 }
 

@@ -36,6 +36,11 @@ class HillsDBDataSource {
     return hills.filter(hill => list === undefined || hill.lists.includes(list));
   }
 
+  async queryOne({ number }) {
+    const hills = await this.hills;
+    return hills.find(hill => hill.number === number);
+  }
+
 }
 
 module.exports = HillsDBDataSource;
