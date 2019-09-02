@@ -11,7 +11,7 @@ plugins:
 
 functions:
   graphql:
-    handler: graphql.graphqlHandler
+    handler: src/graphql.graphqlHandler
     events:
     - http:
         path: graphql

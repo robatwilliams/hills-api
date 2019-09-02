@@ -1,14 +1,7 @@
 const { ApolloServer } = require('apollo-server-lambda');
-const HillsDBDataSource = require('./src/HillsDBDataSource');
-const schema = require('./src/schema');
-
-const resolvers = {
-  Query: {
-    hills(obj, { list }, { dataSources }) {
-      return dataSources.hillsDB.query({ list });
-    }
-  },
-};
+const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
+const resolvers = require('./resolvers');
+const schema = require('./schema');
 
 const hillsDB = new HillsDBDataSource();
 hillsDB.start();
