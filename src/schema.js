@@ -18,6 +18,7 @@ type Hill {
 
 type Country {
   code: String!
+  name: String!
 }
 
 enum List {
