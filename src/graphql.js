@@ -12,6 +12,7 @@ const dataSources = {
   hillsDB,
 }
 
+// "Serverless" (!)
 const server = new ApolloServer({
   dataSources() {
     // This is called by Apollo on every request

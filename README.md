@@ -1,12 +1,56 @@
 # hills-api
 > GraphQL API for *The Database of British and Irish Hills*, serverless on AWS Lambda
 
-Experimental and incomplete.
+Experimental and incomplete. Not deployed anywhere.
+
+
+## Backlog
+
+### Features: domain-specific
+* Remainder of fields from the hills database
+* Expose hills from all major lists (not just Munros, Wainwrights, and Hewitts)
+* Field descriptions
+* [MWIS](http://www.mwis.org.uk/) weather forecast areas (using map from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322))
+* [what3words](https://docs.what3words.com/api/v3/) geocoding
+* [PeakFinder](https://www.peakfinder.org) links
+* Map sheet names
+* Expose database version
+* Mark as done, with date and notes. Needs storage, auth.
+
+
+### Features: generic
+* Parent & children fields - some hills are related to each other
+* Filtering. Including by deep fields - "which hills are on map OL7 ?"
+* Sorting
+* [Pagination](https://graphql.org/learn/pagination/)
+* CORS
+* Compression - gzip, Brotli
+* GraphQL playground enabled in production
+
+
+### Technical
+* Review schema-so-far for graphiness, extensibility, and naming
+* Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
+* Hills data in DynamoDB instead of bundled CSV file
+* GraphQL Playground working on non-prod deployment (needs [apollo-server/2136](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128))
+
+
+### Operational
+* Production deployment
+* Domain
+* Logging & monitoring
+* Concurrency limit, request throttling (API Gateway), and budget alarms
+
+
+## Documentation
+* Flesh out the readme
+* Why does this exist
+* How to try it out (playground)
+* Example queries
+
 
 ## Notes
-The GraphQL Playground doesn't work when deployed due to [this issue](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128).
-
-[Field formats](http://www.hills-database.co.uk/database_notes.html#fields) for the database.
+[Field descriptions](http://www.hills-database.co.uk/database_notes.html#fields) for the database.
 
 
 ## License
