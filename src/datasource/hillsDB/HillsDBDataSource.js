@@ -24,7 +24,7 @@ class HillsDBDataSource {
     const options = {
       cast: value => value === '' ? undefined : value,
       columns: true,
-    }
+    };
 
     return csvParse(textContent, options)
       .map(parseHill)

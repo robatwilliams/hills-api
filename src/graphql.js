@@ -10,7 +10,7 @@ hillsDB.start();
 const dataSources = {
   countries: new CountriesDataSource(),
   hillsDB,
-}
+};
 
 // "Serverless" (!)
 const server = new ApolloServer({
@@ -25,7 +25,7 @@ const server = new ApolloServer({
     },
   },
   resolvers,
-  typeDefs: schema
+  typeDefs: schema,
 });
 
 exports.graphqlHandler = server.createHandler();
