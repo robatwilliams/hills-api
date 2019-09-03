@@ -9,14 +9,11 @@ module.exports = gql`
 
   type Hill {
     countries: [Country!]!
-    county: String!
     heightMetres: Float!
-    island: String
     lists: [List!]!
     maps: Maps!
     name: String!
     number: Int!
-    region: String!
   }
 
   type Country {

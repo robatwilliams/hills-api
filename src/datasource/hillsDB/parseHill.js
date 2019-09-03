@@ -24,22 +24,16 @@ function parseHill(hill) {
 
   const countries = COUNTRIES_CODES[hill.Country].map(name => ({ name }));
 
-  // Without the section number prefix
-  const region = hill.Region.split(': ')[1];
-
   return {
     name: hill.Name,
     countries,
-    county: hill.County,
     heightMetres: hill.Metres,
-    island: hill.Island,
     lists,
     maps: {
       scale25k: parseMaps(hill['Map 1:25k']),
       scale50k: parseMaps(hill['Map 1:50k']),
     },
     number: Number(hill.Number),
-    region,
   };
 }
 
