@@ -15,14 +15,18 @@ Experimental and incomplete. Not deployed anywhere.
 * [PeakFinder](https://www.peakfinder.org) links
 * Map sheet names
 * Expose database version
-* Mark as done, with date and notes. Needs storage, auth.
+* User data (needs storage, auth; could be a separate lambda)
+  * Mark as done, with date, notes, link to photos & GPS activity.
+  * Mark as to-do, with reason, link to route.
 
 
 ### Features: generic
 * Parent & children fields - some hills are related to each other
 * Filtering. Including by deep fields - "which hills are on map OL7 ?"
+* Expose available filter values
 * Sorting
 * [Pagination](https://graphql.org/learn/pagination/)
+* Expose display names for enums
 * CORS
 * Compression - gzip, Brotli
 * GraphQL playground enabled in production
@@ -40,13 +44,14 @@ Experimental and incomplete. Not deployed anywhere.
 * Domain
 * Logging & monitoring
 * Concurrency limit, request throttling (API Gateway), and budget alarms
+* Query size limit (don't allow dumping the entire dataset)
 
 
 ## Documentation
 * Flesh out the readme
 * Why does this exist
 * How to try it out (playground)
-* Example queries
+* Example queries with snapshot responses. Script/tests to check/update them. Gitignore large ones (e.g. all hills).
 
 
 ## Notes
