@@ -1,0 +1,7 @@
+{
+  # Ben Nevis
+  hill(number: 278) {
+    height(unit: METRES)
+    name
+  }
+}

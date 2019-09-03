@@ -27,7 +27,10 @@ function parseHill(hill) {
   return {
     name: hill.Name,
     countries,
-    heightMetres: hill.Metres,
+    height: {
+      feet: Number(hill.Feet),
+      metres: Number(hill.Metres),
+    },
     lists,
     maps: {
       scale25k: parseMaps(hill['Map 1:25k']),

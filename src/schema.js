@@ -9,7 +9,7 @@ module.exports = gql`
 
   type Hill {
     countries: [Country!]!
-    heightMetres: Float!
+    height(unit: UnitOfLength!): Float!
     lists: [List!]!
     maps: Maps!
     name: String!
@@ -35,5 +35,10 @@ module.exports = gql`
   type Map {
     # Although most are numbers, the 1:25k Outdoor Leisure series are prefixed "OL"
     sheet: String
+  }
+
+  enum UnitOfLength {
+    FEET
+    METRES
   }
 `;
