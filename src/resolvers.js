@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   Hill: {
-    height(hill, { unit }, context) {
+    height(hill, { unit }) {
       switch (unit) {
         case 'FEET':
           return hill.height.feet;
