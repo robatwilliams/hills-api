@@ -1,9 +1,9 @@
 module.exports = {
   Query: {
-    hill(obj, { number }, { dataSources }) {
+    hill(object, { number }, { dataSources }) {
       return dataSources.hills.queryOne({ number });
     },
-    hills(obj, { list }, { dataSources }) {
+    hills(object, { list }, { dataSources }) {
       return dataSources.hills.query({ list });
     },
   },
