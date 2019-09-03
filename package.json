@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check:prettier": "prettier --check src/**/*.js",
+    "check:prettier": "prettier --ignore-path=./.gitignore --check **/*.{graphql,js,json,md,yml}",
     "deploy": "serverless deploy",
     "start": "serverless offline --printOutput",
     "undeploy": "serverless remove"

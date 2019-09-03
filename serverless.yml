@@ -3,8 +3,8 @@ service: hills-api
 provider:
   name: aws
   runtime: nodejs10.x
-  reservedConcurrency: 1  # default is account concurrency limit, which is 1000 by default
-  timeout: 6  # seconds, default is 6
+  reservedConcurrency: 1 # default is account concurrency limit, which is 1000 by default
+  timeout: 6 # seconds, default is 6
 
 plugins:
   - serverless-offline
@@ -13,9 +13,9 @@ functions:
   graphql:
     handler: src/graphql.graphqlHandler
     events:
-    - http:
-        path: graphql
-        method: post
-    - http:
-        path: graphql
-        method: get
+      - http:
+          path: graphql
+          method: post
+      - http:
+          path: graphql
+          method: get
