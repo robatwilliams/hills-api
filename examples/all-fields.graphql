@@ -1,0 +1,21 @@
+{
+  # Ben Nevis
+  hill(number: 278) {
+    countries {
+      code
+      name
+    }
+    height(unit: METRES)
+    lists
+    maps {
+      scale25k {
+        sheet
+      }
+      scale50k {
+        sheet
+      }
+    }
+    name
+    number
+  }
+}
