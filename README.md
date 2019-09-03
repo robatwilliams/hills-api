@@ -49,7 +49,7 @@ Experimental and incomplete. Not deployed anywhere.
 - Concurrency limit, request throttling (API Gateway), and budget alarms
 - Query size limit (don't allow dumping the entire dataset)
 
-## Documentation
+### Documentation
 
 - Flesh out the readme
 - Why does this exist
