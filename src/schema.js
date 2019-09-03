@@ -10,7 +10,7 @@ module.exports = gql`
   type Hill {
     countries: [Country!]!
     height(unit: UnitOfLength!): Float!
-    maps: Maps!
+    map(scale: Scale!): [Map!]!
     name: String!
     number: Int!
   }
@@ -26,14 +26,14 @@ module.exports = gql`
     WAINWRIGHT
   }
 
-  type Maps {
-    scale25k: [Map!]!
-    scale50k: [Map!]!
-  }
-
   type Map {
     # Although most are numbers, the 1:25k Outdoor Leisure series are prefixed "OL"
     sheet: String
+  }
+
+  enum Scale {
+    ONE_25K
+    ONE_50K
   }
 
   enum UnitOfLength {

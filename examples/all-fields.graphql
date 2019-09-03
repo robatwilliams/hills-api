@@ -6,13 +6,8 @@
       name
     }
     height(unit: METRES)
-    maps {
-      scale25k {
-        sheet
-      }
-      scale50k {
-        sheet
-      }
+    map(scale: ONE_25K) {
+      sheet
     }
     name
     number

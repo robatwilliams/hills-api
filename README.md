@@ -34,7 +34,8 @@ Experimental and incomplete. Not deployed anywhere.
 
 ### Technical
 
-- Review schema-so-far for graphiness, extensibility, and naming
+- Split resolvers into multiple files
+- Split schema into multiple files
 - Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Hills data in DynamoDB instead of bundled CSV file
 - GraphQL Playground working on non-prod deployment (needs [apollo-server/2136](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128))
