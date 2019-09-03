@@ -9,7 +9,7 @@ hillsDB.start();
 
 const dataSources = {
   countries: new CountriesDataSource(),
-  hillsDB,
+  hills: hillsDB,
 };
 
 // "Serverless" (!)

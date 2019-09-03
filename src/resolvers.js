@@ -1,10 +1,10 @@
 module.exports = {
   Query: {
     hill(obj, { number }, { dataSources }) {
-      return dataSources.hillsDB.queryOne({ number });
+      return dataSources.hills.queryOne({ number });
     },
     hills(obj, { list }, { dataSources }) {
-      return dataSources.hillsDB.query({ list });
+      return dataSources.hills.query({ list });
     },
   },
   Country: {
