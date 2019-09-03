@@ -10,7 +10,6 @@ module.exports = gql`
   type Hill {
     countries: [Country!]!
     height(unit: UnitOfLength!): Float!
-    lists: [List!]!
     maps: Maps!
     name: String!
     number: Int!
