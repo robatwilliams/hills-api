@@ -9,6 +9,7 @@
 - [MWIS](http://www.mwis.org.uk/) weather forecast areas (using map from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322))
 - [what3words](https://docs.what3words.com/api/v3/) geocoding
 - [PeakFinder](https://www.peakfinder.org) links
+- [Unusual summit features](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941) data source (with description, photo with url)
 - Map sheet names
 - Expose database version
 - User data (needs storage, auth; could be a separate lambda)
@@ -34,6 +35,7 @@
 - Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Hills data in DynamoDB instead of bundled CSV file
 - GraphQL Playground working on non-prod deployment (needs [apollo-server/2136](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128))
+- Is Apollo needed, what does it give us over the reference implementation?
 
 ## Operational
 
