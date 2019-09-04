@@ -34,7 +34,7 @@ More information about each field can be found here: http://hills-database.co.uk
 - ❌ 🌍 Island
 - ❌ 🌍 🔗 Topo Section
 - ❌ 🌍 County
-- ❌ ℹ️ Classification
+- ❌ ℹ️ Classification - needs to include display name, not just the enum
 - ✅ 🔗 Map 1:50k
 - ✅ 🔗 Map 1:25k
 - ✅ 📏 Metres
