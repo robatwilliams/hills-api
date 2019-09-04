@@ -8,9 +8,9 @@ module.exports = {
     },
   },
   Country: {
-    code(country, args, { dataSources }) {
-      const countryData = dataSources.countries.byName(country.name);
-      return countryData && (countryData.codeISO3166_2 || countryData.codeISO3166_1);
+    async code(country, args, { dataSources }) {
+      const countryData = await dataSources.countries.byName(country.name);
+      return countryData.codeISO3166_2 || countryData.codeISO3166_1;
     },
   },
   Hill: {

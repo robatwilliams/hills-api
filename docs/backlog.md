@@ -46,7 +46,6 @@ Needs storage, auth. Could be a separate lambda.
 
 ## Tech: improvements
 
-- Generic static CSV data source (to replace CountriesDataSource)
 - Split resolvers into multiple files
 - Split schema into multiple files
 - Hills data in DynamoDB instead of bundled CSV file

@@ -1,15 +1,17 @@
 const { ApolloServer } = require('apollo-server-lambda');
-const CountriesDataSource = require('./datasource/countries/CountriesDataSource');
+const CountriesDataSource = require('./datasource/CountriesDataSource');
 const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
 const resolvers = require('./resolvers');
 const schema = require('./schema');
 
-const hillsDB = new HillsDBDataSource();
-hillsDB.start();
+const countriesDataSource = new CountriesDataSource();
+countriesDataSource.start();
+const hillsDataSource = new HillsDBDataSource();
+hillsDataSource.start();
 
 const dataSources = {
-  countries: new CountriesDataSource(),
-  hills: hillsDB,
+  countries: countriesDataSource,
+  hills: hillsDataSource,
 };
 
 // "Serverless" (!)
