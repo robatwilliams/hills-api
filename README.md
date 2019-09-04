@@ -56,10 +56,6 @@ Experimental and incomplete. Not deployed anywhere.
 - How to try it out (playground)
 - Example queries with snapshot responses. Script/tests to check/update them. Gitignore large ones (e.g. all hills).
 
-## Notes
-
-[Field descriptions](http://www.hills-database.co.uk/database_notes.html#fields) for the database.
-
 ## License
 
 This project is not licensed.
