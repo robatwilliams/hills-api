@@ -7,12 +7,6 @@ module.exports = {
       return dataSources.hills.query({ list });
     },
   },
-  Country: {
-    async code(country, args, { dataSources }) {
-      const countryData = await dataSources.countries.byName(country.name);
-      return countryData.codeISO3166_2 || countryData.codeISO3166_1;
-    },
-  },
   Hill: {
     countries: ({ countries }) => countries,
     height(hill, { unit }) {
@@ -23,16 +17,6 @@ module.exports = {
           return hill.height.metres;
         default:
           throw new Error('Unknown unit ' + unit);
-      }
-    },
-    map(hill, { scale }) {
-      switch (scale) {
-        case 'ONE_25K':
-          return hill.maps.scale25k;
-        case 'ONE_50K':
-          return hill.maps.scale50k;
-        default:
-          throw new Error('Unknown scale ' + scale);
       }
     },
   },

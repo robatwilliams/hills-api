@@ -46,7 +46,6 @@ Needs storage, auth. Could be a separate lambda.
 
 ## Tech: improvements
 
-- Split resolvers into multiple files
 - Hills data in DynamoDB instead of bundled CSV file
 - Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot tests for queries (use the example queries)
