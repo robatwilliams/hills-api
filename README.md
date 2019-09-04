@@ -8,7 +8,7 @@ Experimental and incomplete. Not deployed anywhere.
 
 ### Features: domain-specific
 
-- Alternate name as separate field (those in square brackets in db)
+- Alternate names as separate field (those in square brackets in db)
 - Remainder of fields from the hills database
 - Expose hills from all major lists (not just Munros, Wainwrights, and Hewitts)
 - Field descriptions
