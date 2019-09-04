@@ -1,8 +1,8 @@
 const { ApolloServer, makeExecutableSchema } = require('apollo-server-lambda');
 const CountriesDataSource = require('./datasource/CountriesDataSource');
 const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
+const { schema } = require('./modules');
 const resolvers = require('./resolvers');
-const schema = require('./schema');
 
 const countriesDataSource = new CountriesDataSource();
 countriesDataSource.start();
