@@ -14,6 +14,7 @@ module.exports = {
     },
   },
   Hill: {
+    countries: ({ countries }) => countries,
     height(hill, { unit }) {
       switch (unit) {
         case 'FEET':

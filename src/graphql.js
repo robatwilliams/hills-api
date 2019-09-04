@@ -1,4 +1,4 @@
-const { ApolloServer } = require('apollo-server-lambda');
+const { ApolloServer, makeExecutableSchema } = require('apollo-server-lambda');
 const CountriesDataSource = require('./datasource/CountriesDataSource');
 const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
 const resolvers = require('./resolvers');
@@ -14,6 +14,17 @@ const dataSources = {
   hills: hillsDataSource,
 };
 
+const executableSchema = makeExecutableSchema({
+  allowUndefinedInResolve: false,
+  resolvers,
+  typeDefs: schema,
+  resolverValidationOptions: {
+    requireResolversForArgs: true,
+    requireResolversForNonScalar: true,
+    requireResolversForResolveType: true,
+  },
+});
+
 // "Serverless" (!)
 const server = new ApolloServer({
   dataSources() {
@@ -26,8 +37,7 @@ const server = new ApolloServer({
       'schema.polling.interval': 30000,
     },
   },
-  resolvers,
-  typeDefs: schema,
+  schema: executableSchema,
 });
 
 exports.graphqlHandler = server.createHandler();
