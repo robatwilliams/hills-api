@@ -11,6 +11,7 @@
 ## Data sources
 
 - Map sheet names
+- Relative distance, height, direction/bearing between parent/child hills (calculate it)
 - [MWIS](http://www.mwis.org.uk/) weather forecast areas (using map from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322))
 - Unusual summit features, with description, photo url (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
 - [PeakFinder](https://www.peakfinder.org) links
@@ -36,6 +37,7 @@ Needs storage, auth. Could be a separate lambda.
 
 - Mark as done, with date, notes, links to photos & GPS activity
 - Mark as to-do, with reason, link to route
+- Subscribe to changes, e.g. marked as done for user or a particular hill
 
 ## Tech: features
 
