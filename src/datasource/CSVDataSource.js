@@ -13,6 +13,7 @@ class CSVDataSource {
     this.records = this.loadData();
   }
 
+  // eslint-disable-next-line no-unused-vars
   initialize(config) {
     // Called by Apollo on each request
   }
