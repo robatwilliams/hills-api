@@ -5,7 +5,11 @@
     "node": true
   },
   "extends": "eslint:recommended",
+  "plugins": ["import"],
   "parserOptions": {
     "ecmaVersion": 2018
+  },
+  "rules": {
+    "import/no-unresolved": ["error", { "commonjs": true }]
   }
 }
