@@ -6,7 +6,7 @@
       name
     }
     height(unit: METRES)
-    map(scale: ONE_25K) {
+    maps(scale: ONE_25K) {
       sheet
     }
     name

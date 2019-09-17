@@ -1,6 +1,6 @@
 module.exports = {
   Hill: {
-    map(hill, { scale }) {
+    maps(hill, { scale }) {
       switch (scale) {
         case 'ONE_25K':
           return hill.maps.scale25k;
