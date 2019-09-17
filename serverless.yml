@@ -9,6 +9,15 @@ provider:
 plugins:
   - serverless-offline
 
+package:
+  exclude:
+    - ./**
+    - '!./node_modules/**' # don't re-include this; it'd override excludeDevDependencies
+  include:
+    - data/countries.csv
+    - data/DoBIH_v16_2.csv # TODO remove this once data comes from DynamoDB
+    - src/**
+
 functions:
   graphql:
     handler: src/graphql.graphqlHandler
