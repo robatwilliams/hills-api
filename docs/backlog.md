@@ -15,6 +15,7 @@
 - [MWIS](http://www.mwis.org.uk/) weather forecast areas (using map from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322))
 - Unusual summit features, with description, photo url (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
 - [PeakFinder](https://www.peakfinder.org) links
+- [WalkLakes](https://www.walklakes.co.uk/hill_2367.html) links
 - [what3words](https://docs.what3words.com/api/v3/) geocoding
 
 ## Documentation
