@@ -52,10 +52,12 @@ Needs storage, auth. Could be a separate lambda.
 - Hills data in DynamoDB instead of bundled CSV file
 - Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot tests for queries (use the example queries)
+- Region and table name hard coded in various places
 
 ## Tech: operational
 
 - Production deployment
+- Deploy in closer region than default US East
 - Domain
 - Logging & monitoring
 - Concurrency limit, request throttling (API Gateway), and budget alarms

@@ -5,6 +5,13 @@ provider:
   runtime: nodejs10.x
   reservedConcurrency: 1 # default is account concurrency limit, which is 1000 by default
   timeout: 6 # seconds, default is 6
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:BatchGetItem
+        - dynamodb:GetItem
+      Resource:
+        - 'Fn::GetAtt': [HillsTable, Arn]
 
 plugins:
   - serverless-offline
@@ -19,6 +26,8 @@ package:
     - src/**
 
 functions:
+  dynamoTest:
+    handler: src/dynamoTest.fn
   graphql:
     handler: src/graphql.fn
     events:
