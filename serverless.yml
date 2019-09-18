@@ -25,12 +25,6 @@ package:
     - src/**
 
 functions:
-  dynamoTest:
-    handler: src/dynamoTest.fn
-    events:
-      - http:
-          path: dynamoTest
-          method: get
   graphql:
     handler: src/graphql.fn
     events:
