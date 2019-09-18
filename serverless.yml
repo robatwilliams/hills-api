@@ -20,7 +20,7 @@ package:
 
 functions:
   graphql:
-    handler: src/graphql.graphqlHandler
+    handler: src/graphql.fn
     events:
       - http:
           path: graphql

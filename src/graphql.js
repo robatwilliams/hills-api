@@ -39,4 +39,4 @@ const server = new ApolloServer({
   schema: executableSchema,
 });
 
-exports.graphqlHandler = server.createHandler();
+module.exports.fn = server.createHandler();
