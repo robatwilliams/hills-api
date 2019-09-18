@@ -1,27 +1,24 @@
-const CSVDataSource = require('../CSVDataSource');
-const parseHill = require('./parseHill');
+const DynamoDB = require('aws-sdk/clients/dynamodb');
+const mapHill = require('./mapHill');
 
-const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
-
-class HillsDBDataSource extends CSVDataSource {
-  constructor() {
-    super(DATA_FILE_PATH);
+class HillsDBDataSource {
+  start() {
+    this.client = new DynamoDB.DocumentClient({ region: 'us-east-1' });
   }
 
-  async loadData() {
-    console.log('Loading hills data');
-    const hills = await super.loadData();
-    return hills.map(parseHill).filter(Boolean); // exclude those not parsed
-  }
-
+  // eslint-disable-next-line no-unused-vars
   async query({ list }) {
-    const hills = await this.records;
-    return hills.filter(hill => list === undefined || hill.lists.includes(list));
+    throw new Error('Not implemented');
   }
 
   async queryOne({ number }) {
-    const hills = await this.records;
-    return hills.find(hill => hill.number === number);
+    const params = {
+      TableName: 'HILLS',
+      Key: { number },
+    };
+
+    const item = (await this.client.get(params).promise()).Item;
+    return item && mapHill(item);
   }
 }
 

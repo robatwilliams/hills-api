@@ -7,8 +7,10 @@ class CountriesDataSource extends CSVDataSource {
     super(DATA_FILE_PATH);
   }
 
-  async byName(name) {
-    return (await this.records).find(country => country.name === name);
+  async byCode(code) {
+    return (await this.records).find(
+      country => country.codeISO3166_2 === code || country.codeISO3166_1 === code
+    );
   }
 }
 
