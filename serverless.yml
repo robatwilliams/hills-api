@@ -8,8 +8,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb:BatchGetItem
         - dynamodb:GetItem
+        - dynamodb:Scan
       Resource:
         - 'Fn::GetAtt': [HillsTable, Arn]
 
