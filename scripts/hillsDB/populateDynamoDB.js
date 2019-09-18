@@ -1,10 +1,6 @@
 /**
  * Uploads the Hills Database CSV data into DynamoDB.
  *
- * The table is created via the web UI, with:
- * - Primary key: number (Number)
- * - Read/write capacity mode: On-demand
- *
  * Not using the DocumentClient; prefer explicitness in defining the schema.
  *
  * Bash command to shorten the data file for testing:

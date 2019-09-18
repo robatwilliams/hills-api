@@ -6,7 +6,8 @@
     "check": "npm-run-all --continue-on-error --parallel check:**",
     "check:lint": "eslint src/**/*.js",
     "check:prettier": "prettier --ignore-path=./.gitignore --check **/*.{graphql,js,json,md,yml}",
-    "deploy": "serverless deploy",
+    "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
+    "deploy:sls": "serverless deploy",
     "package": "serverless package",
     "start": "serverless offline --printOutput",
     "undeploy": "serverless remove"

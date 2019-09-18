@@ -28,3 +28,18 @@ functions:
       - http:
           path: graphql
           method: get
+
+resources:
+  Resources:
+    HillsTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: HILLS
+        AttributeDefinitions:
+          - AttributeName: number
+            AttributeType: N
+        KeySchema:
+          - AttributeName: number
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
