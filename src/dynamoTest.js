@@ -2,7 +2,7 @@ const DynamoDB = require('aws-sdk/clients/dynamodb');
 
 const client = new DynamoDB.DocumentClient({ region: 'us-east-1' });
 
-function handler(event) {
+async function handler(event) {
   const params = {
     TableName: 'HILLS',
     Key: {
@@ -10,7 +10,12 @@ function handler(event) {
     },
   };
 
-  return client.get(params).promise();
+  const hill = await client.get(params).promise();
+
+  return {
+    statusCode: '200',
+    body: JSON.stringify(hill),
+  };
 }
 
 module.exports.fn = handler;
