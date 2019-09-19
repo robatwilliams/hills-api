@@ -9,6 +9,7 @@
     "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
     "deploy:sls": "serverless deploy",
     "package": "serverless package",
+    "smoke-test": "sh scripts/smokeTest.sh",
     "start": "serverless offline --printOutput",
     "undeploy": "serverless remove"
   },
