@@ -39,7 +39,7 @@ resources:
   Resources:
     HillsTable:
       Type: AWS::DynamoDB::Table
-      DeletionPolicy: Retain
+      DeletionPolicy: Retain # retain it & data when undeploying the stack
       Properties:
         TableName: HILLS
         AttributeDefinitions:

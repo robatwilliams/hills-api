@@ -53,7 +53,7 @@ Needs storage, auth. Could be a separate lambda.
 - Snapshot tests for queries (use the example queries)
 - Region and table name hard coded in various places
 
-A relational database would probably be [more suitable](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html) than the NoSQL DynamoDB, even though there's only one table. It doesn't allow indexed queries on attributes of type set, so a full table scan is needed for some queries. With the current small (constrained) dataset size (924 items, 8 fields each) however, they're fast enough (50-100ms) and cheap enough (14 read capacity units @ \$0.25/million in US East). Plenty of headroom for more items, more fields, and a lot of traffic.
+A relational database would probably be [more suitable](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html) than the NoSQL DynamoDB, even though there's only one table. It doesn't allow indexed queries on attributes of type set, so a full table scan is needed for some queries. With the current small (constrained) dataset size (924 items, 8 fields each) however, they're fast enough (50-100ms) and cheap enough (14 read capacity units @ \$0.25/million in US East). As of 18 Sep 2019. Plenty of headroom for more items, more fields, and a lot of traffic.
 
 ## Tech: operational
 
