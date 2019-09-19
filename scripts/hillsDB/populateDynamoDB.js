@@ -17,6 +17,9 @@ const readFile = util.promisify(fs.readFile);
 const BATCH_WRITE_ITEM_LIMIT = 25; // DynamoDB API limit
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
+const stage = getStageArg();
+console.log('Config', { stage });
+
 const client = new DynamoDB({ region: 'us-east-1' });
 
 (async () => {
@@ -49,7 +52,7 @@ async function upload(putRequests) {
 function batchWrite(items) {
   const request = {
     RequestItems: {
-      HILLS: items,
+      [stage + '_HILLS']: items,
     },
   };
 
@@ -82,4 +85,15 @@ function chunk(array, length) {
   }
 
   return chunks;
+}
+
+function getStageArg() {
+  const stage = process.argv[2];
+
+  if (!stage) {
+    console.error('Must provide stage name as argument');
+    process.exit(1);
+  }
+
+  return stage;
 }

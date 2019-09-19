@@ -2,7 +2,7 @@ const { performance } = require('perf_hooks');
 const DynamoDB = require('aws-sdk/clients/dynamodb');
 const mapHill = require('./mapHill');
 
-const TableName = 'HILLS';
+const TableName = process.env.HILLS_TABLE_NAME;
 
 class HillsDBDataSource {
   start() {

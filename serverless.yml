@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs10.x
   reservedConcurrency: 1 # default is account concurrency limit, which is 1000 by default
+  stage: ${opt:stage, 'dev'}
   timeout: 6 # seconds, default is 6
   iamRoleStatements:
     - Effect: Allow
@@ -26,6 +27,8 @@ package:
 functions:
   graphql:
     handler: src/graphql.fn
+    environment:
+      HILLS_TABLE_NAME: ${self:custom.hillsTableName}
     events:
       - http:
           path: graphql
@@ -40,7 +43,7 @@ resources:
       Type: AWS::DynamoDB::Table
       DeletionPolicy: Retain # retain it & data when undeploying the stack
       Properties:
-        TableName: HILLS
+        TableName: ${self:custom.hillsTableName}
         AttributeDefinitions:
           - AttributeName: number
             AttributeType: N
@@ -48,3 +51,6 @@ resources:
           - AttributeName: number
             KeyType: HASH
         BillingMode: PAY_PER_REQUEST
+
+custom:
+  hillsTableName: ${self:provider.stage}_HILLS
