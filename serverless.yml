@@ -2,6 +2,7 @@ service: hills-api
 
 provider:
   name: aws
+  region: ${opt:region, env:npm_config_AWS_REGION}
   runtime: nodejs10.x
   reservedConcurrency: 1 # default is account concurrency limit, which is 1000 by default
   stage: ${opt:stage, 'dev'}

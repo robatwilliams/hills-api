@@ -17,10 +17,11 @@ const readFile = util.promisify(fs.readFile);
 const BATCH_WRITE_ITEM_LIMIT = 25; // DynamoDB API limit
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
+const region = process.env.npm_config_AWS_REGION;
 const stage = getStageArg();
-console.log('Config', { stage });
+console.log('Config', { region, stage });
 
-const client = new DynamoDB({ region: 'us-east-1' });
+const client = new DynamoDB({ region });
 
 (async () => {
   console.log(await main());

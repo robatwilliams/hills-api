@@ -6,7 +6,7 @@ const TableName = process.env.HILLS_TABLE_NAME;
 
 class HillsDBDataSource {
   start() {
-    this.client = new DynamoDB.DocumentClient({ region: 'us-east-1' });
+    this.client = new DynamoDB.DocumentClient(); // region from env:AWS_REGION
   }
 
   // eslint-disable-next-line no-unused-vars
