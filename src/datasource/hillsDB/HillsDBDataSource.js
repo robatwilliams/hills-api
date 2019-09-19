@@ -9,6 +9,11 @@ class HillsDBDataSource {
     this.client = new DynamoDB.DocumentClient({ region: 'us-east-1' });
   }
 
+  // eslint-disable-next-line no-unused-vars
+  initialize(config) {
+    // Called by Apollo on each request
+  }
+
   async query({ list }) {
     const params = { TableName };
 

@@ -1,14 +1,13 @@
-const CSVDataSource = require('./CSVDataSource');
+const countries = [
+  { name: 'England', codeISO3166_2: 'GB-ENG' },
+  { name: 'Ireland', codeISO3166_1: 'IE' },
+  { name: 'Scotland', codeISO3166_2: 'GB-SCT' },
+  { name: 'Wales', codeISO3166_2: 'GB-WAL' },
+];
 
-const DATA_FILE_PATH = './data/countries.csv';
-
-class CountriesDataSource extends CSVDataSource {
-  constructor() {
-    super(DATA_FILE_PATH);
-  }
-
-  async byCode(code) {
-    return (await this.records).find(
+class CountriesDataSource {
+  byCode(code) {
+    return countries.find(
       country => country.codeISO3166_2 === code || country.codeISO3166_1 === code
     );
   }

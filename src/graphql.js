@@ -4,7 +4,6 @@ const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
 const { resolvers, schema } = require('./modules');
 
 const countriesDataSource = new CountriesDataSource();
-countriesDataSource.start();
 const hillsDataSource = new HillsDBDataSource();
 hillsDataSource.start();
 

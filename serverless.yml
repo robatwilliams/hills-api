@@ -21,7 +21,6 @@ package:
     - ./**
     - '!./node_modules/**' # don't re-include this; it'd override excludeDevDependencies
   include:
-    - data/countries.csv
     - src/**
 
 functions:
