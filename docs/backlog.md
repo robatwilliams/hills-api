@@ -59,6 +59,6 @@ Needs storage, auth. Could be a separate lambda.
 - Production deployment
 - Domain
 - Logging & monitoring
-- Reduce allocated memory; it doesn't need the default 1GB
+- Reduce allocated memory; it doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
 - Concurrency limit, timeout, request throttling (API Gateway), and budget alarms
 - Query size limit (don't allow dumping the entire dataset)

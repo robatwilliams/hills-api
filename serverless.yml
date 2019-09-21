@@ -5,7 +5,7 @@ provider:
   region: ${opt:region, env:npm_config_AWS_REGION}
   runtime: nodejs10.x
   stage: ${opt:stage, 'dev'}
-  timeout: 6 # seconds, default is 6
+  timeout: 6 # seconds, sls default is 6, aws default is 3
   iamRoleStatements:
     - Effect: Allow
       Action:
