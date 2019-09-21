@@ -4,7 +4,6 @@ provider:
   name: aws
   region: ${opt:region, env:npm_config_AWS_REGION}
   runtime: nodejs10.x
-  reservedConcurrency: 1 # default is account concurrency limit, which is 1000 by default
   stage: ${opt:stage, 'dev'}
   timeout: 6 # seconds, default is 6
   iamRoleStatements:
@@ -28,6 +27,8 @@ package:
 functions:
   graphql:
     handler: src/graphql.fn
+    # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
+    reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
       HILLS_TABLE_NAME: ${self:custom.hillsTableName}
     events:
