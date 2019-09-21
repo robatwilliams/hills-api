@@ -34,9 +34,6 @@ functions:
       - http:
           path: graphql
           method: post
-      - http:
-          path: graphql
-          method: get
 
 resources:
   Resources:

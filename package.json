@@ -23,9 +23,10 @@
     "serverless-offline": "^5.10.1"
   },
   "dependencies": {
-    "apollo-server-lambda": "^2.9.2",
     "aws-sdk": "^2.529.0",
     "graphql": "^14.5.4",
+    "graphql-tag": "^2.10.1",
+    "graphql-tools": "^4.0.5",
     "lodash.merge": "^4.6.2"
   }
 }

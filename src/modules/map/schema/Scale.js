@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-lambda');
+const gql = require('graphql-tag');
 
 module.exports = gql`
   enum Scale {

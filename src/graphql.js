@@ -1,4 +1,5 @@
-const { ApolloServer, makeExecutableSchema } = require('apollo-server-lambda');
+const { graphql } = require('graphql');
+const { makeExecutableSchema } = require('graphql-tools');
 const CountriesDataSource = require('./datasource/CountriesDataSource');
 const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
 const { resolvers, schema } = require('./modules');
@@ -23,19 +24,19 @@ const executableSchema = makeExecutableSchema({
   },
 });
 
-// "Serverless" (!)
-const server = new ApolloServer({
-  dataSources() {
-    // This is called by Apollo on every request
-    return dataSources;
-  },
-  playground: {
-    settings: {
-      // Reduce from 2s; prevent high server CPU usage when running locally
-      'schema.polling.interval': 30000,
-    },
-  },
-  schema: executableSchema,
-});
+async function handler(event) {
+  const { query } = JSON.parse(event.body);
 
-module.exports.fn = server.createHandler();
+  const queryResult = await graphql({
+    contextValue: { dataSources },
+    schema: executableSchema,
+    source: query,
+  });
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(queryResult),
+  };
+}
+
+module.exports.fn = handler;

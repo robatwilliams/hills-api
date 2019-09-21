@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-lambda');
+const gql = require('graphql-tag');
 const merge = require('lodash.merge');
 const { flatten } = require('../util');
 
