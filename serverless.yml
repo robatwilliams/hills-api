@@ -29,7 +29,7 @@ package:
 functions:
   graphql:
     handler: src/graphql.fn
-    description: ${git:branch}:${git:describeLight} isDirty=${git:isDirty} "${git:message}"
+    description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
@@ -40,6 +40,14 @@ functions:
           method: post
       - http:
           path: graphql
+          method: get
+  playground:
+    handler: src/playground.fn
+    description: ${self:custom.versionInfo}
+    reservedConcurrency: 1 # low value until API Gateway throttling configured
+    events:
+      - http:
+          path: playground
           method: get
 
 resources:
@@ -63,3 +71,4 @@ custom:
   prune:
     automatic: true
     number: 3
+  versionInfo: ${git:branch}:${git:describeLight} isDirty=${git:isDirty} "${git:message}"

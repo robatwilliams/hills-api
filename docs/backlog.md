@@ -24,6 +24,7 @@
 - Flesh out the readme
 - Why does this exist (convenient to consume to build things, my own learning)
 - How to try it out (playground, refer to example queries)
+- Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 
 ## Query customisation
 
@@ -43,9 +44,6 @@ Needs storage, auth. Could be a separate lambda.
 ## Tech: features
 
 - Error logging
-- GraphQL Playground / GraphiQL (no frequent polling)
-- GraphQL playground enabled in production
-- GraphQL Playground working on non-prod deployment (needs [apollo-server/2136](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128))
 - CORS
 - Compression (gzip, Brotli)
 
