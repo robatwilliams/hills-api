@@ -10,6 +10,14 @@
     "ecmaVersion": 2018
   },
   "rules": {
-    "import/no-unresolved": ["error", { "commonjs": true }]
+    "import/no-unresolved": ["error", { "commonjs": true }],
+
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "never"
+      }
+    ]
   }
 }

@@ -45,7 +45,7 @@ function removeEmptySetAttributes(item) {
   for (const [name, attribute] of Object.entries(item)) {
     const setValue = attribute.SS || attribute.NS || attribute.BS;
 
-    if (setValue && setValue.length == 0) {
+    if (setValue && setValue.length === 0) {
       delete item[name];
     }
   }
