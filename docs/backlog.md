@@ -59,5 +59,6 @@ Needs storage, auth. Could be a separate lambda.
 - Production deployment
 - Domain
 - Logging & monitoring
-- Concurrency limit, request throttling (API Gateway), and budget alarms
+- Reduce allocated memory; it doesn't need the default 1GB
+- Concurrency limit, timeout, request throttling (API Gateway), and budget alarms
 - Query size limit (don't allow dumping the entire dataset)
