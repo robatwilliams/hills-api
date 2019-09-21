@@ -1,0 +1,6 @@
+{
+  # Ben Nevis
+  hill(number: 278) {
+    name
+  }
+}
