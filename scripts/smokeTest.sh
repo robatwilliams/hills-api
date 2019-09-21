@@ -2,6 +2,7 @@
 
 # Pass the GraphQL endpoint as a command line argument
 curl --request POST \
+  --include \
   --header 'Content-Type: application/json' \
   --data '{"query": "{ hill(number: 278) { name } }"}' \
   $1
