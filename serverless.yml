@@ -16,6 +16,7 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-prune-plugin
 
 package:
   exclude:
@@ -56,3 +57,6 @@ resources:
 
 custom:
   hillsTableName: ${self:provider.stage}_HILLS
+  prune:
+    automatic: true
+    number: 3
