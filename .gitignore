@@ -1,2 +1,3 @@
+# Adding something? Might need to be in .prettierignore too
 /.serverless
 /node_modules

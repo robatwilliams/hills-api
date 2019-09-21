@@ -5,7 +5,7 @@
   "scripts": {
     "check": "npm-run-all --continue-on-error --parallel check:**",
     "check:lint": "eslint src/**/*.js",
-    "check:prettier": "prettier --ignore-path=./.gitignore --check **/*.{graphql,js,json,md,yml}",
+    "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
     "deploy:stack": "serverless deploy",
     "deploy:update-fn": "serverless deploy function --function graphql",
