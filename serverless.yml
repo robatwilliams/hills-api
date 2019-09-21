@@ -16,6 +16,7 @@ provider:
 
 plugins:
   - serverless-offline
+  - serverless-plugin-git-variables
   - serverless-prune-plugin
 
 package:
@@ -28,6 +29,7 @@ package:
 functions:
   graphql:
     handler: src/graphql.fn
+    description: ${git:branch}:${git:describeLight} isDirty=${git:isDirty} "${git:message}"
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
@@ -56,6 +58,7 @@ resources:
         BillingMode: PAY_PER_REQUEST
 
 custom:
+  exportGitVariables: false
   hillsTableName: ${self:provider.stage}_HILLS
   prune:
     automatic: true
