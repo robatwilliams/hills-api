@@ -1,4 +1,6 @@
-const { graphql } = require('graphql');
+const awsServerlessExpress = require('aws-serverless-express');
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 const CountriesDataSource = require('./datasource/CountriesDataSource');
 const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
@@ -24,19 +26,20 @@ const executableSchema = makeExecutableSchema({
   },
 });
 
-async function handler(event) {
-  const { query } = JSON.parse(event.body);
+const app = express();
 
-  const queryResult = await graphql({
-    contextValue: { dataSources },
+app.use(
+  '/',
+  graphqlHTTP({
+    context: { dataSources },
     schema: executableSchema,
-    source: query,
-  });
+  })
+);
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify(queryResult),
-  };
+const server = awsServerlessExpress.createServer(app);
+
+function handler(event, context) {
+  return awsServerlessExpress.proxy(server, event, context);
 }
 
 module.exports.fn = handler;

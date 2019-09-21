@@ -24,6 +24,9 @@
   },
   "dependencies": {
     "aws-sdk": "^2.529.0",
+    "aws-serverless-express": "^3.3.6",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
     "graphql": "^14.5.4",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",

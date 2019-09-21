@@ -42,14 +42,7 @@ Needs storage, auth. Could be a separate lambda.
 
 ## Tech: features
 
-Lost a few things after removing `apollo-server-lambda`. Maybe use `express-graphql` instead of raw `graphql`; it provides many/all these things.
-
-- Complete HTTP handling (see https://graphql.org/learn/serving-over-http/)
-  - Support GET requests (add the lambda event back)
-  - Fully support POST requests
-  - Error response body & status code
 - Error logging
-- Argument checks
 - GraphQL Playground / GraphiQL (no frequent polling)
 - GraphQL playground enabled in production
 - GraphQL Playground working on non-prod deployment (needs [apollo-server/2136](https://github.com/apollographql/apollo-server/issues/2136#issuecomment-458465128))
