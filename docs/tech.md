@@ -18,6 +18,20 @@ There are some [guidelines for operating GraphQL over HTTP](https://graphql.org/
 
 This project uses the Express framework with the [GraphQL middleware](https://github.com/graphql/express-graphql) to satisfy these. The [AWS Serverless Express](https://github.com/awslabs/aws-serverless-express) proxy library is used to bridge the gap between AWS Lambda and Express. Express can also handle many other things (such as compression, CORS), but it should be considered if these would be better handled by API Gateway.
 
+## Separate stack for the database
+
+The lambdas and DynamoDB table were originally defined in the same `serverless.yml`, which made them part of the same CloudFormation stack. That bounded their lifecycles together, which was a problem because the table doesn't need to be deployed nearly as often.
+
+Poor workaround which I used for a while:
+
+1. When deploying the table, comment out the `functions` section
+2. Put `DeletionPolicy: Retain` on the table resource, so CloudFormation won't delete it
+3. When deploying the lambdas, so it doesn't error due to the table already existing:
+   1. Comment out the `resources` section
+   2. Replace the `Fn::GetAtt` for the table ARN under `iamRoleStatements` with the actual ARN
+
+Solution was to split the database into its own stack with its own `serverless-db.yml`, then use AWS [cross-stack references](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html) to export the table ARN from that stack to the lambda stack. Technique described [here](https://serverless-stack.com/chapters/dynamodb-as-a-serverless-service.html), with example `serverless.yml` files for [the database](https://github.com/AnomalyInnovations/serverless-stack-demo-mono-api/blob/master/services/database/serverless.yml) and [the service](https://github.com/AnomalyInnovations/serverless-stack-demo-mono-api/blob/master/services/notes/serverless.yml). There is an [open discussion](https://github.com/serverless/serverless/issues/3183) on the Serverless Framework about the ability to skip resources if they already exist, but this separate stack approach seems fine.
+
 ## Database
 
 A relational database would be more suitable for this than the NoSQL DynamoDB. As a personal/concept project with a small amount of data however, simplicity and ease/speed of getting started win.

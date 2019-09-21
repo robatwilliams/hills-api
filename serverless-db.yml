@@ -1,0 +1,29 @@
+service: hills-api-db
+
+provider:
+  name: aws
+  region: ${opt:region, env:npm_config_AWS_REGION}
+  stage: ${opt:stage, 'dev'}
+
+resources:
+  Outputs:
+    HillsTableArn:
+      Export:
+        Name: ${self:provider.stage}-HillsTableArn
+      Value:
+        Fn::GetAtt: [HillsTable, Arn]
+  Resources:
+    HillsTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.hillsTableName}
+        AttributeDefinitions:
+          - AttributeName: number
+            AttributeType: N
+        KeySchema:
+          - AttributeName: number
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+
+custom:
+  hillsTableName: ${self:provider.stage}_HILLS

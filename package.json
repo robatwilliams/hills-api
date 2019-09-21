@@ -7,13 +7,15 @@
     "check:lint": "eslint src/**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
+    "deploy:database": "serverless deploy --config serverless-db.yml",
     "deploy:stack": "serverless deploy",
     "deploy:update-fn": "serverless deploy function --function",
     "deployment:info": "serverless info",
     "package": "serverless package",
     "smoke-test": "sh scripts/smokeTest.sh",
     "start": "serverless offline --printOutput",
-    "undeploy": "serverless remove"
+    "undeploy:stack": "serverless remove",
+    "undeploy:database": "serverless remove --config serverless-db.yml"
   },
   "devDependencies": {
     "csv-parse": "^4.4.5",
