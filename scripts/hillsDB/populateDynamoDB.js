@@ -89,10 +89,14 @@ function chunk(array, length) {
 }
 
 function getStageArg() {
-  const stage = process.argv[2];
+  const pattern = /^--s(tage)?=.+$/;
+
+  const args = process.argv.slice(2);
+  const stageArg = args.find(arg => pattern.test(arg));
+  const stage = stageArg && stageArg.split('=', 2)[1];
 
   if (!stage) {
-    console.error('Must provide stage name as argument');
+    console.error('Must provide stage name as argument. Received:', args);
     process.exit(1);
   }
 

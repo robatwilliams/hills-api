@@ -8,6 +8,7 @@
     "check": "npm-run-all --continue-on-error --parallel check:**",
     "check:lint": "eslint src/**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
+    "deploy:all": "npm-run-all \"deploy:database -- {@}\" \"deploy:data -- {@}\" \"deploy:stack -- {@}\" --",
     "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
     "deploy:database": "serverless deploy --config serverless-db.yml",
     "deploy:stack": "serverless deploy",
@@ -15,6 +16,7 @@
     "deployment:info": "serverless info",
     "package": "serverless package",
     "start": "serverless offline --printOutput",
+    "undeploy:all": "npm-run-all \"undeploy:database -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:stack": "serverless remove",
     "undeploy:database": "serverless remove --config serverless-db.yml"
   },
