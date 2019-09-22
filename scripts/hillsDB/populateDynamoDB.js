@@ -89,8 +89,8 @@ function chunk(array, length) {
 }
 
 function getStageArg() {
-  const regionPattern = /^--r(egion)?=.+$/;
-  const stagePattern = /^--s(tage)?=.+$/;
+  const regionPattern = /^(-r|--region)=.+$/;
+  const stagePattern = /^(-s|--stage)=.+$/;
 
   const args = process.argv.slice(2);
 
