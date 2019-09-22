@@ -4,7 +4,7 @@
 
 ### Data
 
-- Remainder of [fields from the hills database](fields-hills-database.md)
+- Remainder of key [fields from the hills database](fields-hills-database.md)
 - Hills from all major lists (not just Munros, Wainwrights, and Hewitts)
 - Child and parent relations. Children (and their children etc.) might not be on any of the included major lists; that needs handling somehow.
 - Names
@@ -14,20 +14,39 @@
 
 ### Queries
 
-- Sorting
+- Sorting on key fields
 - [Pagination](https://graphql.org/learn/pagination/)
-- Filtering
+- Filtering on key fields
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
-## Data sources
+## Feature ideas
 
-- Map sheet names
-- Relative distance, height, direction/bearing between parent/child hills (calculate it)
-- [MWIS](http://www.mwis.org.uk/) weather forecast areas (using map from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322))
+### Data
+
+- Remainder of all [fields from the hills database](fields-hills-database.md)
+- Nearby hills to a hill, given a distance
+- Include distance, bearing, and relative height on child/parent/nearby relations. Needs calculation.
+
+### Queries
+
+- Sorting on all fields
+- Filtering on all fields, e.g. "which hills are on map OL7 ?"
+- List nearby hills, given a location name/coordinate and distance. Result could include distance and bearing.
+
+### Additional data sources
+
+- ❤️ Map sheet names
+- Links to sites such as [Hill Bagging](http://www.hill-bagging.co.uk), [WalkLakes](https://www.walklakes.co.uk/hill_2367.html), [Walkhighlands](http://www.hill-bagging.co.uk/mountaindetails.php?qu=S&rf=278)
+- Links to [PeakFinder](https://www.peakfinder.org)
+- Links to the [MWIS](http://www.mwis.org.uk/) mountain weather, directly to the relevant forecast area. Figure that out using info such as [this map](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322).
 - Unusual summit features, with description, photo url (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
-- [PeakFinder](https://www.peakfinder.org) links
-- [WalkLakes](https://www.walklakes.co.uk/hill_2367.html) links
-- [what3words](https://docs.what3words.com/api/v3/) geocoding
+
+### User data
+
+Needs storage, auth. Could be a separate lambda that this one calls.
+
+- Mark as done, with date, notes, links to photos & GPS activity
+- Mark as to-do, with reason, link to route
 
 ## Documentation
 
@@ -39,19 +58,11 @@
     - Playground, refer to example queries you can copy in
     - Code snippets for `fetch()`
   - List of features
-  - How to call it: raw or using a client such as Relay, link to [docs page](https://graphql.org/graphql-js/graphql-clients/)
+  - How to call it: raw or using a client such as Relay, link to [docs page](https://graphql.org/graphql-js/graphql-clients/), can pass JSON or raw GraphQL
   - Technical summary, link to docs page for more
   - Data licensing (as per the Hills Database). Prominent, not just a footnote at the end.
   - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
-
-## User data
-
-Needs storage, auth. Could be a separate lambda.
-
-- Mark as done, with date, notes, links to photos & GPS activity
-- Mark as to-do, with reason, link to route
-- Subscribe to changes, e.g. marked as done for user or a particular hill
 
 ## Technical
 
@@ -82,12 +93,4 @@ Needs storage, auth. Could be a separate lambda.
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot-based integration tests for supported queries
   - Including one that all fields of all hills conform to the schema
-
-## Ideas
-
-- Query hills nearby, by town/village name or coordinates etc.
-- List hills nearby this hill, specify distance. Result would give distance and bearing
-- Do without Express; it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/) could be implemented manually.
-- Expose database version
-- Request pretty printed response? For when using curl
-- Filtering on deep fields, e.g. "which hills are on map OL7 ?"
+- Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
