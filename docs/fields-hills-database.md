@@ -48,7 +48,7 @@ More information about each field can be found here: http://hills-database.co.uk
 - ❌ ℹ️ Observations
 - ❌ 📝 Survey
 - 🚫 Climbed - empty field for marking hills as done
-- ❌ ✅ 🌍 Country
+- ✅ 🌍 Country
 - ❌ 🌍 County Top
 - ❌ 📝 Revision
 - ❌ 📝 Comments
