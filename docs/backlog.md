@@ -1,13 +1,23 @@
 # Backlog
 
-## Completeness
+## Core features
 
-- Alternate names as separate field (those in square brackets in db). Keep the single name field?
-- Single field for country in addition to the countries field?
+### Data
+
 - Remainder of [fields from the hills database](fields-hills-database.md)
-- Children field (reverse of parent) - some hills are related to each other (they won't all be on the included lists though, how to handle that? And what about their own children)
-- Expose hills from all major lists (not just Munros, Wainwrights, and Hewitts)
-- Expose database version
+- Hills from all major lists (not just Munros, Wainwrights, and Hewitts)
+- Child and parent relations. Children (and their children etc.) might not be on any of the included major lists; that needs handling somehow.
+- Names
+  - Include only the main name in the name field (e.g. not "Crag Hill [Eel Crag]"). Probably also rename the field to make this evident.
+  - Add names field, this would be a separated list of all names with the main one first
+  - Filtering should provide a way to search across all names
+
+### Queries
+
+- Sorting
+- [Pagination](https://graphql.org/learn/pagination/)
+- Filtering
+- Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Data sources
 
@@ -27,13 +37,6 @@
 - How to try it out (playground, refer to example queries)
 - How to call it, raw or a client e.g. Relay https://graphql.org/graphql-js/graphql-clients/
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
-
-## Query customisation
-
-- Sorting
-- [Pagination](https://graphql.org/learn/pagination/)
-- Filtering. Including by deep fields - "which hills are on map OL7 ?"
-- Expose available filter values
 
 ## User data
 
@@ -69,3 +72,6 @@ Needs storage, auth. Could be a separate lambda.
 - Query hills nearby, by town/village name or coordinates etc.
 - List hills nearby this hill, specify distance. Result would give distance and bearing
 - Do without Express; it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/) could be implemented manually.
+- Expose database version
+- Request pretty printed response? For when using curl
+- Filtering on deep fields, e.g. "which hills are on map OL7 ?"
