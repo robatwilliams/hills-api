@@ -46,26 +46,35 @@ Needs storage, auth. Could be a separate lambda.
 - Mark as to-do, with reason, link to route
 - Subscribe to changes, e.g. marked as done for user or a particular hill
 
-## Tech: features
+## Technical
 
-- Error logging
+### Client features
+
 - CORS
 - Compression (gzip, Brotli)
-
-## Tech: improvements
-
-- Apply best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
-- Snapshot tests for queries (use the example queries)
-  - All fields of all hills pass the schema
-
-## Tech: operational
-
 - Production deployment
 - Domain
-- Logging & monitoring
-- Reduce allocated memory; it doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
-- Concurrency limit, timeout, request throttling (API Gateway), and budget alarms
+
+### Monitoring
+
+- Error logging
+- Usage logging & monitoring (e.g. what queries)
+- AWS budget alarms
+
+### Resource allocation and limits
+
 - Query size limit (don't allow dumping the entire dataset)
+- Request throttling (API Gateway)
+- Appropriate values for AWS lambda configuration
+  - Concurrency limit
+  - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
+  - Timeout
+
+### Improvements
+
+- Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
+- Snapshot-based integration tests for supported queries
+  - Including one that all fields of all hills conform to the schema
 
 ## Ideas
 
