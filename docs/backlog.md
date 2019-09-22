@@ -31,11 +31,18 @@
 
 ## Documentation
 
-- Field descriptions in the schema
-- Flesh out the readme, list features, tech summary, data licensing, links to endpoint, schema, playground
-- Why does this exist (convenient to consume to build things, my own learning)
-- How to try it out (playground, refer to example queries)
-- How to call it, raw or a client e.g. Relay https://graphql.org/graphql-js/graphql-clients/
+- Field descriptions (short) in the schema, where necessary
+- Readme
+  - Client-focused; move the tech and implementation details to section near end
+  - Links to endpoint, schema, playground
+  - How to try it out
+    - Playground, refer to example queries you can copy in
+    - Code snippets for `fetch()`
+  - List of features
+  - How to call it: raw or using a client such as Relay, link to [docs page](https://graphql.org/graphql-js/graphql-clients/)
+  - Technical summary, link to docs page for more
+  - Data licensing (as per the Hills Database). Prominent, not just a footnote at the end.
+  - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 
 ## User data
