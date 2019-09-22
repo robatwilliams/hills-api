@@ -89,10 +89,17 @@ function chunk(array, length) {
 }
 
 function getStageArg() {
-  const pattern = /^--s(tage)?=.+$/;
+  const regionPattern = /^--r(egion)?=.+$/;
+  const stagePattern = /^--s(tage)?=.+$/;
 
   const args = process.argv.slice(2);
-  const stageArg = args.find(arg => pattern.test(arg));
+
+  if (args.find(arg => regionPattern.test(arg))) {
+    console.error('Region argument not currently supported');
+    process.exit(1);
+  }
+
+  const stageArg = args.find(arg => stagePattern.test(arg));
   const stage = stageArg && stageArg.split('=', 2)[1];
 
   if (!stage) {
