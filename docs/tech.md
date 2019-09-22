@@ -16,7 +16,7 @@ API Gateway proxy integration is used for the lambda, which is simplest integrat
 
 There are some [guidelines for operating GraphQL over HTTP](https://graphql.org/learn/serving-over-http/). They aren't onerous to implement, but it's less work not to.
 
-This project uses the Express framework with the [GraphQL middleware](https://github.com/graphql/express-graphql) to satisfy these. The [AWS Serverless Express](https://github.com/awslabs/aws-serverless-express) proxy library is used to bridge the gap between AWS Lambda and Express. Express can also handle many other things (such as compression, CORS), but it should be considered if these would be better handled by API Gateway.
+This project uses the Express [GraphQL middleware](https://github.com/graphql/express-graphql) to satisfy these. The [AWS Serverless Express](https://github.com/awslabs/aws-serverless-express) proxy library is used to bridge the gap between AWS Lambda and Express. Express can also handle many other things (such as compression, CORS), but it should be considered if these would be better handled by API Gateway. That also leaves open the possibility of not using Express in future, and either using some general GraphQL HTTP library that [might come about](https://github.com/graphql/express-graphql/issues/559) or implementing the core of the guidelines manually.
 
 ## Separate stack for the database
 
