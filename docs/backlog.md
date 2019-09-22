@@ -21,6 +21,11 @@
 
 ## Feature ideas
 
+- ❤️ Map sheet names
+
+<details>
+<summary>Expand for more...</summary>
+
 ### Data
 
 - Remainder of all [fields from the hills database](fields-hills-database.md)
@@ -47,6 +52,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 - Mark as done, with date, notes, links to photos & GPS activity
 - Mark as to-do, with reason, link to route
+  </details>
 
 ## Documentation
 
