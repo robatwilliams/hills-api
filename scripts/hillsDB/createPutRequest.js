@@ -1,19 +1,5 @@
+const { COUNTRIES_CODES, LIST_CODES } = require('./codes');
 const { number, removeEmptySets, string, stringSet } = require('./dynamoAttribute');
-
-// ISO 3166-1 & ISO 3166-2
-const COUNTRIES_CODES = {
-  E: ['GB-ENG'],
-  ES: ['GB-ENG', 'GB-SCT'],
-  I: ['IE'],
-  S: ['GB-SCT'],
-  W: ['GB-WAL'],
-};
-
-const LIST_CODES = {
-  Hew: 'HEWITT',
-  M: 'MUNRO',
-  W: 'WAINWRIGHT',
-};
 
 function createPutRequest(row) {
   const lists = row.Classification.split(',')
