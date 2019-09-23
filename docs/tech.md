@@ -1,5 +1,7 @@
 # Tech
 
+A place for notes that don't belong in code comments.
+
 ## Ditching apollo-server-lambda
 
 This project originally used `apollo-server-lambda`, kicked off from this [useful how-to article](https://www.apollographql.com/docs/apollo-server/deployment/lambda/) by Apollo. After getting my bearings however, I realised I wasn't using (or had any need for) any of Apollo's features. So I stripped it out for the pure `graphql` reference implementation library.
