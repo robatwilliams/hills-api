@@ -12,12 +12,6 @@ To continue using the `gql` template literal tag (which editors, Prettier, etc. 
 
 API Gateway proxy integration is used for the lambda, which is simplest integration and Serverless Framework's default. There are arguments [for](https://www.stackery.io/blog/why-you-should-use-api-gateway-proxy-integration-with-lambda/) and [against](https://read.acloud.guru/how-you-should-and-should-not-use-the-api-gateway-proxy-integration-f9e35479b993) this, but for a lambda that's only ever called via API Gateway it seems to be an ok choice.
 
-## Serving an HTTP GraphQL endpoint
-
-There are some [guidelines for operating GraphQL over HTTP](https://graphql.org/learn/serving-over-http/). They aren't onerous to implement, but it's less work not to.
-
-This project uses the Express [GraphQL middleware](https://github.com/graphql/express-graphql) to satisfy these. The [AWS Serverless Express](https://github.com/awslabs/aws-serverless-express) proxy library is used to bridge the gap between AWS Lambda and Express. Express can also handle many other things (such as compression, CORS), but it should be considered if these would be better handled by API Gateway. That also leaves open the possibility of not using Express in future, and either using some general GraphQL HTTP library that [might come about](https://github.com/graphql/express-graphql/issues/559) or implementing the core of the guidelines manually.
-
 ## Separate stack for the database
 
 The lambdas and DynamoDB table were originally defined in the same `serverless.yml`, which made them part of the same CloudFormation stack. That bounded their lifecycles together, which was a problem because the table doesn't need to be deployed nearly as often.
