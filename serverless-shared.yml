@@ -1,0 +1,3 @@
+constants:
+  # London is closest region to likely API consumers
+  defaultRegion: eu-west-2

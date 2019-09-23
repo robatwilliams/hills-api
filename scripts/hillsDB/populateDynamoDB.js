@@ -17,8 +17,7 @@ const readFile = util.promisify(fs.readFile);
 const BATCH_WRITE_ITEM_LIMIT = 25; // DynamoDB API limit
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
-const region = process.env.npm_config_AWS_REGION;
-const stage = getStageArg();
+const { region, stage } = getProviderArgs();
 console.log('Config', { region, stage });
 
 const client = new DynamoDB({ region });
@@ -88,24 +87,24 @@ function chunk(array, length) {
   return chunks;
 }
 
-function getStageArg() {
-  const regionPattern = /^(-r|--region)=.+$/;
-  const stagePattern = /^(-s|--stage)=.+$/;
+function getProviderArgs() {
+  return {
+    region: getProviderArg('r', 'region'),
+    stage: getProviderArg('s', 'stage'),
+  };
+}
+
+function getProviderArg(shortName, longName) {
+  const pattern = new RegExp(`^(-${shortName}|--${longName})=.+$`);
 
   const args = process.argv.slice(2);
+  const argument = args.find(arg => pattern.test(arg));
+  const value = argument && argument.split('=', 2)[1];
 
-  if (args.find(arg => regionPattern.test(arg))) {
-    console.error('Region argument not currently supported');
+  if (!value) {
+    console.error(`No --${longName} / -${shortName} specified; arguments:`, args);
     process.exit(1);
   }
 
-  const stageArg = args.find(arg => stagePattern.test(arg));
-  const stage = stageArg && stageArg.split('=', 2)[1];
-
-  if (!stage) {
-    console.error('Must provide stage name as argument. Received:', args);
-    process.exit(1);
-  }
-
-  return stage;
+  return value;
 }

@@ -2,7 +2,7 @@ service: hills-api-db
 
 provider:
   name: aws
-  region: ${opt:region, env:npm_config_AWS_REGION}
+  region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
   stage: ${opt:stage, 'dev'}
 
 plugins:
@@ -32,4 +32,4 @@ custom:
   hillsTableName: ${self:provider.stage}_HILLS
   scripts:
     commands:
-      deploy-data: node ./scripts/hillsDB/populateDynamoDB.js --stage=${self:provider.stage}
+      deploy-data: node ./scripts/hillsDB/populateDynamoDB.js --region=${self:provider.region} --stage=${self:provider.stage}

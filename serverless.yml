@@ -2,7 +2,7 @@ service: hills-api
 
 provider:
   name: aws
-  region: ${opt:region, env:npm_config_AWS_REGION}
+  region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
   runtime: nodejs10.x
   stage: ${opt:stage, 'dev'}
   timeout: 6 # seconds, sls default is 6, aws default is 3
