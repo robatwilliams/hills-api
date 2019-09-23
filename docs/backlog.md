@@ -75,7 +75,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Client features
 
-- CORS
+- CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
 - Compression (gzip, Brotli)
 - Production deployment
 - Domain
