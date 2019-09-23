@@ -9,7 +9,7 @@
     "check:lint": "eslint src/**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "deploy:all": "npm-run-all \"deploy:database -- {@}\" \"deploy:data -- {@}\" \"deploy:stack -- {@}\" --",
-    "deploy:data": "node ./scripts/hillsDB/populateDynamoDB.js",
+    "deploy:data": "serverless deploy-data --config serverless-db.yml",
     "deploy:database": "serverless deploy --config serverless-db.yml",
     "deploy:stack": "serverless deploy",
     "deploy:update-fn": "serverless deploy function --function",
@@ -29,6 +29,7 @@
     "serverless": "^1.51.0",
     "serverless-offline": "^5.10.1",
     "serverless-plugin-git-variables": "^3.3.2",
+    "serverless-plugin-scripts": "^1.0.2",
     "serverless-prune-plugin": "^1.4.1"
   },
   "dependencies": {

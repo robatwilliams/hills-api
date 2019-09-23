@@ -5,6 +5,9 @@ provider:
   region: ${opt:region, env:npm_config_AWS_REGION}
   stage: ${opt:stage, 'dev'}
 
+plugins:
+  - serverless-plugin-scripts
+
 resources:
   Outputs:
     HillsTableArn:
@@ -27,3 +30,6 @@ resources:
 
 custom:
   hillsTableName: ${self:provider.stage}_HILLS
+  scripts:
+    commands:
+      deploy-data: node ./scripts/hillsDB/populateDynamoDB.js --stage=${self:provider.stage}
