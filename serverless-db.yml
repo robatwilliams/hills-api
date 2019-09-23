@@ -1,3 +1,9 @@
+#
+# Separate stack for the DynamoDB table, to allow separate deployment.
+#
+# The table doesn't need to be deployed nearly as often as the lambdas, which was
+# a problem when they were the same serverless.yml (and hence CloudFormation stack).
+#
 service: hills-api-db
 
 provider:
@@ -9,6 +15,7 @@ plugins:
   - serverless-plugin-scripts
 
 resources:
+  # Cross-stack reference - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/outputs-section-structure.html
   Outputs:
     HillsTableArn:
       Export:

@@ -12,6 +12,7 @@ provider:
         - dynamodb:GetItem
         - dynamodb:Scan
       Resource:
+        # Cross-stack reference - https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
         - Fn::ImportValue: ${self:provider.stage}-HillsTableArn
 
 plugins:
