@@ -29,6 +29,7 @@
 ### Data
 
 - Remainder of all [fields from the hills database](fields-hills-database.md)
+- All hills from the hills database
 - Nearby hills to a hill, given a distance
 - Include distance, bearing, and relative height on child/parent/nearby relations. Needs calculation.
 
