@@ -8,10 +8,6 @@ One piece of advice - continue using `makeExecutableSchema()` to build your sche
 
 To continue using the `gql` template literal tag (which editors, Prettier, etc. recognise), import it directly from `graphql-tag`. If you'd rather not, for Prettier you can [use a comment instead](https://github.com/prettier/prettier/issues/4360#issuecomment-392391729).
 
-## API Gateway integration
-
-API Gateway proxy integration is used for the lambda, which is simplest integration and Serverless Framework's default. There are arguments [for](https://www.stackery.io/blog/why-you-should-use-api-gateway-proxy-integration-with-lambda/) and [against](https://read.acloud.guru/how-you-should-and-should-not-use-the-api-gateway-proxy-integration-f9e35479b993) this, but for a lambda that's only ever called via API Gateway it seems to be an ok choice.
-
 ## Database
 
 A relational database would be more suitable for this than the NoSQL DynamoDB. As a personal/concept project with a small amount of data however, simplicity and ease/speed of getting started win.
