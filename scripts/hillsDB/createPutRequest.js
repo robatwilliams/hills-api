@@ -1,3 +1,5 @@
+const { number, removeEmptySets, string, stringSet } = require('./dynamoAttribute');
+
 // ISO 3166-1 & ISO 3166-2
 const COUNTRIES_CODES = {
   E: ['GB-ENG'],
@@ -19,17 +21,17 @@ function createPutRequest(row) {
     .filter(Boolean); // mapping is incomplete
 
   const item = {
-    countries: { SS: COUNTRIES_CODES[row.Country] },
-    heightFeet: { N: row.Feet },
-    heightMetres: { N: row.Metres },
-    lists: { SS: lists },
-    mapsScale25k: { SS: parseMaps(row['Map 1:25k']) },
-    mapsScale50k: { SS: parseMaps(row['Map 1:50k']) },
-    name: { S: row.Name },
-    number: { N: row.Number },
+    countries: stringSet(COUNTRIES_CODES[row.Country]),
+    heightFeet: number(row.Feet),
+    heightMetres: number(row.Metres),
+    lists: stringSet(lists),
+    mapsScale25k: stringSet(parseMaps(row['Map 1:25k'])),
+    mapsScale50k: stringSet(parseMaps(row['Map 1:50k'])),
+    name: string(row.Name),
+    number: number(row.Number),
   };
 
-  removeEmptySetAttributes(item);
+  removeEmptySets(item);
 
   return {
     PutRequest: { Item: item },
@@ -38,17 +40,6 @@ function createPutRequest(row) {
 
 function parseMaps(maps) {
   return maps ? maps.split(' ') : [];
-}
-
-function removeEmptySetAttributes(item) {
-  // DynamoDB: An attribute value cannot be an empty String or empty Set
-  for (const [name, attribute] of Object.entries(item)) {
-    const setValue = attribute.SS || attribute.NS || attribute.BS;
-
-    if (setValue && setValue.length === 0) {
-      delete item[name];
-    }
-  }
 }
 
 module.exports = createPutRequest;
