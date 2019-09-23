@@ -32,4 +32,4 @@ custom:
   hillsTableName: ${self:provider.stage}_HILLS
   scripts:
     commands:
-      deploy-data: node ./scripts/hillsDB/populateDynamoDB.js --region=${self:provider.region} --stage=${self:provider.stage}
+      deploy-data: node ./scripts/hillsDB/populateDynamoDB.js ${self:provider.region} ${self:provider.stage}

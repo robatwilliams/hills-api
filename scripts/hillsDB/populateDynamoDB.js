@@ -88,23 +88,12 @@ function chunk(array, length) {
 }
 
 function getProviderArgs() {
-  return {
-    region: getProviderArg('r', 'region'),
-    stage: getProviderArg('s', 'stage'),
-  };
-}
+  const [region, stage] = process.argv.slice(2);
 
-function getProviderArg(shortName, longName) {
-  const pattern = new RegExp(`^(-${shortName}|--${longName})=.+$`);
-
-  const args = process.argv.slice(2);
-  const argument = args.find(arg => pattern.test(arg));
-  const value = argument && argument.split('=', 2)[1];
-
-  if (!value) {
-    console.error(`No --${longName} / -${shortName} specified; arguments:`, args);
+  if (!region || !stage) {
+    console.error('No region/stage specified');
     process.exit(1);
   }
 
-  return value;
+  return { region, stage };
 }
