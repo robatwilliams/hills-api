@@ -12,6 +12,7 @@ const modules = [
 const resolvers = merge(...modules.map(module => module.resolvers));
 
 const globalTypeDefs = gql`
+  # Root operation type; recognised by default due to name
   type Query
 `;
 
