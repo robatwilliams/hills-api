@@ -90,6 +90,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 ### Resource allocation and limits
 
 - Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
+- Defend against a "cost attack". API keys would be a barrier to usage. Just set low limits? WAF is a hassle. Is it really something to be worried about? Set lambda/database limits not to scale out too much.
 - Request throttling (API Gateway)
 - Appropriate values for AWS lambda configuration
   - Concurrency limit
