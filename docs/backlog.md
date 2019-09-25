@@ -89,7 +89,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Resource allocation and limits
 
-- Query size limit (don't allow dumping the entire dataset)
+- Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
 - Request throttling (API Gateway)
 - Appropriate values for AWS lambda configuration
   - Concurrency limit
@@ -98,7 +98,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Improvements
 
-- Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Its real feature is auto-scalability not auto-sleep.
+- Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Its real feature is auto-scalability not auto-sleep. Work out the costing for DynamoDB with all fields & complete data set; is there really enough headroom?
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot-based integration tests for supported queries
   - Including one that all fields of all hills conform to the schema
