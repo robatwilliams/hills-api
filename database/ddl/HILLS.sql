@@ -1,6 +1,6 @@
 CREATE TABLE HILLS (
-  heightFeet SMALLINT NOT NULL,
-  heightMetres SMALLINT NOT NULL,
+  heightFeet DECIMAL(6, 2) NOT NULL, -- 9999.99
+  heightMetres DECIMAL(6, 2) NOT NULL, -- 9999.99
   name VARCHAR(100) NOT NULL,
   number MEDIUMINT NOT NULL,
   PRIMARY KEY (number)
