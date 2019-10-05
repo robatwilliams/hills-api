@@ -5,6 +5,7 @@ const STRING = 'stringValue';
 const types = {
   heightFeet: DOUBLE,
   heightMetres: DOUBLE,
+  lists: [STRING],
   name: STRING,
   number: LONG,
 };
@@ -15,9 +16,19 @@ exports.createParameters = function(hill) {
   return Object.entries(types).map(([name, type]) => {
     return {
       name,
-      value: {
-        [type]: hill[name],
-      },
+      value: wrapValue(hill[name], type),
     };
   });
 };
+
+function wrapValue(value, type) {
+  if (typeof type === 'string') {
+    return { [type]: value };
+  }
+
+  // SET data type
+  const [elementType] = type;
+  return {
+    [elementType]: value.join(','),
+  };
+}

@@ -5,7 +5,7 @@ function mapHill(item) {
       feet: item.heightFeet,
       metres: item.heightMetres,
     },
-    lists: [],
+    lists: item.lists,
     maps: {
       scale25k: [],
       scale50k: [],
