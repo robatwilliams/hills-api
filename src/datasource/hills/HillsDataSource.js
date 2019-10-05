@@ -14,6 +14,23 @@ class HillsDataSource {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
+  async query({ list }) {
+    let sql = 'SELECT * FROM HILLS';
+    const parameters = [];
+
+    if (list !== undefined) {
+      sql += ' WHERE FIND_IN_SET(:list, lists)';
+      parameters.push({ name: 'list', value: { stringValue: list } });
+    }
+
+    const params = { ...staticParams, parameters, sql };
+    const response = await this.client.executeStatement(params).promise();
+
+    return response.records
+      .map(record => mapRecord(record, response.columnMetadata))
+      .map(mapHill);
+  }
+
   async queryOne({ number }) {
     const params = {
       ...staticParams,
