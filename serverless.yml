@@ -47,6 +47,10 @@ functions:
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
+      DATABASE_CLUSTER_ARN: ?
+      DATABASE_CLUSTER_SECRET_ARN: ?
+      DATABASE_NAME: HILLS_${self:provider.stage}
+      DATABASE_REGION: eu-west-1
       HILLS_TABLE_NAME: ${file(./serverless-db.yml):custom.hillsTableName}
     events:
       - http:

@@ -3,18 +3,14 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 const CountriesDataSource = require('./datasource/CountriesDataSource');
-const HillsDBDataSource = require('./datasource/hillsDB/HillsDBDataSource');
+const HillsDataSource = require('./datasource/hills/HillsDataSource');
 const { resolvers, schema } = require('./modules');
 
 const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
 
-const countriesDataSource = new CountriesDataSource();
-const hillsDataSource = new HillsDBDataSource();
-hillsDataSource.start();
-
 const dataSources = {
-  countries: countriesDataSource,
-  hills: hillsDataSource,
+  countries: new CountriesDataSource(),
+  hills: new HillsDataSource(),
 };
 
 const executableSchema = makeExecutableSchema({
