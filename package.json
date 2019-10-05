@@ -6,7 +6,7 @@
     "call": "bash scripts/call.sh",
     "call:local": "bash scripts/call.sh 'http://localhost:3000/graphql'",
     "check": "npm-run-all --continue-on-error --parallel check:**",
-    "check:lint": "eslint src/**/*.js",
+    "check:lint": "eslint ./**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "deploy:all": "npm-run-all \"deploy:database -- {@}\" \"deploy:data -- {@}\" \"deploy:stack -- {@}\" --",
     "deploy:data": "serverless deploy-data --config serverless-db.yml",
