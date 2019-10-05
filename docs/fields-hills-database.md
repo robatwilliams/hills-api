@@ -35,8 +35,8 @@ More information about each field can be found here: http://hills-database.co.uk
 - ❌ 🌍 🔗 Topo Section
 - ❌ 🌍 County
 - ❌ ℹ️ Classification - needs to include display name, not just the enum
-- ✅ 🔗 Map 1:50k
-- ✅ 🔗 Map 1:25k
+- ✅ 🔗 Map 1:50k<sup>1</sup>
+- ✅ 🔗 Map 1:25k<sup>1</sup>
 - ✅ 📏 Metres
 - ✅ 📏 Feet
 - ❌ 📌 Grid ref
@@ -64,3 +64,7 @@ More information about each field can be found here: http://hills-database.co.uk
 - ❌ ➡ Parent (Ma)
 - ❌ 🚫 Parent name (Ma) - is an attribute of another hill entry
 - ❌ 🔗 MVNumber
+
+---
+
+<sup>1</sup> Not including location-on-map information, e.g. "OL39N"

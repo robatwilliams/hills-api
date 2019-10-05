@@ -1,6 +1,17 @@
 const fs = require('fs');
 const util = require('util');
 
+exports.chunk = function(array, length) {
+  const chunks = [];
+
+  for (let startIndex = 0; startIndex < array.length; startIndex += length) {
+    const chunk = array.slice(startIndex, startIndex + length);
+    chunks.push(chunk);
+  }
+
+  return chunks;
+};
+
 exports.getArguments = function() {
   const [region, clusterArn, clusterSecretArn] = process.argv.slice(2);
 

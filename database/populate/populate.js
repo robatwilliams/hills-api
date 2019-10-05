@@ -4,10 +4,13 @@
  */
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 const csvParse = require('csv-parse/lib/sync');
-const { getArguments, readFile } = require('../util');
-const { createParameters, parameterNames } = require('./parameters');
+const hillsType = require('../ddl/hills');
+const hillsMapsType = require('../ddl/hills_maps');
+const { chunk, getArguments, readFile } = require('../util');
+const createParameters = require('./createParameters');
 const parseHill = require('./parseHill');
 
+const BATCH_EXECUTE_PARAMETER_SETS_LIMIT = 1000;
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
 const { region, clusterArn, clusterSecretArn } = getArguments();
@@ -22,30 +25,71 @@ async function main() {
   const records = await loadData();
   console.log(`Loaded ${records.length} records`);
 
-  const parameterSets = records
-    .map(parseHill)
-    .filter(shouldInclude)
-    .map(createParameters);
+  const hills = records.map(parseHill).filter(shouldInclude);
 
-  console.log(`Inserting ${parameterSets.length} items`);
+  console.log('Inserting hills');
+  await insertHills(hills);
 
-  const params = {
-    database: 'HILLS',
-    parameterSets,
-    resourceArn: clusterArn,
-    secretArn: clusterSecretArn,
-    sql: createInsertStatement(),
-  };
+  console.log('Inserting hill-map associations');
+  await insertMaps(hills);
 
-  await client.batchExecuteStatement(params).promise();
-  console.log('Insert complete');
+  console.log('Populate complete');
 }
 
-function createInsertStatement() {
-  const columnList = parameterNames.join(',');
-  const parameterList = parameterNames.map(column => ':' + column).join(',');
+function insertHills(hills) {
+  const sql = createInsertStatement('HILLS', hillsType);
+  const parameterSets = hills.map(hill => createParameters(hill, hillsType));
 
-  return `INSERT INTO HILLS (${columnList}) VALUES (${parameterList})`;
+  return multiBatchExecuteStatement({ parameterSets, sql });
+}
+
+function insertMaps(hills) {
+  const sql = createInsertStatement('HILLS_MAPS', hillsMapsType);
+
+  const entities = hills.reduce((accumulator, hill) => {
+    return [
+      ...accumulator,
+      ...hill.mapsScale25k.map(sheet => ({ hillNumber: hill.number, scale: 25, sheet })),
+      ...hill.mapsScale50k.map(sheet => ({ hillNumber: hill.number, scale: 50, sheet })),
+    ];
+  }, []);
+
+  const parameterSets = entities.map(entity => createParameters(entity, hillsMapsType));
+
+  return multiBatchExecuteStatement({ parameterSets, sql });
+}
+
+function createInsertStatement(table, entityType) {
+  const columns = Object.keys(entityType);
+  const columnList = columns.join(',');
+  const parameterList = columns.map(column => ':' + column).join(',');
+
+  return `INSERT INTO ${table} (${columnList}) VALUES (${parameterList})`;
+}
+
+async function multiBatchExecuteStatement(params) {
+  const { parameterSets } = params;
+
+  const batches = chunk(parameterSets, BATCH_EXECUTE_PARAMETER_SETS_LIMIT);
+  console.log(`Inserting ${parameterSets.length} records in ${batches.length} batches`);
+
+  // One at a time, let it stop if anything fails
+  for (const [index, batch] of batches.entries()) {
+    await batchExecuteStatement({ ...params, parameterSets: batch });
+    console.log(`Uploaded batch ${index + 1}`);
+  }
+
+  console.log('Uploaded all batches');
+}
+
+function batchExecuteStatement(params) {
+  const staticParams = {
+    database: 'HILLS',
+    resourceArn: clusterArn,
+    secretArn: clusterSecretArn,
+  };
+
+  return client.batchExecuteStatement({ ...staticParams, ...params }).promise();
 }
 
 async function loadData() {

@@ -10,7 +10,12 @@ const client = new RDSDataService({ region });
 })();
 
 async function main() {
-  const ddl = await readFile('./database/ddl/HILLS.sql', 'utf8');
+  await createTable('./database/ddl/HILLS.sql');
+  await createTable('./database/ddl/HILLS_MAPS.sql');
+}
+
+async function createTable(ddlFilePath) {
+  const ddl = await readFile(ddlFilePath, 'utf8');
 
   const params = {
     database: 'HILLS',
