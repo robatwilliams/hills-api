@@ -1,4 +1,5 @@
 CREATE TABLE HILLS (
+  countries SET('GB-ENG', 'GB-SCT', 'GB-WAL', 'IE') NOT NULL,
   heightFeet DECIMAL(6, 2) NOT NULL, -- 9999.99
   heightMetres DECIMAL(6, 2) NOT NULL, -- 9999.99
   lists SET('HEWITT', 'MUNRO', 'WAINWRIGHT') NOT NULL,

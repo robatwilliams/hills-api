@@ -3,6 +3,7 @@ const LONG = 'longValue';
 const STRING = 'stringValue';
 
 const types = {
+  countries: [STRING],
   heightFeet: DOUBLE,
   heightMetres: DOUBLE,
   lists: [STRING],

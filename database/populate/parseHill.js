@@ -1,4 +1,4 @@
-const { LIST_CODES } = require('./codes');
+const { COUNTRIES_CODES, LIST_CODES } = require('./codes');
 
 function parseHill(row) {
   const lists = row.Classification.split(',')
@@ -6,6 +6,7 @@ function parseHill(row) {
     .filter(Boolean); // mapping is incomplete
 
   return {
+    countries: COUNTRIES_CODES[row.Country],
     heightFeet: Number(row.Feet),
     heightMetres: Number(row.Metres),
     lists,
