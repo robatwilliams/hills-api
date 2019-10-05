@@ -10,7 +10,7 @@ const parseHill = require('./parseHill');
 
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
 
-const { region, stage, clusterArn, clusterSecretArn } = getArguments();
+const { region, clusterArn, clusterSecretArn } = getArguments();
 
 const client = new RDSDataService({ region });
 
@@ -30,7 +30,7 @@ async function main() {
   console.log(`Inserting ${parameterSets.length} items`);
 
   const params = {
-    database: 'HILLS_' + stage,
+    database: 'HILLS',
     parameterSets,
     resourceArn: clusterArn,
     secretArn: clusterSecretArn,

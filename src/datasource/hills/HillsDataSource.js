@@ -3,7 +3,7 @@ const mapHill = require('./mapHill');
 const mapRecord = require('./mapRecord');
 
 const staticParams = {
-  database: process.env.DATABASE_NAME.toUpperCase(), // TODO remove uppercase
+  database: 'HILLS',
   includeResultMetadata: true, // include column names
   resourceArn: process.env.DATABASE_CLUSTER_ARN,
   secretArn: process.env.DATABASE_CLUSTER_SECRET_ARN,

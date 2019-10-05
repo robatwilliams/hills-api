@@ -17,9 +17,9 @@ resources:
     HillsApiDatabase:
       Type: AWS::RDS::DBCluster
       Properties:
-        DBClusterIdentifier: hills-api-db
+        DBClusterIdentifier: hills-api-db-${self:provider.stage}
         # Create an initial database in this cluster
-        DatabaseName: HILLS_DEV
+        DatabaseName: HILLS
         Engine: aurora
         EngineMode: serverless
         ScalingConfiguration:
