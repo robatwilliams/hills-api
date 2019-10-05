@@ -78,7 +78,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 - CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
 - Compression (gzip, Brotli)
 - Caching (for GETs only)
-- Production deployment
+- Production deployment (set NODE_ENV for express)
 - Domain
 
 ### Monitoring
@@ -99,8 +99,10 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Improvements
 
-- Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Its real feature is auto-scalability not auto-sleep. Work out the costing for DynamoDB with all fields & complete data set; is there really enough headroom? DynamoDB is basically a key-value store at the end of the day.
+- Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Maybe just leave it open, worst case if used hourly it's \$40/mth then can look at API keys. Its real feature is auto-scalability not auto-sleep. Work out the costing for DynamoDB with all fields & complete data set; is there really enough headroom? DynamoDB is basically a key-value store at the end of the day.
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot-based integration tests for supported queries
   - Including one that all fields of all hills conform to the schema
+- Integration tests for HTTP POST, GET, variables/body/querystring/both
+- Split up app/server/request validation
 - Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
