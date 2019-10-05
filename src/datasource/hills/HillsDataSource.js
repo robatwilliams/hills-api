@@ -11,7 +11,7 @@ const staticParams = {
 
 class HillsDataSource {
   constructor() {
-    this.client = new RDSDataService({ region: process.env.DATABASE_REGION });
+    this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
   async queryOne({ number }) {

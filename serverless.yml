@@ -49,7 +49,6 @@ functions:
     environment:
       DATABASE_CLUSTER_ARN: ?
       DATABASE_CLUSTER_SECRET_ARN: ?
-      DATABASE_REGION: eu-west-1
       HILLS_TABLE_NAME: ${file(./serverless-db.yml):custom.hillsTableName}
     events:
       - http:

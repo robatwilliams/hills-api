@@ -1,3 +1,4 @@
 constants:
-  # London is closest region to likely API consumers
-  defaultRegion: eu-west-2
+  # Run lambdas & database in same region to avoid data transfer costs.
+  # Ireland: closest region that supports Data API for Aurora Serverless.
+  defaultRegion: eu-west-1

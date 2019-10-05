@@ -8,8 +8,7 @@ service: hills-api-db
 
 provider:
   name: aws
-  # Ireland; Data API is only available in some regions, London isn't one of them
-  region: ${opt:region, 'eu-west-1'}
+  region: ${opt:region, '${file(../serverless-shared.yml):constants.defaultRegion}'}
   stage: ${opt:stage, 'dev'}
 
 resources:
