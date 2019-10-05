@@ -37,10 +37,8 @@ async function main() {
     sql: createInsertStatement(),
   };
 
-  const result = await client.batchExecuteStatement(params).promise();
+  await client.batchExecuteStatement(params).promise();
   console.log('Insert complete');
-
-  return result;
 }
 
 function createInsertStatement() {
