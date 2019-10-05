@@ -1,0 +1,33 @@
+#
+# Separate stack for the database, to allow separate deployment.
+#
+# It doesn't need to be deployed nearly as often as the lambdas, which was a problem when
+# they were the same serverless.yml (and hence CloudFormation stack).
+#
+service: hills-api-db
+
+provider:
+  name: aws
+  # Ireland; Data API is only available in some regions, London isn't one of them
+  region: ${opt:region, 'eu-west-1'}
+  stage: ${opt:stage, 'dev'}
+
+resources:
+  Resources:
+    HillsApiDatabase:
+      Type: AWS::RDS::DBCluster
+      Properties:
+        DBClusterIdentifier: hills-api-db
+        # Create an initial database in this cluster
+        DatabaseName: HILLS_DEV
+        Engine: aurora
+        EngineMode: serverless
+        ScalingConfiguration:
+          AutoPause: true
+          MaxCapacity: 1
+          MinCapacity: 1
+          SecondsUntilAutoPause: 300
+        DeletionProtection: true
+        # TODO use secrets manager
+        MasterUsername: admin
+        MasterUserPassword: password
