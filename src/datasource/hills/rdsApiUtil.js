@@ -27,6 +27,13 @@ function unwrapField(wrapper, column) {
 }
 
 /**
+ * This can't be done automatically because column metadata only indicates it's a CHAR
+ */
+exports.unwrapSetFieldValue = function(value) {
+  return value.split(',');
+};
+
+/**
  * Converts name-value map to
  * https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_SqlParameter.html
  */

@@ -1,6 +1,5 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
-const mapHill = require('./mapHill');
-const { buildParameters, unwrapRecords } = require('./rdsApiUtil');
+const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
 class HillsDataSource {
   constructor() {
@@ -21,7 +20,7 @@ class HillsDataSource {
       sql: `SELECT * FROM HILLS ${whereList}`,
     });
 
-    return unwrapRecords(response).map(mapHill);
+    return unwrapHillRecords(response);
   }
 
   async queryOne({ number }) {
@@ -31,7 +30,7 @@ class HillsDataSource {
     // TODO deal with slow-resume
     });
 
-    return mapHill(unwrapRecords(response)[0]);
+    return unwrapHillRecords(response)[0];
   }
 
   async queryMaps({ numbers, scale }) {
@@ -58,6 +57,17 @@ class HillsDataSource {
 
     return this.client.executeStatement(params).promise();
   }
+}
+
+function unwrapHillRecords(response) {
+  const hills = unwrapRecords(response);
+
+  for (const hill of hills) {
+    hill.countries = unwrapSetFieldValue(hill.countries);
+    hill.lists = unwrapSetFieldValue(hill.lists);
+  }
+
+  return hills;
 }
 
 module.exports = HillsDataSource;

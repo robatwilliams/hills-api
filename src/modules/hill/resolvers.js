@@ -1,10 +1,14 @@
+const Hill = require('./model/Hill');
+
 module.exports = {
   Query: {
-    hill(object, { number }, { dataSources }) {
-      return dataSources.hills.queryOne({ number });
+    async hill(object, { number }, { dataSources }) {
+      const entity = await dataSources.hills.queryOne({ number });
+      return Hill.fromEntity(entity);
     },
-    hills(object, { list }, { dataSources }) {
-      return dataSources.hills.query({ list });
+    async hills(object, { list }, { dataSources }) {
+      const entities = await dataSources.hills.query({ list });
+      return entities.map(Hill.fromEntity);
     },
   },
   Hill: {
