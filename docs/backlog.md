@@ -107,7 +107,7 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Move from DynamoDB to Aurora
 
-- Handle slow-resume of Aurora Serverless (don't return 200 with an error body)
+- Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don.t HTTP 502
 - Use cross-stack references to populate ARNs in serverless.yml
 - Use secrets manager generated credentials for Aurora cluster
 
