@@ -29,3 +29,29 @@ Key articles of interest:
 
 - [NoSQL Design for DynamoDB](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-general-nosql-design.html)
 - [Why Amazon DynamoDB isn’t for everyone](https://read.acloud.guru/why-amazon-dynamodb-isnt-for-everyone-and-how-to-decide-when-it-s-for-you-aefc52ea9476) - includes "3 laws of DynamoDB", and "should you use DynamoDB" decision flowchart
+
+## Aurora Serverless
+
+Relational DB using MySQL or PostgreSQL. There are no instances to manage; it can scale up/down to meet workload, and can auto-pause during periods of inactivity.
+
+### Costs
+
+Costs in Ireland region:
+
+- \$0.07 per Aurora Capacity Unit (ACU) hour
+- \$0.11 per GB-month storage
+- \$0.22 per million I/O requests
+
+One ACU has approximately 2 GB of memory with corresponding CPU and networking.
+
+Monthly cost of one full-time ACU would be \$50, compared to \$32 for a non-serverless instance of similar capacity. The key benefit for me with this application however is auto-pausing, which makes that cost a maximum rather than a guaranteed fixed. It would only be realised if the API was incredibly popular, or some nefarious person periodically calls it to prevent auto-sleep (at which point I have disable unauthenticated access).
+
+### Benefits for different use cases
+
+Auto-sleep isn't something you'd enable on an important web API due to the slow resumption time (30-60 seconds); for web APIs the real benefits are auto-scaling and no instances to manage. Auto-pause is more a benefit for infrequently-used databases.
+
+### Data API
+
+The [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) allows the database to accessed without a persistent connection, making it suitable for short-lived consumers such as lambdas. It also removes the need for a Virtual Private Cloud for the lambdas, eliminating overhead and configuration hassle.
+
+It's currently only available in some regions. It can be enabled via the console/CLI; CloudFormation doesn't currently support doing so.
