@@ -11,6 +11,7 @@
   },
   "rules": {
     "import/group-exports": "error",
+    "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
 
     "eqeqeq": [
@@ -20,5 +21,14 @@
         "null": "never"
       }
     ]
-  }
+  },
+  "overrides": [
+    {
+      "files": ["./src/**/*"],
+      "rules": {
+        // Matters because serverless packaging does excludeDevDependencies
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": false }]
+      }
+    }
+  ]
 }

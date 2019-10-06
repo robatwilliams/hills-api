@@ -24,6 +24,7 @@ package:
   exclude:
     - ./**
     - '!./node_modules/**' # don't re-include this; it'd override excludeDevDependencies
+  excludeDevDependencies: true # default is true; fyi
   include:
     - src/**
 
