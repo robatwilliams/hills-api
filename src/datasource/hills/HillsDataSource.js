@@ -16,24 +16,20 @@ class HillsDataSource {
       parameters.list = list;
     }
 
-    const params = {
+    const response = await this.executeStatement({
       parameters: buildParameters(parameters),
       sql: `SELECT * FROM HILLS ${whereList}`,
-    };
-
-    const response = await this.executeStatement(params);
+    });
 
     return unwrapRecords(response).map(mapHill);
   }
 
   async queryOne({ number }) {
-    const params = {
+    const response = await this.executeStatement({
       parameters: buildParameters({ number }),
       sql: 'SELECT * FROM HILLS WHERE number = :number',
-    };
-
     // TODO deal with slow-resume
-    const response = await this.executeStatement(params);
+    });
 
     return mapHill(unwrapRecords(response)[0]);
   }
@@ -43,12 +39,10 @@ class HillsDataSource {
     // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
     const inList = numbers.join(',');
 
-    const params = {
+    const response = await this.executeStatement({
       parameters: buildParameters({ scale }),
       sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND hillNumber IN (${inList})`,
-    };
-
-    const response = await this.executeStatement(params);
+    });
 
     return unwrapRecords(response);
   }
