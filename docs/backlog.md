@@ -75,11 +75,17 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Client features
 
-- CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
 - Compression (gzip, Brotli)
 - Caching (for GETs only)
 - Production deployment (set NODE_ENV for express)
 - Domain
+
+### Security
+
+Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse is a problem.
+
+- CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
+- Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
 
 ### Monitoring
 
