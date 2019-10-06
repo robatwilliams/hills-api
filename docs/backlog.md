@@ -16,7 +16,7 @@
 
 - Sorting on key fields
 - [Pagination](https://graphql.org/learn/pagination/)
-- Filtering on key fields ([dynamoose](https://github.com/dynamoosejs/dynamoose) library might be useful for building queries/scans)
+- Filtering on key fields
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Feature ideas

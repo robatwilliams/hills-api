@@ -16,15 +16,20 @@ class HillsDataSource {
   }
 
   async query({ list }) {
-    let sql = 'SELECT * FROM HILLS';
     const parameters = {};
+    let whereList = '';
 
     if (list !== undefined) {
-      sql += ' WHERE FIND_IN_SET(:list, lists)';
+      whereList = 'WHERE FIND_IN_SET(:list, lists)';
       parameters.list = list;
     }
 
-    const params = { ...staticParams, parameters: buildParameters(parameters), sql };
+    const params = {
+      ...staticParams,
+      parameters: buildParameters(parameters),
+      sql: `SELECT * FROM HILLS ${whereList}`,
+    };
+
     const response = await this.client.executeStatement(params).promise();
 
     return response.records
