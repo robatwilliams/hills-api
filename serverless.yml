@@ -11,11 +11,11 @@ provider:
     - Effect: Allow
       Action:
         - rds-data:ExecuteStatement
-      Resource: arn:?
+      Resource: arn:cluster
     - Effect: Allow
       Action:
         - secretsmanager:GetSecretValue
-      Resource: arn:?
+      Resource: arn:secret
 
 plugins:
   - serverless-offline
@@ -50,8 +50,8 @@ functions:
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
-      DATABASE_CLUSTER_ARN: arn:?
-      DATABASE_CLUSTER_SECRET_ARN: arn:?
+      DATABASE_CLUSTER_ARN: arn:cluster
+      DATABASE_CLUSTER_SECRET_ARN: arn:secret
     events:
       - http:
           path: graphql
