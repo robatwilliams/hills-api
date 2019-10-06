@@ -1,7 +1,7 @@
 const fs = require('fs');
 const util = require('util');
 
-exports.getArguments = function() {
+function getArguments() {
   const [region, clusterArn, clusterSecretArn] = process.argv.slice(2);
 
   if (!region || !clusterArn || !clusterSecretArn) {
@@ -13,6 +13,8 @@ exports.getArguments = function() {
   console.log('Config', { region });
 
   return args;
-};
+}
 
-exports.readFile = util.promisify(fs.readFile);
+const readFile = util.promisify(fs.readFile);
+
+module.exports = { getArguments, readFile };

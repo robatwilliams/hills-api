@@ -1,3 +1,5 @@
-exports.DOUBLE = 'doubleValue';
-exports.LONG = 'longValue';
-exports.STRING = 'stringValue';
+module.exports = {
+  DOUBLE: 'doubleValue',
+  LONG: 'longValue',
+  STRING: 'stringValue',
+};

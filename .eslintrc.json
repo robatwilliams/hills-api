@@ -10,6 +10,7 @@
     "ecmaVersion": 2018
   },
   "rules": {
+    "import/group-exports": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
 
     "eqeqeq": [

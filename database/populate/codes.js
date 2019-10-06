@@ -1,5 +1,5 @@
 // ISO 3166-1 & ISO 3166-2
-exports.COUNTRIES_CODES = {
+const COUNTRIES_CODES = {
   E: ['GB-ENG'],
   ES: ['GB-ENG', 'GB-SCT'],
   I: ['IE'],
@@ -8,8 +8,10 @@ exports.COUNTRIES_CODES = {
 };
 
 // http://www.hills-database.co.uk/database_notes.html#classification
-exports.LIST_CODES = {
+const LIST_CODES = {
   Hew: 'HEWITT',
   M: 'MUNRO',
   W: 'WAINWRIGHT',
 };
+
+module.exports = { COUNTRIES_CODES, LIST_CODES };
