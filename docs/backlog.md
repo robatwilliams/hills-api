@@ -95,15 +95,16 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 ### Resource allocation and limits
 
+Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
+
 - Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
-- Defend against a "cost attack". API keys would be a barrier to usage. Just set low limits? WAF is a hassle. Is it really something to be worried about? Set lambda/database limits not to scale out too much.
 - Request throttling (API Gateway)
 - Appropriate values for AWS lambda configuration
   - Concurrency limit
   - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
   - Timeout
 
-### Improvements
+### Move from DynamoDB to Aurora
 
 - Handle slow-resume of Aurora Serverless (don't return 200 with an error body)
 - Script the Aurora setup steps, probably separate the cluster from the tables
@@ -111,6 +112,10 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 - Delete all the DynamoDB code, config, scripts
 - Connect non-offline lambda to Aurora (VPC, IAM, ...)
 - Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Maybe just leave it open, worst case if used hourly it's \$40/mth then can look at API keys. Its real feature is auto-scalability not auto-sleep. Work out the costing for DynamoDB with all fields & complete data set; is there really enough headroom? DynamoDB is basically a key-value store at the end of the day.
+- Update database section in docs/tech.md (maybe separate file)... costings for both etc.
+
+### Improvements
+
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot-based integration tests for supported queries
   - Including one that all fields of all hills conform to the schema
