@@ -9,8 +9,8 @@
     "check:lint": "eslint ./**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "deploy:all": "npm-run-all \"deploy:database -- {@}\" \"deploy:data -- {@}\" \"deploy:stack -- {@}\" --",
-    "deploy:data": "serverless deploy-data --config serverless-db.yml",
-    "deploy:database": "serverless deploy --config serverless-db.yml",
+    "deploy:data": "serverless deploy-data --config ./database/serverless-db.yml",
+    "deploy:database": "serverless deploy --config ./database/serverless-db.yml",
     "deploy:stack": "serverless deploy",
     "deploy:update-fn": "serverless deploy function --function",
     "deployment:info": "serverless info",
@@ -18,7 +18,7 @@
     "start": "serverless offline --printOutput",
     "undeploy:all": "npm-run-all \"undeploy:database -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:stack": "serverless remove",
-    "undeploy:database": "serverless remove --config serverless-db.yml"
+    "undeploy:database": "serverless remove --config ./database/serverless-db.yml"
   },
   "devDependencies": {
     "csv-parse": "^4.4.5",

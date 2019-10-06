@@ -12,6 +12,9 @@ provider:
   region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
   stage: ${opt:stage, 'dev'}
 
+plugins:
+  - serverless-plugin-scripts
+
 resources:
   Resources:
     HillsApiDatabase:
@@ -32,3 +35,8 @@ resources:
         # EnableIAMDatabaseAuthentication: true
         MasterUsername: admin
         MasterUserPassword: password
+
+custom:
+  scripts:
+    commands:
+      deploy-data: echo 'Not yet implemented'
