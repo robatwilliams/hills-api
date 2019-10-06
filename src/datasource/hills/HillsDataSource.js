@@ -38,10 +38,27 @@ class HillsDataSource {
       sql: 'SELECT * FROM HILLS WHERE number = :number',
     };
 
+    // TODO deal with slow-resume
     const response = await this.client.executeStatement(params).promise();
     const record = response.records[0];
 
     return mapHill(mapRecord(record, response.columnMetadata));
+  }
+
+  async queryMaps({ numbers, scale }) {
+    // Although documented, arrayValues isn't actually implemented.
+    // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
+    const inList = numbers.join(',');
+
+    const params = {
+      ...staticParams,
+      parameters: [{ name: 'scale', value: { longValue: scale } }],
+      sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND hillNumber IN (${inList})`,
+    };
+
+    const response = await this.client.executeStatement(params).promise();
+
+    return response.records.map(record => mapRecord(record, response.columnMetadata));
   }
 }
 

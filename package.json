@@ -39,6 +39,7 @@
     "express-graphql": "^0.9.0",
     "graphql": "^14.5.4",
     "graphql-playground-middleware-lambda": "^1.7.13",
+    "graphql-resolve-batch": "^1.0.2",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
     "lodash.merge": "^4.6.2"

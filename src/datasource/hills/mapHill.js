@@ -6,10 +6,6 @@ function mapHill(item) {
       metres: item.heightMetres,
     },
     lists: mapSet(item.lists),
-    maps: {
-      scale25k: [],
-      scale50k: [],
-    },
     name: item.name,
     number: item.number,
   };
