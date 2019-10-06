@@ -1,11 +1,11 @@
-function createParameters(entity, entityType) {
+module.exports = function createParameters(entity, entityType) {
   return Object.entries(entityType).map(([name, type]) => {
     return {
       name,
       value: wrapValue(entity[name], type),
     };
   });
-}
+};
 
 function wrapValue(value, type) {
   if (typeof type === 'string') {
@@ -18,5 +18,3 @@ function wrapValue(value, type) {
     [elementType]: value.join(','),
   };
 }
-
-module.exports = createParameters;

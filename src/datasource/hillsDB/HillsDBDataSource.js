@@ -4,7 +4,7 @@ const mapHill = require('./mapHill');
 
 const TableName = process.env.HILLS_TABLE_NAME;
 
-class HillsDBDataSource {
+module.exports = class HillsDBDataSource {
   start() {
     this.client = new DynamoDB.DocumentClient(); // region from env:AWS_REGION
   }
@@ -30,7 +30,7 @@ class HillsDBDataSource {
     const item = (await this.client.get(params).promise()).Item;
     return item && mapHill(item);
   }
-}
+};
 
 async function scan(client, params) {
   const startTime = performance.now();
@@ -49,5 +49,3 @@ async function scan(client, params) {
 
   return response;
 }
-
-module.exports = HillsDBDataSource;

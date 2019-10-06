@@ -1,7 +1,7 @@
 const explorerRegex = /^OL\d{1,2}$/;
 const landrangerRegex = /^\d{1,3}$/;
 
-function parseMaps(string) {
+module.exports = function parseMaps(string) {
   if (string === 'IoM OL') {
     // Isle of Man Leisure map, not Ordnance Survey
     return string;
@@ -10,7 +10,7 @@ function parseMaps(string) {
   const maps = string ? string.split(' ') : [];
 
   return sanitizeMaps(maps);
-}
+};
 
 function sanitizeMaps(maps) {
   const sanitized = maps.map(sanitizeMap);
@@ -29,5 +29,3 @@ function sanitizeMap(map) {
 
   throw new Error('Invalid map sheet: ' + map);
 }
-
-module.exports = parseMaps;

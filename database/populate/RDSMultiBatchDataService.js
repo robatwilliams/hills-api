@@ -1,6 +1,6 @@
 const BATCH_EXECUTE_PARAMETER_SETS_LIMIT = 1000;
 
-class RDSMultiBatchDataService {
+module.exports = class RDSMultiBatchDataService {
   constructor(client, staticParams) {
     this.client = client;
     this.staticParams = staticParams;
@@ -26,9 +26,7 @@ class RDSMultiBatchDataService {
       .batchExecuteStatement({ ...this.staticParams, ...params })
       .promise();
   }
-}
-
-module.exports = RDSMultiBatchDataService;
+};
 
 function chunk(array, length) {
   const chunks = [];

@@ -1,7 +1,7 @@
 const { COUNTRIES_CODES, LIST_CODES } = require('./codes');
 const { number, removeEmptySets, string, stringSet } = require('./dynamoAttribute');
 
-function createPutRequest(row) {
+module.exports = function createPutRequest(row) {
   const lists = row.Classification.split(',')
     .map(code => LIST_CODES[code])
     .filter(Boolean); // mapping is incomplete
@@ -22,10 +22,8 @@ function createPutRequest(row) {
   return {
     PutRequest: { Item: item },
   };
-}
+};
 
 function parseMaps(maps) {
   return maps ? maps.split(' ') : [];
 }
-
-module.exports = createPutRequest;

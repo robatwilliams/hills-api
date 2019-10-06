@@ -1,4 +1,4 @@
-function mapHill(item) {
+module.exports = function mapHill(item) {
   return {
     countries: mapCountries(readSetAttribute(item.countries)),
     height: {
@@ -13,7 +13,7 @@ function mapHill(item) {
     name: item.name,
     number: item.number,
   };
-}
+};
 
 function mapCountries(countries) {
   return new Set([...countries].map(code => ({ code })));
@@ -27,5 +27,3 @@ function readSetAttribute(attribute) {
   // DynamoDB: An attribute value cannot be an empty String or empty Set
   return new Set(attribute && attribute.values);
 }
-
-module.exports = mapHill;

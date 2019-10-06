@@ -1,7 +1,7 @@
 const { COUNTRIES_CODES, LIST_CODES } = require('./codes');
 const parseMaps = require('./parseMaps');
 
-function parseHill(row) {
+module.exports = function parseHill(row) {
   const lists = row.Classification.split(',')
     .map(code => LIST_CODES[code])
     .filter(Boolean); // mapping is incomplete
@@ -16,6 +16,4 @@ function parseHill(row) {
     name: row.Name,
     number: Number(row.Number),
   };
-}
-
-module.exports = parseHill;
+};

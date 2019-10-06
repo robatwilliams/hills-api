@@ -1,7 +1,7 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
-class HillsDataSource {
+module.exports = class HillsDataSource {
   constructor() {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
@@ -56,7 +56,7 @@ class HillsDataSource {
 
     return this.client.executeStatement(params).promise();
   }
-}
+};
 
 function unwrapHillRecords(response) {
   const hills = unwrapRecords(response);
@@ -68,5 +68,3 @@ function unwrapHillRecords(response) {
 
   return hills;
 }
-
-module.exports = HillsDataSource;
