@@ -1,6 +1,7 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 const mapHill = require('./mapHill');
 const mapRecord = require('./mapRecord');
+const { buildParameters } = require('./rdsApiUtil');
 
 const staticParams = {
   database: 'HILLS',
@@ -16,14 +17,14 @@ class HillsDataSource {
 
   async query({ list }) {
     let sql = 'SELECT * FROM HILLS';
-    const parameters = [];
+    const parameters = {};
 
     if (list !== undefined) {
       sql += ' WHERE FIND_IN_SET(:list, lists)';
-      parameters.push({ name: 'list', value: { stringValue: list } });
+      parameters.list = list;
     }
 
-    const params = { ...staticParams, parameters, sql };
+    const params = { ...staticParams, parameters: buildParameters(parameters), sql };
     const response = await this.client.executeStatement(params).promise();
 
     return response.records
@@ -34,7 +35,7 @@ class HillsDataSource {
   async queryOne({ number }) {
     const params = {
       ...staticParams,
-      parameters: [{ name: 'number', value: { longValue: number } }],
+      parameters: buildParameters({ number }),
       sql: 'SELECT * FROM HILLS WHERE number = :number',
     };
 
@@ -52,7 +53,7 @@ class HillsDataSource {
 
     const params = {
       ...staticParams,
-      parameters: [{ name: 'scale', value: { longValue: scale } }],
+      parameters: buildParameters({ scale }),
       sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND hillNumber IN (${inList})`,
     };
 
