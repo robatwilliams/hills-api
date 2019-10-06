@@ -8,7 +8,8 @@ service: hills-api-db
 
 provider:
   name: aws
-  region: ${opt:region, '${file(../serverless-shared.yml):constants.defaultRegion}'}
+  # File reference path is relative to working director, not this file
+  region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
   stage: ${opt:stage, 'dev'}
 
 resources:
