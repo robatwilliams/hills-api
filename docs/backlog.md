@@ -70,6 +70,7 @@ Needs storage, auth. Could be a separate lambda that this one calls.
   - Data licensing (as per the Hills Database). Prominent, not just a footnote at the end.
   - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
+- Spellcheck
 
 ## Technical
 
