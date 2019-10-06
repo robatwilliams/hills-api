@@ -1,0 +1,9 @@
+https://eu-west-1.console.aws.amazon.com/rds/home?region=eu-west-1#query-editor:
+https://aws.amazon.com/blogs/database/using-the-data-api-to-interact-with-an-amazon-aurora-serverless-mysql-database/
+https://docs.aws.amazon.com/appsync/latest/devguide/tutorial-rds-resolvers.html#create-database-and-table
+https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
+https://stackoverflow.com/questions/48534740/how-to-properly-connect-aws-lambda-to-rds-in-vpc
+https://stackoverflow.com/questions/37555670/aws-lambda-cant-connect-to-rds-instance-but-i-can-locally
+https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html
+https://docs.aws.amazon.com/lambda/latest/dg/services-rds-tutorial.html
+https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html

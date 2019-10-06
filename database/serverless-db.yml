@@ -27,6 +27,5 @@ resources:
           MinCapacity: 1
           SecondsUntilAutoPause: 300
         DeletionProtection: true
-        # TODO use secrets manager
         MasterUsername: admin
         MasterUserPassword: password

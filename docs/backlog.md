@@ -99,6 +99,11 @@ Needs storage, auth. Could be a separate lambda that this one calls.
 
 ### Improvements
 
+- Handle slow-resume of Aurora Serverless (don't return 200 with an error body)
+- Script the Aurora setup steps, probably separate the cluster from the tables
+- Use secrets manager for Aurora cluster credentials
+- Delete all the DynamoDB code, config, scripts
+- Connect non-offline lambda to Aurora (VPC, IAM, ...)
 - Investigate Aurora Serverless. It has a minimum capacity unit of 1 (at \$0.07 per hour), but you can set it to pause the cluster after a period of inactivity. There seem to be [a few problems](https://dev.to/dvddpl/how-to-deal-with-aurora-serverless-coldstarts-ml0) with being slow to resume though. If can't use auto pause/resume, RDS is cheaper at $0.047 per hour, but that still adds up to $1.12 per day. Maybe think of it as auto-sleep rather than true serverless, might be more appropriate for infrequent operations rather than a web API. Maybe just leave it open, worst case if used hourly it's \$40/mth then can look at API keys. Its real feature is auto-scalability not auto-sleep. Work out the costing for DynamoDB with all fields & complete data set; is there really enough headroom? DynamoDB is basically a key-value store at the end of the day.
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Snapshot-based integration tests for supported queries

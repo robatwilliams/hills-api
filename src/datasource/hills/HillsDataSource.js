@@ -27,7 +27,6 @@ class HillsDataSource {
     const response = await this.executeStatement({
       parameters: buildParameters({ number }),
       sql: 'SELECT * FROM HILLS WHERE number = :number',
-    // TODO deal with slow-resume
     });
 
     return unwrapHillRecords(response)[0];
