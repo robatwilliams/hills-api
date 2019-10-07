@@ -2,7 +2,7 @@
 
 See also the [ideas backlog](./backlog-ideas.md).
 
-## Core features
+## Features: core
 
 ### Data
 
@@ -21,9 +21,9 @@ See also the [ideas backlog](./backlog-ideas.md).
 - Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
-## Feature ideas
+## Features: nice to have
 
-- ❤️ Map sheet names
+- Map sheet names
 
 ## Documentation
 
@@ -46,21 +46,27 @@ See also the [ideas backlog](./backlog-ideas.md).
 - Table of which fields are filterable/sortable
 - Move some big comments out into docs files (express, API Gateway integration)
 
-## Technical
-
-### Client features
-
-- Compression (gzip, Brotli)
-- Caching (for GETs only)
-- Production deployment (set NODE_ENV for express)
-- Domain
-
-### Security
+## Security
 
 Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse is a problem.
 
 - CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
 - Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
+
+## Performance
+
+- Compression (gzip, Brotli). Also cuts data transfer cost.
+- Caching (for GETs only; rare)
+- Verify total/database response time of key queries
+- Indices on filterable/sortable database fields
+- Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
+
+## Operational
+
+### Production
+
+- Production deployment (set NODE_ENV for express)
+- Domain
 
 ### Monitoring
 
@@ -78,7 +84,8 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
   - Concurrency limit
   - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
   - Timeout
-- Test for most-expensive currently-supported query (validate resource limits)
+
+## Technical
 
 ### Move from DynamoDB to Aurora
 
@@ -88,22 +95,23 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - Use secrets manager generated credentials for Aurora cluster
 - Replace type definitions in population script with type inference (as done on the query side)
 
-### Performance
-
-- Verify total/database response time of key queries
-- Indices on filterable/sortable database fields
-- Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
-
 ### Code quality
 
 - More eslint rules (just important ones), Node eslint plugin
+- Split up app/server/request validation
+
+### Tests
+
+- Snapshot-based integration tests for supported queries
+  - Including one that all fields of all hills conform to the schema
+- Integration tests for HTTP POST, GET, variables/body/querystring/both
+- Test for most-expensive currently-supported query (validate resource limits)
 
 ### Improvements
 
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
-- Snapshot-based integration tests for supported queries
-  - Including one that all fields of all hills conform to the schema
-- Integration tests for HTTP POST, GET, variables/body/querystring/both
-- Split up app/server/request validation
-- Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
+
+### Further future
+
 - NodeJS 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports.
+- Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
