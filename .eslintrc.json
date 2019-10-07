@@ -28,7 +28,10 @@
 
     // https://eslint.org/docs/rules/#variables - selection
     "no-shadow": "error",
-    "no-use-before-define": ["error", "nofunc"]
+    "no-use-before-define": ["error", "nofunc"],
+
+    // https://eslint.org/docs/rules/#nodejs-and-commonjs - selection
+    "no-process-exit": "error"
   },
   "overrides": [
     {

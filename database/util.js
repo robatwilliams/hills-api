@@ -5,8 +5,7 @@ function getArguments() {
   const [region, clusterArn, clusterSecretArn] = process.argv.slice(2);
 
   if (!region || !clusterArn || !clusterSecretArn) {
-    console.error('Must specify: region, cluster ARN, cluster secret ARN');
-    process.exit(1);
+    throw new Error('Must specify: region, cluster ARN, cluster secret ARN');
   }
 
   const args = { region, clusterArn, clusterSecretArn };
