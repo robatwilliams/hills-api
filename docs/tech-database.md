@@ -44,7 +44,7 @@ Costs in Ireland region:
 
 One ACU has approximately 2 GB of memory with corresponding CPU and networking.
 
-Monthly cost of one full-time ACU would be \$50, compared to \$32 for a non-serverless instance of similar capacity. The key benefit for me with this application however is auto-pausing, which makes that cost a maximum rather than a guaranteed fixed. It would only be realised if the API was incredibly popular, or some nefarious person periodically calls it to prevent auto-sleep (at which point I have disable unauthenticated access).
+Monthly cost of one full-time ACU would be \$50, compared to \$32 for a non-serverless instance of similar capacity. The key benefit for me with this application however is auto-pausing, which makes that cost a maximum (with auto-scaling disabled) rather than a guaranteed fixed. It would only be realised if the API was incredibly popular, or some nefarious person periodically calls it to prevent auto-sleep (at which point I have disable unauthenticated access).
 
 ### Benefits for different use cases
 
