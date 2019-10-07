@@ -1,5 +1,7 @@
 # Backlog
 
+See also the [ideas backlog](./backlog-ideas.md).
+
 ## Core features
 
 ### Data
@@ -22,38 +24,6 @@
 ## Feature ideas
 
 - ❤️ Map sheet names
-
-<details>
-<summary>Expand for more...</summary>
-
-### Data
-
-- Remainder of all [fields from the hills database](fields-hills-database.md)
-- All hills from the hills database
-- Nearby hills to a hill, given a distance
-- Include distance, bearing, and relative height on child/parent/nearby relations. Needs calculation.
-
-### Queries
-
-- Sorting on all fields
-- Filtering on all fields, e.g. "which hills are on map OL7 ?"
-- List nearby hills, given a location name/coordinate and distance. Result could include distance and bearing.
-
-### Additional data sources
-
-- ❤️ Map sheet names
-- Links to sites such as [Hill Bagging](http://www.hill-bagging.co.uk), [WalkLakes](https://www.walklakes.co.uk/hill_2367.html), [Walkhighlands](http://www.hill-bagging.co.uk/mountaindetails.php?qu=S&rf=278)
-- Links to [PeakFinder](https://www.peakfinder.org)
-- Links to the [MWIS](http://www.mwis.org.uk/) mountain weather, directly to the relevant forecast area. Figure that out using info such as [this map](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=85322).
-- Unusual summit features, with description, photo url (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
-
-### User data
-
-Needs storage, auth. Could be a separate lambda that this one calls.
-
-- Mark as done, with date, notes, links to photos & GPS activity
-- Mark as to-do, with reason, link to route
-  </details>
 
 ## Documentation
 
