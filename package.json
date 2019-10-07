@@ -19,20 +19,8 @@
     "package": "serverless package",
     "start": "serverless offline --printOutput",
     "undeploy:all": "npm-run-all \"undeploy:db:all -- {@}\" \"undeploy:stack -- {@}\" --",
-    "undeploy:stack": "serverless remove",
-    "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml"
-  },
-  "devDependencies": {
-    "csv-parse": "^4.4.5",
-    "eslint": "^6.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "npm-run-all": "^4.1.5",
-    "prettier": "1.18.2",
-    "serverless": "^1.51.0",
-    "serverless-offline": "^5.10.1",
-    "serverless-plugin-git-variables": "^3.3.2",
-    "serverless-plugin-scripts": "^1.0.2",
-    "serverless-prune-plugin": "^1.4.1"
+    "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml",
+    "undeploy:stack": "serverless remove"
   },
   "dependencies": {
     "aws-sdk": "^2.529.0",
@@ -45,5 +33,17 @@
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
     "lodash.merge": "^4.6.2"
+  },
+  "devDependencies": {
+    "csv-parse": "^4.4.5",
+    "eslint": "^6.3.0",
+    "eslint-plugin-import": "^2.18.2",
+    "npm-run-all": "^4.1.5",
+    "prettier": "1.18.2",
+    "serverless": "^1.51.0",
+    "serverless-offline": "^5.10.1",
+    "serverless-plugin-git-variables": "^3.3.2",
+    "serverless-plugin-scripts": "^1.0.2",
+    "serverless-prune-plugin": "^1.4.1"
   }
 }
