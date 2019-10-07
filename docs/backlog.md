@@ -97,7 +97,7 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Code quality
 
-- More ESLint rules (just important ones), Node.js ESLint plugin
+- Node.js ESLint plugin
 - Split up app/server/request validation
 
 ### Tests
