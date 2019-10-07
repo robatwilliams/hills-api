@@ -24,7 +24,11 @@
     "no-empty-function": "error",
     "no-return-await": "error",
     "radix": "error",
-    "require-await": "error"
+    "require-await": "error",
+
+    // https://eslint.org/docs/rules/#variables - selection
+    "no-shadow": "error",
+    "no-use-before-define": ["error", "nofunc"]
   },
   "overrides": [
     {

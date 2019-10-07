@@ -32,6 +32,7 @@ function chunk(array, length) {
   const chunks = [];
 
   for (let startIndex = 0; startIndex < array.length; startIndex += length) {
+    // eslint-disable-next-line no-shadow
     const chunk = array.slice(startIndex, startIndex + length);
     chunks.push(chunk);
   }
