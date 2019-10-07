@@ -90,14 +90,14 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 ### Move from DynamoDB to Aurora
 
 - Use a transaction for the complete data upload (multibatch client should require one too)
-- Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don.t HTTP 502
+- Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don't HTTP 502
 - Use cross-stack references to populate ARNs in serverless.yml
 - Use secrets manager generated credentials for Aurora cluster
 - Replace type definitions in population script with type inference (as done on the query side)
 
 ### Code quality
 
-- More eslint rules (just important ones), Node eslint plugin
+- More ESLint rules (just important ones), Node.js ESLint plugin
 - Split up app/server/request validation
 
 ### Tests
@@ -113,5 +113,5 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Further future
 
-- NodeJS 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports.
+- Node.js 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports.
 - Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).

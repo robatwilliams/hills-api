@@ -6,7 +6,7 @@ Started off with DynamoDB, then moved to Aurora Serverless.
 
 NoSQL key-value store. It was quick and easy to get started with for a personal/concept project with a small amount of data. However, it wasn't suitable by nature for queries other than individual record lookups by key. A relational database would be more suitable.
 
-It can peform queries with non-trivial criteria, but they require an inefficient full table scan. For single-field criteria on fields of type string/number/binary, Global Secondary Indexes solve it. For multi-field criteria, concatenated attributes used as keys (yuck) will work - but only for equality criteria. So it can't do a "query" such as `country == 'Scotland' && height >= 800` - but it can apply such criteria as a post-read filter to the result of a scan... which doesn't really help.
+It can perform queries with non-trivial criteria, but they require an inefficient full table scan. For single-field criteria on fields of type string/number/binary, Global Secondary Indexes solve it. For multi-field criteria, concatenated attributes used as keys (yuck) will work - but only for equality criteria. So it can't do a "query" such as `country == 'Scotland' && height >= 800` - but it can apply such criteria as a post-read filter to the result of a scan... which doesn't really help.
 
 ### Cost of full table scan
 
@@ -23,7 +23,7 @@ The first (current) scenario's calculation confirms the value returned by `scan(
 
 ### Conclusion
 
-The scans are fast enough (50-100ms) in the first (current) scenario, but would probably be quite a bit slower with 100x the table size. That's an issue, even if we could get away with the costs until/if traffic grows. Better switch to Aurora while there isn't much code to adapt.
+The scans are fast enough (50-100 ms) in the first (current) scenario, but would probably be quite a bit slower with 100x the table size. That's an issue, even if we could get away with the costs until/if traffic grows. Better switch to Aurora while there isn't much code to adapt.
 
 Key articles of interest:
 

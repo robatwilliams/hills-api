@@ -23,7 +23,7 @@ Things that could be done, and/or might be nice to have.
 
 ## Additional data sources
 
-- Unusual summit features, with description, photo url (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
+- Unusual summit features, with description, photo URL (using data from [here](https://www.walkhighlands.co.uk/Forum/viewtopic.php?f=1&t=91941))
 
 ## User data
 
