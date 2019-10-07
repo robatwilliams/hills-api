@@ -16,7 +16,7 @@
 
 - Sorting on key fields
 - [Pagination](https://graphql.org/learn/pagination/)
-- Filtering on key fields
+- Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Feature ideas
@@ -71,6 +71,10 @@ Needs storage, auth. Could be a separate lambda that this one calls.
   - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 - Spellcheck
+- Example using variables (`.graphql` file)
+- GitHub Pages, with Google Analytics
+- Table of which fields are filterable/sortable
+- Move some big comments out into docs files (express, API Gateway integration)
 
 ## Technical
 
@@ -104,13 +108,25 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
   - Concurrency limit
   - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
   - Timeout
+- Test for most-expensive currently-supported query (validate resource limits)
 
 ### Move from DynamoDB to Aurora
 
+- Use a transaction for the complete data upload (multibatch client should require one too)
 - Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don.t HTTP 502
 - Use cross-stack references to populate ARNs in serverless.yml
 - Use secrets manager generated credentials for Aurora cluster
 - Replace type definitions in population script with type inference (as done on the query side)
+
+### Performance
+
+- Verify total/database response time of key queries
+- Indices on filterable/sortable database fields
+- Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
+
+### Code quality
+
+- More eslint rules (just important ones), Node eslint plugin
 
 ### Improvements
 
@@ -120,3 +136,4 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - Integration tests for HTTP POST, GET, variables/body/querystring/both
 - Split up app/server/request validation
 - Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
+- NodeJS 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports.
