@@ -1,5 +1,6 @@
 const gql = require('graphql-tag');
 const merge = require('lodash.merge');
+
 const { flatten } = require('../util');
 
 const modules = [

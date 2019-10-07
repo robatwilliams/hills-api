@@ -13,6 +13,7 @@
     "import/group-exports": "error",
     "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
+    "import/order": ["error", { "newlines-between": "always" }],
 
     "eqeqeq": ["error", "always", { "null": "never" }]
   },

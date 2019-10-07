@@ -1,4 +1,5 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
+
 const { getArguments, readFile } = require('./util');
 
 const { region, clusterArn, clusterSecretArn } = getArguments();

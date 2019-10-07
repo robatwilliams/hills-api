@@ -4,9 +4,11 @@
  */
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 const csvParse = require('csv-parse/lib/sync');
+
 const hillsType = require('../ddl/hills');
 const hillsMapsType = require('../ddl/hills_maps');
 const { getArguments, readFile } = require('../util');
+
 const createParameters = require('./createParameters');
 const parseHill = require('./parseHill');
 const RDSMultiBatchDataService = require('./RDSMultiBatchDataService');
