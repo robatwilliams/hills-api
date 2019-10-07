@@ -15,7 +15,16 @@
     "import/no-unresolved": ["error", { "commonjs": true }],
     "import/order": ["error", { "newlines-between": "always" }],
 
-    "eqeqeq": ["error", "always", { "null": "never" }]
+    // https://eslint.org/docs/rules/#possible-errors - nothing; almost all are enabled by eslint:recommended
+
+    // https://eslint.org/docs/rules/#best-practices - selection
+    "consistent-return": "error",
+    "default-case": "error",
+    "eqeqeq": ["error", "always", { "null": "never" }],
+    "no-empty-function": "error",
+    "no-return-await": "error",
+    "radix": "error",
+    "require-await": "error"
   },
   "overrides": [
     {

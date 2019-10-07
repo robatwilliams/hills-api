@@ -1,7 +1,7 @@
 class Hill {
   static fromEntity(entity) {
     if (!entity) {
-      return;
+      return undefined;
     }
 
     const countries = entity.countries.map(code => ({ code }));

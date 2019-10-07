@@ -50,6 +50,7 @@ app.use(
 // Proxy library to bridge the gap between AWS Lambda and Express
 const server = awsServerlessExpress.createServer(app);
 
+// eslint-disable-next-line require-await
 async function handler(event, context) {
   // async; caller must consistently receive a promise
 
@@ -65,20 +66,22 @@ async function handler(event, context) {
  */
 function ensureSupportedContentType(event) {
   if (event.httpMethod !== 'POST') {
-    return;
+    return undefined;
   }
 
   // API Gateway normalises to lowercase, serverless-offline does not
   const contentType = event.headers['content-type'] || event.headers['Content-Type'];
 
-  if (!REQUEST_MEDIA_TYPES.includes(contentType)) {
-    return {
-      statusCode: 415,
-      body: JSON.stringify({
-        errors: [{ message: 'Supports: ' + REQUEST_MEDIA_TYPES.join(', ') }],
-      }),
-    };
+  if (REQUEST_MEDIA_TYPES.includes(contentType)) {
+    return undefined;
   }
+
+  return {
+    statusCode: 415,
+    body: JSON.stringify({
+      errors: [{ message: 'Supports: ' + REQUEST_MEDIA_TYPES.join(', ') }],
+    }),
+  };
 }
 
 module.exports.fn = handler;
