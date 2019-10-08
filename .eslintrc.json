@@ -70,7 +70,7 @@
       { "blankLine": "any", "prev": "cjs-import", "next": "cjs-import" }
     ],
 
-    // eslint-plugin-import
+    // eslint-plugin-import - selection from the ones that are compatible with CommonJS
     "import/group-exports": "error",
     "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
