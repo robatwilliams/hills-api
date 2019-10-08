@@ -7,12 +7,10 @@ const countries = [
   /* eslint-enable camelcase */
 ];
 
-class CountriesDataSource {
+module.exports = class CountriesDataSource {
   byCode(code) {
     return countries.find(
       country => country.codeISO3166_2 === code || country.codeISO3166_1 === code
     );
   }
-}
-
-module.exports = CountriesDataSource;
+};
