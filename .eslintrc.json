@@ -86,7 +86,7 @@
     "node/file-extension-in-import": ["error", "never"],
     "node/prefer-promises/fs": "error", // won't do anything until Node >= 11.14
 
-    // eslint-plugin-unicorn - additions and removals from the extended preset
+    // eslint-plugin-unicorn - additions/removals/modifications to the preset
     "unicorn/custom-error-definition": "error",
     "unicorn/filename-case": "off",
     "unicorn/no-unsafe-regex": "error",
