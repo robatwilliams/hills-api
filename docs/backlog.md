@@ -95,10 +95,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - Use secrets manager generated credentials for Aurora cluster
 - Replace type definitions in population script with type inference (as done on the query side)
 
-### Code quality
-
-- Split up app/server/request validation
-
 ### Tests
 
 - Snapshot-based integration tests for supported queries
