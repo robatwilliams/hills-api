@@ -4,10 +4,12 @@ module.exports = {
   Query: {
     async hill(object, { number }, { dataSources }) {
       const entity = await dataSources.hills.queryOne({ number });
+
       return Hill.fromEntity(entity);
     },
     async hills(object, { list }, { dataSources }) {
       const entities = await dataSources.hills.query({ list });
+
       return entities.map(Hill.fromEntity);
     },
   },

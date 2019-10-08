@@ -58,6 +58,18 @@
       { "avoidEscape": true, "allowTemplateLiterals": false }
     ],
 
+    // eslint:all - rules whose default options do nothing. Options need to be compatible with Prettier.
+    "padding-line-between-statements": [
+      "error",
+      { "blankLine": "always", "prev": "*", "next": ["cjs-export", "class", "return"] },
+
+      { "blankLine": "always", "prev": "*", "next": "block-like" },
+      { "blankLine": "always", "prev": "block-like", "next": "*" },
+
+      { "blankLine": "always", "prev": "cjs-import", "next": "*" },
+      { "blankLine": "any", "prev": "cjs-import", "next": "cjs-import" }
+    ],
+
     // eslint-plugin-import
     "import/group-exports": "error",
     "import/no-extraneous-dependencies": "error",

@@ -12,6 +12,7 @@ function unwrapRecords(response) {
 function unwrapRecord(values, columnMetadata) {
   return columnMetadata.reduce((item, column, columnIndex) => {
     item[column.name] = unwrapField(values[columnIndex], column);
+
     return item;
   }, {});
 }

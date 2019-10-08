@@ -14,6 +14,7 @@ function wrapValue(value, type) {
 
   // SET data type
   const [elementType] = type;
+
   return {
     [elementType]: value.join(','),
   };
