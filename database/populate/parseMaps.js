@@ -24,7 +24,7 @@ function sanitizeMap(map) {
     return map;
   } else if (/[NESW]$/u.test(map)) {
     // Discard any location-on-map information added to the sheet name, e.g. OL47W
-    return sanitizeMap(map.substr(0, map.length - 1));
+    return sanitizeMap(map.slice(0, map.length - 1));
   }
 
   throw new Error(`Invalid map sheet: ${map}`);

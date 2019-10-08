@@ -5,6 +5,8 @@
     "node": true
   },
   "extends": [
+    // Prettier presets are partial "anti-presets" for other presets, that disable unnecessary/conflicting rules.
+
     /*
      * Enable all rules:
      *   1. Majority of rules and default options are good
@@ -12,9 +14,10 @@
      *   3. We automatically gain new rules when they are released
      */
     "eslint:all",
+    "prettier",
 
-    // Disable rules that are unnecessary or in some cases conflict with Prettier
-    "prettier"
+    "plugin:unicorn/recommended",
+    "prettier/unicorn"
   ],
   "plugins": ["import"],
   "parserOptions": {
@@ -74,7 +77,13 @@
     "import/group-exports": "error",
     "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
-    "import/order": ["error", { "newlines-between": "always" }]
+    "import/order": ["error", { "newlines-between": "always" }],
+
+    // eslint-plugin-unicorn - additions and removals from the extended preset
+    "unicorn/custom-error-definition": "error",
+    "unicorn/filename-case": "off",
+    "unicorn/no-unsafe-regex": "error",
+    "unicorn/prevent-abbreviations": "off"
   },
   "overrides": [
     {
