@@ -50,6 +50,13 @@ app.use(
 // Proxy library to bridge the gap between AWS Lambda and Express
 const server = awsServerlessExpress.createServer(app);
 
+/**
+ * Event documentation:
+ * https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+ * https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html
+ *
+ * @param {*} event API Gateway Lambda proxy integration representation of client request
+ */
 // eslint-disable-next-line require-await
 async function handler(event, context) {
   // async; caller must consistently receive a promise
