@@ -14,6 +14,7 @@ module.exports = class RDSMultiBatchDataService {
 
     // One at a time, let it stop if anything fails
     for (const [index, batch] of batches.entries()) {
+      // eslint-disable-next-line no-await-in-loop, no-underscore-dangle
       await this._batchExecuteStatement({ ...params, parameterSets: batch });
       console.log(`Inserted batch ${index + 1}`);
     }

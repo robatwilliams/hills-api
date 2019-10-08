@@ -56,7 +56,7 @@ function fieldValueKey(value) {
     return 'longValue';
   }
 
-  throw new Error('Not implemented for values of this type: ' + value);
+  throw new Error(`Not implemented for values of this type: ${value}`);
 }
 
 module.exports = {

@@ -20,7 +20,7 @@ module.exports = {
         case 'METRES':
           return hill.height.metres;
         default:
-          throw new Error('Unknown unit ' + unit);
+          throw new Error(`Unknown unit: ${unit}`);
       }
     },
   },

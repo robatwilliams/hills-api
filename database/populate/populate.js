@@ -69,7 +69,7 @@ function insertMaps(hills) {
 function createInsertStatement(table, entityType) {
   const columns = Object.keys(entityType);
   const columnList = columns.join(',');
-  const parameterList = columns.map(column => ':' + column).join(',');
+  const parameterList = columns.map(column => `:${column}`).join(',');
 
   return `INSERT INTO ${table} (${columnList}) VALUES (${parameterList})`;
 }

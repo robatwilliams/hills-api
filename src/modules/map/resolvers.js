@@ -21,6 +21,6 @@ function convertScale(scale) {
     case 'ONE_50K':
       return 50;
     default:
-      throw new Error('Unknown scale ' + scale);
+      throw new Error(`Unknown scale: ${scale}`);
   }
 }

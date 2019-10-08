@@ -4,54 +4,65 @@
     "es6": true,
     "node": true
   },
-  "extends": "eslint:recommended",
+  "extends": [
+    /*
+     * Enable all rules:
+     *   1. Majority of rules and default options are good
+     *   2. eslint:recommended is only a small subset
+     *   3. We automatically gain new rules when they are released
+     */
+    "eslint:all",
+
+    // Disable rules that are unnecessary or in some cases conflict with Prettier
+    "prettier"
+  ],
   "plugins": ["import"],
   "parserOptions": {
     "ecmaVersion": 2018
   },
   "reportUnusedDisableDirectives": true,
   "rules": {
-    // Only ones that won't conflict with Prettier _in_practice_ : https://github.com/prettier/eslint-config-prettier#cli-helper-tool
+    // eslint:all - disable unwanted rules
+    // Add others here as discovered, for guidance refer to https://github.com/robatwilliams/eslint-config-robatwilliams
+    "capitalized-comments": "off",
+    "class-methods-use-this": "off",
+    "global-require": "off",
+    "id-length": "off",
+    "line-comment-position": "off",
+    "multiline-comment-style": "off",
+    "no-console": "off",
+    "no-inline-comments": "off",
+    "no-magic-numbers": "off",
+    "no-process-env": "off",
+    "no-ternary": "off",
+    "no-undefined": "off",
+    "one-var": "off",
+    "sort-keys": "off",
+    "strict": "off",
 
-    "import/group-exports": "error",
-    "import/no-extraneous-dependencies": "error",
-    "import/no-unresolved": ["error", { "commonjs": true }],
-    "import/order": ["error", { "newlines-between": "always" }],
-
-    // https://eslint.org/docs/rules/#possible-errors - nothing; almost all are enabled by eslint:recommended
-
-    // https://eslint.org/docs/rules/#best-practices - selection
-    "consistent-return": "error",
-    "default-case": "error",
+    // eslint:all - modify default options
     "eqeqeq": ["error", "always", { "null": "never" }],
-    "no-empty-function": "error",
-    "no-return-await": "error",
-    "radix": "error",
-    "require-await": "error",
-
-    // https://eslint.org/docs/rules/#variables - selection
-    "no-shadow": "error",
-    "no-use-before-define": ["error", "nofunc"],
-
-    // https://eslint.org/docs/rules/#nodejs-and-commonjs - selection
-    "no-process-exit": "error",
-
-    // https://eslint.org/docs/rules/#stylistic-issues - selection; most things covered by Prettier
-    "camelcase": "error",
     "func-names": ["error", "as-needed"],
     "func-style": ["error", "declaration"],
-    "lines-between-class-members": "error",
-    "no-bitwise": "error",
-    "no-lonely-if": "error",
-    // "no-mixed-operators": "error", // Prettier conflict
-    "no-negated-condition": "error",
+    "no-use-before-define": ["error", "nofunc"],
+    "spaced-comment": ["error", "always", { "block": { "balanced": true } }],
+
+    // eslint:all & prettier - re-enable some of the rules that are compatible when certain options are used
+    //   (https://github.com/prettier/eslint-config-prettier#special-rules)
+    "curly": "error",
+    "max-len": ["error", { "code": 1000, "comments": 90, "ignoreUrls": true }],
+    // "no-mixed-operators": "error", // incompatible
     "quotes": [
-      // Prettier-compatible options
       "error",
       "single",
       { "avoidEscape": true, "allowTemplateLiterals": false }
     ],
-    "spaced-comment": ["error", "always", { "block": { "balanced": true } }]
+
+    // eslint-plugin-import
+    "import/group-exports": "error",
+    "import/no-extraneous-dependencies": "error",
+    "import/no-unresolved": ["error", { "commonjs": true }],
+    "import/order": ["error", { "newlines-between": "always" }]
   },
   "overrides": [
     {

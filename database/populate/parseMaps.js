@@ -1,5 +1,5 @@
-const explorerRegex = /^OL\d{1,2}$/;
-const landrangerRegex = /^\d{1,3}$/;
+const explorerRegex = /^OL\d{1,2}$/u;
+const landrangerRegex = /^\d{1,3}$/u;
 
 module.exports = function parseMaps(string) {
   if (string === 'IoM OL') {
@@ -22,10 +22,10 @@ function sanitizeMaps(maps) {
 function sanitizeMap(map) {
   if (explorerRegex.test(map) || landrangerRegex.test(map)) {
     return map;
-  } else if (/(N|E|S|W)$/.test(map)) {
+  } else if (/[NESW]$/u.test(map)) {
     // Discard any location-on-map information added to the sheet name, e.g. OL47W
     return sanitizeMap(map.substr(0, map.length - 1));
   }
 
-  throw new Error('Invalid map sheet: ' + map);
+  throw new Error(`Invalid map sheet: ${map}`);
 }
