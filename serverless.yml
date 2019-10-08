@@ -3,7 +3,7 @@ service: hills-api
 provider:
   name: aws
   region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
-  runtime: nodejs10.x
+  runtime: nodejs10.x # matches package.json:engines
   stage: ${opt:stage, 'dev'}
   timeout: 6 # seconds, sls default is 6, aws default is 3
   # Only the graphql lambda needs this, but a single shared role is much easier to configure

@@ -17,7 +17,9 @@
     "prettier",
 
     "plugin:unicorn/recommended",
-    "prettier/unicorn"
+    "prettier/unicorn",
+
+    "plugin:node/recommended"
   ],
   "plugins": ["import"],
   "parserOptions": {
@@ -78,6 +80,11 @@
     "import/no-extraneous-dependencies": "error",
     "import/no-unresolved": ["error", { "commonjs": true }],
     "import/order": ["error", { "newlines-between": "always" }],
+
+    // eslint-plugin-node - additions/removals/modifications to the preset
+    "node/exports-style": "error",
+    "node/file-extension-in-import": ["error", "never"],
+    "node/prefer-promises/fs": "error", // won't do anything until Node >= 11.14
 
     // eslint-plugin-unicorn - additions and removals from the extended preset
     "unicorn/custom-error-definition": "error",
