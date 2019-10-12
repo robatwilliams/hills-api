@@ -62,6 +62,36 @@ Note that it's generally better to use variables for passing arguments, rather t
 
 Check out the `/examples` folder on GitHub for more.
 
+<details>
+<summary>Specific hill</summary>
+
+```graphql
+{
+  hill(number: 278) {
+    countries {
+      name
+    }
+    height(unit: METRES)
+    name
+  }
+}
+```
+
+</details>
+
+<details>
+<summary>Filter: Wainwright hills of the Lake District</summary>
+
+```graphql
+{
+  hills(list: WAINWRIGHT) {
+    name
+  }
+}
+```
+
+</details>
+
 ## Technology
 
 The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. The API runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
