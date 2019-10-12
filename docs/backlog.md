@@ -43,7 +43,6 @@ See also the [ideas backlog](./backlog-ideas.md).
 - Spellcheck
 - Example using variables (`.graphql` file)
 - GitHub Pages, with Google Analytics
-- Table of which fields are filterable/sortable
 - Move some big comments out into docs files (express, API Gateway integration)
 
 ## Security

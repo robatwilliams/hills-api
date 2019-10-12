@@ -27,23 +27,23 @@ More information about each field can be found here: http://hills-database.co.uk
 | Name                   | Type  | Included        | Filterable | Sortable |
 | ---------------------- | ----- | --------------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅              | ✅         |
-| Name                   | ℹ️    | ✅              |            | 🙏       |
+| Name                   | ℹ️    | ✅              | 🙏         | 🙏       |
 | Parent (SMC)           | ➡     | 🙏              |
 | Parent name (SMC)      | -     | 🚫              | 🚫         | 🚫       |
 | Parent (Ma)            | ➡     | 🙏              |
 | Parent name (Ma)       | -     | 🚫              | 🚫         | 🚫       |
 | Section                | 🔗    |                 |
 | \_Section              | 🔗    | 🚫              | 🚫         | 🚫       |
-| Region                 | 🌍    | 🙏              |
-| Area                   | 🌍    | 🙏              |
+| Region                 | 🌍    | 🙏              | 🙏         |
+| Area                   | 🌍    | 🙏              | 🙏         |
 | Island                 | 🌍    |                 |
 | Topo Section           | 🌍 🔗 |                 |
 | County                 | 🌍    |                 |
 | Classification         | ℹ️    | 🙏              | ✅         |
 | Map 1:50k              | 🔗    | ✅ <sup>1</sup> |
 | Map 1:25k              | 🔗    | ✅ <sup>1</sup> |
-| Metres                 | 📏    | ✅              |            | 🙏       |
-| Feet                   | 📏    | ✅              |            | 🙏       |
+| Metres                 | 📏    | ✅              | 🙏         | 🙏       |
+| Feet                   | 📏    | ✅              | 🙏         | 🙏       |
 | Grid ref               | 📌    | 🙏              |
 | Grid ref 10            | 📌    |                 |
 | Drop [to col]          | 📏    |                 |
@@ -53,7 +53,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Observations           | ℹ️    | 🙏              |
 | Survey                 | 📝    |                 |
 | Climbed                | -     | 🚫              | 🚫         | 🚫       |
-| Country                | 🌍    | ✅              |
+| Country                | 🌍    | ✅              | 🙏         |
 | County Top             | 🌍    |                 |
 | Revision               | 📝    |                 |
 | Comments               | 📝    |                 |
