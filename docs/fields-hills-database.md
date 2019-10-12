@@ -6,11 +6,11 @@ More information about each field can be found here: http://hills-database.co.uk
 
 ## Key
 
-### Inclusion
+### Included / supported
 
-- ✅ Included
-- ❌ Not currently included
-- 🚫 Not to be included
+- ✅ Yes
+- ❌ Not currently
+- 🚫 Not necessary/appropriate (see notes)
 
 ### Type
 
@@ -24,9 +24,9 @@ More information about each field can be found here: http://hills-database.co.uk
 
 ## Fields
 
-| Name                   | Type  | Included |
-| ---------------------- | ----- | -------- |
-| Number                 | ℹ️    | ✅       |
+| Name                   | Type  | Included | Filterable | Sortable |
+| ---------------------- | ----- | -------- | ---------- | -------- |
+| Number                 | ℹ️    | ✅       | ✅         |
 | Name                   | ℹ️    | ✅       |
 | Parent (SMC)           | ➡     | ❌       |
 | Parent name (SMC)      | -     | 🚫       |
@@ -36,7 +36,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Island                 | 🌍    | ❌       |
 | Topo Section           | 🌍 🔗 | ❌       |
 | County                 | 🌍    | ❌       |
-| Classification         | ℹ️    | ❌       |
+| Classification         | ℹ️    | ❌       | ✅         |
 | Map 1:50k<sup>1</sup>  | 🔗    | ✅       |
 | Map 1:25k<sup>1</sup>  | 🔗    | ✅       |
 | Metres                 | 📏    | ✅       |
