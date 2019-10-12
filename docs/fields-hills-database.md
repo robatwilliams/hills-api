@@ -24,47 +24,49 @@ More information about each field can be found here: http://hills-database.co.uk
 
 ## Fields
 
-- ✅ ℹ️ Number
-- ✅ ℹ️ Name
-- ❌ ➡ Parent (SMC)
-- 🚫 Parent name (SMC) - is an attribute of another hill entry
-- ❌ 🔗 Section
-- ❌ 🌍 Region
-- ❌ 🌍 Area
-- ❌ 🌍 Island
-- ❌ 🌍 🔗 Topo Section
-- ❌ 🌍 County
-- ❌ ℹ️ Classification - needs to include display name, not just the enum
-- ✅ 🔗 Map 1:50k<sup>1</sup>
-- ✅ 🔗 Map 1:25k<sup>1</sup>
-- ✅ 📏 Metres
-- ✅ 📏 Feet
-- ❌ 📌 Grid ref
-- ❌ 📌 Grid ref 10
-- ❌ 📏 Drop
-- ❌ 📌 Col grid ref
-- ❌ 📏 Col height
-- ❌ ℹ️ Feature
-- ❌ ℹ️ Observations
-- ❌ 📝 Survey
-- 🚫 Climbed - empty field for marking hills as done
-- ✅ 🌍 Country
-- ❌ 🌍 County Top
-- ❌ 📝 Revision
-- ❌ 📝 Comments
-- ❌ 🔗 Streetmap/OSiViewer
-- ❌ 🔗 Geograph/MountainViews
-- ❌ 🔗 Hill-bagging
-- ❌ 📌 Xcoord
-- ❌ 📌 Ycoord
-- ❌ 📌 Latitude
-- ❌ 📌 Longitude
-- ❌ 📌 GridrefXY
-- ❌ 🔗 \_Section
-- ❌ ➡ Parent (Ma)
-- ❌ 🚫 Parent name (Ma) - is an attribute of another hill entry
-- ❌ 🔗 MVNumber
+| Name                   | Type  | Included |
+| ---------------------- | ----- | -------- |
+| Number                 | ℹ️    | ✅       |
+| Name                   | ℹ️    | ✅       |
+| Parent (SMC)           | ➡     | ❌       |
+| Parent name (SMC)      | -     | 🚫       |
+| Section                | 🔗    | ❌       |
+| Region                 | 🌍    | ❌       |
+| Area                   | 🌍    | ❌       |
+| Island                 | 🌍    | ❌       |
+| Topo Section           | 🌍 🔗 | ❌       |
+| County                 | 🌍    | ❌       |
+| Classification         | ℹ️    | ❌       |
+| Map 1:50k<sup>1</sup>  | 🔗    | ✅       |
+| Map 1:25k<sup>1</sup>  | 🔗    | ✅       |
+| Metres                 | 📏    | ✅       |
+| Feet                   | 📏    | ✅       |
+| Grid ref               | 📌    | ❌       |
+| Grid ref 10            | 📌    | ❌       |
+| Drop                   | 📏    | ❌       |
+| Col grid ref           | 📌    | ❌       |
+| Col height             | 📏    | ❌       |
+| Feature                | ℹ️    | ❌       |
+| Observations           | ℹ️    | ❌       |
+| Survey                 | 📝    | ❌       |
+| Climbed                | -     | 🚫       |
+| Country                | 🌍    | ✅       |
+| County Top             | 🌍    | ❌       |
+| Revision               | 📝    | ❌       |
+| Comments               | 📝    | ❌       |
+| Streetmap/OSiViewer    | 🔗    | ❌       |
+| Geograph/MountainViews | 🔗    | ❌       |
+| Hill-bagging           | 🔗    | ❌       |
+| Xcoord                 | 📌    | ❌       |
+| Ycoord                 | 📌    | ❌       |
+| Latitude               | 📌    | ❌       |
+| Longitude              | 📌    | ❌       |
+| GridrefXY              | 📌    | ❌       |
+| \_Section              | 🔗    | ❌       |
+| Parent (Ma)            | ➡     | ❌       |
+| Parent name (Ma)       | -     | 🚫       |
+| MVNumber               | 🔗    | ❌       |
 
----
+"Parent name" fields are not included; the information is conveniently accessible on the parent hill itself by querying the parent relation. "Climbed" is also not included; it's an empty field for users to mark completion.
 
 <sup>1</sup> Not including location-on-map information, e.g. "OL39N"
