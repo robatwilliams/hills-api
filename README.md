@@ -58,6 +58,10 @@ fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
 
 Note that it's generally better to use variables for passing arguments, rather than embedding them in the query itself. Read more about calling GraphQL APIs, including how to use variables, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
 
+## Example queries
+
+Check out the `/examples` folder on GitHub for more.
+
 ## Technology
 
 The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. The API runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
