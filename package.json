@@ -2,6 +2,7 @@
   "name": "hills-api",
   "version": "1.0.0",
   "private": true,
+  "license": "AGPL-3.0-or-later",
   "scripts": {
     "call": "bash scripts/call.sh",
     "call:local": "bash scripts/call.sh 'http://localhost:3000/graphql'",
