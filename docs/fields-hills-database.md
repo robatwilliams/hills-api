@@ -9,7 +9,6 @@ More information about each field can be found here: http://hills-database.co.uk
 ### Included / supported
 
 - ✅ Yes
-- ❌ Not currently
 - 🚫 Not necessary/appropriate (see notes)
 
 ### Type
@@ -28,44 +27,44 @@ More information about each field can be found here: http://hills-database.co.uk
 | ---------------------- | ----- | -------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅       | ✅         |
 | Name                   | ℹ️    | ✅       |
-| Parent (SMC)           | ➡     | ❌       |
+| Parent (SMC)           | ➡     |          |
 | Parent name (SMC)      | -     | 🚫       |
-| Section                | 🔗    | ❌       |
-| Region                 | 🌍    | ❌       |
-| Area                   | 🌍    | ❌       |
-| Island                 | 🌍    | ❌       |
-| Topo Section           | 🌍 🔗 | ❌       |
-| County                 | 🌍    | ❌       |
-| Classification         | ℹ️    | ❌       | ✅         |
+| Section                | 🔗    |          |
+| Region                 | 🌍    |          |
+| Area                   | 🌍    |          |
+| Island                 | 🌍    |          |
+| Topo Section           | 🌍 🔗 |          |
+| County                 | 🌍    |          |
+| Classification         | ℹ️    |          | ✅         |
 | Map 1:50k<sup>1</sup>  | 🔗    | ✅       |
 | Map 1:25k<sup>1</sup>  | 🔗    | ✅       |
 | Metres                 | 📏    | ✅       |
 | Feet                   | 📏    | ✅       |
-| Grid ref               | 📌    | ❌       |
-| Grid ref 10            | 📌    | ❌       |
-| Drop                   | 📏    | ❌       |
-| Col grid ref           | 📌    | ❌       |
-| Col height             | 📏    | ❌       |
-| Feature                | ℹ️    | ❌       |
-| Observations           | ℹ️    | ❌       |
-| Survey                 | 📝    | ❌       |
+| Grid ref               | 📌    |          |
+| Grid ref 10            | 📌    |          |
+| Drop                   | 📏    |          |
+| Col grid ref           | 📌    |          |
+| Col height             | 📏    |          |
+| Feature                | ℹ️    |          |
+| Observations           | ℹ️    |          |
+| Survey                 | 📝    |          |
 | Climbed                | -     | 🚫       |
 | Country                | 🌍    | ✅       |
-| County Top             | 🌍    | ❌       |
-| Revision               | 📝    | ❌       |
-| Comments               | 📝    | ❌       |
-| Streetmap/OSiViewer    | 🔗    | ❌       |
-| Geograph/MountainViews | 🔗    | ❌       |
-| Hill-bagging           | 🔗    | ❌       |
-| Xcoord                 | 📌    | ❌       |
-| Ycoord                 | 📌    | ❌       |
-| Latitude               | 📌    | ❌       |
-| Longitude              | 📌    | ❌       |
-| GridrefXY              | 📌    | ❌       |
-| \_Section              | 🔗    | ❌       |
-| Parent (Ma)            | ➡     | ❌       |
+| County Top             | 🌍    |          |
+| Revision               | 📝    |          |
+| Comments               | 📝    |          |
+| Streetmap/OSiViewer    | 🔗    |          |
+| Geograph/MountainViews | 🔗    |          |
+| Hill-bagging           | 🔗    |          |
+| Xcoord                 | 📌    |          |
+| Ycoord                 | 📌    |          |
+| Latitude               | 📌    |          |
+| Longitude              | 📌    |          |
+| GridrefXY              | 📌    |          |
+| \_Section              | 🔗    |          |
+| Parent (Ma)            | ➡     |          |
 | Parent name (Ma)       | -     | 🚫       |
-| MVNumber               | 🔗    | ❌       |
+| MVNumber               | 🔗    |          |
 
 "Parent name" fields are not included; the information is conveniently accessible on the parent hill itself by querying the parent relation. "Climbed" is also not included; it's an empty field for users to mark completion.
 
