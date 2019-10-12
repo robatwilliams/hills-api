@@ -27,7 +27,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Name                   | Type  | Included | Filterable | Sortable |
 | ---------------------- | ----- | -------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅       | ✅         |
-| Name                   | ℹ️    | ✅       |
+| Name                   | ℹ️    | ✅       |            | 🙏       |
 | Parent (SMC)           | ➡     | 🙏       |
 | Parent name (SMC)      | -     | 🚫       |
 | Parent (Ma)            | ➡     | 🙏       |
@@ -42,8 +42,8 @@ More information about each field can be found here: http://hills-database.co.uk
 | Classification         | ℹ️    | 🙏       | ✅         |
 | Map 1:50k<sup>1</sup>  | 🔗    | ✅       |
 | Map 1:25k<sup>1</sup>  | 🔗    | ✅       |
-| Metres                 | 📏    | ✅       |
-| Feet                   | 📏    | ✅       |
+| Metres                 | 📏    | ✅       |            | 🙏       |
+| Feet                   | 📏    | ✅       |            | 🙏       |
 | Grid ref               | 📌    | 🙏       |
 | Grid ref 10            | 📌    |          |
 | Drop [to col]          | 📏    |          |
