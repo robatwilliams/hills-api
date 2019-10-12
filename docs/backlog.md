@@ -33,9 +33,7 @@ Key:
 ## 🙏 Documentation
 
 - Readme
-  - Links to endpoint, schema, playground
   - How to try it out
-    - Playground, refer to example queries you can copy in
     - Code snippets for `fetch()`
   - List of features
   - How to call it: raw or using a client such as Relay, link to [docs page](https://graphql.org/graphql-js/graphql-clients/), can pass JSON or raw GraphQL

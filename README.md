@@ -8,6 +8,14 @@ Use it as a convenient data source for apps and web apps, whether real or just e
 
 The data comes from the <abbr title="Database of British and Irish Hills">DoBIH</abbr> database and is used [under license](#license). If you use it, consider donating to the [DoBIH fund](http://www.hills-database.co.uk/downloads.html).
 
+## Endpoints
+
+**API endpoint:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
+
+**Playground:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
+
+Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder on GitHub. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
+
 ## Technology
 
 The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. The API runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
