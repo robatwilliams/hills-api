@@ -29,7 +29,10 @@ More information about each field can be found here: http://hills-database.co.uk
 | Name                   | ℹ️    | ✅       |
 | Parent (SMC)           | ➡     |          |
 | Parent name (SMC)      | -     | 🚫       |
+| Parent (Ma)            | ➡     |          |
+| Parent name (Ma)       | -     | 🚫       |
 | Section                | 🔗    |          |
+| \_Section              | 🔗    |          |
 | Region                 | 🌍    |          |
 | Area                   | 🌍    |          |
 | Island                 | 🌍    |          |
@@ -61,9 +64,6 @@ More information about each field can be found here: http://hills-database.co.uk
 | Latitude               | 📌    |          |
 | Longitude              | 📌    |          |
 | GridrefXY              | 📌    |          |
-| \_Section              | 🔗    |          |
-| Parent (Ma)            | ➡     |          |
-| Parent name (Ma)       | -     | 🚫       |
 | MVNumber               | 🔗    |          |
 
 "Parent name" fields are not included; the information is conveniently accessible on the parent hill itself by querying the parent relation. "Climbed" is also not included; it's an empty field for users to mark completion.
