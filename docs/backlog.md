@@ -89,12 +89,12 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 ### 🙏 Tests
 
 - Integration - all fields of all hills conform to the schema
-- Integration - HTTP POST, GET, variables/body/querystring/both
 - Test for most-expensive currently-supported query (validate resource limits)
 
 ### Improvements
 
 - 💩 Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
+- Fully configure rules for ESLint Jest plugin
 
 ### Further future
 

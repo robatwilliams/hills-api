@@ -1,6 +1,7 @@
 const axios = require('axios').default;
 
 const endpoint = 'http://localhost:3000/graphql';
+const playground = 'http://localhost:3000/playground';
 
 function sendQuery(query) {
   return axios.post(endpoint, query, {
@@ -17,4 +18,9 @@ async function sendQueryOk(query) {
   return response.data.data;
 }
 
-module.exports = { sendQueryOk };
+module.exports = {
+  endpoint,
+  playground,
+  sendQuery,
+  sendQueryOk,
+};
