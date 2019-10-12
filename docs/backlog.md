@@ -2,9 +2,14 @@
 
 See also the [ideas backlog](./backlog-ideas.md).
 
-## Features: core
+Key:
 
-### Data
+- 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
+- 💩 Technical debt
+
+## 🙏 Features: core
+
+### 🙏 Data
 
 - Remainder of key [fields from the hills database](fields-hills-database.md)
 - Hills from all major lists (not just Munros, Wainwrights, and Hewitts)
@@ -14,7 +19,7 @@ See also the [ideas backlog](./backlog-ideas.md).
   - Add names field, this would be a separated list of all names with the main one first
   - Filtering should provide a way to search across all names
 
-### Queries
+### 🙏 Queries
 
 - Sorting on key fields
 - [Pagination](https://graphql.org/learn/pagination/)
@@ -25,9 +30,8 @@ See also the [ideas backlog](./backlog-ideas.md).
 
 - Map sheet names
 
-## Documentation
+## 🙏 Documentation
 
-- Field descriptions (short) in the schema, where necessary
 - Readme
   - Client-focused; move the tech and implementation details to section near end
   - Links to endpoint, schema, playground
@@ -40,12 +44,11 @@ See also the [ideas backlog](./backlog-ideas.md).
   - Data licensing (as per the Hills Database). Prominent, not just a footnote at the end.
   - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
-- Spellcheck
 - Example using variables (`.graphql` file)
 - GitHub Pages, with Google Analytics
-- Move some big comments out into docs files (express, API Gateway integration)
+- 💩 Move some big comments out into docs files (express, API Gateway integration)
 
-## Security
+## 🙏 Security
 
 Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse is a problem.
 
@@ -54,26 +57,26 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 ## Performance
 
-- Compression (gzip, Brotli). Also cuts data transfer cost.
+- 🙏 Compression (gzip, Brotli). Also cuts data transfer cost.
 - Caching (for GETs only; rare)
-- Verify total/database response time of key queries
+- 🙏 Verify total/database response time of key queries
 - Indices on filterable/sortable database fields
-- Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
+- 💩 Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
 
 ## Operational
 
 ### Production
 
-- Production deployment (set NODE_ENV for express)
+- 🙏 Production deployment (set NODE_ENV for express)
 - Domain
 
-### Monitoring
+### 🙏 Monitoring
 
 - Error logging
 - Usage logging & monitoring (e.g. what queries)
 - AWS budget alarms
 
-### Resource allocation and limits
+### 🙏 Resource allocation and limits
 
 Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
 
@@ -88,13 +91,13 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Move from DynamoDB to Aurora
 
-- Use a transaction for the complete data upload (multibatch client should require one too)
-- Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don't HTTP 502
-- Use cross-stack references to populate ARNs in serverless.yml
-- Use secrets manager generated credentials for Aurora cluster
-- Replace type definitions in population script with type inference (as done on the query side)
+- 💩 Use a transaction for the complete data upload (multibatch client should require one too)
+- 🙏 Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don't HTTP 502
+- 💩 Use cross-stack references to populate ARNs in serverless.yml
+- 💩 Use secrets manager generated credentials for Aurora cluster
+- 💩 Replace type definitions in population script with type inference (as done on the query side)
 
-### Tests
+### 🙏 Tests
 
 - Snapshot-based integration tests for supported queries
   - Including one that all fields of all hills conform to the schema
@@ -103,7 +106,7 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Improvements
 
-- Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
+- 💩 Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 
 ### Further future
 
