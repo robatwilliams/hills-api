@@ -29,11 +29,11 @@ More information about each field can be found here: http://hills-database.co.uk
 | Number                 | ℹ️    | ✅              | ✅         |
 | Name                   | ℹ️    | ✅              |            | 🙏       |
 | Parent (SMC)           | ➡     | 🙏              |
-| Parent name (SMC)      | -     | 🚫              |
+| Parent name (SMC)      | -     | 🚫              | 🚫         | 🚫       |
 | Parent (Ma)            | ➡     | 🙏              |
-| Parent name (Ma)       | -     | 🚫              |
+| Parent name (Ma)       | -     | 🚫              | 🚫         | 🚫       |
 | Section                | 🔗    |                 |
-| \_Section              | 🔗    | 🚫              |
+| \_Section              | 🔗    | 🚫              | 🚫         | 🚫       |
 | Region                 | 🌍    | 🙏              |
 | Area                   | 🌍    | 🙏              |
 | Island                 | 🌍    |                 |
@@ -52,7 +52,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Feature                | ℹ️    | 🙏              |
 | Observations           | ℹ️    | 🙏              |
 | Survey                 | 📝    |                 |
-| Climbed                | -     | 🚫              |
+| Climbed                | -     | 🚫              | 🚫         | 🚫       |
 | Country                | 🌍    | ✅              |
 | County Top             | 🌍    |                 |
 | Revision               | 📝    |                 |
