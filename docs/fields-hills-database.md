@@ -9,6 +9,7 @@ More information about each field can be found here: http://hills-database.co.uk
 ### Included / supported
 
 - ✅ Yes
+- 🙏 Should be for <abbr title="Minimum Viable Product">MVP</abbr>
 - 🚫 Not necessary/appropriate (see notes)
 
 ### Type
@@ -27,29 +28,29 @@ More information about each field can be found here: http://hills-database.co.uk
 | ---------------------- | ----- | -------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅       | ✅         |
 | Name                   | ℹ️    | ✅       |
-| Parent (SMC)           | ➡     |          |
+| Parent (SMC)           | ➡     | 🙏       |
 | Parent name (SMC)      | -     | 🚫       |
-| Parent (Ma)            | ➡     |          |
+| Parent (Ma)            | ➡     | 🙏       |
 | Parent name (Ma)       | -     | 🚫       |
 | Section                | 🔗    |          |
-| \_Section              | 🔗    |          |
-| Region                 | 🌍    |          |
-| Area                   | 🌍    |          |
+| \_Section              | 🔗    | 🚫       |
+| Region                 | 🌍    | 🙏       |
+| Area                   | 🌍    | 🙏       |
 | Island                 | 🌍    |          |
 | Topo Section           | 🌍 🔗 |          |
 | County                 | 🌍    |          |
-| Classification         | ℹ️    |          | ✅         |
+| Classification         | ℹ️    | 🙏       | ✅         |
 | Map 1:50k<sup>1</sup>  | 🔗    | ✅       |
 | Map 1:25k<sup>1</sup>  | 🔗    | ✅       |
 | Metres                 | 📏    | ✅       |
 | Feet                   | 📏    | ✅       |
-| Grid ref               | 📌    |          |
+| Grid ref               | 📌    | 🙏       |
 | Grid ref 10            | 📌    |          |
-| Drop                   | 📏    |          |
+| Drop [to col]          | 📏    |          |
 | Col grid ref           | 📌    |          |
 | Col height             | 📏    |          |
-| Feature                | ℹ️    |          |
-| Observations           | ℹ️    |          |
+| Feature                | ℹ️    | 🙏       |
+| Observations           | ℹ️    | 🙏       |
 | Survey                 | 📝    |          |
 | Climbed                | -     | 🚫       |
 | Country                | 🌍    | ✅       |
@@ -61,8 +62,8 @@ More information about each field can be found here: http://hills-database.co.uk
 | Hill-bagging           | 🔗    |          |
 | Xcoord                 | 📌    |          |
 | Ycoord                 | 📌    |          |
-| Latitude               | 📌    |          |
-| Longitude              | 📌    |          |
+| Latitude               | 📌    | 🙏       |
+| Longitude              | 📌    | 🙏       |
 | GridrefXY              | 📌    |          |
 | MVNumber               | 🔗    |          |
 
