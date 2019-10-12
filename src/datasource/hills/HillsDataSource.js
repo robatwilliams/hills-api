@@ -11,6 +11,7 @@ module.exports = class HillsDataSource {
     const parameters = {};
     let whereList = '';
 
+    // Check not currently necessary; it's the only argument and is mandatory
     if (list !== undefined) {
       whereList = 'WHERE FIND_IN_SET(:list, lists)';
       parameters.list = list;
