@@ -22,7 +22,7 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 🗜️ Compressed HTTP responses for speed and efficiency
 
-👐 Free to use, no API key
+👐 Free to use, no API key (at least while it's not costing me much)
 
 There is a [list](docs/backlog.md) of possible future features.
 
