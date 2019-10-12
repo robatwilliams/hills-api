@@ -28,6 +28,8 @@ There is a [list](docs/backlog.md) of possible future features.
 
 ## Endpoints
 
+⚠️ 😴 ⏳ To save on running costs, the database behind the API is currently allowed to sleep during periods of inactivity. Error responses will be returned while it wakes up, which can take up to a minute.
+
 **API endpoint:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
 
 **Playground:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
