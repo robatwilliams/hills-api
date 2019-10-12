@@ -36,6 +36,28 @@ There is a [list](docs/backlog.md) of possible future features.
 
 Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder on GitHub. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
 
+## Calling the API
+
+Queries are accepted as POST and GET requests, and return JSON. You can construct and send them yourself, or use a GraphQL [client library](https://github.com/chentsulin/awesome-graphql) for your platform which can take advantage of the structured and self-describing nature of the API.
+
+Here's a simple example using just `fetch()` for a web browser:
+
+```javascript
+fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    query: '{ hill(number: 278) { name } }',
+  }),
+})
+  .then(response => response.json())
+  .then(console.log);
+```
+
+Note that it's generally better to use variables for passing arguments, rather than embedding them in the query itself. Read more about calling GraphQL APIs, including how to use variables, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
+
 ## Technology
 
 The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. The API runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
