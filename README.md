@@ -1,8 +1,6 @@
 # hills-api
 
-> GraphQL API for _The Database of British and Irish Hills_, serverless on AWS Lambda
-
-Experimental and incomplete. Not deployed anywhere.
+> GraphQL API for [_The Database of British and Irish Hills_](http://www.hills-database.co.uk/)
 
 ## License
 
