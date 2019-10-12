@@ -9,10 +9,16 @@ module.exports = {
       const maps = await dataSources.hills.queryMaps({ numbers, scale: scaleInt });
 
       // Batch, so return an array (for each source/hill) of arrays (actual value)
-      return hills.map(hill => maps.filter(map => map.hillNumber === hill.number));
+      return hills.map(hill => findHillMaps(maps, hill));
     }),
   },
 };
+
+function findHillMaps(maps, hill) {
+  return maps
+    .filter(map => map.hillNumber === hill.number)
+    .sort((a, b) => a.sheet.localeCompare(b.sheet));
+}
 
 function convertScale(scale) {
   switch (scale) {

@@ -106,6 +106,12 @@
       "files": ["./src/integration/**/*", "*.spec.js"],
       "extends": "plugin:jest/recommended",
       "plugins": ["jest"]
+    },
+    {
+      "files": "*.spec.js",
+      "rules": {
+        "max-lines-per-function": "off" // for describe() blocks
+      }
     }
   ]
 }

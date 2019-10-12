@@ -88,9 +88,8 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### 🙏 Tests
 
-- Snapshot-based integration tests for supported queries
-  - Including one that all fields of all hills conform to the schema
-- Integration tests for HTTP POST, GET, variables/body/querystring/both
+- Integration - all fields of all hills conform to the schema
+- Integration - HTTP POST, GET, variables/body/querystring/both
 - Test for most-expensive currently-supported query (validate resource limits)
 
 ### Improvements
