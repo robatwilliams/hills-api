@@ -3,7 +3,7 @@
  *   sed --in-place '1001,$ d' data/DoBIH_v16_2.csv
  */
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
-const csvParse = require('csv-parse/lib/sync'); // eslint-disable-line node/no-unpublished-require
+const csvParse = require('csv-parse/lib/sync');
 
 const hillsType = require('../ddl/hills');
 const hillsMapsType = require('../ddl/hills_maps');

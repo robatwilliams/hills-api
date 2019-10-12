@@ -22,6 +22,7 @@
     "deployment:info": "serverless info",
     "package": "serverless package",
     "start": "serverless offline --printOutput",
+    "test:integration": "jest ./src/integration",
     "undeploy:all": "npm-run-all \"undeploy:db:all -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml",
     "undeploy:stack": "serverless remove"
@@ -39,12 +40,15 @@
     "lodash.merge": "^4.6.2"
   },
   "devDependencies": {
+    "axios": "^0.19.0",
     "csv-parse": "^4.6.3",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jest": "^22.19.0",
     "eslint-plugin-node": "^10.0.0",
     "eslint-plugin-unicorn": "^12.0.2",
+    "jest": "^24.9.0",
     "license-checker": "^25.0.1",
     "npm-run-all": "^4.1.5",
     "prettier": "1.18.2",

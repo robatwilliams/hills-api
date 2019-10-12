@@ -84,6 +84,7 @@
     // eslint-plugin-node - additions/removals/modifications to the preset
     "node/exports-style": "error",
     "node/file-extension-in-import": ["error", "never"],
+    "node/no-unpublished-require": "off", // https://github.com/mysticatea/eslint-plugin-node/issues/77
     "node/prefer-promises/fs": "error", // won't do anything until Node >= 11.14
 
     // eslint-plugin-unicorn - additions/removals/modifications to the preset
@@ -95,10 +96,16 @@
   "overrides": [
     {
       "files": ["./src/**/*"],
+      "excludedFiles": ["./src/integration/**/*", "*.spec.js"],
       "rules": {
         // Matters because serverless packaging does excludeDevDependencies
         "import/no-extraneous-dependencies": ["error", { "devDependencies": false }]
       }
+    },
+    {
+      "files": ["./src/integration/**/*", "*.spec.js"],
+      "extends": "plugin:jest/recommended",
+      "plugins": ["jest"]
     }
   ]
 }
