@@ -8,6 +8,24 @@ Use it as a convenient data source for apps and web apps, whether real or just e
 
 The data comes from the <abbr title="Database of British and Irish Hills">DoBIH</abbr> database and is used [under license](#license). If you use it, consider donating to the [DoBIH fund](http://www.hills-database.co.uk/downloads.html).
 
+## Features
+
+⛰️ Major hills and mountains of Britain and Ireland
+
+📝 Key data [fields](docs/fields-hills-database.md) from the hills database
+
+🔍 Filter and sort on some fields
+
+👪 Query related hills in the same query
+
+🚚 Paginate large result sets
+
+🗜️ Compressed HTTP responses for speed and efficiency
+
+👐 Free to use, no API key
+
+There is a [list](docs/backlog.md) of possible future features.
+
 ## Endpoints
 
 **API endpoint:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
