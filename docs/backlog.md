@@ -41,7 +41,6 @@ Key:
   - List of features
   - How to call it: raw or using a client such as Relay, link to [docs page](https://graphql.org/graphql-js/graphql-clients/), can pass JSON or raw GraphQL
   - Technical summary, link to docs page for more
-  - Data licensing (as per the Hills Database). Prominent, not just a footnote at the end.
   - Why this exists (convenient to consume to build things, my own learning)
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 - Example using variables (`.graphql` file)
