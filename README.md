@@ -4,7 +4,15 @@
 
 Web <abbr title="Application Programming Interface">API</abbr> providing data about the hills and mountains of Britain and Ireland.
 
+Use it as a convenient data source for apps and web apps, whether real or just experiments that need some data. You may also be interested in the [technology](#technology) that powers it.
+
 The data comes from the <abbr title="Database of British and Irish Hills">DoBIH</abbr> database and is used [under license](#license). If you use it, consider donating to the [DoBIH fund](http://www.hills-database.co.uk/downloads.html).
+
+## Technology
+
+The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. The API runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
+
+The `/docs` folder on GitHub contains some more detailed technical notes, and you can of course browse the source code and run it yourself.
 
 ## License
 
