@@ -22,7 +22,8 @@
     "deployment:info": "serverless info",
     "package": "serverless package",
     "start": "serverless offline --printOutput",
-    "test:integration": "jest --testEnvironment=node ./src/integration",
+    "test:integration": "bash scripts/testIntegration.sh",
+    "test:integration:local": "bash scripts/testIntegration.sh 'http://localhost:3000'",
     "undeploy:all": "npm-run-all \"undeploy:db:all -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml",
     "undeploy:stack": "serverless remove"

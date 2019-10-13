@@ -1,7 +1,8 @@
 const axios = require('axios').default;
 
-const endpoint = 'http://localhost:3000/graphql';
-const playground = 'http://localhost:3000/playground';
+const rootUrl = process.env.TEST_INTEGRATION_ROOT_URL;
+const endpoint = `${rootUrl}/graphql`;
+const playground = `${rootUrl}/playground`;
 
 function sendQuery(query) {
   return axios.post(endpoint, query, {
