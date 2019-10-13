@@ -34,7 +34,7 @@ There is a [list](docs/backlog.md) of possible future features.
 
 **Playground:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
 
-Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder on GitHub. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
+Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
 
 ## Calling the API
 
@@ -64,7 +64,7 @@ Read more about calling GraphQL APIs, including those aspects, [here](https://gr
 
 ## Example queries
 
-Check out the `/examples` folder on GitHub for more.
+Check out the `/examples` folder for more.
 
 <details>
 <summary>Specific hill</summary>
@@ -100,7 +100,7 @@ Check out the `/examples` folder on GitHub for more.
 
 The API accepts queries described using [GraphQL](https://graphql.org/), which provides flexibility for consumers to receive only the parts of the data they require for their particular use cases. The backend for the API is implemented in JavaScript and runs on Node.js. It runs on serverless technologies by Amazon Web Services (Lambda, Aurora Serverless database), thus there are no dedicated servers to manage or pay for by the hour.
 
-The `/docs` folder on GitHub contains some more detailed technical notes, and you can of course browse the source code and run it yourself.
+The `/docs` folder contains some more detailed technical notes, and you can of course browse the source code and run it yourself.
 
 ## License
 
