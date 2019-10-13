@@ -50,7 +50,7 @@ test('GET: conditional request using ETag', async () => {
   }
 });
 
-test('not allowed method', async () => {
+test('disallowed method', async () => {
   expect.assertions(1);
 
   try {
@@ -69,7 +69,7 @@ test('not allowed method', async () => {
   }
 });
 
-test('unsupported POST body content type', async () => {
+test('POST: unsupported body content type', async () => {
   expect.assertions(2);
 
   try {
@@ -86,7 +86,7 @@ test('unsupported POST body content type', async () => {
   }
 });
 
-test('query syntax error gives 400', async () => {
+test('query syntax error', async () => {
   const malformedQuery = `{
     hill(number: 278) { number
   }`;
