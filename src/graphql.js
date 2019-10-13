@@ -58,7 +58,6 @@ const server = awsServerlessExpress.createServer(app);
  *
  * @param {*} event API Gateway Lambda proxy integration representation of client request
  */
-// eslint-disable-next-line require-await
 async function handler(event, context) {
   // async; caller must consistently receive a promise
 
