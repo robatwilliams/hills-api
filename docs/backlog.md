@@ -7,42 +7,42 @@ Key:
 - 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
 - 💩 Technical debt
 
-## 🙏 Features: core
+## Features: core
 
-### 🙏 Data
+### Data
 
-- Remainder of key [fields from the hills database](fields-hills-database.md)
-- Hills from all major lists (not just Munros, Wainwrights, and Hewitts)
-- Child and parent relations. Children (and their children etc.) might not be on any of the included major lists; that needs handling somehow.
+- 🙏 Remainder of key [fields from the hills database](fields-hills-database.md)
+- 🙏 Hills from all major lists (not just Munros, Wainwrights, and Hewitts)
+- 🙏 Child and parent relations. Children (and their children etc.) might not be on any of the included major lists; that needs handling somehow.
 - Names
-  - Include only the main name in the name field (e.g. not "Crag Hill [Eel Crag]"). Probably also rename the field to make this evident.
-  - Add names field, this would be a separated list of all names with the main one first
-  - Filtering should provide a way to search across all names
+  - 🙏 Include only the main name in the name field (e.g. not "Crag Hill [Eel Crag]"). Probably also rename the field to make this evident.
+  - 🙏 Add names field, this would be a separated list of all names with the main one first
+  - 🙏 Filtering should provide a way to search across all names
 
-### 🙏 Queries
+### Queries
 
-- Sorting on key fields
-- [Pagination](https://graphql.org/learn/pagination/)
-- Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
+- 🙏 Sorting on key fields
+- 🙏 [Pagination](https://graphql.org/learn/pagination/)
+- 🙏 Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Features: nice to have
 
 - Map sheet names
 
-## 🙏 Documentation
+## Documentation
 
-- Example queries for each feature
-- Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
-- GitHub Pages, with Google Analytics
+- 🙏 Example queries for each feature
+- 🙏 Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
+- 🙏 GitHub Pages, with Google Analytics
 - 💩 Move some big comments out into docs files (express, API Gateway integration)
 
-## 🙏 Security
+## Security
 
 Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse is a problem.
 
-- CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
-- Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
+- 🙏 CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
+- 🙏 Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
 
 ## Performance
 
@@ -58,19 +58,19 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 - 🙏 Production deployment (set NODE_ENV for express)
 - Domain
 
-### 🙏 Monitoring
+### Monitoring
 
-- Error logging
-- Usage logging & monitoring (e.g. what queries)
-- AWS budget alarms
+- 🙏 Error logging
+- 🙏 Usage logging & monitoring (e.g. what queries)
+- 🙏 AWS budget alarms
 
-### 🙏 Resource allocation and limits
+### Resource allocation and limits
 
 Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
 
-- Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
-- Request throttling (API Gateway)
-- Appropriate values for AWS lambda configuration
+- 🙏 Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
+- 🙏 Request throttling (API Gateway)
+- 🙏 Appropriate values for AWS lambda configuration
   - Concurrency limit
   - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
   - Timeout
@@ -85,10 +85,10 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - 💩 Use secrets manager generated credentials for Aurora cluster
 - 💩 Replace type definitions in population script with type inference (as done on the query side)
 
-### 🙏 Tests
+### Tests
 
-- Integration - all fields of all hills conform to the schema
-- Test for most-expensive currently-supported query (validate resource limits)
+- 🙏 Integration - all fields of all hills conform to the schema
+- 🙏 Test for most-expensive currently-supported query (validate resource limits)
 
 ### Improvements
 
