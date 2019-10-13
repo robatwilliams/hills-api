@@ -48,10 +48,10 @@ Monthly cost of one full-time ACU would be \$50, compared to \$32 for a non-serv
 
 ### Benefits for different use cases
 
-Auto-sleep isn't something you'd enable on an important web API due to the slow resumption time (30-60 seconds); for web APIs the real benefits are auto-scaling and no instances to manage. Auto-pause is more a benefit for infrequently-used databases.
+Auto-sleep isn't something you'd enable on an important web API due to the slow resumption time (30-60 seconds); for web APIs the real benefits are auto-scaling and no instances to manage. Auto-pause is more a benefit for infrequently-used databases. And Data API is a benefit for both in serverless applications.
 
 ### Data API
 
-The [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) allows the database to accessed without a persistent connection, making it suitable for short-lived consumers such as lambdas. It also removes the need for a Virtual Private Cloud for the lambdas, eliminating overhead and configuration hassle.
+The [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) allows Aurora Serverless databases to accessed without a persistent connection, making it suitable for short-lived consumers such as lambdas. It also removes the need for a Virtual Private Cloud for the lambdas, eliminating overhead and configuration hassle.
 
 It's currently only available in some regions. It can be enabled via the console/CLI; CloudFormation doesn't currently support doing so.
