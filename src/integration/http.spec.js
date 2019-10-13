@@ -23,6 +23,33 @@ test('GET', async () => {
   expect(response.data.data.hill).toEqual({ number: 278 });
 });
 
+test('GET: conditional request using ETag', async () => {
+  expect.assertions(2);
+
+  const responseOne = await axios.get(endpoint, {
+    params: {
+      query,
+    },
+  });
+
+  expect(responseOne.headers).toEqual(
+    expect.objectContaining({ etag: expect.any(String) })
+  );
+
+  try {
+    await axios.get(endpoint, {
+      headers: {
+        'If-None-Match': responseOne.headers.etag,
+      },
+      params: {
+        query,
+      },
+    });
+  } catch (error) {
+    expect(error.response.status).toBe(304);
+  }
+});
+
 test('not allowed method', async () => {
   expect.assertions(1);
 
