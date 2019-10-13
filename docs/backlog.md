@@ -5,7 +5,7 @@ See also the [ideas backlog](./backlog-ideas.md).
 Key:
 
 - 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
-- 💩 Technical debt
+- 💩 Technical debt (⚠️ = important)
 
 ## Features: core
 
@@ -41,7 +41,7 @@ Key:
 - 🙏 Example queries for each feature
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 - GitHub Pages, with Google Analytics
-- 💩 Move some big comments out into docs files (express, API Gateway integration)
+- ⚠️ 💩 Move some big comments out into docs files (express, API Gateway integration)
 
 ## Security
 
@@ -87,8 +87,8 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 - 💩 Use a transaction for the complete data upload (multibatch client should require one too)
 - 🙏 Handle slow-resume of Aurora Serverless (don't return 200 with an error body), don't HTTP 502
-- 💩 Use cross-stack references to populate ARNs in serverless.yml
-- 💩 Use secrets manager generated credentials for Aurora cluster
+- ⚠️ 💩 Use cross-stack references to populate ARNs in serverless.yml
+- ⚠️ 💩 Use secrets manager generated credentials for Aurora cluster
 - 💩 Replace type definitions in population script with type inference (as done on the query side)
 
 ### Tests
@@ -98,7 +98,7 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Improvements
 
-- 💩 Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
+- Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Fully configure rules for ESLint Jest plugin
 
 ### Further future
