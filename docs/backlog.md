@@ -7,6 +7,11 @@ Key:
 - 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
 - 💩 Technical debt (⚠️ = important)
 
+Checklist for done items:
+
+- Integration test added
+- Example added in `/examples` and readme
+
 ## Features: core
 
 ### Data
@@ -38,7 +43,6 @@ Key:
 
 ## Documentation
 
-- 🙏 Example queries for each feature
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
 - GitHub Pages, with Google Analytics
 - ⚠️ 💩 Move some big comments out into docs files (express, API Gateway integration)
