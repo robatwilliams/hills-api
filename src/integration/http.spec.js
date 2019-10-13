@@ -50,6 +50,28 @@ test('GET: conditional request using ETag', async () => {
   }
 });
 
+test('caching: allowed for GET responses', async () => {
+  const response = await axios.get(endpoint, {
+    params: {
+      query,
+    },
+  });
+
+  expect(response.status).toBe(200);
+  expect(response.headers).toEqual(
+    expect.objectContaining({ 'cache-control': expect.stringContaining('max-age') })
+  );
+});
+
+test('caching: not allowed for POST responses', async () => {
+  const response = await sendQuery(query);
+
+  expect(response.status).toBe(200);
+  expect(response.headers).toEqual(
+    expect.objectContaining({ 'cache-control': 'no-cache' })
+  );
+});
+
 test('disallowed method', async () => {
   expect.assertions(1);
 

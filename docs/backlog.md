@@ -47,7 +47,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 ## Performance
 
 - 🙏 Compression (gzip, Brotli). Also cuts data transfer cost.
-- Caching - `Cache-Control` (for GETs only; rare)
 - 🙏 Verify total/database response time of key queries
 - Indices on filterable/sortable database fields
 - 💩 Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)

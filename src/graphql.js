@@ -62,10 +62,19 @@ const server = awsServerlessExpress.createServer(app);
 async function handler(event, context) {
   // async; caller must consistently receive a promise
 
-  return (
-    ensureSupportedContentType(event, REQUEST_MEDIA_TYPES) ||
-    awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise
-  );
+  let response = ensureSupportedContentType(event, REQUEST_MEDIA_TYPES);
+
+  if (response) {
+    return response;
+  }
+
+  response = await awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
+
+  if (event.httpMethod === 'GET') {
+    response.headers['Cache-Control'] = 'max-age=86400';
+  }
+
+  return response;
 }
 
 module.exports.fn = handler;

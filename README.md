@@ -20,7 +20,7 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 🚚 Paginate large result sets
 
-🗜️ Compressed HTTP responses for speed and efficiency
+🗜️ Compressed and cacheable HTTP responses for speed and efficiency
 
 👐 Free to use, no API key (at least while it's not costing me much)
 
@@ -56,7 +56,11 @@ fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
   .then(console.log);
 ```
 
-Note that it's generally better to use variables for passing arguments, rather than embedding them in the query itself. Read more about calling GraphQL APIs, including how to use variables, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
+Note that it's generally better to use variables for passing arguments, rather than embedding them in the query itself.
+
+Prefer to send queries using GET requests (`?query=`) rather than POST, as this will allow reuse of cached responses without making a network request.
+
+Read more about calling GraphQL APIs, including those aspects, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
 
 ## Example queries
 
