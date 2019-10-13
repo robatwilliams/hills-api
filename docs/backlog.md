@@ -68,7 +68,7 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 - 🙏 Error logging
 - 🙏 Usage logging & monitoring (e.g. what queries)
-- 🙏 AWS budget alarms
+- ✅ AWS budget alarms
 
 ### Resource allocation and limits
 
