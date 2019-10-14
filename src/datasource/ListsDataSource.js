@@ -1,5 +1,5 @@
 module.exports = class ListsDataSource {
-  byID(id) {
+  byId(id) {
     return {
       id,
       name: sentenceCase(id),

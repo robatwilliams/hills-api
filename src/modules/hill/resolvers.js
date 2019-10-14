@@ -26,7 +26,7 @@ module.exports = {
       }
     },
     lists({ lists }, args, { dataSources }) {
-      return lists.map(id => dataSources.lists.byID(id));
+      return lists.map(id => dataSources.lists.byId(id));
     },
   },
   List: {

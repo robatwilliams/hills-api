@@ -1,7 +1,7 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
-  enum ListID {
+  enum ListId {
     HEWITT
     MUNRO
     WAINWRIGHT

@@ -2,7 +2,7 @@ const gql = require('graphql-tag');
 
 module.exports = gql`
   type List {
-    id: ListID!
+    id: ListId!
     name: String!
   }
 `;
