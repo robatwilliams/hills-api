@@ -1,8 +1,0 @@
-{
-  __type(name: "ListID") {
-    enumValues {
-      name
-      description
-    }
-  }
-}
