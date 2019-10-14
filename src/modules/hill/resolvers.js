@@ -7,8 +7,8 @@ module.exports = {
 
       return Hill.fromEntity(entity);
     },
-    async hills(object, { list }, { dataSources }) {
-      const entities = await dataSources.hills.query({ list });
+    async hills(object, { filter }, { dataSources }) {
+      const entities = await dataSources.hills.query({ list: filter.listId });
 
       return entities.map(Hill.fromEntity);
     },

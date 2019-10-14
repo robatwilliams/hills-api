@@ -88,7 +88,7 @@ Check out the `/examples` folder for more.
 
 ```graphql
 {
-  hills(list: WAINWRIGHT) {
+  hills(filter: { listId: WAINWRIGHT }) {
     name
   }
 }

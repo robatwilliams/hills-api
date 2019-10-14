@@ -4,7 +4,7 @@ const { sendQueryOk } = require('./helpers');
 test('by list', async () => {
   const query = gql`
     {
-      hills(list: WAINWRIGHT) {
+      hills(filter: { listId: WAINWRIGHT }) {
         name
       }
     }
