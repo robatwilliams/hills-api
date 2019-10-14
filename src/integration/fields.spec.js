@@ -1,10 +1,17 @@
+const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
 describe('countries', () => {
   test('name', async () => {
-    const query = `{
-      hill(number: 278) { countries { name } }
-    }`;
+    const query = gql`
+      {
+        hill(number: 278) {
+          countries {
+            name
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -12,9 +19,16 @@ describe('countries', () => {
   });
 
   test('multiple; straddling border', async () => {
-    const query = `{
-      hill(number: 2308) { name, countries { name } }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2308) {
+          name
+          countries {
+            name
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -29,11 +43,13 @@ describe('countries', () => {
 
 describe('height', () => {
   test('in metres', async () => {
-    const query = `{
-      hill(number: 278) {
-        height(unit: METRES)
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 278) {
+          height(unit: METRES)
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -41,11 +57,13 @@ describe('height', () => {
   });
 
   test('in feet', async () => {
-    const query = `{
-      hill(number: 278) {
-        height(unit: FEET)
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 278) {
+          height(unit: FEET)
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -55,11 +73,15 @@ describe('height', () => {
 
 describe('lists', () => {
   test('name', async () => {
-    const query = `{
-      hill(number: 2423) {
-        lists { name }
+    const query = gql`
+      {
+        hill(number: 2423) {
+          lists {
+            name
+          }
+        }
       }
-    }`;
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -67,11 +89,15 @@ describe('lists', () => {
   });
 
   test('multiple', async () => {
-    const query = `{
-      hill(number: 2320) {
-        lists { id }
+    const query = gql`
+      {
+        hill(number: 2320) {
+          lists {
+            id
+          }
+        }
       }
-    }`;
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -83,11 +109,15 @@ describe('lists', () => {
 
 describe('maps', () => {
   test('on single', async () => {
-    const query = `{
-      hill(number: 2320) {
-        maps(scale: ONE_50K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2320) {
+          maps(scale: ONE_50K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -95,11 +125,15 @@ describe('maps', () => {
   });
 
   test('on multiple', async () => {
-    const query = `{
-      hill(number: 2405) {
-        maps(scale: ONE_50K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2405) {
+          maps(scale: ONE_50K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -107,11 +141,15 @@ describe('maps', () => {
   });
 
   test('OL Explorer sub-series', async () => {
-    const query = `{
-      hill(number: 2412) {
-        maps(scale: ONE_25K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2412) {
+          maps(scale: ONE_25K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -119,11 +157,15 @@ describe('maps', () => {
   });
 
   test('sheet number omits location-on-sheet suffix present in source data', async () => {
-    const query = `{
-      hill(number: 2412) {
-        maps(scale: ONE_25K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2412) {
+          maps(scale: ONE_25K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -132,11 +174,15 @@ describe('maps', () => {
   });
 
   test('no duplicate sheet when sheet number listed twice in source data with location suffix', async () => {
-    const query = `{
-      hill(number: 71) {
-        maps(scale: ONE_25K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 71) {
+          maps(scale: ONE_25K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -145,11 +191,15 @@ describe('maps', () => {
   });
 
   test('Ireland 1:50k - Discovery Series by OS Ireland', async () => {
-    const query = `{
-      hill(number: 20001) {
-        maps(scale: ONE_50K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 20001) {
+          maps(scale: ONE_50K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -157,11 +207,15 @@ describe('maps', () => {
   });
 
   test('Ireland missing 1:25k maps', async () => {
-    const query = `{
-      hill(number: 20001) {
-        maps(scale: ONE_25K) { sheet }
-       }
-    }`;
+    const query = gql`
+      {
+        hill(number: 20001) {
+          maps(scale: ONE_25K) {
+            sheet
+          }
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -171,9 +225,13 @@ describe('maps', () => {
 
 describe('name', () => {
   test('single simple', async () => {
-    const query = `{
-      hill(number: 2319) { name }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2319) {
+          name
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -181,9 +239,13 @@ describe('name', () => {
   });
 
   test('single with disambiguation', async () => {
-    const query = `{
-      hill(number: 2643) { name }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2643) {
+          name
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 
@@ -191,9 +253,13 @@ describe('name', () => {
   });
 
   test('multiple', async () => {
-    const query = `{
-      hill(number: 2374) { name }
-    }`;
+    const query = gql`
+      {
+        hill(number: 2374) {
+          name
+        }
+      }
+    `;
 
     const data = await sendQueryOk(query);
 

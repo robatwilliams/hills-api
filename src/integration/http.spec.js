@@ -6,11 +6,16 @@
  */
 const axios = require('axios').default;
 
+const gql = require('./graphql-tag-raw');
 const { endpoint, playground, sendQuery, sendQueryOk } = require('./helpers');
 
-const query = `{
-  hill(number: 278) { number }
-}`;
+const query = gql`
+  {
+    hill(number: 278) {
+      number
+    }
+  }
+`;
 
 test('GET', async () => {
   const response = await axios.get(endpoint, {
@@ -139,15 +144,17 @@ test('playground is served', async () => {
 });
 
 test('schema introspection is allowed (for playground)', async () => {
-  const introspectionQuery = `{
-    __schema {
-      queryType {
-        fields {
-          name
+  const introspectionQuery = gql`
+    {
+      __schema {
+        queryType {
+          fields {
+            name
+          }
         }
       }
     }
-  }`;
+  `;
 
   await sendQueryOk(introspectionQuery);
 });

@@ -1,9 +1,14 @@
+const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
 test('by list', async () => {
-  const query = `{
-    hills(list: WAINWRIGHT) { name }
-  }`;
+  const query = gql`
+    {
+      hills(list: WAINWRIGHT) {
+        name
+      }
+    }
+  `;
 
   const data = await sendQueryOk(query);
 

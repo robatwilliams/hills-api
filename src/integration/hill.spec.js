@@ -1,9 +1,14 @@
+const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
 test('by number: found', async () => {
-  const query = `{
-    hill(number: 278) { number }
-  }`;
+  const query = gql`
+    {
+      hill(number: 278) {
+        number
+      }
+    }
+  `;
 
   const data = await sendQueryOk(query);
 
@@ -11,9 +16,13 @@ test('by number: found', async () => {
 });
 
 test('by number: not found', async () => {
-  const query = `{
-    hill(number: 99999) { number }
-  }`;
+  const query = gql`
+    {
+      hill(number: 99999) {
+        number
+      }
+    }
+  `;
 
   const data = await sendQueryOk(query);
 
@@ -21,9 +30,13 @@ test('by number: not found', async () => {
 });
 
 test('by number: negative', async () => {
-  const query = `{
-    hill(number: -100) { number }
-  }`;
+  const query = gql`
+    {
+      hill(number: -100) {
+        number
+      }
+    }
+  `;
 
   const data = await sendQueryOk(query);
 
