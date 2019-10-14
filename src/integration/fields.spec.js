@@ -53,6 +53,34 @@ describe('height', () => {
   });
 });
 
+describe('lists', () => {
+  test('name', async () => {
+    const query = `{
+      hill(number: 2423) {
+        lists { name }
+      }
+    }`;
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hill.lists).toEqual(expect.arrayContaining([{ name: 'Wainwright' }]));
+  });
+
+  test('multiple', async () => {
+    const query = `{
+      hill(number: 2320) {
+        lists { id }
+      }
+    }`;
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hill.lists).toEqual(
+      expect.arrayContaining([{ id: 'WAINWRIGHT' }, { id: 'HEWITT' }])
+    );
+  });
+});
+
 describe('maps', () => {
   test('on single', async () => {
     const query = `{

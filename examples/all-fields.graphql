@@ -6,6 +6,10 @@
       name
     }
     height(unit: METRES)
+    lists {
+      id
+      name
+    }
     maps(scale: ONE_25K) {
       sheet
     }

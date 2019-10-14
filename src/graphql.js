@@ -4,6 +4,7 @@ const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
 const CountriesDataSource = require('./datasource/CountriesDataSource');
+const ListsDataSource = require('./datasource/ListsDataSource');
 const HillsDataSource = require('./datasource/hills/HillsDataSource');
 const { resolvers, schema } = require('./modules');
 const { ensureSupportedContentType } = require('./util-http');
@@ -13,6 +14,7 @@ const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
 const dataSources = {
   countries: new CountriesDataSource(),
   hills: new HillsDataSource(),
+  lists: new ListsDataSource(),
 };
 
 const executableSchema = makeExecutableSchema({

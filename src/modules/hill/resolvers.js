@@ -25,5 +25,11 @@ module.exports = {
           throw new Error(`Unknown unit: ${unit}`);
       }
     },
+    lists({ lists }, args, { dataSources }) {
+      return lists.map(id => dataSources.lists.byID(id));
+    },
+  },
+  List: {
+    id: ({ id }) => id,
   },
 };
