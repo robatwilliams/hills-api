@@ -33,7 +33,7 @@ Checklist for done items:
 ### Queries
 
 - 🙏 Sorting on key fields
-- 🙏 [Pagination](https://graphql.org/learn/pagination/)
+- 🙏 [Pagination](https://graphql.org/learn/pagination/) - optional, with default and maximum (remember to re-enable skipped filtering tests)
 - 🙏 Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
