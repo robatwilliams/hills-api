@@ -1,6 +1,29 @@
 const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
+test('by country', async () => {
+  const query = gql`
+    {
+      hills(filter: { countryCode: "GB-ENG" }) {
+        name
+      }
+    }
+  `;
+
+  const data = await sendQueryOk(query);
+
+  expect(data.hills).toEqual(
+    expect.arrayContaining([expect.objectContaining({ name: 'Skiddaw' })])
+  );
+  expect(data.hills).toEqual(
+    // On the England-Scotland border
+    expect.arrayContaining([expect.objectContaining({ name: 'Windy Gyle' })])
+  );
+  expect(data.hills).toEqual(
+    expect.not.arrayContaining([expect.objectContaining({ name: 'Ben Lomond' })])
+  );
+});
+
 test('by list', async () => {
   const query = gql`
     {

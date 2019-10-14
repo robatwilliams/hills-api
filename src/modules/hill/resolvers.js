@@ -8,7 +8,12 @@ module.exports = {
       return Hill.fromEntity(entity);
     },
     async hills(object, { filter }, { dataSources }) {
-      const entities = await dataSources.hills.query({ list: filter.listId });
+      const dataSourceFilter = {
+        country: filter.countryCode,
+        list: filter.listId,
+      };
+
+      const entities = await dataSources.hills.query(dataSourceFilter);
 
       return entities.map(Hill.fromEntity);
     },

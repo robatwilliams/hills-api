@@ -1,5 +1,6 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 
+const { filterWhere } = require('./filtering');
 const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
 module.exports = class HillsDataSource {
@@ -7,19 +8,12 @@ module.exports = class HillsDataSource {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
-  async query({ list }) {
-    const parameters = {};
-    let whereList = '';
-
-    // Check not currently necessary; it's the only argument and is mandatory
-    if (list !== undefined) {
-      whereList = 'WHERE FIND_IN_SET(:list, lists)';
-      parameters.list = list;
-    }
+  async query(filters) {
+    const { parameters, whereClause } = filterWhere(filters);
 
     const response = await this.executeStatement({
       parameters: buildParameters(parameters),
-      sql: `SELECT * FROM HILLS ${whereList}`,
+      sql: `SELECT * FROM HILLS ${whereClause || ''}`,
     });
 
     return unwrapHillRecords(response);

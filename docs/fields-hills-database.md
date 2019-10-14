@@ -53,7 +53,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Observations           | ℹ️    | 🙏              |
 | Survey                 | 📝    |                 |
 | Climbed                | -     | 🚫              | 🚫         | 🚫       |
-| Country                | 🌍    | ✅              | 🙏         |
+| Country                | 🌍    | ✅              | ✅         |
 | County Top             | 🌍    |                 |
 | Revision               | 📝    |                 |
 | Comments               | 📝    |                 |
