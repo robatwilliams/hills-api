@@ -20,7 +20,12 @@ const globalTypeDefs = gql`
 
 const schema = [globalTypeDefs, ...flatten(modules.map(module => module.schema))];
 
+const validationRules = flatten(
+  modules.map(module => module.validationRules).filter(rules => rules != null)
+);
+
 module.exports = {
   resolvers,
   schema,
+  validationRules,
 };

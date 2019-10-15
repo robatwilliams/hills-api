@@ -36,6 +36,7 @@
     "line-comment-position": "off",
     "multiline-comment-style": "off",
     "no-console": "off",
+    "no-eq-null": "off",
     "no-inline-comments": "off",
     "no-magic-numbers": "off",
     "no-process-env": "off",

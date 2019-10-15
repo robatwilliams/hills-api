@@ -1,3 +1,6 @@
+// Use fail() in this file to avoid interfering with a test's expect.assertions()
+/* global fail */
+/* eslint-disable jest/no-jasmine-globals */
 const axios = require('axios').default;
 
 const rootUrl = process.env.TEST_INTEGRATION_ROOT_URL;
@@ -13,15 +16,36 @@ function sendQuery(query) {
 async function sendQueryOk(query) {
   const response = await sendQuery(query);
 
-  expect(response.status).toBe(200);
+  if (response.status !== 200) {
+    fail(`Expected status 200, but received ${response.status}`);
+  }
 
   // Unwrap the GraphQL response
   return response.data.data;
+}
+
+async function sendQueryError(expectStatus, query) {
+  try {
+    await sendQuery(query);
+    fail('Query unexpectedly succeeded');
+  } catch (error) {
+    const { response } = error;
+
+    if (response.status !== expectStatus) {
+      fail(`Expected status ${expectStatus}, but received ${response.status}`);
+    }
+
+    // Unwrap the GraphQL response
+    return response.data.errors;
+  }
+
+  return undefined;
 }
 
 module.exports = {
   endpoint,
   playground,
   sendQuery,
+  sendQueryError,
   sendQueryOk,
 };
