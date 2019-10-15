@@ -1,7 +1,7 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
-  input HillsFilter {
+  input HillFilter {
     countries: CountryFilter
     lists: ListFilter
   }
