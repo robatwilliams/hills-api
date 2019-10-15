@@ -4,6 +4,7 @@ module.exports = {
     require('./schema/Hill'),
     require('./schema/HillsFilter'),
     require('./schema/List'),
+    require('./schema/ListFilter'),
     require('./schema/ListId'),
     require('./schema/Query'),
   ],

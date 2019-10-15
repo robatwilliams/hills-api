@@ -9,8 +9,8 @@ module.exports = {
     },
     async hills(object, { filter }, { dataSources }) {
       const dataSourceFilter = {
-        country: filter.countryCode,
-        list: filter.listId,
+        country: filter.countries && filter.countries.code,
+        list: filter.lists && filter.lists.id,
       };
 
       const entities = await dataSources.hills.query(dataSourceFilter);

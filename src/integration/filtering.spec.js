@@ -36,7 +36,7 @@ describe.skip('no filters', () => {
 test('by country', async () => {
   const query = gql`
     {
-      hills(filter: { countryCode: "GB-ENG" }) {
+      hills(filter: { countries: { code: "GB-ENG" } }) {
         name
       }
     }
@@ -59,7 +59,7 @@ test('by country', async () => {
 test('by list', async () => {
   const query = gql`
     {
-      hills(filter: { listId: WAINWRIGHT }) {
+      hills(filter: { lists: { id: WAINWRIGHT } }) {
         name
       }
     }

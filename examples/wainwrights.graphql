@@ -1,5 +1,5 @@
 {
-  hills(filter: { listId: WAINWRIGHT }) {
+  hills(filter: { lists: { id: WAINWRIGHT } }) {
     name
   }
 }
