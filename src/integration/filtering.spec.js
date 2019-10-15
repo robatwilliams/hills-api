@@ -80,3 +80,28 @@ test('by list', async () => {
     expect.not.arrayContaining([expect.objectContaining({ name: 'Ben Lomond' })])
   );
 });
+
+test('by multiple fields', async () => {
+  const query = gql`
+    {
+      hills(filter: { countries: { code: "GB-WAL" }, lists: { id: HEWITT } }) {
+        name
+      }
+    }
+  `;
+
+  const data = await sendQueryOk(query);
+
+  expect(data.hills).toHaveLength(136);
+  expect(data.hills).toEqual(
+    expect.arrayContaining([expect.objectContaining({ name: 'Yr Aran' })])
+  );
+  expect(data.hills).toEqual(
+    // Hewitt, but not in Wales
+    expect.not.arrayContaining([expect.objectContaining({ name: 'Scafell' })])
+  );
+  expect(data.hills).toEqual(
+    // In Wales, but not a Hewitt
+    expect.not.arrayContaining([expect.objectContaining({ name: 'Yr Eifl' })])
+  );
+});
