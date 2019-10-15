@@ -4,6 +4,7 @@ const merge = require('lodash.merge');
 const { flatten } = require('../util');
 
 const modules = [
+  require('./filter'),
   require('./geo'),
   require('./hill'),
   require('./map'),

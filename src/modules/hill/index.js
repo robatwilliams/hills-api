@@ -6,6 +6,7 @@ module.exports = {
     require('./schema/List'),
     require('./schema/ListFilter'),
     require('./schema/ListId'),
+    require('./schema/ListIdCriterion'),
     require('./schema/Query'),
   ],
 };

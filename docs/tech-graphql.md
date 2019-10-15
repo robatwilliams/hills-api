@@ -67,3 +67,7 @@ That requires little effort, but it has some disadvantages:
 Although it requires introspection to be enabled in production (which you may wish to [disable](https://github.com/helfer/graphql-disable-introspection) to avoid revealing your entire schema), it appears that it would be simple to allow introspection for some chosen types.
 
 Introspection might be ok for you, and it would have been ok here. This API however chooses to expose display names in-context within query results, and will provide separate queries for retrieving all available values of both enums and value-lists in a consistent way. Introspection is left for tooling to use.
+
+## Filters
+
+The design is based on the [GatsbyJS GraphQL API](https://www.gatsbyjs.org/docs/graphql-reference/#filter), which uses [Sift](https://www.npmjs.com/package/sift), which is an implementation of [MongoDB-style queries](https://docs.mongodb.com/manual/reference/operator/query/).
