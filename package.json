@@ -12,6 +12,7 @@
     "check": "npm-run-all --continue-on-error --parallel check:*",
     "check:lint": "eslint ./**/*.js",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
+    "ci": "npm-run-all --continue-on-error --parallel audit check test:unit",
     "deploy:all": "npm-run-all \"deploy:db:all -- {@}\" \"deploy:stack -- {@}\" --",
     "deploy:db:all": "npm-run-all \"deploy:db:cluster -- {@}\" \"deploy:db:tables -- {@}\" \"deploy:db:data -- {@}\" --",
     "deploy:db:cluster": "serverless deploy --config ./database/serverless-db.yml",
@@ -23,6 +24,7 @@
     "package": "serverless package",
     "start": "serverless offline --printOutput",
     "test:integration": "jest --config=./jest.config.integration.js --runInBand",
+    "test:unit": "jest --config=./jest.config.unit.js",
     "undeploy:all": "npm-run-all \"undeploy:db:all -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml",
     "undeploy:stack": "serverless remove"
