@@ -22,8 +22,7 @@
     "deployment:info": "serverless info",
     "package": "serverless package",
     "start": "serverless offline --printOutput",
-    "test:integration": "bash scripts/testIntegration.sh",
-    "test:integration:local": "bash scripts/testIntegration.sh 'http://localhost:3000'",
+    "test:integration": "jest --config=./jest.config.integration.js --runInBand",
     "undeploy:all": "npm-run-all \"undeploy:db:all -- {@}\" \"undeploy:stack -- {@}\" --",
     "undeploy:db:all": "serverless remove --config ./database/serverless-db.yml",
     "undeploy:stack": "serverless remove"
@@ -43,6 +42,7 @@
   "devDependencies": {
     "axios": "^0.19.0",
     "csv-parse": "^4.6.3",
+    "dotenv": "^8.2.0",
     "eslint": "^6.5.1",
     "eslint-config-prettier": "^6.4.0",
     "eslint-plugin-import": "^2.18.2",
