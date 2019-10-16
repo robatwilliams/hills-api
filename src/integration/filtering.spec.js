@@ -1,5 +1,5 @@
 const gql = require('./graphql-tag-raw');
-const { sendQueryOk } = require('./helpers');
+const { sendQueryError, sendQueryOk } = require('./helpers');
 
 // Until we have default pagination, query will be too big and will fail
 // eslint-disable-next-line jest/no-disabled-tests
@@ -106,4 +106,21 @@ test('by multiple fields', async () => {
     // In Wales, but not a Hewitt
     expect.not.arrayContaining([expect.objectContaining({ name: 'Yr Eifl' })])
   );
+});
+
+test('invalid criterion', async () => {
+  // No operator specified. Unit tests cover other cases.
+  const query = gql`
+    {
+      hills(filter: { countries: { code: {} } }) {
+        name
+      }
+    }
+  `;
+
+  const errors = await sendQueryError(400, query);
+
+  expect(errors).toEqual([
+    expect.objectContaining({ message: 'Criterion must have an operator' }),
+  ]);
 });
