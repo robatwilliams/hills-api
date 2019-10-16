@@ -15,12 +15,12 @@ shift
 # bail - many failures likely means Aurora Serverless was sleeping and is taking time to wake up
 # runInBand - run serially, otherwise it'll choke the resource-constrained lambdas and cause errors
 # testEnvironment - doesn't need jsdom
-# $@ - pass remaining arguments on to Jest, e.g. --testRegex=src/integration/http.spec.js
+# $@ - pass remaining arguments on to Jest
 #
 TEST_INTEGRATION_ROOT_URL=$rootUrl \
   jest \
+  --config=./jest.config.integration.js \
   --bail=5 \
   --runInBand \
   --testEnvironment=node \
-  ./src/integration \
   "$@"
