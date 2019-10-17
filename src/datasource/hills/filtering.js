@@ -2,7 +2,7 @@ const convertCriterion = require('./convertCriterion');
 
 // eslint-disable-next-line max-statements
 function filterWhere(filters) {
-  const { country, heightMetres, list } = filters;
+  const { country, heightFeet, heightMetres, list } = filters;
 
   const parameters = {};
   const conjunctions = [];
@@ -12,10 +12,12 @@ function filterWhere(filters) {
     parameters.country = country;
   }
 
+  if (heightFeet !== undefined) {
+    addCriterion({ conjunctions, parameters }, heightFeet, 'heightFeet');
+  }
+
   if (heightMetres !== undefined) {
-    const sqlCriterion = convertCriterion(heightMetres, 'heightMetres');
-    conjunctions.push(...sqlCriterion.expressions);
-    Object.assign(parameters, sqlCriterion.parameters);
+    addCriterion({ conjunctions, parameters }, heightMetres, 'heightMetres');
   }
 
   if (list !== undefined) {
@@ -26,6 +28,13 @@ function filterWhere(filters) {
   const whereClause = conjunctions.length > 0 && `WHERE ${conjunctions.join(' AND ')}`;
 
   return { parameters, whereClause };
+}
+
+function addCriterion(target, criterion, columnName) {
+  const sqlCriterion = convertCriterion(criterion, columnName);
+
+  target.conjunctions.push(...sqlCriterion.expressions);
+  Object.assign(target.parameters, sqlCriterion.parameters);
 }
 
 module.exports = { filterWhere };

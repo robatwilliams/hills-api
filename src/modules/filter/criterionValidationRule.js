@@ -10,6 +10,7 @@ const { GraphQLError } = require('graphql');
 
 const COMPATIBILITY = {
   gt: [],
+  gte: [],
   inc: [],
 };
 

@@ -10,6 +10,7 @@ module.exports = {
     async hills(object, { filter }, { dataSources }) {
       const dataSourceFilter = {
         country: filter.countries && filter.countries.code.inc,
+        heightFeet: filter.heightFeet,
         heightMetres: filter.heightMetres,
         list: filter.lists && filter.lists.id.inc,
       };

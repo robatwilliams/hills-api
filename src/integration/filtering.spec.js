@@ -74,6 +74,25 @@ describe('by height', () => {
       { name: 'Ben Macdui [Beinn Macduibh]' },
     ]);
   });
+
+  test('greater than or equal to, in feet', async () => {
+    const query = gql`
+      {
+        # Braeriach is 4252ft
+        hills(filter: { heightFeet: { gte: 4252 } }) {
+          name
+        }
+      }
+    `;
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills).toEqual([
+      { name: 'Ben Nevis [Beinn Nibheis]' },
+      { name: 'Ben Macdui [Beinn Macduibh]' },
+      { name: 'Braeriach' },
+    ]);
+  });
 });
 
 test('by list', async () => {
