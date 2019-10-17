@@ -1,6 +1,8 @@
 const operatorsByShortName = {
   gt: '>',
   gte: '>=',
+  lt: '<',
+  lte: '<=',
 };
 
 module.exports = function criterionConverter(criterion, columnName) {

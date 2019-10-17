@@ -9,8 +9,10 @@
 const { GraphQLError } = require('graphql');
 
 const COMPATIBILITY = {
-  gt: [],
-  gte: [],
+  gt: ['lt', 'lte'],
+  gte: ['lt', 'lte'],
+  lt: ['gt', 'gte'],
+  lte: ['gt', 'gte'],
   inc: [],
 };
 

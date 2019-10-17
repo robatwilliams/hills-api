@@ -13,6 +13,16 @@ it('accepts one known operator on its own', () => {
   expect(context.reportError).not.toHaveBeenCalled();
 });
 
+it('accepts valid combination of operators', () => {
+  const { context, rule } = setup();
+
+  rule.ObjectValue({
+    fields: [{ name: { value: 'gt' } }, { name: { value: 'lt' } }],
+  });
+
+  expect(context.reportError).not.toHaveBeenCalled();
+});
+
 it('rejects invalid combination of operators', () => {
   const { context, rule } = setup();
 

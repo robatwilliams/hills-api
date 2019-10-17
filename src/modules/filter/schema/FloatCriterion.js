@@ -4,5 +4,8 @@ module.exports = gql`
   input FloatCriterion {
     gt: Float
     gte: Float
+
+    lt: Float
+    lte: Float
   }
 `;
