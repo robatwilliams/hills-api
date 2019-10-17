@@ -36,6 +36,20 @@ There is a [list](docs/backlog.md) of possible future features.
 
 Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
 
+## Example query
+
+Wainwright hills (of the Lake District), higher than 900m:
+
+```graphql
+{
+  hills(filter: { heightMetres: { gt: 900 }, lists: { id: { inc: WAINWRIGHT } } }) {
+    name
+  }
+}
+```
+
+Check out the `/examples` folder for more.
+
 ## Calling the API
 
 Queries are accepted as POST and GET requests, and return JSON. You can construct and send them yourself, or use a GraphQL [client library](https://github.com/chentsulin/awesome-graphql) for your platform which can take advantage of the structured and self-describing nature of the API.
@@ -61,40 +75,6 @@ Note that it's generally better to use variables for passing arguments, rather t
 Prefer to send queries using GET requests (`?query=`) rather than POST, as this will allow reuse of cached responses without making a network request.
 
 Read more about calling GraphQL APIs, including those aspects, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
-
-## Example queries
-
-Check out the `/examples` folder for more.
-
-<details>
-<summary>Specific hill</summary>
-
-```graphql
-{
-  hill(number: 278) {
-    countries {
-      name
-    }
-    height(unit: METRES)
-    name
-  }
-}
-```
-
-</details>
-
-<details>
-<summary>Filter: Wainwright hills of the Lake District</summary>
-
-```graphql
-{
-  hills(filter: { lists: { id: { inc: WAINWRIGHT } } }) {
-    name
-  }
-}
-```
-
-</details>
 
 ## Technology
 

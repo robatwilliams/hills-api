@@ -43,7 +43,6 @@ Checklist for done items:
 
 ## Documentation
 
-- 🙏 More interesting example of calling the API
 - 🙏 Equivalent example using GET with variables
 - 🙏 Explain you may get 200 response but with errors
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
