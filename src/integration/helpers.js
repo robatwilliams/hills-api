@@ -17,11 +17,18 @@ async function sendQueryOk(query) {
   const response = await sendQuery(query);
 
   if (response.status !== 200) {
+    console.error(response);
     fail(`Expected status 200, but received ${response.status}`);
   }
 
-  // Unwrap the GraphQL response
-  return response.data.data;
+  const { data, errors } = response.data;
+
+  if (errors) {
+    console.error(errors);
+    fail('Errors in the response body');
+  }
+
+  return data;
 }
 
 async function sendQueryError(expectStatus, query) {
