@@ -54,7 +54,7 @@ Check out the `/examples` folder for more.
 
 Queries are accepted as POST and GET requests, and return JSON. You can construct and send them yourself, or use a GraphQL [client library](https://github.com/chentsulin/awesome-graphql) for your platform which can take advantage of the structured and self-describing nature of the API.
 
-Here's a simple example using just `fetch()` for a web browser:
+Here's a simple POST example using just `fetch()` for a web browser:
 
 ```javascript
 fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
@@ -72,7 +72,13 @@ fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
 
 Note that it's generally better to use variables for passing arguments, rather than embedding them in the query itself.
 
-Prefer to send queries using GET requests (`?query=`) rather than POST, as this will allow reuse of cached responses without making a network request.
+Prefer to send queries using GET requests rather than POST, as this will allow reuse of cached responses without making a network request. Here's an equivalent example using GET and variables (separated onto multiple lines and unencoded for readability):
+
+```
+https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
+?query=query MyQuery($myVariable: Int!) { hill(number: $myVariable) { name } }
+&variables={"myVariable":278}
+```
 
 Read more about calling GraphQL APIs, including those aspects, [here](https://graphql.org/graphql-js/graphql-clients/) and [here](https://graphql.org/learn/serving-over-http/).
 
