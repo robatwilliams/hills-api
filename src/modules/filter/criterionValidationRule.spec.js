@@ -22,17 +22,16 @@ it('rejects when no operator', () => {
   expectOneGraphQLError(context, 'Criterion must have an operator', object);
 });
 
-it('rejects unknown operator', () => {
-  // Schema will catch it; this behaviour is to make sure we update the rule
-  // when a new operator is added to the schema.
-  const { context, rule } = setup();
+it('throws error for unknown operator', () => {
+  const { rule } = setup();
 
   const object = {
     fields: [{ name: { value: 'abc' } }],
   };
-  rule.ObjectValue(object);
 
-  expectOneGraphQLError(context, 'Unknown operator in criterion', object);
+  expect(() => rule.ObjectValue(object)).toThrow(
+    new Error('Unknown operator in criterion')
+  );
 });
 
 it('ignores non-criterion objects', () => {

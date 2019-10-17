@@ -20,7 +20,8 @@ module.exports = function criterionValidationRule(context) {
       if (fieldNames.length === 0) {
         context.reportError(new GraphQLError('Criterion must have an operator', node));
       } else if (!includesAll(OPERATORS, fieldNames)) {
-        context.reportError(new GraphQLError('Unknown operator in criterion', node));
+        // Make sure we update the rule for any new operator added to the schema
+        throw new Error('Unknown operator in criterion');
       }
     },
   };
