@@ -1,10 +1,21 @@
-function filterWhere({ country, list }) {
+const convertCriterion = require('./convertCriterion');
+
+// eslint-disable-next-line max-statements
+function filterWhere(filters) {
+  const { country, heightMetres, list } = filters;
+
   const parameters = {};
   const conjunctions = [];
 
   if (country !== undefined) {
     conjunctions.push('FIND_IN_SET(:country, countries)');
     parameters.country = country;
+  }
+
+  if (heightMetres !== undefined) {
+    const sqlCriterion = convertCriterion(heightMetres, 'heightMetres');
+    conjunctions.push(...sqlCriterion.expressions);
+    Object.assign(parameters, sqlCriterion.parameters);
   }
 
   if (list !== undefined) {

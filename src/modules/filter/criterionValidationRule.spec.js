@@ -3,7 +3,7 @@ const { GraphQLError } = require('graphql');
 
 const criterionValidationRule = require('./criterionValidationRule');
 
-it('accepts "inc" on its own', () => {
+it('accepts one known operator on its own', () => {
   const { context, rule } = setup();
 
   rule.ObjectValue({
@@ -11,6 +11,15 @@ it('accepts "inc" on its own', () => {
   });
 
   expect(context.reportError).not.toHaveBeenCalled();
+});
+
+it('rejects invalid combination of operators', () => {
+  const { context, rule } = setup();
+
+  const object = { fields: [{ name: { value: 'inc' } }, { name: { value: 'gt' } }] };
+  rule.ObjectValue(object);
+
+  expectOneGraphQLError(context, 'Incompatible operators in criterion: gt, inc', object);
 });
 
 it('rejects when no operator', () => {

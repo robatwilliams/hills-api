@@ -56,6 +56,26 @@ test('by country', async () => {
   );
 });
 
+describe('by height', () => {
+  test('greater than, in metres', async () => {
+    const query = gql`
+      {
+        # Braeriach is 1296m
+        hills(filter: { heightMetres: { gt: 1296 } }) {
+          name
+        }
+      }
+    `;
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills).toEqual([
+      { name: 'Ben Nevis [Beinn Nibheis]' },
+      { name: 'Ben Macdui [Beinn Macduibh]' },
+    ]);
+  });
+});
+
 test('by list', async () => {
   const query = gql`
     {

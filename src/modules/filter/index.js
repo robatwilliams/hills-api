@@ -1,5 +1,5 @@
 module.exports = {
   resolvers: {},
-  schema: [require('./schema/StringCriterion')],
+  schema: [require('./schema/FloatCriterion'), require('./schema/StringCriterion')],
   validationRules: [require('./criterionValidationRule')],
 };
