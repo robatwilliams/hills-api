@@ -1,4 +1,5 @@
 const operatorsByShortName = {
+  eq: '=',
   gt: '>',
   gte: '>=',
   lt: '<',

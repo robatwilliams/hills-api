@@ -40,6 +40,7 @@ Checklist for done items:
 ## Features: nice to have
 
 - Map sheet names
+- "In" multi-valued filtering operator, to complement the single-valued equals and includes
 
 ## Documentation
 

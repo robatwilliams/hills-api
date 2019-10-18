@@ -42,8 +42,8 @@ More information about each field can be found here: http://hills-database.co.uk
 | Classification         | ℹ️    | ✅              | ✅         |
 | Map 1:50k              | 🔗    | ✅ <sup>1</sup> |
 | Map 1:25k              | 🔗    | ✅ <sup>1</sup> |
-| Metres                 | 📏    | ✅              | 🙏         | 🙏       |
-| Feet                   | 📏    | ✅              | 🙏         | 🙏       |
+| Metres                 | 📏    | ✅              | ✅         | 🙏       |
+| Feet                   | 📏    | ✅              | ✅         | 🙏       |
 | Grid ref               | 📌    | 🙏              |
 | Grid ref 10            | 📌    |                 |
 | Drop [to col]          | 📏    |                 |
