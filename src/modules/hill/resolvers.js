@@ -1,6 +1,5 @@
 const Hill = require('./model/Hill');
-const HillEdge = require('./model/HillEdge');
-const { decodeCursor } = require('./paginate');
+const { decodeCursor, encodeCursor } = require('./paginate');
 
 const PAGINATION_LIMIT_DEFAULT = 10;
 
@@ -44,10 +43,12 @@ module.exports = {
       }
 
       const hills = entities.map(Hill.fromEntity);
-      const edges = hills.map(HillEdge.forHill);
-      const pageInfo = computePageInfo(edges, paginate, hasMore);
+      const pageInfo = computePageInfo(hills, paginate, hasMore);
 
-      return { edges, pageInfo };
+      return {
+        nodes: hills,
+        pageInfo,
+      };
     },
   },
   Hill: {
@@ -67,7 +68,13 @@ module.exports = {
     },
   },
   HillsConnection: {
-    edges: ({ edges }) => edges,
+    edges({ nodes }) {
+      return nodes.map(node => ({
+        node,
+        cursor: encodeCursor(node),
+      }));
+    },
+    nodes: ({ nodes }) => nodes,
     pageInfo: ({ pageInfo }) => pageInfo,
   },
   HillEdge: {
@@ -84,12 +91,12 @@ function setPaginateDefaults(paginate) {
   }
 }
 
-function computePageInfo(edges, paginate, hasMore) {
-  const lastEdge = edges[edges.length - 1];
+function computePageInfo(nodes, paginate, hasMore) {
+  const lastNode = nodes[nodes.length - 1];
 
   return {
-    endCursor: lastEdge && lastEdge.cursor,
-    startCursor: edges[0] && edges[0].cursor,
+    endCursor: lastNode && encodeCursor(lastNode),
+    startCursor: nodes[0] && encodeCursor(nodes[0]),
 
     /**
      * Only look in the direction of pagination; not implementing the optional part of

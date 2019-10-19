@@ -5,5 +5,8 @@ module.exports = gql`
   type HillsConnection {
     edges: [HillEdge!]!
     pageInfo: PageInfo!
+
+    # Convenience extension for edges.node
+    nodes: [Hill!]!
   }
 `;

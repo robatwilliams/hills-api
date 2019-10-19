@@ -43,10 +43,8 @@ Wainwright hills (of the Lake District), higher than 900m:
 ```graphql
 {
   hills(filter: { heightMetres: { gt: 900 }, lists: { id: { inc: WAINWRIGHT } } }) {
-    edges {
-      node {
-        name
-      }
+    nodes {
+      name
     }
   }
 }
