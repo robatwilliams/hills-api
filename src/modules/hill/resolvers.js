@@ -1,4 +1,4 @@
-const { decodeNumericCursor, setPaginateDefaults } = require('../paginate');
+const { buildEdges, decodeNumericCursor, setPaginateDefaults } = require('../paginate');
 
 const Hill = require('./model/Hill');
 const { computePageInfo, getHillCursor } = require('./resolverHelpers');
@@ -59,12 +59,7 @@ module.exports = {
     },
   },
   HillsConnection: {
-    edges({ nodes }) {
-      return nodes.map(node => ({
-        node,
-        cursor: getHillCursor(node),
-      }));
-    },
+    edges: ({ nodes }) => buildEdges(nodes, getHillCursor),
     nodes: ({ nodes }) => nodes,
     pageInfo: ({ pageInfo }) => pageInfo,
   },
