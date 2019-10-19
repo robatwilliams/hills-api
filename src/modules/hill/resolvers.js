@@ -34,16 +34,7 @@ module.exports = {
   },
   Hill: {
     countries: ({ countries }) => countries,
-    height(hill, { unit }) {
-      switch (unit) {
-        case 'FEET':
-          return hill.height.feet;
-        case 'METRES':
-          return hill.height.metres;
-        default:
-          throw new Error(`Unknown unit: ${unit}`);
-      }
-    },
+    height: (hill, { unit }) => hill.height(unit),
     lists({ lists }, args, { dataSources }) {
       return lists.map(id => dataSources.lists.byId(id));
     },

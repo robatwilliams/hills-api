@@ -6,7 +6,7 @@ module.exports = class Hill {
 
     const countries = entity.countries.map(code => ({ code }));
 
-    return {
+    return new Hill({
       countries,
       height: {
         feet: entity.heightFeet,
@@ -15,6 +15,26 @@ module.exports = class Hill {
       lists: entity.lists,
       name: entity.name,
       number: entity.number,
-    };
+    });
+  }
+
+  constructor(fields) {
+    const { height, ...withoutArguments } = fields;
+
+    this.fieldsWithArguments = { height };
+    Object.assign(this, withoutArguments);
+  }
+
+  height(unit) {
+    const { height } = this.fieldsWithArguments;
+
+    switch (unit) {
+      case 'FEET':
+        return height.feet;
+      case 'METRES':
+        return height.metres;
+      default:
+        throw new Error(`Unknown unit: ${unit}`);
+    }
   }
 };
