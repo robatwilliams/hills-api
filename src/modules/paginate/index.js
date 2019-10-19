@@ -1,6 +1,6 @@
 const PageInfo = require('./model/PageInfo');
-const { decodeNumericCursor, encodeNumericCursor } = require('./cursors');
-const { setPaginateDefaults } = require('./defaultArguments');
+const { decodeNumericCursor, encodeNumericCursor } = require('./util/cursors');
+const { setPaginateDefaults } = require('./util/defaultArguments');
 
 module.exports = {
   resolvers: {},
