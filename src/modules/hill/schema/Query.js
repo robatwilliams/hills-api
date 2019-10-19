@@ -1,9 +1,9 @@
 const gql = require('graphql-tag');
 
-// Note: "input" types may be useful when more arguments are added
+// Pagination as per https://facebook.github.io/relay/graphql/connections.htm
 module.exports = gql`
   extend type Query {
     hill(number: Int!): Hill
-    hills(filter: HillFilter): [Hill!]!
+    hills(filter: HillFilter = {}, first: Int = 10): HillsConnection!
   }
 `;

@@ -1,5 +1,9 @@
 {
   hills(filter: { lists: { id: { inc: WAINWRIGHT } } }) {
-    name
+    edges {
+      node {
+        name
+      }
+    }
   }
 }

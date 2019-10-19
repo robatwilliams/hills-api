@@ -1,35 +1,41 @@
 const gql = require('./graphql-tag-raw');
-const { sendQueryError, sendQueryOk } = require('./helpers');
+const { extractHillNodes, sendQueryError, sendQueryOk } = require('./helpers');
 
-// Until we have default pagination, query will be too big and will fail
-// eslint-disable-next-line jest/no-disabled-tests
-describe.skip('no filters', () => {
+describe('no filters', () => {
   test('omitted', async () => {
     const query = gql`
       {
         hills {
-          name
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     `;
 
     const data = await sendQueryOk(query);
 
-    expect(data.hills.length).toBeGreaterThan(0);
+    expect(data.hills.edges.length).toBeGreaterThan(0);
   });
 
   test('empty', async () => {
     const query = gql`
       {
         hills(filter: {}) {
-          name
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     `;
 
     const data = await sendQueryOk(query);
 
-    expect(data.hills.length).toBeGreaterThan(0);
+    expect(data.hills.edges.length).toBeGreaterThan(0);
   });
 });
 
@@ -37,23 +43,26 @@ test('by country', async () => {
   const query = gql`
     {
       hills(filter: { countries: { code: { inc: "GB-ENG" } } }) {
-        name
+        edges {
+          node {
+            countries {
+              name
+            }
+          }
+        }
       }
     }
   `;
 
   const data = await sendQueryOk(query);
+  const hills = extractHillNodes(data);
 
-  expect(data.hills).toEqual(
-    expect.arrayContaining([expect.objectContaining({ name: 'Skiddaw' })])
-  );
-  expect(data.hills).toEqual(
-    // On the England-Scotland border
-    expect.arrayContaining([expect.objectContaining({ name: 'Windy Gyle' })])
-  );
-  expect(data.hills).toEqual(
-    expect.not.arrayContaining([expect.objectContaining({ name: 'Ben Lomond' })])
-  );
+  for (const hill of hills) {
+    expect(hill.countries).toEqual(
+      // It's ok to be in other countries too - border hills
+      expect.arrayContaining([expect.objectContaining({ name: 'England' })])
+    );
+  }
 });
 
 describe('by height', () => {
@@ -62,14 +71,19 @@ describe('by height', () => {
       {
         # Braeriach is 1296m
         hills(filter: { heightMetres: { gt: 1296 } }) {
-          name
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     `;
 
     const data = await sendQueryOk(query);
+    const hills = extractHillNodes(data);
 
-    expect(data.hills).toEqual([
+    expect(hills).toEqual([
       { name: 'Ben Nevis [Beinn Nibheis]' },
       { name: 'Ben Macdui [Beinn Macduibh]' },
     ]);
@@ -80,14 +94,19 @@ describe('by height', () => {
       {
         # Braeriach is 4252ft
         hills(filter: { heightFeet: { gte: 4252 } }) {
-          name
+          edges {
+            node {
+              name
+            }
+          }
         }
       }
     `;
 
     const data = await sendQueryOk(query);
+    const hills = extractHillNodes(data);
 
-    expect(data.hills).toEqual([
+    expect(hills).toEqual([
       { name: 'Ben Nevis [Beinn Nibheis]' },
       { name: 'Ben Macdui [Beinn Macduibh]' },
       { name: 'Braeriach' },
@@ -99,25 +118,26 @@ test('by list', async () => {
   const query = gql`
     {
       hills(filter: { lists: { id: { inc: WAINWRIGHT } } }) {
-        name
+        edges {
+          node {
+            lists {
+              id
+            }
+          }
+        }
       }
     }
   `;
 
   const data = await sendQueryOk(query);
+  const hills = extractHillNodes(data);
 
-  expect(data.hills).toHaveLength(214);
-  expect(data.hills).toEqual(
-    // Wainwright only
-    expect.arrayContaining([expect.objectContaining({ name: 'Bakestall' })])
-  );
-  expect(data.hills).toEqual(
-    // Wainwright and Hewitt
-    expect.arrayContaining([expect.objectContaining({ name: 'Skiddaw' })])
-  );
-  expect(data.hills).toEqual(
-    expect.not.arrayContaining([expect.objectContaining({ name: 'Ben Lomond' })])
-  );
+  for (const hill of hills) {
+    expect(hill.lists).toEqual(
+      // It's ok to be in other lists too
+      expect.arrayContaining([expect.objectContaining({ id: 'WAINWRIGHT' })])
+    );
+  }
 });
 
 test('by multiple fields', async () => {
@@ -126,25 +146,34 @@ test('by multiple fields', async () => {
       hills(
         filter: { countries: { code: { inc: "GB-WAL" } }, lists: { id: { inc: HEWITT } } }
       ) {
-        name
+        edges {
+          node {
+            countries {
+              name
+            }
+            lists {
+              id
+            }
+          }
+        }
       }
     }
   `;
 
   const data = await sendQueryOk(query);
+  const hills = extractHillNodes(data);
 
-  expect(data.hills).toHaveLength(136);
-  expect(data.hills).toEqual(
-    expect.arrayContaining([expect.objectContaining({ name: 'Yr Aran' })])
-  );
-  expect(data.hills).toEqual(
-    // Hewitt, but not in Wales
-    expect.not.arrayContaining([expect.objectContaining({ name: 'Scafell' })])
-  );
-  expect(data.hills).toEqual(
-    // In Wales, but not a Hewitt
-    expect.not.arrayContaining([expect.objectContaining({ name: 'Yr Eifl' })])
-  );
+  for (const hill of hills) {
+    expect(hill.countries).toEqual(
+      // It's ok to be in other countries too - border hills
+      expect.arrayContaining([expect.objectContaining({ name: 'Wales' })])
+    );
+
+    expect(hill.lists).toEqual(
+      // It's ok to be in other lists too
+      expect.arrayContaining([expect.objectContaining({ id: 'HEWITT' })])
+    );
+  }
 });
 
 test('invalid criterion', async () => {
@@ -152,7 +181,11 @@ test('invalid criterion', async () => {
   const query = gql`
     {
       hills(filter: { countries: { code: {} } }) {
-        name
+        edges {
+          node {
+            name
+          }
+        }
       }
     }
   `;

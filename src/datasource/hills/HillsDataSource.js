@@ -8,12 +8,14 @@ module.exports = class HillsDataSource {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
-  async query(filters) {
+  async query(filters, pagination) {
     const { parameters, whereClause } = filterWhere(filters);
+
+    parameters.limit = pagination.first;
 
     const response = await this.executeStatement({
       parameters: buildParameters(parameters),
-      sql: `SELECT * FROM HILLS ${whereClause || ''}`,
+      sql: `SELECT * FROM HILLS ${whereClause || ''} LIMIT :limit`,
     });
 
     return unwrapHillRecords(response);

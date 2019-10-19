@@ -49,8 +49,13 @@ async function sendQueryError(expectStatus, query) {
   return undefined;
 }
 
+function extractHillNodes(data) {
+  return data.hills.edges.map(edge => edge.node);
+}
+
 module.exports = {
   endpoint,
+  extractHillNodes,
   playground,
   sendQuery,
   sendQueryError,

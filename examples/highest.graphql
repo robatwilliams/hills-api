@@ -1,5 +1,9 @@
 {
   hills(filter: { heightMetres: { gt: 1200 } }) {
-    name
+    edges {
+      node {
+        name
+      }
+    }
   }
 }
