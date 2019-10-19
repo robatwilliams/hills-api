@@ -1,5 +1,5 @@
 module.exports = {
   resolvers: {},
-  schema: [],
+  schema: [require('./schema/PageInfo')],
   validationRules: [require('./paginationValidationRule')],
 };

@@ -12,6 +12,10 @@ module.exports = {
       return Hill.fromEntity(entity);
     },
     async hills(object, { filter, ...paginate }, { dataSources }) {
+      setPaginateDefaults(paginate);
+      const { first, last } = paginate;
+      const limit = first == null ? last : first;
+
       const dataSourceFilter = {
         country: filter.countries && filter.countries.code.inc,
         heightFeet: filter.heightFeet,
@@ -19,7 +23,7 @@ module.exports = {
         list: filter.lists && filter.lists.id.inc,
       };
       const dataSourcePaginate = {
-        limit: getPaginationLimit(paginate),
+        limit: limit + 1, // +1 so we can determine if there are more items
         before: paginate.before && decodeCursor(paginate.before),
         after: paginate.after && decodeCursor(paginate.after),
       };
@@ -28,11 +32,22 @@ module.exports = {
         dataSourceFilter,
         dataSourcePaginate
       );
-      const hills = entities.map(Hill.fromEntity);
 
-      return {
-        edges: hills.map(HillEdge.forHill),
-      };
+      const hasMore = entities.length === limit + 1;
+
+      if (hasMore) {
+        if (first != null) {
+          entities.pop();
+        } else if (last != null) {
+          entities.shift();
+        }
+      }
+
+      const hills = entities.map(Hill.fromEntity);
+      const edges = hills.map(HillEdge.forHill);
+      const pageInfo = computePageInfo(edges, paginate, hasMore);
+
+      return { edges, pageInfo };
     },
   },
   Hill: {
@@ -53,6 +68,7 @@ module.exports = {
   },
   HillsConnection: {
     edges: ({ edges }) => edges,
+    pageInfo: ({ pageInfo }) => pageInfo,
   },
   HillEdge: {
     node: ({ node }) => node,
@@ -62,12 +78,25 @@ module.exports = {
   },
 };
 
-function getPaginationLimit({ first, last }) {
-  if (first != null) {
-    return first;
-  } else if (last != null) {
-    return last;
+function setPaginateDefaults(paginate) {
+  if (paginate.first == null && paginate.last == null) {
+    paginate.first = PAGINATION_LIMIT_DEFAULT;
   }
+}
 
-  return PAGINATION_LIMIT_DEFAULT;
+function computePageInfo(edges, paginate, hasMore) {
+  const lastEdge = edges[edges.length - 1];
+
+  return {
+    endCursor: lastEdge && lastEdge.cursor,
+    startCursor: edges[0] && edges[0].cursor,
+
+    /**
+     * Only look in the direction of pagination; not implementing the optional part of
+     * https://facebook.github.io/relay/graphql/connections.htm#sec-undefined.PageInfo .
+     * Also returning null for the optional cases which is more accurate than false.
+     */
+    hasNextPage: paginate.first == null ? null : hasMore,
+    hasPreviousPage: paginate.last == null ? null : hasMore,
+  };
 }

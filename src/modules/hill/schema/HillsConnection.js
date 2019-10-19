@@ -4,5 +4,6 @@ const gql = require('graphql-tag');
 module.exports = gql`
   type HillsConnection {
     edges: [HillEdge!]!
+    pageInfo: PageInfo!
   }
 `;

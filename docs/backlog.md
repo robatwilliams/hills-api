@@ -40,6 +40,7 @@ Checklist for done items:
 ## Features: nice to have
 
 - Map sheet names
+- Return total number of records when paginating
 - "In" multi-valued filtering operator, to complement the single-valued equals and includes
 
 ## Documentation

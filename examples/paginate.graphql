@@ -7,5 +7,12 @@
         number
       }
     }
+    pageInfo {
+      endCursor
+      startCursor
+
+      hasNextPage
+      hasPreviousPage
+    }
   }
 }
