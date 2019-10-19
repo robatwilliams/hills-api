@@ -7,20 +7,20 @@ function filterWhere(filter) {
   const parameters = {};
   const conjunctions = [];
 
-  if (country !== undefined) {
+  if (country != null) {
     conjunctions.push('FIND_IN_SET(:country, countries)');
     parameters.country = country;
   }
 
-  if (heightFeet !== undefined) {
+  if (heightFeet != null) {
     addCriterion({ conjunctions, parameters }, heightFeet, 'heightFeet');
   }
 
-  if (heightMetres !== undefined) {
+  if (heightMetres != null) {
     addCriterion({ conjunctions, parameters }, heightMetres, 'heightMetres');
   }
 
-  if (list !== undefined) {
+  if (list != null) {
     conjunctions.push('FIND_IN_SET(:list, lists)');
     parameters.list = list;
   }
