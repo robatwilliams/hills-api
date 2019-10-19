@@ -1,5 +1,6 @@
+const { decodeNumericCursor, encodeNumericCursor } = require('../paginate');
+
 const Hill = require('./model/Hill');
-const { decodeCursor, getHillCursor } = require('./paginate');
 
 const PAGINATION_LIMIT_DEFAULT = 10;
 
@@ -23,8 +24,8 @@ module.exports = {
       };
       const dataSourcePaginate = {
         limit: limit + 1, // +1 so we can determine if there are more items
-        before: paginate.before && decodeCursor(paginate.before),
-        after: paginate.after && decodeCursor(paginate.after),
+        before: paginate.before && decodeNumericCursor(paginate.before),
+        after: paginate.after && decodeNumericCursor(paginate.after),
         reverse: limit === last,
       };
 
@@ -94,6 +95,10 @@ function setPaginateDefaults(paginate) {
       paginate.first = PAGINATION_LIMIT_DEFAULT;
     }
   }
+}
+
+function getHillCursor(hill) {
+  return encodeNumericCursor(hill.number);
 }
 
 function computePageInfo(nodes, paginate, hasMore) {
