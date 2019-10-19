@@ -23,26 +23,16 @@ module.exports = {
         list: filter.lists && filter.lists.id.inc,
       };
       const dataSourcePaginate = {
-        limit: limit + 1, // +1 so we can determine if there are more items
+        limit,
         before: paginate.before && decodeNumericCursor(paginate.before),
         after: paginate.after && decodeNumericCursor(paginate.after),
-        reverse: limit === last,
+        backward: limit === last,
       };
 
-      const entities = await dataSources.hills.query(
+      const { entities, hasMore } = await dataSources.hills.query(
         dataSourceFilter,
         dataSourcePaginate
       );
-
-      const hasMore = entities.length === limit + 1;
-
-      if (hasMore) {
-        if (first != null) {
-          entities.pop();
-        } else if (last != null) {
-          entities.shift();
-        }
-      }
 
       const hills = entities.map(Hill.fromEntity);
       const pageInfo = computePageInfo(hills, paginate, hasMore);

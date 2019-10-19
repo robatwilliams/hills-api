@@ -1,85 +1,36 @@
-const RDSDataService = require('aws-sdk/clients/rdsdataservice');
-
-const { filterWhere } = require('./filtering');
-const { paginateBy } = require('./pagination');
-const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
+const HillsDAO = require('./HillsDAO');
 
 module.exports = class HillsDataSource {
   constructor() {
-    this.client = new RDSDataService(); // region from env:AWS_REGION
+    this.dao = new HillsDAO();
   }
 
   async query(filter, paginate) {
-    const filterExpression = filterWhere(filter);
-    const paginateExpression = paginateBy(paginate);
-
-    const conjunctions = [filterExpression.expression, paginateExpression.expression];
-
-    const parameters = {
-      ...filterExpression.parameters,
-      ...paginateExpression.parameters,
-      limit: paginate.limit,
+    const daoPaginate = {
+      ...paginate,
+      limit: paginate.limit + 1, // +1 so we can determine if there are more items
     };
 
-    // Always include number in order-by, for stable pagination
-    const statement = `
-      SELECT * FROM HILLS
-      ${conjunctions.length === 0 ? '' : `WHERE ${conjunctions.join(' AND ')}`}
-      ORDER BY number ${paginate.reverse ? 'DESC' : 'ASC'}
-      LIMIT :limit`;
+    const entities = await this.dao.query(filter, daoPaginate);
 
-    const response = await this.executeStatement({
-      parameters: buildParameters(parameters),
-      sql: statement,
-    });
+    const hasMore = entities.length === daoPaginate.limit;
 
-    const hills = unwrapHillRecords(response);
+    if (hasMore) {
+      if (paginate.backward) {
+        entities.shift();
+      } else {
+        entities.pop();
+      }
+    }
 
-    return paginate.reverse ? hills.reverse() : hills;
+    return { entities, hasMore };
   }
 
-  async queryOne({ number }) {
-    const response = await this.executeStatement({
-      parameters: buildParameters({ number }),
-      sql: 'SELECT * FROM HILLS WHERE number = :number',
-    });
-
-    return unwrapHillRecords(response)[0];
+  queryOne({ number }) {
+    return this.dao.queryOne({ number });
   }
 
-  async queryMaps({ numbers, scale }) {
-    // Although documented, arrayValues isn't actually implemented.
-    // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
-    const inList = numbers.join(',');
-
-    const response = await this.executeStatement({
-      parameters: buildParameters({ scale }),
-      sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND hillNumber IN (${inList})`,
-    });
-
-    return unwrapRecords(response);
-  }
-
-  executeStatement(statementParams) {
-    const params = {
-      database: 'HILLS',
-      includeResultMetadata: true, // include column names
-      resourceArn: process.env.DATABASE_CLUSTER_ARN,
-      secretArn: process.env.DATABASE_CLUSTER_SECRET_ARN,
-      ...statementParams,
-    };
-
-    return this.client.executeStatement(params).promise();
+  queryMaps({ numbers, scale }) {
+    return this.dao.queryMaps({ numbers, scale });
   }
 };
-
-function unwrapHillRecords(response) {
-  const hills = unwrapRecords(response);
-
-  for (const hill of hills) {
-    hill.countries = unwrapSetFieldValue(hill.countries);
-    hill.lists = unwrapSetFieldValue(hill.lists);
-  }
-
-  return hills;
-}
