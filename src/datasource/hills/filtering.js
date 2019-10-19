@@ -25,7 +25,10 @@ function filterWhere(filter) {
     parameters.list = list;
   }
 
-  return { conjunctions, parameters };
+  // Always return an expression, to reduce need for conditionals elsewhere
+  const expression = conjunctions.length === 0 ? 1 : `(${conjunctions.join(' AND ')})`;
+
+  return { expression, parameters };
 }
 
 function addCriterion(target, criterion, columnName) {

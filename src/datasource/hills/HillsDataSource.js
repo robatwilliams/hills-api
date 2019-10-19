@@ -1,6 +1,7 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 
 const { filterWhere } = require('./filtering');
+const { paginateBy } = require('./pagination');
 const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
 module.exports = class HillsDataSource {
@@ -9,14 +10,16 @@ module.exports = class HillsDataSource {
   }
 
   async query(filter, paginate) {
-    const { conjunctions, parameters } = filterWhere(filter);
+    const filterExpression = filterWhere(filter);
+    const paginateExpression = paginateBy(paginate);
 
-    parameters.limit = paginate.first;
+    const conjunctions = [filterExpression.expression, paginateExpression.expression];
 
-    if (paginate.after) {
-      conjunctions.push('number > :cursor');
-      parameters.cursor = paginate.after;
-    }
+    const parameters = {
+      ...filterExpression.parameters,
+      ...paginateExpression.parameters,
+      limit: paginate.limit,
+    };
 
     // Always include number in order-by, for stable pagination
     const statement = `

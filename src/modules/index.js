@@ -9,6 +9,7 @@ const modules = [
   require('./hill'),
   require('./map'),
   require('./measure'),
+  require('./paginate'),
 ];
 
 const resolvers = merge(...modules.map(module => module.resolvers));

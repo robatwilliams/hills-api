@@ -4,6 +4,14 @@ const gql = require('graphql-tag');
 module.exports = gql`
   extend type Query {
     hill(number: Int!): Hill
-    hills(filter: HillFilter = {}, first: Int = 10, after: String): HillsConnection!
+    hills(
+      filter: HillFilter = {}
+
+      first: Int
+      after: String
+
+      last: Int
+      before: String
+    ): HillsConnection!
   }
 `;

@@ -33,6 +33,7 @@
     "class-methods-use-this": "off",
     "global-require": "off",
     "id-length": "off",
+    "init-declarations": "off",
     "line-comment-position": "off",
     "multiline-comment-style": "off",
     "no-console": "off",

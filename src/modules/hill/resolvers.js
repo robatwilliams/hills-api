@@ -2,6 +2,8 @@ const Hill = require('./model/Hill');
 const HillEdge = require('./model/HillEdge');
 const { decodeCursor } = require('./paginate');
 
+const PAGINATION_LIMIT_DEFAULT = 10;
+
 module.exports = {
   Query: {
     async hill(object, { number }, { dataSources }) {
@@ -17,7 +19,8 @@ module.exports = {
         list: filter.lists && filter.lists.id.inc,
       };
       const dataSourcePaginate = {
-        first: paginate.first,
+        limit: getPaginationLimit(paginate),
+        before: paginate.before && decodeCursor(paginate.before),
         after: paginate.after && decodeCursor(paginate.after),
       };
 
@@ -58,3 +61,13 @@ module.exports = {
     id: ({ id }) => id,
   },
 };
+
+function getPaginationLimit({ first, last }) {
+  if (first != null) {
+    return first;
+  } else if (last != null) {
+    return last;
+  }
+
+  return PAGINATION_LIMIT_DEFAULT;
+}

@@ -1,10 +1,12 @@
 /**
- * Validations that the schema alone cannot do.
+ * Validations that the schema alone cannot do: mutually-exclusive fields.
  *
  * graphql-tools SchemaDirectiveVisitor might have been nicer, but it doesn't support
  * input types: https://github.com/apollographql/graphql-tools/issues/858
  *
- * Usage info gleaned from https://github.com/graphql/graphql-js/tree/master/src/validation/rules
+ * Usage info:
+ *   https://github.com/graphql/graphql-js/tree/master/src/validation/rules
+ *   https://graphql.org/graphql-js/language/#visitor
  */
 const { GraphQLError } = require('graphql');
 
