@@ -29,6 +29,8 @@ test('GET', async () => {
 });
 
 test('GET: conditional request using ETag', async () => {
+  // This test will break when graphql-express pretty printing is enabled
+
   expect.assertions(2);
 
   const responseOne = await axios.get(endpoint, {
