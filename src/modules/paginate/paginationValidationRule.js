@@ -18,19 +18,9 @@ module.exports = function argumentsValidationRule(context) {
 
       leave(node) {
         const fieldArgNames = fieldsArgumentsStack.shift();
-        const { first, after, last, before } = fieldArgNames;
 
-        let message;
-
-        if (first && last) {
-          message = 'Limits given for both forward and backward pagination';
-        } else if (after && before) {
-          message = 'Cursors given for both forward and backward pagination';
-        } else if (before && first) {
-          message = 'Backward pagination cursor given with forward pagination limit';
-        } else if (after && last) {
-          message = 'Forward pagination cursor given with backward pagination limit';
-        }
+        const message =
+          validateCompatibility(fieldArgNames) || validateLimits(fieldArgNames);
 
         if (message) {
           context.reportError(new GraphQLError(message, node));
@@ -41,7 +31,31 @@ module.exports = function argumentsValidationRule(context) {
       const [fieldArgNames] = fieldsArgumentsStack;
 
       const name = node.name.value;
-      fieldArgNames[name] = true;
+      fieldArgNames[name] = node;
     },
   };
 };
+
+function validateCompatibility({ first, after, last, before }) {
+  if (first && last) {
+    return 'Limits given for both forward and backward pagination';
+  } else if (after && before) {
+    return 'Cursors given for both forward and backward pagination';
+  } else if (before && first) {
+    return 'Backward pagination cursor given with forward pagination limit';
+  } else if (after && last) {
+    return 'Forward pagination cursor given with backward pagination limit';
+  }
+
+  return undefined;
+}
+
+function validateLimits({ first, last }) {
+  const limitNode = first || last;
+
+  if (limitNode && limitNode.value.value.startsWith('-')) {
+    return 'Negative pagination limit given';
+  }
+
+  return undefined;
+}

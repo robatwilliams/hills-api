@@ -1,7 +1,7 @@
 const { encodeCursor } = require('../modules/hill/paginate');
 
 const gql = require('./graphql-tag-raw');
-const { sendQueryOk } = require('./helpers');
+const { sendQueryError, sendQueryOk } = require('./helpers');
 
 it('returns the first few when no paging specified', async () => {
   const query = createQuery();
@@ -178,6 +178,39 @@ describe('going backward', () => {
       hasNextPage: null,
       hasPreviousPage: false,
     });
+  });
+});
+
+describe('handling invalid arguments', () => {
+  it('rejects incompatible arguments', async () => {
+    // Just test one case, the conditions are similar enough
+    const query = createQuery({ first: 1, last: 1 });
+
+    const errors = await sendQueryError(400, query);
+
+    expect(errors).toEqual([
+      expect.objectContaining({
+        message: 'Limits given for both forward and backward pagination',
+      }),
+    ]);
+  });
+
+  it('rejects negative limit', async () => {
+    const query = createQuery({ first: -1 });
+
+    const errors = await sendQueryError(400, query);
+
+    expect(errors).toEqual([
+      expect.objectContaining({
+        message: 'Negative pagination limit given',
+      }),
+    ]);
+  });
+
+  it('does not cause internal server error when given an invalid cursor', async () => {
+    const query = createQuery({ after: 'hello!' }); // not a valid base64 string
+
+    await sendQueryOk(query);
   });
 });
 

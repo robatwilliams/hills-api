@@ -33,7 +33,8 @@ async function sendQueryOk(query) {
 
 async function sendQueryError(expectStatus, query) {
   try {
-    await sendQuery(query);
+    const response = await sendQuery(query);
+    console.log(response.data);
     fail('Query unexpectedly succeeded');
   } catch (error) {
     const { response } = error;
