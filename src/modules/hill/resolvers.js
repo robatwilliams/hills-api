@@ -1,11 +1,7 @@
-const { decodeNumericCursor } = require('../paginate');
+const { decodeNumericCursor, setPaginateDefaults } = require('../paginate');
 
 const Hill = require('./model/Hill');
-const {
-  computePageInfo,
-  getHillCursor,
-  setPaginateDefaults,
-} = require('./resolverHelpers');
+const { computePageInfo, getHillCursor } = require('./resolverHelpers');
 
 module.exports = {
   Query: {

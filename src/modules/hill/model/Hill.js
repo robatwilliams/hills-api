@@ -1,4 +1,4 @@
-class Hill {
+module.exports = class Hill {
   static fromEntity(entity) {
     if (!entity) {
       return undefined;
@@ -17,6 +17,4 @@ class Hill {
       number: entity.number,
     };
   }
-}
-
-module.exports = Hill;
+};
