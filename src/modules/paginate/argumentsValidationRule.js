@@ -7,7 +7,7 @@
  */
 const { GraphQLError } = require('graphql');
 
-module.exports = function argumentsValidationRule(context) {
+module.exports = function paginationValidationRule(context) {
   const fieldsArgumentsStack = [];
 
   return {
