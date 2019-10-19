@@ -25,7 +25,7 @@ module.exports = class HillsDataSource {
     const statement = `
       SELECT * FROM HILLS
       ${conjunctions.length === 0 ? '' : `WHERE ${conjunctions.join(' AND ')}`}
-      ORDER BY number
+      ORDER BY number ${paginate.reverse ? 'DESC' : 'ASC'}
       LIMIT :limit`;
 
     const response = await this.executeStatement({
@@ -33,7 +33,9 @@ module.exports = class HillsDataSource {
       sql: statement,
     });
 
-    return unwrapHillRecords(response);
+    const hills = unwrapHillRecords(response);
+
+    return paginate.reverse ? hills.reverse() : hills;
   }
 
   async queryOne({ number }) {

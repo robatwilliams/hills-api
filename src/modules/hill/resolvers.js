@@ -1,5 +1,5 @@
 const Hill = require('./model/Hill');
-const { decodeCursor, encodeCursor } = require('./paginate');
+const { decodeCursor, getHillCursor } = require('./paginate');
 
 const PAGINATION_LIMIT_DEFAULT = 10;
 
@@ -25,6 +25,7 @@ module.exports = {
         limit: limit + 1, // +1 so we can determine if there are more items
         before: paginate.before && decodeCursor(paginate.before),
         after: paginate.after && decodeCursor(paginate.after),
+        reverse: limit === last,
       };
 
       const entities = await dataSources.hills.query(
@@ -71,7 +72,7 @@ module.exports = {
     edges({ nodes }) {
       return nodes.map(node => ({
         node,
-        cursor: encodeCursor(node),
+        cursor: getHillCursor(node),
       }));
     },
     nodes: ({ nodes }) => nodes,
@@ -87,7 +88,11 @@ module.exports = {
 
 function setPaginateDefaults(paginate) {
   if (paginate.first == null && paginate.last == null) {
-    paginate.first = PAGINATION_LIMIT_DEFAULT;
+    if (paginate.before) {
+      paginate.last = PAGINATION_LIMIT_DEFAULT;
+    } else {
+      paginate.first = PAGINATION_LIMIT_DEFAULT;
+    }
   }
 }
 
@@ -95,8 +100,8 @@ function computePageInfo(nodes, paginate, hasMore) {
   const lastNode = nodes[nodes.length - 1];
 
   return {
-    endCursor: lastNode && encodeCursor(lastNode),
-    startCursor: nodes[0] && encodeCursor(nodes[0]),
+    endCursor: lastNode ? getHillCursor(lastNode) : null,
+    startCursor: nodes[0] ? getHillCursor(nodes[0]) : null,
 
     /**
      * Only look in the direction of pagination; not implementing the optional part of
