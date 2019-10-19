@@ -8,14 +8,26 @@ module.exports = class HillsDataSource {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
-  async query(filters, pagination) {
-    const { parameters, whereClause } = filterWhere(filters);
+  async query(filter, paginate) {
+    const { conjunctions, parameters } = filterWhere(filter);
 
-    parameters.limit = pagination.first;
+    parameters.limit = paginate.first;
+
+    if (paginate.after) {
+      conjunctions.push('number > :cursor');
+      parameters.cursor = paginate.after;
+    }
+
+    // Always include number in order-by, for stable pagination
+    const statement = `
+      SELECT * FROM HILLS
+      ${conjunctions.length === 0 ? '' : `WHERE ${conjunctions.join(' AND ')}`}
+      ORDER BY number
+      LIMIT :limit`;
 
     const response = await this.executeStatement({
       parameters: buildParameters(parameters),
-      sql: `SELECT * FROM HILLS ${whereClause || ''} LIMIT :limit`,
+      sql: statement,
     });
 
     return unwrapHillRecords(response);

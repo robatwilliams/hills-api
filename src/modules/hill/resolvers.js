@@ -1,4 +1,6 @@
 const Hill = require('./model/Hill');
+const HillEdge = require('./model/HillEdge');
+const { decodeCursor } = require('./paginate');
 
 module.exports = {
   Query: {
@@ -7,20 +9,26 @@ module.exports = {
 
       return Hill.fromEntity(entity);
     },
-    async hills(object, { filter, first }, { dataSources }) {
+    async hills(object, { filter, ...paginate }, { dataSources }) {
       const dataSourceFilter = {
         country: filter.countries && filter.countries.code.inc,
         heightFeet: filter.heightFeet,
         heightMetres: filter.heightMetres,
         list: filter.lists && filter.lists.id.inc,
       };
-      const pagination = { first };
+      const dataSourcePaginate = {
+        first: paginate.first,
+        after: paginate.after && decodeCursor(paginate.after),
+      };
 
-      const entities = await dataSources.hills.query(dataSourceFilter, pagination);
-      const nodes = entities.map(Hill.fromEntity);
+      const entities = await dataSources.hills.query(
+        dataSourceFilter,
+        dataSourcePaginate
+      );
+      const hills = entities.map(Hill.fromEntity);
 
       return {
-        edges: nodes.map(node => ({ node })),
+        edges: hills.map(HillEdge.forHill),
       };
     },
   },

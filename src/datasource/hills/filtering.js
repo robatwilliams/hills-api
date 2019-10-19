@@ -1,8 +1,8 @@
 const convertCriterion = require('./convertCriterion');
 
 // eslint-disable-next-line max-statements
-function filterWhere(filters) {
-  const { country, heightFeet, heightMetres, list } = filters;
+function filterWhere(filter) {
+  const { country, heightFeet, heightMetres, list } = filter;
 
   const parameters = {};
   const conjunctions = [];
@@ -25,9 +25,7 @@ function filterWhere(filters) {
     parameters.list = list;
   }
 
-  const whereClause = conjunctions.length > 0 && `WHERE ${conjunctions.join(' AND ')}`;
-
-  return { parameters, whereClause };
+  return { conjunctions, parameters };
 }
 
 function addCriterion(target, criterion, columnName) {

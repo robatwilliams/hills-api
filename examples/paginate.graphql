@@ -1,0 +1,11 @@
+{
+  hills(first: 5, after: "MQ==") {
+    edges {
+      cursor
+      node {
+        name
+        number
+      }
+    }
+  }
+}
