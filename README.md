@@ -54,6 +54,9 @@ Wainwright hills (of the Lake District), higher than 600m, the first 50:
   ) {
     nodes {
       name
+      parent {
+        name
+      }
     }
     pageInfo {
       endCursor

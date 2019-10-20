@@ -28,9 +28,9 @@ More information about each field can be found here: http://hills-database.co.uk
 | ---------------------- | ----- | --------------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅              | ✅         |
 | Name                   | ℹ️    | ✅              | 🙏         | 🙏       |
-| Parent (SMC)           | ➡     | 🙏              |
+| Parent (SMC)           | ➡     |                 |
 | Parent name (SMC)      | -     | 🚫              | 🚫         | 🚫       |
-| Parent (Ma)            | ➡     | 🙏              |
+| Parent (Ma)            | ➡     | ✅              |
 | Parent name (Ma)       | -     | 🚫              | 🚫         | 🚫       |
 | Section                | 🔗    |                 |
 | \_Section              | 🔗    | 🚫              | 🚫         | 🚫       |
