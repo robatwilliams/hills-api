@@ -27,7 +27,7 @@ function filterWhere(filter) {
     const { numbers } = filter;
 
     if (numbers.length === 0) {
-      conjunctions.push(0);
+      conjunctions.push('FALSE');
     } else {
       // Although documented, arrayValues isn't actually implemented.
       // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
@@ -38,7 +38,8 @@ function filterWhere(filter) {
   }
 
   // Always return an expression, to reduce need for conditionals elsewhere
-  const expression = conjunctions.length === 0 ? 1 : `(${conjunctions.join(' AND ')})`;
+  const expression =
+    conjunctions.length === 0 ? 'TRUE' : `(${conjunctions.join(' AND ')})`;
 
   return { expression, parameters };
 }

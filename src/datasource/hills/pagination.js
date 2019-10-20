@@ -3,7 +3,7 @@ function paginateBy(paginate) {
 
   if (!cursor) {
     // Always return an expression, to reduce need for conditionals elsewhere
-    return { expression: 1 };
+    return { expression: 'TRUE' };
   }
 
   const operator = paginate.after ? '>' : '<';
