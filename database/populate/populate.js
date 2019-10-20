@@ -14,43 +14,58 @@ const parseHill = require('./parseHill');
 const RDSMultiBatchDataService = require('./RDSMultiBatchDataService');
 
 const DATA_FILE_PATH = './data/DoBIH_v16_2.csv';
+const database = 'HILLS';
 
-const { region, clusterArn, clusterSecretArn } = getArguments();
+const { region, clusterArn: resourceArn, clusterSecretArn: secretArn } = getArguments();
+const commonParams = { database, resourceArn, secretArn };
 
 const client = new RDSDataService({ region });
-const multiBatchClient = new RDSMultiBatchDataService(client, {
-  database: 'HILLS',
-  resourceArn: clusterArn,
-  secretArn: clusterSecretArn,
-});
+const multiBatchClient = new RDSMultiBatchDataService(client);
 
 (async () => {
   console.log(await main());
 })();
 
 async function main() {
-  const records = await loadData();
-  console.log(`Loaded ${records.length} records`);
+  const hills = await loadHills();
+  const { transactionId } = await client.beginTransaction(commonParams).promise();
 
-  const hills = records.map(parseHill).filter(shouldInclude);
+  try {
+    await insert(hills, transactionId);
+  } catch (error) {
+    console.error('Error while inserting data. Rolling back transaction...', error);
+    const { transactionStatus } = await client
+      .rollbackTransaction({ resourceArn, secretArn, transactionId })
+      .promise();
+    console.log(`Transaction rollback requested. Status: ${transactionStatus}`);
 
-  console.log('Inserting hills');
-  await insertHills(hills);
-
-  console.log('Inserting hill-map associations');
-  await insertMaps(hills);
+    throw new Error('Populate aborted due to error', error);
+  }
 
   console.log('Populate complete');
 }
 
-function insertHills(hills) {
+async function insert(hills, transactionId) {
+  console.log('Inserting hills');
+  await insertHills(hills, transactionId);
+
+  console.log('Inserting hill-map associations');
+  await insertMaps(hills, transactionId);
+}
+
+function insertHills(hills, transactionId) {
   const sql = createInsertStatement('HILLS', hillsType);
   const parameterSets = hills.map(hill => createParameters(hill, hillsType));
 
-  return multiBatchClient.batchExecuteStatement({ parameterSets, sql });
+  return multiBatchClient.batchExecuteStatement({
+    ...commonParams,
+    parameterSets,
+    sql,
+    transactionId,
+  });
 }
 
-function insertMaps(hills) {
+function insertMaps(hills, transactionId) {
   const sql = createInsertStatement('HILLS_MAPS', hillsMapsType);
 
   const entities = hills.reduce((accumulator, hill) => {
@@ -63,7 +78,12 @@ function insertMaps(hills) {
 
   const parameterSets = entities.map(entity => createParameters(entity, hillsMapsType));
 
-  return multiBatchClient.batchExecuteStatement({ parameterSets, sql });
+  return multiBatchClient.batchExecuteStatement({
+    ...commonParams,
+    parameterSets,
+    sql,
+    transactionId,
+  });
 }
 
 function createInsertStatement(table, entityType) {
@@ -72,6 +92,16 @@ function createInsertStatement(table, entityType) {
   const parameterList = columns.map(column => `:${column}`).join(',');
 
   return `INSERT INTO ${table} (${columnList}) VALUES (${parameterList})`;
+}
+
+async function loadHills() {
+  const records = await loadData();
+  console.log(`Loaded ${records.length} records`);
+
+  const hills = records.map(parseHill).filter(shouldInclude);
+  console.log(`Filtered records down to ${hills.length} hills`);
+
+  return hills;
 }
 
 async function loadData() {
