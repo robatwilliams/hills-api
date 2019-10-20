@@ -34,7 +34,6 @@ Checklist for done items:
 
 - 🙏 Sorting on key fields
 - 🙏 Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
-- Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Features: nice to have
 

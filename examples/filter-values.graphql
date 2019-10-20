@@ -1,4 +1,8 @@
 {
+  countries {
+    code
+    name
+  }
   lists {
     id
     name

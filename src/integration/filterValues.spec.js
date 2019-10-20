@@ -1,6 +1,27 @@
 const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
+test('countries', async () => {
+  const query = gql`
+    {
+      countries {
+        code
+        name
+      }
+    }
+  `;
+
+  const data = await sendQueryOk(query);
+
+  expect(data.countries.length).toBeGreaterThan(0);
+  expect(data.countries).toContainEqual({ code: 'GB-SCT', name: 'Scotland' });
+
+  for (const country of data.countries) {
+    expect(country.code).toMatch(/^[A-Z-]+$/u);
+    expect(country.name).toMatch(/^[A-Z][a-z]+$/u);
+  }
+});
+
 test('lists', async () => {
   const query = gql`
     {

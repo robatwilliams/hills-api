@@ -8,6 +8,10 @@ const countries = [
 ];
 
 module.exports = class CountriesDataSource {
+  all() {
+    return countries;
+  }
+
   byCode(code) {
     return countries.find(
       country => country.codeISO3166_2 === code || country.codeISO3166_1 === code
