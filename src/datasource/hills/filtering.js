@@ -24,11 +24,17 @@ function filterWhere(filter) {
   }
 
   if (filter.numbers != null) {
-    // Although documented, arrayValues isn't actually implemented.
-    // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
-    const inList = filter.numbers.join(',');
+    const { numbers } = filter;
 
-    conjunctions.push(`number in (${inList})`);
+    if (numbers.length === 0) {
+      conjunctions.push(0);
+    } else {
+      // Although documented, arrayValues isn't actually implemented.
+      // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
+      const inList = filter.numbers.join(',');
+
+      conjunctions.push(`number in (${inList})`);
+    }
   }
 
   // Always return an expression, to reduce need for conditionals elsewhere
