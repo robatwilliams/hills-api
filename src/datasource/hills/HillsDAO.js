@@ -1,6 +1,6 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 
-const { filterWhere } = require('./filtering');
+const { filterWhere, makeInListExpression } = require('./filtering');
 const { paginateBy } = require('./pagination');
 const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
@@ -48,13 +48,11 @@ module.exports = class HillsDAO {
   }
 
   async queryMaps({ numbers, scale }) {
-    // Although documented, arrayValues isn't actually implemented.
-    // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
-    const inList = numbers.join(',');
+    const inExpression = makeInListExpression(numbers, 'hillNumber');
 
     const response = await this.executeStatement({
       parameters: buildParameters({ scale }),
-      sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND hillNumber IN (${inList})`,
+      sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND ${inExpression}`,
     });
 
     return unwrapRecords(response);

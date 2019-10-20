@@ -24,17 +24,7 @@ function filterWhere(filter) {
   }
 
   if (filter.numbers != null) {
-    const { numbers } = filter;
-
-    if (numbers.length === 0) {
-      conjunctions.push('FALSE');
-    } else {
-      // Although documented, arrayValues isn't actually implemented.
-      // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
-      const inList = filter.numbers.join(',');
-
-      conjunctions.push(`number in (${inList})`);
-    }
+    conjunctions.push(makeInListExpression(filter.numbers, 'number'));
   }
 
   // Always return an expression, to reduce need for conditionals elsewhere
@@ -51,4 +41,19 @@ function addCriterion(target, criterion, columnName) {
   Object.assign(target.parameters, sqlCriterion.parameters);
 }
 
-module.exports = { filterWhere };
+function makeInListExpression(values, columnName) {
+  if (values.length === 0) {
+    return 'FALSE';
+  }
+
+  // Although documented, arrayValues isn't actually implemented, so can't use parameters.
+  // Confirmed by https://github.com/jeremydaly/data-api-client#you-cant-send-in-an-array-of-values
+  const inList = values.join(',');
+
+  return `${columnName} IN (${inList})`;
+}
+
+module.exports = {
+  filterWhere,
+  makeInListExpression,
+};
