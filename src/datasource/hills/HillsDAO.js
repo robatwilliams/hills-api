@@ -24,7 +24,7 @@ module.exports = class HillsDAO {
     // Always include number in order-by, for stable pagination
     const statement = `
       SELECT * FROM HILLS
-      ${conjunctions.length === 0 ? '' : `WHERE ${conjunctions.join(' AND ')}`}
+      WHERE ${conjunctions.join(' AND ')}
       ORDER BY number ${paginate.backward ? 'DESC' : 'ASC'}
       LIMIT :limit`;
 
