@@ -1,6 +1,6 @@
 # Fields from The Database of British and Irish Hills
 
-This is the primary data source. Note that the API also exposes fields from other data sources.
+This is the primary (and currently, only) data source.
 
 More information about each field can be found here: http://hills-database.co.uk/database_notes.html#fields
 
