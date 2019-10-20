@@ -21,7 +21,7 @@ Key:
 ### Queries
 
 - 🙏 Sorting on key fields
-- 🙏 Filtering on remainder of key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
+- 🙏 Filtering on remainder of key fields
 
 ## Features: nice to have
 
