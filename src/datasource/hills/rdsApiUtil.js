@@ -21,10 +21,14 @@ function unwrapRecord(values, columnMetadata) {
  * https://docs.aws.amazon.com/rdsdataservice/latest/APIReference/API_Field.html
  */
 function unwrapField(wrapper, column) {
-  // resultSetOptions.decimalReturnType doesn't seem to work
-  return column.typeName === 'DECIMAL'
-    ? Number(wrapper.stringValue)
-    : Object.values(wrapper)[0];
+  if (wrapper.isNull) {
+    return null;
+  } else if (column.typeName === 'DECIMAL') {
+    // resultSetOptions.decimalReturnType doesn't seem to work
+    return Number(wrapper.stringValue);
+  }
+
+  return Object.values(wrapper)[0];
 }
 
 /**
