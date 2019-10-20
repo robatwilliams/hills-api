@@ -1,11 +1,13 @@
 const { createBatchResolver } = require('graphql-resolve-batch');
 
+const { unique } = require('../../util');
+
 const Scale = require('./model/Scale');
 
 module.exports = {
   Hill: {
     maps: createBatchResolver(async (hills, { scale }, { dataSources }) => {
-      const numbers = hills.map(({ number }) => number);
+      const numbers = unique(hills.map(({ number }) => number));
       const scaleInt = convertScale(scale);
 
       const maps = await dataSources.hills.queryMaps({ numbers, scale: scaleInt });

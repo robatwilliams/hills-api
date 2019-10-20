@@ -1,5 +1,6 @@
 const { createBatchResolver } = require('graphql-resolve-batch');
 
+const { unique } = require('../../util');
 const { buildEdges, setPaginateDefaults } = require('../paginate');
 
 const Hill = require('./model/Hill');
@@ -41,9 +42,9 @@ module.exports = {
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),
     parent: createBatchResolver(async (hills, args, { dataSources }) => {
-      const parentNumbers = [
-        hills.map(hill => hill.parentMarilynNumber).filter(number => number != null),
-      ];
+      const parentNumbers = unique(
+        hills.map(hill => hill.parentMarilynNumber).filter(number => number != null)
+      );
 
       const { entities: parents } = await dataSources.hills.query(
         { numbers: parentNumbers },
