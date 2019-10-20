@@ -21,7 +21,7 @@ Key:
 ### Queries
 
 - 🙏 Sorting on key fields
-- 🙏 Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
+- 🙏 Filtering on remainder of key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 
 ## Features: nice to have
 
@@ -46,7 +46,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 ## Performance
 
 - 🙏 Compression (gzip, Brotli). Also cuts data transfer cost.
-- 🙏 Verify total/database response time of key queries
 - Indices on filterable/sortable database fields
 - Set ETags based on query & variables (not the response), to allow returning not-modified without running the database query
 - 💩 Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
@@ -68,7 +67,7 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
 
-- 🙏 Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough.
+- 🙏 Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough. Maybe use [graphql-scalars](https://www.npmjs.com/package/graphql-scalars) or [graphql-constraint-directive](https://www.npmjs.com/package/graphql-constraint-directive) - could do pagination arguments validation too.
 - 🙏 Request throttling (API Gateway)
 - 🙏 Appropriate values for AWS lambda configuration
   - Concurrency limit
@@ -86,7 +85,9 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Tests
 
-- 🙏 Test for most-expensive currently-supported query (validate resource limits)
+- 🙏 Key & most-expensive currently-supported queries
+  - Validates resource limits
+  - Verifies total/database response time (maybe use [Server-Timing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing))
 
 ### Improvements
 

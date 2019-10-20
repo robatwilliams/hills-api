@@ -50,7 +50,6 @@ function validateCompatibility({ first, after, last, before }) {
   return undefined;
 }
 
-// Could also have used https://github.com/Urigo/graphql-scalars, but simpler not to.
 function validateLimits({ first, last }) {
   const limitNode = first || last;
 
