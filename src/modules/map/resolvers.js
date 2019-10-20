@@ -1,5 +1,7 @@
 const { createBatchResolver } = require('graphql-resolve-batch');
 
+const Scale = require('./model/Scale');
+
 module.exports = {
   Hill: {
     maps: createBatchResolver(async (hills, { scale }, { dataSources }) => {
@@ -22,9 +24,9 @@ function findHillMaps(maps, hill) {
 
 function convertScale(scale) {
   switch (scale) {
-    case 'ONE_25K':
+    case Scale.ONE_25K:
       return 25;
-    case 'ONE_50K':
+    case Scale.ONE_50K:
       return 50;
     default:
       throw new Error(`Unknown scale: ${scale}`);
