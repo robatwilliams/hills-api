@@ -1,6 +1,7 @@
 const { buildEdges, setPaginateDefaults } = require('../paginate');
 
 const Hill = require('./model/Hill');
+const ListId = require('./model/ListId');
 const {
   buildDataSourceFilter,
   buildDataSourcePaginate,
@@ -31,13 +32,12 @@ module.exports = {
         pageInfo,
       };
     },
+    lists: () => Object.keys(ListId).map(id => ({ id })),
   },
   Hill: {
     countries: ({ countries }) => countries,
     height: (hill, { unit }) => hill.height(unit),
-    lists({ lists }, args, { dataSources }) {
-      return lists.map(id => dataSources.lists.byId(id));
-    },
+    lists: ({ lists }) => lists.map(id => ({ id })),
   },
   HillsConnection: {
     edges: ({ nodes }) => buildEdges(nodes, getHillCursor),
@@ -49,5 +49,6 @@ module.exports = {
   },
   List: {
     id: ({ id }) => id,
+    name: ({ id }, args, { dataSources }) => dataSources.lists.getName(id),
   },
 };

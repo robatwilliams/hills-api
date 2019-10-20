@@ -1,9 +1,6 @@
 module.exports = class ListsDataSource {
-  byId(id) {
-    return {
-      id,
-      name: sentenceCase(id),
-    };
+  getName(id) {
+    return sentenceCase(id);
   }
 };
 

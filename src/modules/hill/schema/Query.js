@@ -13,5 +13,6 @@ module.exports = gql`
       last: Int
       before: String
     ): HillsConnection!
+    lists: [List!]!
   }
 `;
