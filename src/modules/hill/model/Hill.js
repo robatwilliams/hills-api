@@ -1,3 +1,5 @@
+const { UnitOfLength } = require('../../measure');
+
 module.exports = class Hill {
   static fromEntity(entity) {
     if (!entity) {
@@ -29,9 +31,9 @@ module.exports = class Hill {
     const { height } = this.fieldsWithArguments;
 
     switch (unit) {
-      case 'FEET':
+      case UnitOfLength.FEET:
         return height.feet;
-      case 'METRES':
+      case UnitOfLength.METRES:
         return height.metres;
       default:
         throw new Error(`Unknown unit: ${unit}`);
