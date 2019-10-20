@@ -7,11 +7,6 @@ Key:
 - 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
 - 💩 Technical debt (⚠️ = important)
 
-Checklist for done items:
-
-- Integration test added
-- Example added in `/examples` and readme
-
 ## Features: core
 
 ### Data
@@ -99,7 +94,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Tests
 
-- 🙏 Integration - all fields of all hills conform to the schema
 - 🙏 Test for most-expensive currently-supported query (validate resource limits)
 
 ### Improvements
