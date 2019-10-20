@@ -1,0 +1,11 @@
+{
+  # Mungrisdale Common's parent is Blencathra
+  hill(number: 2340) {
+    name
+    number
+    parent {
+      name
+      number
+    }
+  }
+}

@@ -7,4 +7,5 @@ module.exports = {
   lists: [STRING],
   name: STRING,
   number: LONG,
+  parentMarilynNumber: LONG,
 };

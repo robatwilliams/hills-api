@@ -38,6 +38,11 @@ module.exports = {
     countries: ({ countriesCodes }) => countriesCodes.map(code => ({ code })),
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),
+    async parent({ parentMarilynNumber }, args, { dataSources }) {
+      const entity = await dataSources.hills.queryOne({ number: parentMarilynNumber });
+
+      return Hill.fromEntity(entity);
+    },
   },
   HillsConnection: {
     edges: ({ nodes }) => buildEdges(nodes, getHillCursor),

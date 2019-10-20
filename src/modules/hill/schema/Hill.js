@@ -8,5 +8,6 @@ module.exports = gql`
     maps(scale: Scale!): [Map!]!
     name: String!
     number: Int!
+    parent: Hill
   }
 `;

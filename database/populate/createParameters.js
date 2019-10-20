@@ -18,7 +18,7 @@ function createParameter(entity, name, type) {
 
 function wrapValue(value, type) {
   if (typeof type === 'string') {
-    return { [type]: value };
+    return value == null ? { isNull: true } : { [type]: value };
   }
 
   // SET data type

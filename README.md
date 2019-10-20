@@ -16,7 +16,7 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 🔍 Filter and sort on some fields
 
-👪 Query related hills in the same query
+👪 Query related (parent / child) hills in the same query
 
 🚚 Paginate large result sets
 
