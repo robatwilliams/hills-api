@@ -60,6 +60,7 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 - 🙏 Compression (gzip, Brotli). Also cuts data transfer cost.
 - 🙏 Verify total/database response time of key queries
 - Indices on filterable/sortable database fields
+- Set ETags based on query & variables (not the response), to allow returning not-modified without running the database query
 - 💩 Refactor database columns of type `SET` into multiple fields or separate table (`FIND_IN_SET` requires a table scan)
 
 ## Operational
