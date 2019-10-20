@@ -32,17 +32,29 @@ async function main() {
 
   try {
     await insert(hills, transactionId);
+    await commitTransaction(transactionId);
   } catch (error) {
     console.error('Error while inserting data. Rolling back transaction...', error);
-    const { transactionStatus } = await client
-      .rollbackTransaction({ resourceArn, secretArn, transactionId })
-      .promise();
-    console.log(`Transaction rollback requested. Status: ${transactionStatus}`);
+    await rollbackTransaction(transactionId);
 
     throw new Error('Populate aborted due to error', error);
   }
 
   console.log('Populate complete');
+}
+
+async function commitTransaction(id) {
+  const { transactionStatus } = await client
+    .commitTransaction({ resourceArn, secretArn, transactionId: id })
+    .promise();
+  console.log(`Transaction committed. Status: ${transactionStatus}`);
+}
+
+async function rollbackTransaction(id) {
+  const { transactionStatus } = await client
+    .rollbackTransaction({ resourceArn, secretArn, transactionId: id })
+    .promise();
+  console.log(`Transaction rollback requested. Status: ${transactionStatus}`);
 }
 
 async function insert(hills, transactionId) {
@@ -116,6 +128,6 @@ async function loadData() {
 }
 
 function shouldInclude(hill) {
-  // Constrain data set for ease of handling and known quality
+  // Dataset exposed by the API is currently limited to major hill lists
   return hill.lists.length > 0;
 }

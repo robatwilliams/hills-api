@@ -4,7 +4,7 @@ const landrangerRegex = /^\d{1,3}$/u;
 module.exports = function parseMaps(string) {
   if (string === 'IoM OL') {
     // Isle of Man Leisure map, not Ordnance Survey
-    return string;
+    return [];
   }
 
   const maps = string ? string.split(' ') : [];

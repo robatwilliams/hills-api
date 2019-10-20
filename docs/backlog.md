@@ -12,13 +12,6 @@ Key:
 ### Data
 
 - 🙏 Remainder of key [fields from the hills database](fields-hills-database.md)
-- 🙏 Hills from remainder of major lists:
-  - Birketts (541)
-  - Corbetts (222)
-  - Donalds (89)
-  - Grahams (219)
-  - Marilyns (1557)
-  - Nuttalls (446)
 - 🙏 Child and parent relations. Children (and their children etc.) might not be on any of the included major lists; that needs handling somehow.
 - Names
   - 🙏 Include only the main name in the name field (e.g. not "Crag Hill [Eel Crag]"). Probably also rename the field to make this evident.

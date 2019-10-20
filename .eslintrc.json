@@ -40,6 +40,7 @@
     "no-eq-null": "off",
     "no-inline-comments": "off",
     "no-magic-numbers": "off",
+    "no-plusplus": "off",
     "no-process-env": "off",
     "no-ternary": "off",
     "no-undefined": "off",

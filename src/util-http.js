@@ -23,18 +23,6 @@ function ensureSupportedContentType(event, supportedTypes) {
   };
 }
 
-/**
- * For schema conformance integration tests; they don't need the data, just need
- * to pull it through the server's GraphQL schema checks.
- */
-function omitResponseBody(response) {
-  if (response.statusCode === 200 && !response.body.includes('error')) {
-    response.body = undefined;
-    response.headers['content-length'] = 0;
-  }
-}
-
 module.exports = {
   ensureSupportedContentType,
-  omitResponseBody,
 };

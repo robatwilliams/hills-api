@@ -7,7 +7,7 @@ const CountriesDataSource = require('./datasource/CountriesDataSource');
 const ListsDataSource = require('./datasource/ListsDataSource');
 const HillsDataSource = require('./datasource/hills/HillsDataSource');
 const { resolvers, schema, validationRules } = require('./modules');
-const { ensureSupportedContentType, omitResponseBody } = require('./util-http');
+const { ensureSupportedContentType } = require('./util-http');
 
 const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
 
@@ -75,10 +75,6 @@ async function handler(event, context) {
   }
 
   response = await awsServerlessExpress.proxy(server, event, context, 'PROMISE').promise;
-
-  if ((event.queryStringParameters || {}).omitResponseBody === 'true') {
-    omitResponseBody(response);
-  }
 
   if (event.httpMethod === 'GET') {
     response.headers['Cache-Control'] = 'max-age=86400';

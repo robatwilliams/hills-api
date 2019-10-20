@@ -7,15 +7,14 @@ const rootUrl = process.env.TEST_INTEGRATION_ROOT_URL;
 const endpoint = `${rootUrl}/graphql`;
 const playground = `${rootUrl}/playground`;
 
-function sendQuery(query, httpParams) {
+function sendQuery(query) {
   return axios.post(endpoint, query, {
     headers: { 'Content-Type': 'application/graphql' },
-    params: httpParams,
   });
 }
 
-async function sendQueryOk(query, httpParams) {
-  const response = await sendQuery(query, httpParams);
+async function sendQueryOk(query) {
+  const response = await sendQuery(query);
 
   if (response.status !== 200) {
     console.error(response);

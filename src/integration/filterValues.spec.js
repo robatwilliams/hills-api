@@ -18,7 +18,7 @@ test('countries', async () => {
 
   for (const country of data.countries) {
     expect(country.code).toMatch(/^[A-Z-]+$/u);
-    expect(country.name).toMatch(/^[A-Z][a-z]+$/u);
+    expect(country.name).toMatch(/^[A-Z][\w ]+$/u);
   }
 });
 

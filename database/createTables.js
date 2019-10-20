@@ -13,6 +13,8 @@ const client = new RDSDataService({ region });
 async function main() {
   await createTable('./database/ddl/HILLS.sql');
   await createTable('./database/ddl/HILLS_MAPS.sql');
+
+  console.log('Tables created');
 }
 
 async function createTable(ddlFilePath) {
