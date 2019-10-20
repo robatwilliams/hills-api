@@ -47,7 +47,7 @@ app.use(
   graphqlHTTP({
     context: { dataSources },
 
-    // For local development using serverless-offline. Breaks ETags when enabled.
+    // For local development using serverless-offline. No ETags when enabled.
     pretty: process.env.IS_OFFLINE,
 
     schema: executableSchema,
