@@ -1,3 +1,5 @@
+const { createBatchResolver } = require('graphql-resolve-batch');
+
 const { buildEdges, setPaginateDefaults } = require('../paginate');
 
 const Hill = require('./model/Hill');
@@ -38,11 +40,20 @@ module.exports = {
     countries: ({ countriesCodes }) => countriesCodes.map(code => ({ code })),
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),
-    async parent({ parentMarilynNumber }, args, { dataSources }) {
-      const entity = await dataSources.hills.queryOne({ number: parentMarilynNumber });
+    parent: createBatchResolver(async (hills, args, { dataSources }) => {
+      const parentNumbers = [
+        hills.map(hill => hill.parentMarilynNumber).filter(number => number != null),
+      ];
 
-      return Hill.fromEntity(entity);
-    },
+      const { entities: parents } = await dataSources.hills.query(
+        { numbers: parentNumbers },
+        { limit: parentNumbers.length }
+      );
+
+      return hills.map(hill =>
+        parents.find(parent => parent.number === hill.parentMarilynNumber)
+      );
+    }),
   },
   HillsConnection: {
     edges: ({ nodes }) => buildEdges(nodes, getHillCursor),
