@@ -108,7 +108,7 @@ describe('lists', () => {
 });
 
 describe('maps', () => {
-  test('on single', async () => {
+  test('appearing only on one', async () => {
     const query = gql`
       {
         hill(number: 2320) {
@@ -124,7 +124,7 @@ describe('maps', () => {
     expect(data.hill.maps).toEqual([{ sheet: '90' }]);
   });
 
-  test('on multiple', async () => {
+  test('appearing on multiple', async () => {
     const query = gql`
       {
         hill(number: 2405) {
