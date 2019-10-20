@@ -2,27 +2,26 @@ const convertCriterion = require('./convertCriterion');
 
 // eslint-disable-next-line max-statements
 function filterWhere(filter) {
-  const { country, heightFeet, heightMetres, list } = filter;
-
   const parameters = {};
   const conjunctions = [];
 
-  if (country != null) {
+  if (filter.country != null) {
     conjunctions.push('FIND_IN_SET(:country, countries)');
-    parameters.country = country;
+    parameters.country = filter.country;
   }
 
-  if (heightFeet != null) {
-    addCriterion({ conjunctions, parameters }, heightFeet, 'heightFeet');
+  if (filter.heightFeet != null) {
+    addCriterion({ conjunctions, parameters }, filter.heightFeet, 'heightFeet');
   }
 
-  if (heightMetres != null) {
-    addCriterion({ conjunctions, parameters }, heightMetres, 'heightMetres');
+  if (filter.heightMetres != null) {
+    addCriterion({ conjunctions, parameters }, filter.heightMetres, 'heightMetres');
   }
 
-  if (list != null) {
+  if (filter.list != null) {
     conjunctions.push('FIND_IN_SET(:list, lists)');
-    parameters.list = list;
+    parameters.list = filter.list;
+  }
 
   if (filter.numbers != null) {
     // Although documented, arrayValues isn't actually implemented.
