@@ -6,35 +6,24 @@ module.exports = class Hill {
       return undefined;
     }
 
-    const countries = entity.countries.map(code => ({ code }));
+    const { countries, ...noConflict } = entity;
 
     return new Hill({
-      countries,
-      height: {
-        feet: entity.heightFeet,
-        metres: entity.heightMetres,
-      },
-      lists: entity.lists,
-      name: entity.name,
-      number: entity.number,
+      ...noConflict,
+      countriesCodes: countries,
     });
   }
 
   constructor(fields) {
-    const { height, ...withoutArguments } = fields;
-
-    this.fieldsWithArguments = { height };
-    Object.assign(this, withoutArguments);
+    Object.assign(this, fields);
   }
 
   height(unit) {
-    const { height } = this.fieldsWithArguments;
-
     switch (unit) {
       case UnitOfLength.FEET:
-        return height.feet;
+        return this.heightFeet;
       case UnitOfLength.METRES:
-        return height.metres;
+        return this.heightMetres;
       default:
         throw new Error(`Unknown unit: ${unit}`);
     }

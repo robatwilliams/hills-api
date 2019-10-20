@@ -35,7 +35,7 @@ module.exports = {
     lists: () => Object.keys(ListId).map(id => ({ id })),
   },
   Hill: {
-    countries: ({ countries }) => countries,
+    countries: ({ countriesCodes }) => countriesCodes.map(code => ({ code })),
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),
   },
