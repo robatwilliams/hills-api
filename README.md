@@ -44,7 +44,7 @@ Pagination is [cursor-based](https://graphql.org/learn/pagination/#pagination-an
 
 ## Example query
 
-Wainwright hills (of the Lake District), higher than 600m, the first 50:
+Wainwright hills (of the Lake District), higher than 600m, the first 50, with a selection of fields:
 
 ```graphql
 {
@@ -53,6 +53,10 @@ Wainwright hills (of the Lake District), higher than 600m, the first 50:
     filter: { heightMetres: { gt: 600 }, lists: { id: { inc: WAINWRIGHT } } }
   ) {
     nodes {
+      height(unit: METRES)
+      maps(scale: ONE_25K) {
+        sheet
+      }
       name
       parent {
         name
@@ -60,9 +64,7 @@ Wainwright hills (of the Lake District), higher than 600m, the first 50:
     }
     pageInfo {
       endCursor
-      startCursor
       hasNextPage
-      hasPreviousPage
     }
   }
 }
