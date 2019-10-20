@@ -71,3 +71,13 @@ Introspection might be ok for you, and it would have been ok here. This API howe
 ## Filters
 
 The design is based on the [GatsbyJS GraphQL API](https://www.gatsbyjs.org/docs/graphql-reference/#filter), which uses [Sift](https://www.npmjs.com/package/sift), which is an implementation of [MongoDB-style queries](https://docs.mongodb.com/manual/reference/operator/query/).
+
+## Pagination
+
+Cursor-based pagination is implemented (mostly) based on the [Relay Cursor Connections Specification](https://facebook.github.io/relay/graphql/connections.htm). The library [graphql-relay-js](https://github.com/graphql/graphql-relay-js) exists to help build Relay-compliant GraphQL servers, but I didn't fancy the upheaval of introducing that.
+
+Other articles of interest:
+
+- [GraphQL Best Practices: Pagination](https://graphql.org/learn/pagination/)
+- [Evolving API Pagination at Slack](https://slack.engineering/evolving-api-pagination-at-slack-1c1f644f8e12)
+- [Faster Pagination in Mysql – Why Order By With Limit and Offset is Slow?](https://www.eversql.com/faster-pagination-in-mysql-why-order-by-with-limit-and-offset-is-slow)

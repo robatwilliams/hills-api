@@ -33,14 +33,15 @@ Checklist for done items:
 ### Queries
 
 - 🙏 Sorting on key fields
-- 🙏 [Pagination](https://graphql.org/learn/pagination/) - optional, with default and maximum (remember to re-enable skipped filtering tests)
 - 🙏 Filtering on key fields (parameters maybe in [this format](https://www.gatsbyjs.org/docs/graphql-reference/#filter))
 - Expose available filter values, where applicable - use case to populate a UI filter dropdown
 
 ## Features: nice to have
 
 - Map sheet names
-- Return total number of records when paginating
+- Pagination
+  - Allow skipping pages by number, rather than traversing cursors
+  - Return total number of records
 - "In" multi-valued filtering operator, to complement the single-valued equals and includes
 
 ## Documentation

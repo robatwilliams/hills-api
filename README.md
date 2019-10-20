@@ -34,17 +34,32 @@ There is a [list](docs/backlog.md) of possible future features.
 
 **Playground:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
 
-Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available data and querying options.
+Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available fields and query arguments.
+
+## Query arguments
+
+Filtering is in the style of [MongoDB-style query objects](https://docs.mongodb.com/manual/reference/operator/query).
+
+Pagination is [cursor-based](https://graphql.org/learn/pagination/#pagination-and-edges), in the style of [Relay cursor connections](https://facebook.github.io/relay/graphql/connections.htm).
 
 ## Example query
 
-Wainwright hills (of the Lake District), higher than 900m:
+Wainwright hills (of the Lake District), higher than 600m, the first 50:
 
 ```graphql
 {
-  hills(filter: { heightMetres: { gt: 900 }, lists: { id: { inc: WAINWRIGHT } } }) {
+  hills(
+    first: 50
+    filter: { heightMetres: { gt: 600 }, lists: { id: { inc: WAINWRIGHT } } }
+  ) {
     nodes {
       name
+    }
+    pageInfo {
+      endCursor
+      startCursor
+      hasNextPage
+      hasPreviousPage
     }
   }
 }
