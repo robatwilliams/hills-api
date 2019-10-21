@@ -28,13 +28,25 @@ There is a [list](docs/backlog.md) of possible future features.
 
 ## Endpoints
 
+### GraphQL API
+
+> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
+
 ⚠️ 😴 ⏳ To save on running costs, the database behind the API is currently allowed to sleep during periods of inactivity. Error responses will be returned while it wakes up, which can take up to a minute.
 
-**API endpoint:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
+### Schema
 
-**Playground:** https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
+> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/schema
 
-Visit the playground in your browser to try out some queries straight away. You can copy an example query from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available fields and query arguments.
+Plain text dump of the API's self-description of available queries and data.
+
+### Playground
+
+> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
+
+Browser-based <abbr title="Integrated Development Environment">IDE</abbr> (query editor), for building and executing queries.
+
+Try some out some queries straight away - you can copy an example from below or from the `/examples` folder. Use the _Schema_ and _Docs_ tabs (at the right hand edge) to browse the API's self-description of available queries and data.
 
 ## Query arguments
 

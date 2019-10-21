@@ -62,10 +62,20 @@ functions:
   playground:
     handler: src/playground.fn
     description: ${self:custom.versionInfo}
+    # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     events:
       - http:
           path: playground
+          method: get
+  schemaDump:
+    handler: src/schemaDump.fn
+    description: ${self:custom.versionInfo}
+    # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
+    reservedConcurrency: 1 # low value until API Gateway throttling configured
+    events:
+      - http:
+          path: schema
           method: get
 
 custom:
