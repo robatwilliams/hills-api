@@ -67,7 +67,7 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
 
-- 🙏 Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), although for the current graph a pagination size limit could be enough. Maybe use [graphql-scalars](https://www.npmjs.com/package/graphql-scalars) or [graphql-constraint-directive](https://www.npmjs.com/package/graphql-constraint-directive) - could do pagination arguments validation too.
+- 🙏 Query size limit (don't allow dumping the entire dataset). There is [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), and [more](https://medium.com/workflowgen/graphql-query-timeout-and-complexity-management-fab4d7315d8d), although for the current graph a pagination size limit could be enough. Maybe use [graphql-scalars](https://www.npmjs.com/package/graphql-scalars) or [graphql-constraint-directive](https://www.npmjs.com/package/graphql-constraint-directive) - could do pagination arguments validation too.
 - 🙏 Request throttling (API Gateway)
 - 🙏 Appropriate values for AWS lambda configuration
   - Concurrency limit
@@ -97,5 +97,5 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Further future
 
-- Node.js 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports.
+- Node.js 12 ([will have LTS](https://nodejs.org/en/about/releases/)), when it becomes available on AWS Lambda. Then convert to ES6 imports/exports (update lint rules), use promisified `fs` module, anything else new.
 - Do without Express (?); it's only used to allow `express-graphql` to be used. Needs [express-graphql/559](https://github.com/graphql/express-graphql/issues/559), or manual implementation of [basic requirements for GraphQL over HTTP](https://graphql.org/learn/serving-over-http/).
