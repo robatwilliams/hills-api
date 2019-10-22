@@ -12,7 +12,6 @@ Key:
 ### Data
 
 - 🙏 Remainder of key [fields from the hills database](fields-hills-database.md)
-- 🙏 Child relation (needs pagination)
 - Names
   - 🙏 Include only the main name in the name field (e.g. not "Crag Hill [Eel Crag]"). Probably also rename the field to make this evident.
   - 🙏 Add names field, this would be a separated list of all names with the main one first
@@ -26,7 +25,8 @@ Key:
 ## Features: nice to have
 
 - Map sheet names
-- Pagination
+- Child hills relation (with pagination)
+- Pagination enhancements
   - Allow skipping pages by number, rather than traversing cursors
   - Return total number of records
 - "In" multi-valued filtering operator, to complement the single-valued equals and includes
