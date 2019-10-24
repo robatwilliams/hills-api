@@ -30,5 +30,10 @@ module.exports = async function handler(event, context) {
     response.headers['Cache-Control'] = 'max-age=86400';
   }
 
+  if (response.statusCode === 503) {
+    // Aurora Serverless is resuming, possibly already, or kicked off by this request.
+    response.headers['Retry-After'] = '10';
+  }
+
   return response;
 };

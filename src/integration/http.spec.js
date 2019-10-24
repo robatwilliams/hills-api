@@ -167,3 +167,25 @@ test('schema introspection is allowed (for playground)', async () => {
 
   await sendQueryOk(introspectionQuery);
 });
+
+// Test will only pass when Aurora Serverless is paused
+// eslint-disable-next-line jest/no-disabled-tests
+test.skip('service unavailable response when Aurora Serverless is resuming', async () => {
+  expect.assertions(3);
+
+  try {
+    await sendQuery(query);
+  } catch (error) {
+    const { response } = error;
+
+    expect(response.status).toBe(503);
+    expect(response.headers).toEqual(
+      expect.objectContaining({
+        'retry-after': '10',
+      })
+    );
+    expect(response.data.errors).toEqual([
+      { message: 'Temporarily unavailable while the database resumes from sleep' },
+    ]);
+  }
+});
