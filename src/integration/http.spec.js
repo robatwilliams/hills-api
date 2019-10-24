@@ -7,7 +7,7 @@
 const axios = require('axios').default;
 
 const gql = require('./graphql-tag-raw');
-const { endpoint, playground, sendQuery, sendQueryOk } = require('./helpers');
+const { endpoint, playground, schemaDump, sendQuery, sendQueryOk } = require('./helpers');
 
 const query = gql`
   {
@@ -136,6 +136,13 @@ test('query syntax error', async () => {
       ])
     );
   }
+});
+
+test('schema dump as plain text', async () => {
+  const response = await axios.get(schemaDump);
+
+  expect(response.status).toBe(200);
+  expect(response.data).toMatch('type Query {');
 });
 
 test('playground is served', async () => {

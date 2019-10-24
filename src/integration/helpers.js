@@ -5,6 +5,7 @@ const axios = require('axios').default;
 
 const rootUrl = process.env.TEST_INTEGRATION_ROOT_URL;
 const endpoint = `${rootUrl}/graphql`;
+const schemaDump = `${rootUrl}/schema`;
 const playground = `${rootUrl}/playground`;
 
 function sendQuery(query) {
@@ -53,6 +54,8 @@ async function sendQueryError(expectStatus, query) {
 module.exports = {
   endpoint,
   playground,
+  schemaDump,
+
   sendQuery,
   sendQueryError,
   sendQueryOk,
