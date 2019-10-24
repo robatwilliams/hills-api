@@ -3,12 +3,12 @@ const express = require('express');
 const graphqlHTTP = require('express-graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
-const CountriesDataSource = require('../datasource/CountriesDataSource');
-const ListsDataSource = require('../datasource/ListsDataSource');
-const HillsDataSource = require('../datasource/hills/HillsDataSource');
-const { resolvers, schema, validationRules } = require('../modules');
+const CountriesDataSource = require('../../datasource/CountriesDataSource');
+const ListsDataSource = require('../../datasource/ListsDataSource');
+const HillsDataSource = require('../../datasource/hills/HillsDataSource');
+const { resolvers, schema, validationRules } = require('../../modules');
 
-const { ensureSupportedContentType } = require('./graphqlHelpers');
+const { ensureSupportedContentType } = require('./helpers');
 
 const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
 
@@ -68,7 +68,7 @@ const server = awsServerlessExpress.createServer(app);
  *
  * @param {*} event API Gateway Lambda proxy integration representation of client request
  */
-async function handler(event, context) {
+module.exports = async function handler(event, context) {
   let response = ensureSupportedContentType(event, REQUEST_MEDIA_TYPES);
 
   if (response) {
@@ -82,6 +82,4 @@ async function handler(event, context) {
   }
 
   return response;
-}
-
-module.exports.fn = handler;
+};
