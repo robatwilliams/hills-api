@@ -6,7 +6,7 @@ const operatorsByShortName = {
   lte: '<=',
 };
 
-module.exports = function criterionConverter(criterion, columnName) {
+module.exports = function convertCriterion(criterion, columnName) {
   const fieldCriteria = unwrapCriterion(criterion);
 
   const expressions = [];
