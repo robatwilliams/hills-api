@@ -59,6 +59,8 @@ app.use(
 const server = awsServerlessExpress.createServer(app);
 
 /**
+ * https://docs.aws.amazon.com/lambda/latest/dg/nodejs-prog-model-handler.html
+ *
  * Event documentation:
  * https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
  * https://docs.aws.amazon.com/lambda/latest/dg/with-on-demand-https.html
@@ -66,8 +68,6 @@ const server = awsServerlessExpress.createServer(app);
  * @param {*} event API Gateway Lambda proxy integration representation of client request
  */
 async function handler(event, context) {
-  // async; caller must consistently receive a promise
-
   let response = ensureSupportedContentType(event, REQUEST_MEDIA_TYPES);
 
   if (response) {

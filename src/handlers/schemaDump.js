@@ -7,8 +7,6 @@ const executableSchema = makeExecutableSchema({ typeDefs: schema });
 
 // eslint-disable-next-line require-await
 async function handler() {
-  // async; caller must consistently receive a promise
-
   return {
     statusCode: 200,
     headers: {
