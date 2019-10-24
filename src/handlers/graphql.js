@@ -7,7 +7,8 @@ const CountriesDataSource = require('../datasource/CountriesDataSource');
 const ListsDataSource = require('../datasource/ListsDataSource');
 const HillsDataSource = require('../datasource/hills/HillsDataSource');
 const { resolvers, schema, validationRules } = require('../modules');
-const { ensureSupportedContentType } = require('../util-http');
+
+const { ensureSupportedContentType } = require('./graphqlHelpers');
 
 const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
 
