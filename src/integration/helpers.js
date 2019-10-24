@@ -18,6 +18,7 @@ async function sendQueryOk(query) {
   const response = await sendQuery(query);
 
   if (response.status !== 200) {
+    // eslint-disable-next-line no-console
     console.error(response);
     fail(`Expected status 200, but received ${response.status}`);
   }
@@ -25,6 +26,7 @@ async function sendQueryOk(query) {
   const { data, errors } = response.data;
 
   if (errors) {
+    // eslint-disable-next-line no-console
     console.error(errors);
     fail('Errors in the response body');
   }
@@ -35,6 +37,8 @@ async function sendQueryOk(query) {
 async function sendQueryError(expectStatus, query) {
   try {
     const response = await sendQuery(query);
+
+    // eslint-disable-next-line no-console
     console.log(response.data);
     fail('Query unexpectedly succeeded');
   } catch (error) {

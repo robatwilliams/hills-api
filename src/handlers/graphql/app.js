@@ -7,6 +7,8 @@ const ListsDataSource = require('../../datasource/ListsDataSource');
 const HillsDataSource = require('../../datasource/hills/HillsDataSource');
 const { resolvers, schema, validationRules } = require('../../modules');
 
+const queryLogger = require('./queryLogger');
+
 const dataSources = {
   countries: new CountriesDataSource(),
   hills: new HillsDataSource(),
@@ -23,6 +25,12 @@ const executableSchema = makeExecutableSchema({
     requireResolversForResolveType: true,
   },
 });
+
+function extensions(info) {
+  queryLogger(info);
+
+  return {};
+}
 
 /**
  * Express is only used to allow the express-graphql middleware to be used.
@@ -42,6 +50,7 @@ app.use(
   '/',
   graphqlHTTP({
     context: { dataSources },
+    extensions,
 
     // For local development using serverless-offline. No ETags when enabled.
     pretty: process.env.IS_OFFLINE,

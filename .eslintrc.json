@@ -36,7 +36,6 @@
     "init-declarations": "off",
     "line-comment-position": "off",
     "multiline-comment-style": "off",
-    "no-console": "off",
     "no-eq-null": "off",
     "no-inline-comments": "off",
     "no-magic-numbers": "off",
@@ -103,6 +102,12 @@
       "rules": {
         // Matters because serverless packaging does excludeDevDependencies
         "import/no-extraneous-dependencies": ["error", { "devDependencies": false }]
+      }
+    },
+    {
+      "files": ["./database/**/*"],
+      "rules": {
+        "no-console": "off"
       }
     },
     {
