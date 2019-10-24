@@ -89,7 +89,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 
 ### Improvements
 
-- 🙏 Proper response code for server errors, not 200 with "errors" object
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Fully configure rules for ESLint Jest plugin
 

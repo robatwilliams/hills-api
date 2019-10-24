@@ -81,3 +81,11 @@ Other articles of interest:
 - [GraphQL Best Practices: Pagination](https://graphql.org/learn/pagination/)
 - [Evolving API Pagination at Slack](https://slack.engineering/evolving-api-pagination-at-slack-1c1f644f8e12)
 - [Faster Pagination in Mysql – Why Order By With Limit and Offset is Slow?](https://www.eversql.com/faster-pagination-in-mysql-why-order-by-with-limit-and-offset-is-slow)
+
+## Response codes
+
+GraphQL has the concept of "partial success", where some parts of the query can return data and ones which encountered problems do not.
+
+To facilitate this, the response body may have an "errors" property alongside "data" - and the response code will be 200. Clients must check for the presence of the "errors" property.
+
+Depending on the type of error and what the schema allows to be null, some errors will still return an intuitive HTTP status code. For example, an invalid query will give 400 Bad Request.
