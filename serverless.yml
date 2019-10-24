@@ -45,7 +45,7 @@ package:
 #
 functions:
   graphql:
-    handler: src/graphql.fn
+    handler: src/handlers/graphql.fn
     description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
@@ -60,7 +60,7 @@ functions:
           path: graphql
           method: get
   playground:
-    handler: src/playground.fn
+    handler: src/handlers/playground.fn
     description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
@@ -69,7 +69,7 @@ functions:
           path: playground
           method: get
   schemaDump:
-    handler: src/schemaDump.fn
+    handler: src/handlers/schemaDump.fn
     description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured

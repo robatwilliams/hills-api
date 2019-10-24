@@ -1,7 +1,7 @@
 const { printSchema } = require('graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
-const { schema } = require('./modules');
+const { schema } = require('../modules');
 
 const executableSchema = makeExecutableSchema({ typeDefs: schema });
 
