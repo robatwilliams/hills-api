@@ -33,7 +33,7 @@ function extensions(info) {
   // Last; might throw
   customHttpError(info);
 
-  return {};
+  // Don't return an object, to avoid it appearing in the response
 }
 
 /**
