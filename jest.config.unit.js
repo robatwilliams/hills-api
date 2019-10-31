@@ -1,8 +1,8 @@
 module.exports = {
-  rootDir: './src',
+  roots: ['<rootDir>/database', '<rootDir>/src'],
 
   // Doesn't need JSDOM
   testEnvironment: 'node',
 
-  testPathIgnorePatterns: ['<rootDir>/integration/'],
+  testPathIgnorePatterns: ['<rootDir>/src/integration/'],
 };

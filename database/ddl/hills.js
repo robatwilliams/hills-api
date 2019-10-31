@@ -5,7 +5,6 @@ module.exports = {
   heightFeet: DOUBLE,
   heightMetres: DOUBLE,
   lists: [STRING],
-  name: STRING,
   number: LONG,
   parentMarilynNumber: LONG,
 };

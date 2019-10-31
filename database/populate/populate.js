@@ -5,11 +5,13 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 const csvParse = require('csv-parse/lib/sync');
 
+const { flatten } = require('../../src/util');
 const hillsType = require('../ddl/hills');
 const hillsMapsType = require('../ddl/hills_maps');
+const hillsNamesType = require('../ddl/hills_names');
 const { getArguments, readFile } = require('../util');
 
-const createParameters = require('./createParameters');
+const { createHillNamesParameters, createParameters } = require('./createParameters');
 const parseHill = require('./parseHill');
 const RDSMultiBatchDataService = require('./RDSMultiBatchDataService');
 
@@ -61,6 +63,9 @@ async function insert(hills, transactionId) {
   console.log('Inserting hills');
   await insertHills(hills, transactionId);
 
+  console.log('Inserting hill names');
+  await insertNames(hills, transactionId);
+
   console.log('Inserting hill-map associations');
   await insertMaps(hills, transactionId);
 }
@@ -68,6 +73,20 @@ async function insert(hills, transactionId) {
 function insertHills(hills, transactionId) {
   const sql = createInsertStatement('HILLS', hillsType);
   const parameterSets = hills.map(hill => createParameters(hill, hillsType));
+
+  return multiBatchClient.batchExecuteStatement({
+    ...commonParams,
+    parameterSets,
+    sql,
+    transactionId,
+  });
+}
+
+function insertNames(hills, transactionId) {
+  const sql = createInsertStatement('HILLS_NAMES', hillsNamesType);
+  const parameterSets = flatten(
+    hills.map(hill => createHillNamesParameters(hill, hillsNamesType))
+  );
 
   return multiBatchClient.batchExecuteStatement({
     ...commonParams,

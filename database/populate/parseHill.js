@@ -1,5 +1,6 @@
 const { COUNTRIES_CODES, LIST_CODES } = require('./codes');
 const parseMaps = require('./parseMaps');
+const parseNames = require('./parseNames');
 
 module.exports = function parseHill(row) {
   const lists = row.Classification.split(',')
@@ -19,7 +20,7 @@ module.exports = function parseHill(row) {
     lists,
     mapsScale25k: parseMaps(row['Map 1:25k']),
     mapsScale50k: parseMaps(row['Map 1:50k']),
-    name: row.Name,
+    names: parseNames(row.Name),
     number,
     parentMarilynNumber,
   };

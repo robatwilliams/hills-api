@@ -1,8 +1,21 @@
-module.exports = function createParameters(entity, entityType) {
+function createParameters(entity, entityType) {
   return Object.entries(entityType).map(([name, type]) =>
     createParameter(entity, name, type)
   );
-};
+}
+
+function createHillNamesParameters(hill, hillsNamesType) {
+  return hill.names.map((name, index) =>
+    createParameters(
+      {
+        hillNumber: hill.number,
+        isPrimary: index === 0,
+        name,
+      },
+      hillsNamesType
+    )
+  );
+}
 
 function createParameter(entity, name, type) {
   try {
@@ -28,3 +41,8 @@ function wrapValue(value, type) {
     [elementType]: value.join(','),
   };
 }
+
+module.exports = {
+  createHillNamesParameters,
+  createParameters,
+};
