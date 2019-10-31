@@ -1,3 +1,5 @@
+const { isAuroraServerlessPausedError } = require('./helpers');
+
 module.exports = function customHttpStatus({ result }) {
   if (!result.errors) {
     return;
@@ -11,7 +13,7 @@ module.exports = function customHttpStatus({ result }) {
 };
 
 function auroraServerlessPaused(errors) {
-  if (!errors.some(({ message }) => message.startsWith('Communications link failure'))) {
+  if (!errors.some(isAuroraServerlessPausedError)) {
     return undefined;
   }
 

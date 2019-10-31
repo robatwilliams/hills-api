@@ -23,6 +23,11 @@ function ensureSupportedContentType(event, supportedTypes) {
   };
 }
 
+function isAuroraServerlessPausedError({ message }) {
+  return message.startsWith('Communications link failure');
+}
+
 module.exports = {
   ensureSupportedContentType,
+  isAuroraServerlessPausedError,
 };

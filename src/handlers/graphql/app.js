@@ -8,6 +8,7 @@ const HillsDataSource = require('../../datasource/hills/HillsDataSource');
 const { resolvers, schema, validationRules } = require('../../modules');
 
 const customHttpError = require('./customHttpError');
+const errorLogger = require('./errorLogger');
 const queryLogger = require('./queryLogger');
 
 const dataSources = {
@@ -28,6 +29,7 @@ const executableSchema = makeExecutableSchema({
 });
 
 function extensions(info) {
+  errorLogger(info);
   queryLogger(info);
 
   // Last; might throw

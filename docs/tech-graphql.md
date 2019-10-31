@@ -89,3 +89,7 @@ GraphQL has the concept of "partial success", where some parts of the query can 
 To facilitate this, the response body may have an "errors" property alongside "data" - and the response code will be 200. Clients must check for the presence of the "errors" property.
 
 Depending on the type of error and what the schema allows to be null, some errors will still return an intuitive HTTP status code. For example, an invalid query will give 400 Bad Request.
+
+## Error logging
+
+Errors thrown/returned by `graphql-js` don't include any robust indication of being client or server errors. To choose a log level for logging errors, you must inspect the message. Due to the lack of exposed information, it's not possible to always log 500 errors at the error level and 400 errors at the warning level.
