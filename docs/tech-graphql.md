@@ -93,3 +93,7 @@ Depending on the type of error and what the schema allows to be null, some error
 ## Error logging
 
 Errors thrown/returned by `graphql-js` don't include any robust indication of being client or server errors. To choose a log level for logging errors, you must inspect the message. Due to the lack of exposed information, it's not possible to always log 500 errors at the error level and 400 errors at the warning level.
+
+## No generic types
+
+Lack of generic types means types such as connections/pagination would be repeated in larger projects. There is a [proposal](https://github.com/graphql/graphql-spec/issues/190) to add them to GraphQL. Until then, perhaps they could be generated at runtime.
