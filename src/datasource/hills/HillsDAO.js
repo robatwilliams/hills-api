@@ -12,7 +12,7 @@ module.exports = class HillsDAO {
 
   async query(filter, sort, paginate) {
     const filterExpression = filterBy(filter);
-    const paginateExpression = paginateBy(paginate);
+    const paginateExpression = paginateBy(paginate, sort);
 
     const conjunctions = [filterExpression.expression, paginateExpression.expression];
 
@@ -29,8 +29,10 @@ module.exports = class HillsDAO {
       `number ${paginate.backward ? 'DESC' : 'ASC'}`,
     ];
 
+    // Include namePrimary (sortable field) for use in building pagination cursor
     const statement = `
-      SELECT hill.* FROM HILLS hill
+      SELECT hill.*, name.name AS namePrimary
+      FROM HILLS hill
       LEFT JOIN HILLS_NAMES name
         ON hill.number = name.hillNumber
         AND name.isPrimary = TRUE

@@ -1,6 +1,7 @@
 function sortBy(sort) {
   const expressions = [];
 
+  // Remember to update pagination/cursor code to handle new sorts!
   if (sort.namePrimary) {
     expressions.push(`name.name ${sort.namePrimary.descending ? 'DESC' : 'ASC'}`);
   }

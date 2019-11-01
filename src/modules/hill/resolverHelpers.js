@@ -21,8 +21,13 @@ function buildDataSourcePaginate(paginate) {
   };
 }
 
-function computePageInfo(nodes, paginate, hasMore) {
-  return PageInfo.compute({ getNodeCursor: getHillCursor, hasMore, nodes, paginate });
+function computePageInfo({ hasMore, nodes, paginate, sort }) {
+  return PageInfo.compute({
+    getNodeCursor: hill => getHillCursor(hill, sort),
+    hasMore,
+    nodes,
+    paginate,
+  });
 }
 
 function findHillNames(allNames, hill) {
@@ -37,8 +42,17 @@ function findHillNames(allNames, hill) {
   };
 }
 
-function getHillCursor(hill) {
-  return encodeJSONCursor({ number: hill.number });
+function getHillCursor(hill, sort) {
+  const sortValues = {};
+
+  if (sort.namePrimary) {
+    sortValues.namePrimary = hill.namePrimary;
+  }
+
+  return encodeJSONCursor({
+    number: hill.number,
+    ...sortValues,
+  });
 }
 
 module.exports = {

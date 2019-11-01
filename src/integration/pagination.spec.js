@@ -185,7 +185,7 @@ describe('going backward', () => {
   });
 });
 
-it.skip('works when combined with client-specified sort', async () => {
+it('works when combined with client-specified sort', async () => {
   const query = gql`
     {
       hills(
@@ -208,18 +208,21 @@ it.skip('works when combined with client-specified sort', async () => {
 
   let data = await sendQueryOk(query);
 
+  // First page
   expectNames(['Allen Crags', 'Angletarn Pikes'], data);
 
   data = await sendQueryOk(
     query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
   );
 
+  // Second page follows first
   expectNames(['Ard Crags', 'Armboth Fell'], data);
 
   data = await sendQueryOk(
     query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
   );
 
+  // Third page, we don't want to see anything we've seen before
   expectNames(['Arnison Crag', "Arthur's Pike"], data);
 });
 

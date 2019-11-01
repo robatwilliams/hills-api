@@ -1,4 +1,4 @@
-function paginateBy(paginate) {
+function paginateBy(paginate, sort) {
   const cursor = paginate.after || paginate.before;
 
   if (!cursor) {
@@ -6,10 +6,15 @@ function paginateBy(paginate) {
     return { expression: 'TRUE' };
   }
 
-  const operator = paginate.after ? '>' : '<';
+  if (sort.namePrimary) {
+    return {
+      expression: `name.name ${sort.namePrimary.descending ? '<' : '>'} :namePrimary`,
+      parameters: { namePrimary: cursor.namePrimary },
+    };
+  }
 
   return {
-    expression: `number ${operator} :number`,
+    expression: `number ${paginate.after ? '>' : '<'} :number`,
     parameters: { number: cursor.number },
   };
 }

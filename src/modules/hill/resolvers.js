@@ -20,7 +20,13 @@ module.exports = {
 
       return Hill.fromEntity(entity);
     },
-    async hills(object, { filter, sort, ...paginate }, { dataSources }) {
+    async hills(object, args, context) {
+      const { filter, sort, ...paginate } = args;
+      const { dataSources } = context;
+
+      // For use in child resolvers
+      context.rootArgs = args;
+
       setPaginateDefaults(paginate);
 
       const dsFilter = buildDataSourceFilter(filter);
@@ -33,7 +39,7 @@ module.exports = {
       );
 
       const hills = entities.map(Hill.fromEntity);
-      const pageInfo = computePageInfo(hills, paginate, hasMore);
+      const pageInfo = computePageInfo({ hasMore, nodes: hills, paginate, sort });
 
       return {
         nodes: hills,
@@ -70,7 +76,9 @@ module.exports = {
     }),
   },
   HillsConnection: {
-    edges: ({ nodes }) => buildEdges(nodes, getHillCursor),
+    edges({ nodes }, args, { rootArgs }) {
+      return buildEdges(nodes, hill => getHillCursor(hill, rootArgs.sort));
+    },
     nodes: ({ nodes }) => nodes,
     pageInfo: ({ pageInfo }) => pageInfo,
   },

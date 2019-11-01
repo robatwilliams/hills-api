@@ -11,7 +11,8 @@ function unwrapRecords(response) {
  */
 function unwrapRecord(values, columnMetadata) {
   return columnMetadata.reduce((item, column, columnIndex) => {
-    item[column.name] = unwrapField(values[columnIndex], column);
+    // label === name when not using "select name as alias"
+    item[column.label] = unwrapField(values[columnIndex], column);
 
     return item;
   }, {});
