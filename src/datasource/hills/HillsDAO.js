@@ -30,7 +30,7 @@ module.exports = class HillsDAO {
     ];
 
     const statement = `
-      SELECT * FROM HILLS hill
+      SELECT hill.* FROM HILLS hill
       LEFT JOIN HILLS_NAMES name
         ON hill.number = name.hillNumber
         AND name.isPrimary = TRUE
