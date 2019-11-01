@@ -20,7 +20,7 @@ const allFieldsFragment = gql`
       maps50: maps(scale: ONE_50K) {
         sheet
       }
-      name
+      names
       number
     }
     pageInfo {

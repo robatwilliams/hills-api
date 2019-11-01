@@ -41,6 +41,13 @@ module.exports = {
     countries: ({ countriesCodes }) => countriesCodes.map(code => ({ code })),
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),
+    names: createBatchResolver(async (hills, args, { dataSources }) => {
+      const numbers = unique(hills.map(({ number }) => number));
+
+      const entities = await dataSources.hills.queryNames({ numbers });
+
+      return hills.map(hill => findHillNames(entities, hill));
+    }),
     parent: createBatchResolver(async (hills, args, { dataSources }) => {
       const parentNumbers = unique(
         hills.map(hill => hill.parentMarilynNumber).filter(number => number != null)
@@ -69,3 +76,12 @@ module.exports = {
     name: ({ id }, args, { dataSources }) => dataSources.lists.getName(id),
   },
 };
+
+function findHillNames(allNames, hill) {
+  const names = allNames.filter(name => name.hillNumber === hill.number);
+
+  const primary = names.find(name => name.isPrimary);
+  const alternates = names.filter(name => name !== primary);
+
+  return [primary, ...alternates].map(name => name.name);
+}

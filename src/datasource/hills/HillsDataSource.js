@@ -33,4 +33,8 @@ module.exports = class HillsDataSource {
   queryMaps({ numbers, scale }) {
     return this.dao.queryMaps({ numbers, scale });
   }
+
+  queryNames({ numbers }) {
+    return this.dao.queryNames({ numbers });
+  }
 };

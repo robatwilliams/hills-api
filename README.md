@@ -69,9 +69,9 @@ Wainwright hills (of the Lake District), higher than 600m, the first 50, with a 
       maps(scale: ONE_25K) {
         sheet
       }
-      name
+      names
       parent {
-        name
+        names
       }
     }
     pageInfo {
@@ -97,7 +97,7 @@ fetch('https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql', {
     'Content-Type': 'application/json',
   },
   body: JSON.stringify({
-    query: '{ hill(number: 278) { name } }',
+    query: '{ hill(number: 278) { names } }',
   }),
 })
   .then(response => response.json())
@@ -110,7 +110,7 @@ Prefer to send queries using GET requests rather than POST, as this will allow r
 
 ```
 https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
-?query=query MyQuery($myVariable: Int!) { hill(number: $myVariable) { name } }
+?query=query MyQuery($myVariable: Int!) { hill(number: $myVariable) { names } }
 &variables={"myVariable":278}
 ```
 

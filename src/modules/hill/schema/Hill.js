@@ -6,7 +6,7 @@ module.exports = gql`
     height(unit: UnitOfLength!): Float!
     lists: [List!]!
     maps(scale: Scale!): [Map!]!
-    name: String!
+    names: [String!]
     number: Int!
     parent: Hill
   }

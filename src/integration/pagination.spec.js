@@ -10,7 +10,7 @@ it('returns the first few when no paging specified', async () => {
   const hills = data.hills.nodes;
 
   expect(hills.length).toBe(10);
-  expect(hills[0].name).toBe('Skiddaw');
+  expect(hills[0].names).toEqual(['Skiddaw']);
 });
 
 it('assembles complete connection structure', async () => {
@@ -20,11 +20,11 @@ it('assembles complete connection structure', async () => {
         edges {
           cursor
           node {
-            name
+            names
           }
         }
         nodes {
-          name
+          names
         }
       }
     }
@@ -89,8 +89,8 @@ describe('going forward', () => {
     const hills = data.hills.nodes;
 
     expect(hills).toHaveLength(5);
-    expect(hills[0].name).toBe('Skiddaw');
-    expect(hills[4].name).toBe('Long Side');
+    expect(hills[0].names).toEqual(['Skiddaw']);
+    expect(hills[4].names).toEqual(['Long Side']);
   });
 
   it('returns those after cursor', async () => {
@@ -99,7 +99,7 @@ describe('going forward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[0].name).toBe('Carl Side');
+    expect(hills[0].names).toEqual(['Carl Side']);
   });
 
   it('has a next page when ending on the penultimate result', async () => {
@@ -108,7 +108,7 @@ describe('going forward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[hills.length - 1].name).toBe('Holme Fell');
+    expect(hills[hills.length - 1].names).toEqual(['Holme Fell']);
 
     expect(data.hills.pageInfo).toMatchObject({
       hasNextPage: true,
@@ -122,7 +122,7 @@ describe('going forward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[hills.length - 1].name).toBe('High Stile');
+    expect(hills[hills.length - 1].names).toEqual(['High Stile']);
 
     expect(data.hills.pageInfo).toMatchObject({
       hasNextPage: false,
@@ -139,8 +139,8 @@ describe('going backward', () => {
     const hills = data.hills.nodes;
 
     expect(hills).toHaveLength(5);
-    expect(hills[0].name).toBe('Wetherlam');
-    expect(hills[4].name).toBe('High Stile');
+    expect(hills[0].names).toEqual(['Wetherlam']);
+    expect(hills[4].names).toEqual(['High Stile']);
   });
 
   it('returns those before cursor', async () => {
@@ -149,7 +149,7 @@ describe('going backward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[hills.length - 1].name).toBe('Green Crag');
+    expect(hills[hills.length - 1].names).toEqual(['Green Crag']);
   });
 
   it('has a previous page when ending on the second result', async () => {
@@ -158,7 +158,7 @@ describe('going backward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[0].name).toBe('Blencathra - Hallsfell Top');
+    expect(hills[0].names).toEqual(['Blencathra - Hallsfell Top']);
 
     expect(data.hills.pageInfo).toMatchObject({
       hasNextPage: null,
@@ -172,7 +172,7 @@ describe('going backward', () => {
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
 
-    expect(hills[0].name).toBe('Skiddaw');
+    expect(hills[0].names).toEqual(['Skiddaw']);
 
     expect(data.hills.pageInfo).toMatchObject({
       hasNextPage: null,
@@ -223,7 +223,7 @@ function createQuery({ filter, first, after, last, before } = {}) {
         cursor
       }
       nodes {
-        name
+        names
       }
       pageInfo {
         endCursor

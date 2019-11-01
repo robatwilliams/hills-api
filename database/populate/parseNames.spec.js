@@ -17,7 +17,7 @@ describe('single names (pass through)', () => {
     expect(parseNames("Stuc a' Chroin")).toEqual(["Stuc a' Chroin"]);
   });
 
-  test('with qualifier', () => {
+  test('with disambiguation', () => {
     expect(parseNames('Red Pike (Buttermere)')).toEqual(['Red Pike (Buttermere)']);
   });
 
@@ -58,7 +58,7 @@ describe('alternate names (split out)', () => {
     ]);
   });
 
-  test('with qualifier', () => {
+  test('with disambiguation', () => {
     expect(parseNames('Carn Dearg (NW) [Carn Dearg (North)]')).toEqual([
       'Carn Dearg (NW)',
       'Carn Dearg (North)',

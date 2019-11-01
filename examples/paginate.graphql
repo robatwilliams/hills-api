@@ -3,7 +3,7 @@
     edges {
       cursor
       node {
-        name
+        names
         number
       }
     }

@@ -13,7 +13,7 @@
     maps(scale: ONE_25K) {
       sheet
     }
-    name
+    names
     number
   }
 }

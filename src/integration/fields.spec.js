@@ -22,7 +22,6 @@ describe('countries', () => {
     const query = gql`
       {
         hill(number: 2308) {
-          name
           countries {
             name
           }
@@ -223,47 +222,47 @@ describe('maps', () => {
   });
 });
 
-describe('name', () => {
+describe('names', () => {
   test('single simple', async () => {
     const query = gql`
       {
         hill(number: 2319) {
-          name
+          names
         }
       }
     `;
 
     const data = await sendQueryOk(query);
 
-    expect(data.hill.name).toBe('Skiddaw');
+    expect(data.hill.names).toEqual(['Skiddaw']);
   });
 
   test('single with disambiguation', async () => {
     const query = gql`
       {
         hill(number: 2643) {
-          name
+          names
         }
       }
     `;
 
     const data = await sendQueryOk(query);
 
-    expect(data.hill.name).toBe('Harter Fell (Eskdale)');
+    expect(data.hill.names).toEqual(['Harter Fell (Eskdale)']);
   });
 
   test('multiple', async () => {
     const query = gql`
       {
         hill(number: 2374) {
-          name
+          names
         }
       }
     `;
 
     const data = await sendQueryOk(query);
 
-    expect(data.hill.name).toBe('Crag Hill [Eel Crag]');
+    expect(data.hill.names).toEqual(['Crag Hill', 'Eel Crag']);
 
     // There are also hills with 3 and 4 names
   });

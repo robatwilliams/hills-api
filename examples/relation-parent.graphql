@@ -1,9 +1,9 @@
 {
   hill(number: 2340) {
-    name
+    names
     number
     parent {
-      name
+      names
       number
     }
   }

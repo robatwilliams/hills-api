@@ -6,9 +6,9 @@ describe('parent', () => {
     const query = gql`
       {
         hill(number: 2340) {
-          name
+          names
           parent {
-            name
+            names
           }
         }
       }
@@ -17,9 +17,9 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hill).toEqual({
-      name: 'Mungrisdale Common',
+      names: ['Mungrisdale Common'],
       parent: {
-        name: 'Blencathra - Hallsfell Top',
+        names: ['Blencathra - Hallsfell Top'],
       },
     });
   });
@@ -28,9 +28,9 @@ describe('parent', () => {
     const query = gql`
       {
         hill(number: 278) {
-          name
+          names
           parent {
-            name
+            names
           }
         }
       }
@@ -39,7 +39,7 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hill).toEqual({
-      name: 'Ben Nevis [Beinn Nibheis]',
+      names: ['Ben Nevis', 'Beinn Nibheis'],
       parent: null,
     });
   });
@@ -54,9 +54,9 @@ describe('parent', () => {
           }
         ) {
           nodes {
-            name
+            names
             parent {
-              name
+              names
             }
           }
         }
@@ -66,9 +66,9 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hills.nodes).toEqual([
-      { name: 'Kirk Fell', parent: null },
-      { name: 'Green Gable', parent: { name: 'Great Gable' } },
-      { name: 'High Raise (High Street)', parent: { name: 'High Street' } },
+      { names: ['Kirk Fell'], parent: null },
+      { names: ['Green Gable'], parent: { names: ['Great Gable'] } },
+      { names: ['High Raise (High Street)'], parent: { names: ['High Street'] } },
     ]);
   });
 });

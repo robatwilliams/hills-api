@@ -58,6 +58,16 @@ module.exports = class HillsDAO {
     return unwrapRecords(response);
   }
 
+  async queryNames({ numbers }) {
+    const inExpression = makeInListExpression(numbers, 'hillNumber');
+
+    const response = await this.executeStatement({
+      sql: `SELECT hillNumber, isPrimary, name FROM HILLS_NAMES WHERE ${inExpression}`,
+    });
+
+    return unwrapRecords(response);
+  }
+
   executeStatement(statementParams) {
     const params = {
       database: 'HILLS',
