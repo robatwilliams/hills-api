@@ -1,7 +1,7 @@
 const convertCriterion = require('./convertCriterion');
 
 // eslint-disable-next-line max-statements
-function filterWhere(filter) {
+function filterBy(filter) {
   const parameters = {};
   const conjunctions = [];
 
@@ -54,6 +54,6 @@ function makeInListExpression(values, columnName) {
 }
 
 module.exports = {
-  filterWhere,
+  filterBy,
   makeInListExpression,
 };

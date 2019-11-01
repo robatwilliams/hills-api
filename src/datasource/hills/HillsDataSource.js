@@ -5,13 +5,13 @@ module.exports = class HillsDataSource {
     this.dao = new HillsDAO();
   }
 
-  async query(filter, paginate) {
+  async query(filter, sort, paginate) {
     const daoPaginate = {
       ...paginate,
       limit: paginate.limit + 1, // +1 so we can determine if there are more items
     };
 
-    const entities = await this.dao.query(filter, daoPaginate);
+    const entities = await this.dao.query(filter, sort, daoPaginate);
 
     const hasMore = entities.length === daoPaginate.limit;
 

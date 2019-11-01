@@ -20,13 +20,17 @@ module.exports = {
 
       return Hill.fromEntity(entity);
     },
-    async hills(object, { filter, ...paginate }, { dataSources }) {
+    async hills(object, { filter, sort, ...paginate }, { dataSources }) {
       setPaginateDefaults(paginate);
 
       const dsFilter = buildDataSourceFilter(filter);
       const dsPaginate = buildDataSourcePaginate(paginate);
 
-      const { entities, hasMore } = await dataSources.hills.query(dsFilter, dsPaginate);
+      const { entities, hasMore } = await dataSources.hills.query(
+        dsFilter,
+        sort,
+        dsPaginate
+      );
 
       const hills = entities.map(Hill.fromEntity);
       const pageInfo = computePageInfo(hills, paginate, hasMore);
@@ -56,6 +60,7 @@ module.exports = {
 
       const { entities: parents } = await dataSources.hills.query(
         { numbers: parentNumbers },
+        {},
         { limit: parentNumbers.length }
       );
 

@@ -6,6 +6,7 @@ module.exports = gql`
     hill(number: Int!): Hill
     hills(
       filter: HillFilter = {}
+      sort: HillSort = {}
 
       first: Int
       after: String

@@ -27,7 +27,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Name                   | Type  | Included        | Filterable | Sortable |
 | ---------------------- | ----- | --------------- | ---------- | -------- |
 | Number                 | ℹ️    | ✅              | ✅         |
-| Name                   | ℹ️    | ✅              | 🙏         | 🙏       |
+| Name                   | ℹ️    | ✅              | 🙏         | ✅       |
 | Parent (SMC)           | ➡     |                 |
 | Parent name (SMC)      | -     | 🚫              | 🚫         | 🚫       |
 | Parent (Ma)            | ➡     | ✅              |

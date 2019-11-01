@@ -185,6 +185,44 @@ describe('going backward', () => {
   });
 });
 
+it.skip('works when combined with client-specified sort', async () => {
+  const query = gql`
+    {
+      hills(
+        filter: { lists: { id: { inc: WAINWRIGHT } } }
+        sort: { namePrimary: { descending: false } }
+        first: 2
+        after: null
+      ) {
+        nodes {
+          names {
+            primary
+          }
+        }
+        pageInfo {
+          endCursor
+        }
+      }
+    }
+  `;
+
+  let data = await sendQueryOk(query);
+
+  expectNames(['Allen Crags', 'Angletarn Pikes'], data);
+
+  data = await sendQueryOk(
+    query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+  );
+
+  expectNames(['Ard Crags', 'Armboth Fell'], data);
+
+  data = await sendQueryOk(
+    query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+  );
+
+  expectNames(['Arnison Crag', "Arthur's Pike"], data);
+});
+
 describe('handling invalid arguments', () => {
   it('rejects incompatible arguments', async () => {
     // Just test one case, the conditions are similar enough
@@ -252,4 +290,9 @@ function createQuery({ filter, first, after, last, before } = {}) {
       ${fieldsFragment}
     }
   `;
+}
+
+function expectNames(expected, data) {
+  const actual = data.hills.nodes.map(hill => hill.names.primary);
+  expect(actual).toEqual(expected);
 }

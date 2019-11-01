@@ -10,6 +10,7 @@ const modules = [
   require('./map'),
   require('./measure'),
   require('./paginate'),
+  require('./sort'),
 ];
 
 const resolvers = merge(...modules.map(module => module.resolvers));

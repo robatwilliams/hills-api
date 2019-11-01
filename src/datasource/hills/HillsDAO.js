@@ -1,7 +1,8 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 
-const { filterWhere, makeInListExpression } = require('./filtering');
+const { filterBy, makeInListExpression } = require('./filtering');
 const { paginateBy } = require('./pagination');
+const { sortBy } = require('./sorting');
 const { buildParameters, unwrapRecords, unwrapSetFieldValue } = require('./rdsApiUtil');
 
 module.exports = class HillsDAO {
@@ -9,8 +10,8 @@ module.exports = class HillsDAO {
     this.client = new RDSDataService(); // region from env:AWS_REGION
   }
 
-  async query(filter, paginate) {
-    const filterExpression = filterWhere(filter);
+  async query(filter, sort, paginate) {
+    const filterExpression = filterBy(filter);
     const paginateExpression = paginateBy(paginate);
 
     const conjunctions = [filterExpression.expression, paginateExpression.expression];
@@ -21,11 +22,20 @@ module.exports = class HillsDAO {
       limit: paginate.limit,
     };
 
-    // Always include number in order-by, for stable pagination
+    const sortExpressions = [
+      ...sortBy(sort),
+
+      // Always include number, for stable pagination
+      `number ${paginate.backward ? 'DESC' : 'ASC'}`,
+    ];
+
     const statement = `
-      SELECT * FROM HILLS
+      SELECT * FROM HILLS hill
+      LEFT JOIN HILLS_NAMES name
+        ON hill.number = name.hillNumber
+        AND name.isPrimary = TRUE
       WHERE ${conjunctions.join(' AND ')}
-      ORDER BY number ${paginate.backward ? 'DESC' : 'ASC'}
+      ORDER BY ${sortExpressions.join(', ')}
       LIMIT :limit`;
 
     const response = await this.executeStatement({

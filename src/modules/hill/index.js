@@ -4,6 +4,7 @@ module.exports = {
     require('./schema/Hill'),
     require('./schema/HillEdge'),
     require('./schema/HillFilter'),
+    require('./schema/HillSort'),
     require('./schema/HillsConnection'),
     require('./schema/List'),
     require('./schema/ListFilter'),
