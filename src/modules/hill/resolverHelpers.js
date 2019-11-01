@@ -1,4 +1,4 @@
-const { decodeNumericCursor, encodeNumericCursor, PageInfo } = require('../paginate');
+const { decodeJSONCursor, encodeJSONCursor, PageInfo } = require('../paginate');
 
 function buildDataSourceFilter(filter) {
   return {
@@ -15,8 +15,8 @@ function buildDataSourcePaginate(paginate) {
 
   return {
     limit,
-    before: paginate.before && decodeNumericCursor(paginate.before),
-    after: paginate.after && decodeNumericCursor(paginate.after),
+    before: paginate.before && decodeJSONCursor(paginate.before),
+    after: paginate.after && decodeJSONCursor(paginate.after),
     backward: limit === last,
   };
 }
@@ -38,7 +38,7 @@ function findHillNames(allNames, hill) {
 }
 
 function getHillCursor(hill) {
-  return encodeNumericCursor(hill.number);
+  return encodeJSONCursor({ number: hill.number });
 }
 
 module.exports = {

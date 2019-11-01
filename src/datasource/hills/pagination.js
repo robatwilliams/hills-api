@@ -9,8 +9,8 @@ function paginateBy(paginate) {
   const operator = paginate.after ? '>' : '<';
 
   return {
-    expression: `number ${operator} :cursor`,
-    parameters: { cursor },
+    expression: `number ${operator} :number`,
+    parameters: { number: cursor.number },
   };
 }
 

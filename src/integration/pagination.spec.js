@@ -1,4 +1,4 @@
-const { encodeNumericCursor } = require('../modules/paginate');
+const { encodeJSONCursor } = require('../modules/paginate');
 
 const gql = require('./graphql-tag-raw');
 const { sendQueryError, sendQueryOk } = require('./helpers');
@@ -98,7 +98,7 @@ describe('going forward', () => {
   });
 
   it('returns those after cursor', async () => {
-    const query = createQuery({ after: encodeNumericCursor(2321) });
+    const query = createQuery({ after: encodeCursor(2321) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -107,7 +107,7 @@ describe('going forward', () => {
   });
 
   it('has a next page when ending on the penultimate result', async () => {
-    const query = createQuery({ after: encodeNumericCursor(2627) });
+    const query = createQuery({ after: encodeCursor(2627) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -121,7 +121,7 @@ describe('going forward', () => {
   });
 
   it('has no next page when ending on the last result', async () => {
-    const query = createQuery({ after: encodeNumericCursor(2634) });
+    const query = createQuery({ after: encodeCursor(2634) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -148,7 +148,7 @@ describe('going backward', () => {
   });
 
   it('returns those before cursor', async () => {
-    const query = createQuery({ before: encodeNumericCursor(2673) });
+    const query = createQuery({ before: encodeCursor(2673) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -157,7 +157,7 @@ describe('going backward', () => {
   });
 
   it('has a previous page when ending on the second result', async () => {
-    const query = createQuery({ before: encodeNumericCursor(2333) });
+    const query = createQuery({ before: encodeCursor(2333) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -171,7 +171,7 @@ describe('going backward', () => {
   });
 
   it('has no previous page when ending on the first result', async () => {
-    const query = createQuery({ before: encodeNumericCursor(2332) });
+    const query = createQuery({ before: encodeCursor(2332) });
 
     const data = await sendQueryOk(query);
     const hills = data.hills.nodes;
@@ -290,6 +290,11 @@ function createQuery({ filter, first, after, last, before } = {}) {
       ${fieldsFragment}
     }
   `;
+}
+
+function encodeCursor(hillNumber) {
+  // Tests would be hard to read if cursors were encoded
+  return encodeJSONCursor({ number: hillNumber });
 }
 
 function expectNames(expected, data) {

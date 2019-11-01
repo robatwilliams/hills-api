@@ -1,5 +1,5 @@
 {
-  hills(first: 5, after: "MQ==") {
+  hills(first: 5, after: null) {
     edges {
       cursor
       node {
@@ -9,7 +9,9 @@
         number
       }
     }
-    nodes
+    nodes {
+      number
+    }
     pageInfo {
       endCursor
       startCursor
