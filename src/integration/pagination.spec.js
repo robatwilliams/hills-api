@@ -185,45 +185,47 @@ describe('going backward', () => {
   });
 });
 
-it('works when combined with client-specified sort', async () => {
-  const query = gql`
-    {
-      hills(
-        filter: { lists: { id: { inc: WAINWRIGHT } } }
-        sort: { namePrimary: { descending: false } }
-        first: 2
-        after: null
-      ) {
-        nodes {
-          names {
-            primary
+describe('when combined with client-specified sort', () => {
+  it('works when the sort column is unique', async () => {
+    const query = gql`
+      {
+        hills(
+          filter: { lists: { id: { inc: WAINWRIGHT } } }
+          sort: { namePrimary: { descending: false } }
+          first: 2
+          after: null
+        ) {
+          nodes {
+            names {
+              primary
+            }
+          }
+          pageInfo {
+            endCursor
           }
         }
-        pageInfo {
-          endCursor
-        }
       }
-    }
-  `;
+    `;
 
-  let data = await sendQueryOk(query);
+    let data = await sendQueryOk(query);
 
-  // First page
-  expectNames(['Allen Crags', 'Angletarn Pikes'], data);
+    // First page
+    expectNames(['Allen Crags', 'Angletarn Pikes'], data);
 
-  data = await sendQueryOk(
-    query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
-  );
+    data = await sendQueryOk(
+      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+    );
 
-  // Second page follows first
-  expectNames(['Ard Crags', 'Armboth Fell'], data);
+    // Second page follows first
+    expectNames(['Ard Crags', 'Armboth Fell'], data);
 
-  data = await sendQueryOk(
-    query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
-  );
+    data = await sendQueryOk(
+      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+    );
 
-  // Third page, we don't want to see anything we've seen before
-  expectNames(['Arnison Crag', "Arthur's Pike"], data);
+    // Third page, we don't want to see anything we've seen before
+    expectNames(['Arnison Crag', "Arthur's Pike"], data);
+  });
 });
 
 describe('handling invalid arguments', () => {
