@@ -20,12 +20,8 @@ describe('parent', () => {
 
     const data = await sendQueryOk(query);
 
-    expect(data.hill).toEqual({
-      names: { primary: 'Mungrisdale Common' },
-      parent: {
-        names: { primary: 'Blencathra - Hallsfell Top' },
-      },
-    });
+    expect(data.hill.names.primary).toBe('Mungrisdale Common');
+    expect(data.hill.parent.names.primary).toBe('Blencathra - Hallsfell Top');
   });
 
   it('returns null when hill does not have one', async () => {
@@ -46,10 +42,8 @@ describe('parent', () => {
 
     const data = await sendQueryOk(query);
 
-    expect(data.hill).toEqual({
-      names: { primary: 'Ben Nevis' },
-      parent: null,
-    });
+    expect(data.hill.names.primary).toBe('Ben Nevis');
+    expect(data.hill.parent).toBeNull();
   });
 
   it('returns the correct ones when querying multiple hills (batch resolver)', async () => {
@@ -77,20 +71,22 @@ describe('parent', () => {
 
     const data = await sendQueryOk(query);
 
-    expect(data.hills.nodes).toEqual([
-      { names: { primary: 'Kirk Fell' }, parent: null },
-      {
-        names: { primary: 'Green Gable' },
-        parent: {
-          names: { primary: 'Great Gable' },
-        },
+    expect(data.hills.nodes).toHaveLength(3);
+    expect(data.hills.nodes[0]).toEqual({
+      names: { primary: 'Kirk Fell' },
+      parent: null,
+    });
+    expect(data.hills.nodes[1]).toEqual({
+      names: { primary: 'Green Gable' },
+      parent: {
+        names: { primary: 'Great Gable' },
       },
-      {
-        names: { primary: 'High Raise (High Street)' },
-        parent: {
-          names: { primary: 'High Street' },
-        },
+    });
+    expect(data.hills.nodes[2]).toEqual({
+      names: { primary: 'High Raise (High Street)' },
+      parent: {
+        names: { primary: 'High Street' },
       },
-    ]);
+    });
   });
 });
