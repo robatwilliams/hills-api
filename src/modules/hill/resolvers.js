@@ -9,6 +9,7 @@ const {
   buildDataSourceFilter,
   buildDataSourcePaginate,
   computePageInfo,
+  findHillNames,
   getHillCursor,
 } = require('./resolverHelpers');
 
@@ -76,12 +77,3 @@ module.exports = {
     name: ({ id }, args, { dataSources }) => dataSources.lists.getName(id),
   },
 };
-
-function findHillNames(allNames, hill) {
-  const names = allNames.filter(name => name.hillNumber === hill.number);
-
-  const primary = names.find(name => name.isPrimary);
-  const alternates = names.filter(name => name !== primary);
-
-  return [primary, ...alternates].map(name => name.name);
-}

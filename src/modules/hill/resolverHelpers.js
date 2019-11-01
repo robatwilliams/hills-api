@@ -25,6 +25,15 @@ function computePageInfo(nodes, paginate, hasMore) {
   return PageInfo.compute({ getNodeCursor: getHillCursor, hasMore, nodes, paginate });
 }
 
+function findHillNames(allNames, hill) {
+  const names = allNames.filter(name => name.hillNumber === hill.number);
+
+  const primary = names.find(name => name.isPrimary);
+  const alternates = names.filter(name => name !== primary);
+
+  return [primary, ...alternates].map(name => name.name);
+}
+
 function getHillCursor(hill) {
   return encodeNumericCursor(hill.number);
 }
@@ -33,5 +42,6 @@ module.exports = {
   buildDataSourceFilter,
   buildDataSourcePaginate,
   computePageInfo,
+  findHillNames,
   getHillCursor,
 };
