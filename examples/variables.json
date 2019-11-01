@@ -1,5 +1,5 @@
 {
-  "query": "query MyQuery($myVariable: Int!) { hill(number: $myVariable) { names } }",
+  "query": "query MyQuery($myVariable: Int!) { hill(number: $myVariable) { names { primary } } }",
   "variables": {
     "myVariable": 278
   }

@@ -4,6 +4,8 @@
     # https://graphql.org/learn/queries/#aliases
     heightFeet: height(unit: FEET)
     heightMetres: height(unit: METRES)
-    names
+    names {
+      primary
+    }
   }
 }

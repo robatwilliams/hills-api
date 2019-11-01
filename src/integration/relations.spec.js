@@ -6,9 +6,13 @@ describe('parent', () => {
     const query = gql`
       {
         hill(number: 2340) {
-          names
+          names {
+            primary
+          }
           parent {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -17,9 +21,9 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hill).toEqual({
-      names: ['Mungrisdale Common'],
+      names: { primary: 'Mungrisdale Common' },
       parent: {
-        names: ['Blencathra - Hallsfell Top'],
+        names: { primary: 'Blencathra - Hallsfell Top' },
       },
     });
   });
@@ -28,9 +32,13 @@ describe('parent', () => {
     const query = gql`
       {
         hill(number: 278) {
-          names
+          names {
+            primary
+          }
           parent {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -39,7 +47,7 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hill).toEqual({
-      names: ['Ben Nevis', 'Beinn Nibheis'],
+      names: { primary: 'Ben Nevis' },
       parent: null,
     });
   });
@@ -54,9 +62,13 @@ describe('parent', () => {
           }
         ) {
           nodes {
-            names
+            names {
+              primary
+            }
             parent {
-              names
+              names {
+                primary
+              }
             }
           }
         }
@@ -66,9 +78,19 @@ describe('parent', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hills.nodes).toEqual([
-      { names: ['Kirk Fell'], parent: null },
-      { names: ['Green Gable'], parent: { names: ['Great Gable'] } },
-      { names: ['High Raise (High Street)'], parent: { names: ['High Street'] } },
+      { names: { primary: 'Kirk Fell' }, parent: null },
+      {
+        names: { primary: 'Green Gable' },
+        parent: {
+          names: { primary: 'Great Gable' },
+        },
+      },
+      {
+        names: { primary: 'High Raise (High Street)' },
+        parent: {
+          names: { primary: 'High Street' },
+        },
+      },
     ]);
   });
 });

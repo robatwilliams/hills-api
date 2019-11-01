@@ -7,7 +7,9 @@ describe('no filters', () => {
       {
         hills {
           nodes {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -23,7 +25,9 @@ describe('no filters', () => {
       {
         hills(filter: {}) {
           nodes {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -65,7 +69,9 @@ describe('by height', () => {
         # Braeriach is 1296m
         hills(filter: { heightMetres: { gt: 1296 } }) {
           nodes {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -74,8 +80,8 @@ describe('by height', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hills.nodes).toEqual([
-      { names: ['Ben Nevis', 'Beinn Nibheis'] },
-      { names: ['Ben Macdui', 'Beinn Macduibh'] },
+      { names: { primary: 'Ben Nevis' } },
+      { names: { primary: 'Ben Macdui' } },
     ]);
   });
 
@@ -85,7 +91,9 @@ describe('by height', () => {
         # Braeriach is 4252ft
         hills(filter: { heightFeet: { gte: 4252 } }) {
           nodes {
-            names
+            names {
+              primary
+            }
           }
         }
       }
@@ -94,9 +102,9 @@ describe('by height', () => {
     const data = await sendQueryOk(query);
 
     expect(data.hills.nodes).toEqual([
-      { names: ['Ben Nevis', 'Beinn Nibheis'] },
-      { names: ['Ben Macdui', 'Beinn Macduibh'] },
-      { names: ['Braeriach'] },
+      { names: { primary: 'Ben Nevis' } },
+      { names: { primary: 'Ben Macdui' } },
+      { names: { primary: 'Braeriach' } },
     ]);
   });
 });
@@ -163,7 +171,9 @@ test('invalid criterion', async () => {
     {
       hills(filter: { countries: { code: {} } }) {
         nodes {
-          names
+          names {
+            primary
+          }
         }
       }
     }

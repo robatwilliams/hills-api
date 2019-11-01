@@ -1,9 +1,13 @@
 {
   hill(number: 2340) {
-    names
+    names {
+      primary
+    }
     number
     parent {
-      names
+      names {
+        primary
+      }
       number
     }
   }

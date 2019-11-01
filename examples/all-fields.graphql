@@ -13,7 +13,10 @@
     maps(scale: ONE_25K) {
       sheet
     }
-    names
+    names {
+      primary
+      alternates
+    }
     number
   }
 }

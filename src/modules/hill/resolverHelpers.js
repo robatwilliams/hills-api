@@ -31,7 +31,10 @@ function findHillNames(allNames, hill) {
   const primary = names.find(name => name.isPrimary);
   const alternates = names.filter(name => name !== primary);
 
-  return [primary, ...alternates].map(name => name.name);
+  return {
+    primary: primary.name,
+    alternates: alternates.map(name => name.name),
+  };
 }
 
 function getHillCursor(hill) {
