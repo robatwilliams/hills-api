@@ -1,3 +1,4 @@
+// Not very elegant, but until we have more sort fields, it works and is clearer
 function paginateBy(paginate, sort) {
   const cursor = paginate.after || paginate.before;
 
@@ -6,21 +7,18 @@ function paginateBy(paginate, sort) {
     return { expression: 'TRUE' };
   }
 
-  const gt = paginate.backward ? '<' : '>';
-  const lt = paginate.backward ? '>' : '<';
+  const { gt, lt } = getCompensatedOperators(paginate);
 
   const numberExpression = `number ${paginate.after ? '>' : '<'} :number`;
 
   if (sort.height) {
-    // It's a different height...
-    // OR it's the same height AND beyond the previous page
-    const expression = `(
-      heightMetres ${sort.height.descending ? lt : gt} :height
-      OR (heightMetres = :height AND ${numberExpression})
-    )`;
-
     return {
-      expression,
+      // It's a different height...
+      // OR it's the same height AND beyond the previous page
+      expression: `(
+        heightMetres ${sort.height.descending ? lt : gt} :height
+        OR (heightMetres = :height AND ${numberExpression})
+      )`,
       parameters: {
         height: cursor.height,
         number: cursor.number,
@@ -38,6 +36,13 @@ function paginateBy(paginate, sort) {
   return {
     expression: numberExpression,
     parameters: { number: cursor.number },
+  };
+}
+
+function getCompensatedOperators(paginate) {
+  return {
+    gt: paginate.backward ? '<' : '>',
+    lt: paginate.backward ? '>' : '<',
   };
 }
 
