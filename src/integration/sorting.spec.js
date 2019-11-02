@@ -1,5 +1,5 @@
 const gql = require('./graphql-tag-raw');
-const { sendQueryOk } = require('./helpers');
+const { sendQueryError, sendQueryOk } = require('./helpers');
 
 test('by primary name, ascending', async () => {
   const query = gql`
@@ -41,4 +41,26 @@ test('by height, descending', async () => {
 
   expect(data.hills.nodes[0].height).toBe(978.07);
   expect(data.hills.nodes[1].height).toBe(963.9);
+});
+
+test('does not support sorting by multiple fields at once', async () => {
+  const query = gql`
+    {
+      hills(sort: { height: {}, namePrimary: {} }) {
+        nodes {
+          names {
+            primary
+          }
+        }
+      }
+    }
+  `;
+
+  const errors = await sendQueryError(400, query);
+
+  expect(errors).toEqual([
+    expect.objectContaining({
+      message: 'Sorting is only supported on one field at a time',
+    }),
+  ]);
 });
