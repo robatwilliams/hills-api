@@ -1,5 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
+const { formatError: defaultFormatError } = require('graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
 const CountriesDataSource = require('../../datasource/CountriesDataSource');
@@ -28,8 +29,15 @@ const executableSchema = makeExecutableSchema({
   },
 });
 
+function customFormatError(error) {
+  // Use custom error formatter as a hook for error logging.
+  // This is the only place that absolutely all errors pass through.
+  errorLogger(error);
+
+  return defaultFormatError(error);
+}
+
 function extensions(info) {
-  errorLogger(info);
   queryLogger(info);
 
   // Last; might throw
@@ -56,6 +64,7 @@ app.use(
   '/',
   graphqlHTTP({
     context: { dataSources },
+    customFormatErrorFn: customFormatError,
     extensions,
 
     // For local development using serverless-offline. No ETags when enabled.

@@ -2,19 +2,13 @@ const log = require('../../log');
 
 const { isAuroraServerlessPausedError } = require('./helpers');
 
-module.exports = function errorLogger({ result }) {
-  const { errors } = result;
-
-  if (
-    !errors ||
-    errors.every(isClientError) ||
-    errors.some(isAuroraServerlessPausedError)
-  ) {
+module.exports = function errorLogger(error) {
+  if (isClientError(error) || isAuroraServerlessPausedError(error)) {
     // No full error logging for these; query logging is enough
     return;
   }
 
-  errors.forEach(error => log.error('Error while executing query', error));
+  log.error('Error while executing query', error);
 };
 
 function isClientError({ message, status }) {
