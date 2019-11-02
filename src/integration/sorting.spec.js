@@ -87,3 +87,27 @@ test('does not support sorting by multiple fields at once', async () => {
     }),
   ]);
 });
+
+test('rejects unknown sort field', async () => {
+  // Tests that the custom validation rules don't choke on objects of unknown types
+
+  const query = gql`
+    {
+      hills(sort: { foo: {} }) {
+        nodes {
+          names {
+            primary
+          }
+        }
+      }
+    }
+  `;
+
+  const errors = await sendQueryError(400, query);
+
+  expect(errors).toEqual([
+    expect.objectContaining({
+      message: 'Field "foo" is not defined by type HillSort.',
+    }),
+  ]);
+});

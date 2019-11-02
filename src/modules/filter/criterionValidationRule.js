@@ -22,7 +22,8 @@ const COMPATIBILITY = {
 module.exports = function criterionValidationRule(context) {
   return {
     ObjectValue(node) {
-      if (!context.getInputType().name.endsWith('Criterion')) {
+      // This will get called even if an unknown field (and so input type) was given
+      if (!context.getInputType() || !context.getInputType().name.endsWith('Criterion')) {
         return;
       }
 

@@ -8,7 +8,7 @@ const { GraphQLError } = require('graphql');
 module.exports = function sortValidationRule(context) {
   return {
     ObjectValue(node) {
-      if (!context.getInputType().name.endsWith('Sort')) {
+      if (!context.getInputType() || !context.getInputType().name.endsWith('Sort')) {
         return;
       }
 
