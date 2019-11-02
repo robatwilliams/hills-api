@@ -186,7 +186,7 @@ describe('going backward', () => {
 });
 
 describe('when combined with client-specified sort', () => {
-  it('works on sort column with unique values (name)', async () => {
+  it('works on sort column with unique values (name) - going forward', async () => {
     const query = gql`
       {
         hills(
@@ -227,7 +227,48 @@ describe('when combined with client-specified sort', () => {
     expectNames(['Arnison Crag', "Arthur's Pike"], data);
   });
 
-  it('works on a sort column containing duplicates (height)', async () => {
+  it('works on sort column with unique values (name), - going backward', async () => {
+    const query = gql`
+      {
+        hills(
+          filter: { lists: { id: { inc: WAINWRIGHT } } }
+          sort: { namePrimary: { descending: false } }
+          last: 2
+          before: null
+        ) {
+          nodes {
+            names {
+              primary
+            }
+          }
+          pageInfo {
+            startCursor
+          }
+        }
+      }
+    `;
+
+    let data = await sendQueryOk(query);
+
+    // Last page
+    expectNames(['Yewbarrow', 'Yoke'], data);
+
+    data = await sendQueryOk(
+      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+    );
+
+    // Penultimate page before last
+    expectNames(['Whiteless Pike', 'Whiteside'], data);
+
+    data = await sendQueryOk(
+      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+    );
+
+    // Second last page, we don't want to see anything we've seen before
+    expectNames(['Whinlatter', 'White Side'], data);
+  });
+
+  it('works on a sort column containing duplicates (height) - going forward', async () => {
     const query = gql`
       {
         hills(
@@ -266,6 +307,47 @@ describe('when combined with client-specified sort', () => {
 
     // Third page, we don't want to see anything we've seen before
     expectNames(['Creigiau Gleision', 'Baugh Fell - Tarn Rigg Hill'], data);
+  });
+
+  it('works on a sort column containing duplicates (height) - going backward', async () => {
+    const query = gql`
+      {
+        hills(
+          filter: { heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }
+          sort: { height: { descending: true } }
+          last: 2
+          before: null
+        ) {
+          nodes {
+            names {
+              primary
+            }
+          }
+          pageInfo {
+            startCursor
+          }
+        }
+      }
+    `;
+
+    let data = await sendQueryOk(query);
+
+    // Last page
+    expectNames(['Sawel', 'Slieve Snaght'], data);
+
+    data = await sendQueryOk(
+      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+    );
+
+    // Penultimate page, before the last
+    expectNames(['Creigiau Gleision', 'Baugh Fell - Tarn Rigg Hill'], data);
+
+    data = await sendQueryOk(
+      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+    );
+
+    // 2nd-last page, we don't want to see anything we've seen before
+    expectNames(['Carn Breac', 'Capel Fell'], data);
   });
 });
 
