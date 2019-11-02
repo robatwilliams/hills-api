@@ -45,6 +45,10 @@ function findHillNames(allNames, hill) {
 function getHillCursor(hill, sort) {
   const sortValues = {};
 
+  if (sort.height) {
+    sortValues.height = hill.heightMetres;
+  }
+
   if (sort.namePrimary) {
     sortValues.namePrimary = hill.namePrimary;
   }

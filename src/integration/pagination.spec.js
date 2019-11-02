@@ -186,7 +186,7 @@ describe('going backward', () => {
 });
 
 describe('when combined with client-specified sort', () => {
-  it('works when the sort column is unique', async () => {
+  it('works on sort column with unique values (name)', async () => {
     const query = gql`
       {
         hills(
@@ -225,6 +225,47 @@ describe('when combined with client-specified sort', () => {
 
     // Third page, we don't want to see anything we've seen before
     expectNames(['Arnison Crag', "Arthur's Pike"], data);
+  });
+
+  it('works on a sort column containing duplicates (height)', async () => {
+    const query = gql`
+      {
+        hills(
+          filter: { heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }
+          sort: { height: { descending: true } }
+          first: 2
+          after: null
+        ) {
+          nodes {
+            names {
+              primary
+            }
+          }
+          pageInfo {
+            endCursor
+          }
+        }
+      }
+    `;
+
+    let data = await sendQueryOk(query);
+
+    // First page
+    expectNames(['Hill of Wirren', 'Carn Mhic an Toisich'], data);
+
+    data = await sendQueryOk(
+      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+    );
+
+    // Second page follows first
+    expectNames(['Carn Breac', 'Capel Fell'], data);
+
+    data = await sendQueryOk(
+      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+    );
+
+    // Third page, we don't want to see anything we've seen before
+    expectNames(['Creigiau Gleision', 'Baugh Fell - Tarn Rigg Hill'], data);
   });
 });
 

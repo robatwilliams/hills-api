@@ -6,6 +6,20 @@ function paginateBy(paginate, sort) {
     return { expression: 'TRUE' };
   }
 
+  if (sort.height) {
+    return {
+      expression: `heightMetres ${
+        sort.height.descending ? '<' : '>'
+      } :height OR (heightMetres = :height AND number ${
+        paginate.after ? '>' : '<'
+      } :number)`,
+      parameters: {
+        height: cursor.height,
+        number: cursor.number,
+      },
+    };
+  }
+
   if (sort.namePrimary) {
     return {
       expression: `name.name ${sort.namePrimary.descending ? '<' : '>'} :namePrimary`,

@@ -24,7 +24,8 @@ function unwrapRecord(values, columnMetadata) {
 function unwrapField(wrapper, column) {
   if (wrapper.isNull) {
     return null;
-  } else if (column.typeName === 'DECIMAL') {
+  } else if (column.typeName.startsWith('DECIMAL')) {
+    // may be DECIMAL UNSIGNED
     // resultSetOptions.decimalReturnType doesn't seem to work
     return Number(wrapper.stringValue);
   }
