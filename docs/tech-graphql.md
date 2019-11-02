@@ -76,11 +76,14 @@ The design is based on the [GatsbyJS GraphQL API](https://www.gatsbyjs.org/docs/
 
 Cursor-based pagination is implemented (mostly) based on the [Relay Cursor Connections Specification](https://facebook.github.io/relay/graphql/connections.htm). The library [graphql-relay-js](https://github.com/graphql/graphql-relay-js) exists to help build Relay-compliant GraphQL servers, but I didn't fancy the upheaval of introducing that.
 
+Implementing cursor-based pagination while also supporting sorting, is tricky. To be able to skip items from previous pages when querying the database, the value of the sorted field from the previous page is needed. This can be stored within the Base64 encoded cursor to avoid an extra database call. When a column contains duplicate values (e.g. height in metres), the query criteria needs to carefully use both this and the primary key in order obtain the correct records. When paginating backward, comparator operations and sort directions need to be reversed - which can be tricky to reason about.
+
 Other articles of interest:
 
 - [GraphQL Best Practices: Pagination](https://graphql.org/learn/pagination/)
 - [Evolving API Pagination at Slack](https://slack.engineering/evolving-api-pagination-at-slack-1c1f644f8e12)
 - [Faster Pagination in Mysql – Why Order By With Limit and Offset is Slow?](https://www.eversql.com/faster-pagination-in-mysql-why-order-by-with-limit-and-offset-is-slow)
+- [Implementing cursor-based pagination in Laravel](https://simonkollross.de/posts/implementing-cursor-based-pagination-in-laravel)
 
 ## Response codes
 
