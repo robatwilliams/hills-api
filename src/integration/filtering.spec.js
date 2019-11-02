@@ -1,5 +1,5 @@
 const gql = require('./graphql-tag-raw');
-const { sendQueryError, sendQueryOk } = require('./helpers');
+const { sendQuery, sendQueryOk } = require('./helpers');
 
 describe('no filters', () => {
   test('omitted', async () => {
@@ -355,7 +355,8 @@ test('invalid criterion', async () => {
     }
   `;
 
-  const response = await sendQueryError(400, query);
+  const response = await sendQuery(query);
 
+  expect(response.status).toBe(400);
   expect(response).toContainOneError('Criterion must have an operator');
 });

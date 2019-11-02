@@ -1,5 +1,5 @@
 const gql = require('./graphql-tag-raw');
-const { sendQueryError, sendQueryOk } = require('./helpers');
+const { sendQuery, sendQueryOk } = require('./helpers');
 
 test('by primary name, ascending', async () => {
   const query = gql`
@@ -79,8 +79,9 @@ test('does not support sorting by multiple fields at once', async () => {
     }
   `;
 
-  const response = await sendQueryError(400, query);
+  const response = await sendQuery(query);
 
+  expect(response.status).toBe(400);
   expect(response).toContainOneError('Sorting is only supported on one field at a time');
 });
 
@@ -99,7 +100,8 @@ test('rejects unknown sort field', async () => {
     }
   `;
 
-  const response = await sendQueryError(400, query);
+  const response = await sendQuery(query);
 
+  expect(response.status).toBe(400);
   expect(response).toContainOneError('Field "foo" is not defined by type HillSort.');
 });

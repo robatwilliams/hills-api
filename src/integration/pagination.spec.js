@@ -1,7 +1,7 @@
 const { encodeJSONCursor } = require('../modules/paginate');
 
 const gql = require('./graphql-tag-raw');
-const { sendQueryError, sendQueryOk } = require('./helpers');
+const { sendQuery, sendQueryOk } = require('./helpers');
 
 it('returns the first few when no paging specified', async () => {
   const query = createQuery();
@@ -192,8 +192,9 @@ describe('handling invalid arguments', () => {
     // Just test one case, the conditions are similar enough
     const query = createQuery({ first: 1, last: 1 });
 
-    const response = await sendQueryError(400, query);
+    const response = await sendQuery(query);
 
+    expect(response.status).toBe(400);
     expect(response).toContainOneError(
       'Limits given for both forward and backward pagination'
     );
@@ -202,8 +203,9 @@ describe('handling invalid arguments', () => {
   it('rejects negative limit', async () => {
     const query = createQuery({ first: -1 });
 
-    const response = await sendQueryError(400, query);
+    const response = await sendQuery(query);
 
+    expect(response.status).toBe(400);
     expect(response).toContainOneError('Negative pagination limit given');
   });
 

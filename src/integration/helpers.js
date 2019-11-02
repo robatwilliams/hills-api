@@ -8,10 +8,14 @@ const endpoint = `${rootUrl}/graphql`;
 const schemaDump = `${rootUrl}/schema`;
 const playground = `${rootUrl}/playground`;
 
-function sendQuery(query) {
-  return axios.post(endpoint, query, {
-    headers: { 'Content-Type': 'application/graphql' },
-  });
+async function sendQuery(query) {
+  try {
+    return await axios.post(endpoint, query, {
+      headers: { 'Content-Type': 'application/graphql' },
+    });
+  } catch (error) {
+    return error.response;
+  }
 }
 
 async function sendQueryOk(query) {
@@ -34,32 +38,11 @@ async function sendQueryOk(query) {
   return data;
 }
 
-async function sendQueryError(expectStatus, query) {
-  try {
-    const response = await sendQuery(query);
-
-    // eslint-disable-next-line no-console
-    console.log(response.data);
-    fail('Query unexpectedly succeeded');
-  } catch (error) {
-    const { response } = error;
-
-    if (response.status !== expectStatus) {
-      fail(`Expected status ${expectStatus}, but received ${response.status}`);
-    }
-
-    return response;
-  }
-
-  return undefined;
-}
-
 module.exports = {
   endpoint,
   playground,
   schemaDump,
 
   sendQuery,
-  sendQueryError,
   sendQueryOk,
 };
