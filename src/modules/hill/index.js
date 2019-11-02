@@ -12,8 +12,10 @@ module.exports = {
     require('./schema/ListId'),
     require('./schema/ListIdCriterion'),
     require('./schema/Names'),
+    require('./schema/NamesCriterion'),
     require('./schema/Query'),
     require('./schema/Region'),
     require('./schema/RegionFilter'),
+    require('./schema/RegionNameCriterion'),
   ],
 };
