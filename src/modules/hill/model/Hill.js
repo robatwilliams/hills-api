@@ -18,6 +18,20 @@ module.exports = class Hill {
     Object.assign(this, fields);
   }
 
+  coordinates() {
+    return {
+      geodetic: {
+        latitude: this.geodeticLatitude,
+        longitude: this.geodeticLongitude,
+      },
+      grid: {
+        easting: this.gridRef6Easting,
+        northing: this.gridRef6Northing,
+        square: this.gridRefSquare,
+      },
+    };
+  }
+
   height(unit) {
     switch (unit) {
       case UnitOfLength.FEET:

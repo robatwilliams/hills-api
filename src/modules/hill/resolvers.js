@@ -48,7 +48,12 @@ module.exports = {
     },
     lists: () => Object.keys(ListId).map(id => ({ id })),
   },
+  Coordinates: {
+    geodetic: ({ geodetic }) => geodetic,
+    grid: ({ grid }) => grid,
+  },
   Hill: {
+    coordinates: hill => hill.coordinates(),
     countries: ({ countriesCodes }) => countriesCodes.map(code => ({ code })),
     height: (hill, { unit }) => hill.height(unit),
     lists: ({ lists }) => lists.map(id => ({ id })),

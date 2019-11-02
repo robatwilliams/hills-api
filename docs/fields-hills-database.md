@@ -44,7 +44,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Map 1:25k              | 🔗    | ✅ <sup>1</sup> |
 | Metres                 | 📏    | ✅              | ✅         | ✅       |
 | Feet                   | 📏    | ✅              | ✅         | ✅       |
-| Grid ref               | 📌    | 🙏              |
+| Grid ref               | 📌    | ✅              |
 | Grid ref 10            | 📌    |                 |
 | Drop [to col]          | 📏    |                 |
 | Col grid ref           | 📌    |                 |
@@ -62,8 +62,8 @@ More information about each field can be found here: http://hills-database.co.uk
 | Hill-bagging           | 🔗    |                 |
 | Xcoord                 | 📌    |                 |
 | Ycoord                 | 📌    |                 |
-| Latitude               | 📌    | 🙏              |
-| Longitude              | 📌    | 🙏              |
+| Latitude               | 📌    | ✅              |
+| Longitude              | 📌    | ✅              |
 | GridrefXY              | 📌    |                 |
 | MVNumber               | 🔗    |                 |
 

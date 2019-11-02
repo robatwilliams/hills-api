@@ -56,7 +56,7 @@ Pagination is [cursor-based](https://graphql.org/learn/pagination/#pagination-an
 
 ## Example query
 
-Wainwright hills (of the Lake District), higher than 600m, sorted by height, 50 per page, with a selection of fields:
+Wainwright hills (of the Lake District), higher than 600m, sorted by height, 50 per page, with a selection of fields ([more available](docs/fields-hills-database.md)):
 
 ```graphql
 {
@@ -66,6 +66,12 @@ Wainwright hills (of the Lake District), higher than 600m, sorted by height, 50 
     sort: { height: { descending: true } }
   ) {
     nodes {
+      coordinates {
+        grid {
+          easting
+          northing
+        }
+      }
       height(unit: METRES)
       maps(scale: ONE_25K) {
         sheet

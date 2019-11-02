@@ -1,6 +1,7 @@
 module.exports = {
   resolvers: require('./resolvers'),
   schema: [
+    require('./schema/Coordinates'),
     require('./schema/Hill'),
     require('./schema/HillEdge'),
     require('./schema/HillFilter'),

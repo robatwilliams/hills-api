@@ -11,6 +11,7 @@ const client = new RDSDataService({ region });
 })();
 
 async function main() {
+  // This would ideally be done in a transaction
   await createTable('./database/ddl/HILLS.sql');
   await createTable('./database/ddl/HILLS_MAPS.sql');
   await createTable('./database/ddl/HILLS_NAMES.sql');

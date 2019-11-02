@@ -3,6 +3,8 @@ const parseMaps = require('./parseMaps');
 const parseNames = require('./parseNames');
 
 module.exports = function parseHill(row) {
+  const gridRef = parseGridRefSix(row['Grid ref']);
+
   const lists = row.Classification.split(',')
     .map(code => LIST_CODES[code])
     .filter(Boolean); // mapping is incomplete
@@ -14,6 +16,11 @@ module.exports = function parseHill(row) {
   });
 
   return {
+    geodeticLatitude: Number(row.Latitude),
+    geodeticLongitude: Number(row.Longitude),
+    gridRef6Easting: gridRef.easting,
+    gridRef6Northing: gridRef.northing,
+    gridRefSquare: gridRef.square,
     countries: COUNTRIES_CODES[row.Country],
     heightFeet: Number(row.Feet),
     heightMetres: Number(row.Metres),
@@ -39,4 +46,16 @@ function sanitizeMarilynParent({ ownNumber, parentNumber }) {
   }
 
   return parentNumber;
+}
+
+function parseGridRefSix(gridRef) {
+  const regex = /^(?<square>[A-Z]+)(?<easting>\d{3})(?<northing>\d{3})$/u;
+
+  const { easting, northing, square } = gridRef.match(regex).groups;
+
+  return {
+    easting: Number(easting),
+    northing: Number(northing),
+    square,
+  };
 }

@@ -1,6 +1,18 @@
 {
   # Ben Nevis
+  # Maintainer note: keep in sync with schemaConformance.spec.js
   hill(number: 278) {
+    coordinates {
+      geodetic {
+        latitude
+        longitude
+      }
+      grid {
+        easting
+        northing
+        square
+      }
+    }
     countries {
       code
       name

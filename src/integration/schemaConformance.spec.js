@@ -1,9 +1,21 @@
 const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
+// Keep in sync with examples/all-fields.graphql
 const allFieldsFragment = gql`
   {
     nodes {
+      coordinates {
+        geodetic {
+          latitude
+          longitude
+        }
+        grid {
+          easting
+          northing
+          square
+        }
+      }
       countries {
         code
         name
