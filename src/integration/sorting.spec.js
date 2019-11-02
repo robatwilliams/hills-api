@@ -79,13 +79,9 @@ test('does not support sorting by multiple fields at once', async () => {
     }
   `;
 
-  const errors = await sendQueryError(400, query);
+  const response = await sendQueryError(400, query);
 
-  expect(errors).toEqual([
-    expect.objectContaining({
-      message: 'Sorting is only supported on one field at a time',
-    }),
-  ]);
+  expect(response).toContainOneError('Sorting is only supported on one field at a time');
 });
 
 test('rejects unknown sort field', async () => {
@@ -103,11 +99,7 @@ test('rejects unknown sort field', async () => {
     }
   `;
 
-  const errors = await sendQueryError(400, query);
+  const response = await sendQueryError(400, query);
 
-  expect(errors).toEqual([
-    expect.objectContaining({
-      message: 'Field "foo" is not defined by type HillSort.',
-    }),
-  ]);
+  expect(response).toContainOneError('Field "foo" is not defined by type HillSort.');
 });

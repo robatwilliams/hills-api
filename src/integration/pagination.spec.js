@@ -192,25 +192,19 @@ describe('handling invalid arguments', () => {
     // Just test one case, the conditions are similar enough
     const query = createQuery({ first: 1, last: 1 });
 
-    const errors = await sendQueryError(400, query);
+    const response = await sendQueryError(400, query);
 
-    expect(errors).toEqual([
-      expect.objectContaining({
-        message: 'Limits given for both forward and backward pagination',
-      }),
-    ]);
+    expect(response).toContainOneError(
+      'Limits given for both forward and backward pagination'
+    );
   });
 
   it('rejects negative limit', async () => {
     const query = createQuery({ first: -1 });
 
-    const errors = await sendQueryError(400, query);
+    const response = await sendQueryError(400, query);
 
-    expect(errors).toEqual([
-      expect.objectContaining({
-        message: 'Negative pagination limit given',
-      }),
-    ]);
+    expect(response).toContainOneError('Negative pagination limit given');
   });
 
   it('does not cause internal server error when given an invalid cursor', async () => {

@@ -48,8 +48,7 @@ async function sendQueryError(expectStatus, query) {
       fail(`Expected status ${expectStatus}, but received ${response.status}`);
     }
 
-    // Unwrap the GraphQL response
-    return response.data.errors;
+    return response;
   }
 
   return undefined;

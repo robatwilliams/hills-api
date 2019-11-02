@@ -355,9 +355,7 @@ test('invalid criterion', async () => {
     }
   `;
 
-  const errors = await sendQueryError(400, query);
+  const response = await sendQueryError(400, query);
 
-  expect(errors).toEqual([
-    expect.objectContaining({ message: 'Criterion must have an operator' }),
-  ]);
+  expect(response).toContainOneError('Criterion must have an operator');
 });
