@@ -7,6 +7,7 @@ function buildDataSourceFilter(filter, dataSources) {
     heightFeet: filter.heightFeet,
     heightMetres: filter.heightMetres,
     list: filter.lists && filter.lists.id.inc,
+    names: filter.names,
     region:
       filter.region &&
       filter.region.name &&

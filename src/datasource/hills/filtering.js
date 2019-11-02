@@ -23,6 +23,10 @@ function filterBy(filter) {
     parameters.list = filter.list;
   }
 
+  if (filter.names) {
+    addNameSearchCriterion({ conjunctions, parameters }, filter.names);
+  }
+
   if (filter.numbers) {
     conjunctions.push(makeInListExpression(filter.numbers, 'number'));
   }
@@ -42,6 +46,21 @@ function addCriterion(target, criterion, columnName) {
   const sqlCriterion = convertCriterion(criterion, columnName);
 
   target.conjunctions.push(...sqlCriterion.expressions);
+  Object.assign(target.parameters, sqlCriterion.parameters);
+}
+
+function addNameSearchCriterion(target, criterion) {
+  const sqlCriterion = convertCriterion(criterion, 'name');
+
+  const expression = `
+    EXISTS(
+      SELECT NULL FROM HILLS_NAMES nameSub
+      WHERE nameSub.hillNumber = hill.number
+      AND ${sqlCriterion.expression}
+    )
+  `;
+
+  target.conjunctions.push(expression);
   Object.assign(target.parameters, sqlCriterion.parameters);
 }
 

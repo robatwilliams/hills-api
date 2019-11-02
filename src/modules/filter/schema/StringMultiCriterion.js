@@ -4,5 +4,7 @@ module.exports = gql`
   input StringMultiCriterion {
     "Includes"
     inc: String
+
+    search: String
   }
 `;

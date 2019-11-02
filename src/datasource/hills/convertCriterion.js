@@ -7,6 +7,10 @@ const operatorsByShortName = {
 };
 
 module.exports = function convertCriterion(criterion, columnName) {
+  if (criterion.search) {
+    return convertSearchCriterion(criterion, columnName);
+  }
+
   const fieldCriteria = unwrapCriterion(criterion);
 
   const expressions = [];
@@ -36,4 +40,21 @@ function sqlOperator(shortName) {
   }
 
   return operator;
+}
+
+function convertSearchCriterion({ search }, columnName) {
+  const paramName = `${columnName}_search`;
+
+  const expression = `(
+    ${columnName} = :${paramName}
+    OR ${columnName} LIKE CONCAT(:${paramName}, '%')
+    OR ${columnName} LIKE CONCAT('% ', :${paramName}, '%')
+  )`;
+
+  return {
+    expression,
+    parameters: {
+      [paramName]: search,
+    },
+  };
 }

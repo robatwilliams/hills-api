@@ -17,6 +17,7 @@ const COMPATIBILITY = {
   lt: ['gt', 'gte'],
   lte: ['gt', 'gte'],
   inc: [],
+  search: [],
 };
 
 module.exports = function criterionValidationRule(context) {

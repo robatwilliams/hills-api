@@ -6,6 +6,7 @@ module.exports = gql`
     heightFeet: FloatCriterion
     heightMetres: FloatCriterion
     lists: ListFilter
+    names: StringMultiCriterion
     region: RegionFilter
   }
 `;

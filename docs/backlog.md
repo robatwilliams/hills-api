@@ -9,9 +9,7 @@ Key:
 
 ## Features: core
 
-### Queries
-
-- 🙏 Filtering on remainder of key fields
+✅ All done.
 
 ## Features: nice to have
 

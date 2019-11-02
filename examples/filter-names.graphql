@@ -1,0 +1,10 @@
+{
+  hills(filter: { names: { search: "pik" } }) {
+    nodes {
+      names {
+        alternates
+        primary
+      }
+    }
+  }
+}

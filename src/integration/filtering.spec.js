@@ -154,6 +154,136 @@ test('by list', async () => {
   }
 });
 
+describe('by names', () => {
+  describe('word == term', () => {
+    it('includes when name == term', async () => {
+      const query = createQuery('Skiddaw');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'Skiddaw' } }),
+        ])
+      );
+    });
+
+    it('includes when first word of name == term', async () => {
+      const query = createQuery('Glyder');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'Glyder Fach' } }),
+        ])
+      );
+    });
+
+    it('includes when middle word of name == term', async () => {
+      const query = createQuery('Sca');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'Great Sca Fell' } }),
+        ])
+      );
+    });
+
+    it('includes when last word of name == term', async () => {
+      const query = createQuery('Blisco');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'Pike of Blisco' } }),
+        ])
+      );
+    });
+  });
+
+  describe('word starts with term', () => {
+    it('includes when name starts with term', async () => {
+      const query = createQuery('Skid');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'Skiddaw' } }),
+        ])
+      );
+    });
+
+    it('includes when subsequent word of name starts with term', async () => {
+      const query = createQuery('Sund');
+
+      const data = await sendQueryOk(query);
+
+      expect(data.hills.nodes).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ names: { primary: 'St Sunday Crag' } }),
+        ])
+      );
+    });
+  });
+
+  it('includes when match is on alternate name', async () => {
+    const query = createQuery('Eel Crag');
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills.nodes).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ names: { primary: 'Crag Hill' } }),
+      ])
+    );
+  });
+
+  it('does not include when word includes term later than the start', async () => {
+    const query = createQuery('ben');
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills.nodes).not.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ names: { primary: 'Scaraben' } }),
+      ])
+    );
+  });
+
+  it('is not case sensitive', async () => {
+    const query = createQuery('skiddaw');
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills.nodes).toEqual(
+      expect.arrayContaining([expect.objectContaining({ names: { primary: 'Skiddaw' } })])
+    );
+  });
+
+  function createQuery(searchTerm) {
+    const fieldsFragment = gql`
+      {
+        nodes {
+          names {
+            primary
+          }
+        }
+      }
+    `;
+
+    return gql`
+      {
+        hills(filter: { names: { search: "${searchTerm}" } }) ${fieldsFragment}
+      }
+    `;
+  }
+});
+
 test('by region', async () => {
   const query = gql`
     {
