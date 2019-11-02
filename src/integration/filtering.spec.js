@@ -107,6 +107,24 @@ describe('by height', () => {
       { names: { primary: 'Braeriach' } },
     ]);
   });
+
+  test('using a decimal', async () => {
+    const query = gql`
+      {
+        hills(filter: { heightMetres: { gt: 1344.5 } }) {
+          nodes {
+            names {
+              primary
+            }
+          }
+        }
+      }
+    `;
+
+    const data = await sendQueryOk(query);
+
+    expect(data.hills.nodes).toEqual([{ names: { primary: 'Ben Nevis' } }]);
+  });
 });
 
 test('by list', async () => {

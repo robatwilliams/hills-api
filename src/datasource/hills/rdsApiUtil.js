@@ -59,8 +59,8 @@ function buildParameters(paramMap) {
 function fieldValueKey(value) {
   if (typeof value === 'string') {
     return 'stringValue';
-  } else if (Number.isInteger(value)) {
-    return 'longValue';
+  } else if (typeof value === 'number') {
+    return Number.isInteger(value) ? 'longValue' : 'doubleValue';
   }
 
   throw new Error(`Not implemented for values of this type: ${value}`);
