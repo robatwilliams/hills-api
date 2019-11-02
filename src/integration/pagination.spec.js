@@ -187,81 +187,51 @@ describe('going backward', () => {
 
 describe('when combined with client-specified sort', () => {
   it('works on sort column with unique values (name) - going forward', async () => {
-    const query = gql`
-      {
-        hills(
-          filter: { lists: { id: { inc: WAINWRIGHT } } }
-          sort: { namePrimary: { descending: false } }
-          first: 2
-          after: null
-        ) {
-          nodes {
-            names {
-              primary
-            }
-          }
-          pageInfo {
-            endCursor
-          }
-        }
-      }
-    `;
+    const queryOptions = {
+      sort: gql`{ namePrimary: { descending: false } }`,
+      first: 2,
+    };
 
-    let data = await sendQueryOk(query);
+    let data = await sendQueryOk(createQuery(queryOptions));
 
     // First page
     expectNames(['Allen Crags', 'Angletarn Pikes'], data);
 
     data = await sendQueryOk(
-      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+      createQuery({ ...queryOptions, after: data.hills.pageInfo.endCursor })
     );
 
     // Second page follows first
     expectNames(['Ard Crags', 'Armboth Fell'], data);
 
     data = await sendQueryOk(
-      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+      createQuery({ ...queryOptions, after: data.hills.pageInfo.endCursor })
     );
 
     // Third page, we don't want to see anything we've seen before
     expectNames(['Arnison Crag', "Arthur's Pike"], data);
   });
 
-  it('works on sort column with unique values (name), - going backward', async () => {
-    const query = gql`
-      {
-        hills(
-          filter: { lists: { id: { inc: WAINWRIGHT } } }
-          sort: { namePrimary: { descending: false } }
-          last: 2
-          before: null
-        ) {
-          nodes {
-            names {
-              primary
-            }
-          }
-          pageInfo {
-            startCursor
-          }
-        }
-      }
-    `;
+  it('works on sort column with unique values (name) - going backward', async () => {
+    const queryOptions = {
+      sort: gql`{ namePrimary: { descending: false } }`,
+      last: 2,
+    };
 
-    let data = await sendQueryOk(query);
+    let data = await sendQueryOk(createQuery(queryOptions));
 
     // Last page
     expectNames(['Yewbarrow', 'Yoke'], data);
 
     data = await sendQueryOk(
-      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+      createQuery({ ...queryOptions, before: data.hills.pageInfo.startCursor })
     );
 
     // Penultimate page before last
     expectNames(['Whiteless Pike', 'Whiteside'], data);
 
     data = await sendQueryOk(
-      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+      createQuery({ ...queryOptions, before: data.hills.pageInfo.startCursor })
     );
 
     // Second last page, we don't want to see anything we've seen before
@@ -269,40 +239,26 @@ describe('when combined with client-specified sort', () => {
   });
 
   it('works on a sort column containing duplicates (height) - going forward', async () => {
-    const query = gql`
-      {
-        hills(
-          filter: { heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }
-          sort: { height: { descending: true } }
-          first: 2
-          after: null
-        ) {
-          nodes {
-            names {
-              primary
-            }
-          }
-          pageInfo {
-            endCursor
-          }
-        }
-      }
-    `;
+    const queryOptions = {
+      filter: gql`{ heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }`,
+      sort: gql`{ height: { descending: true } }`,
+      first: 2,
+    };
 
-    let data = await sendQueryOk(query);
+    let data = await sendQueryOk(createQuery(queryOptions));
 
     // First page
     expectNames(['Hill of Wirren', 'Carn Mhic an Toisich'], data);
 
     data = await sendQueryOk(
-      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+      createQuery({ ...queryOptions, after: data.hills.pageInfo.endCursor })
     );
 
     // Second page follows first
     expectNames(['Carn Breac', 'Capel Fell'], data);
 
     data = await sendQueryOk(
-      query.replace('after: null', `after: "${data.hills.pageInfo.endCursor}"`)
+      createQuery({ ...queryOptions, after: data.hills.pageInfo.endCursor })
     );
 
     // Third page, we don't want to see anything we've seen before
@@ -310,40 +266,26 @@ describe('when combined with client-specified sort', () => {
   });
 
   it('works on a sort column containing duplicates (height) - going backward', async () => {
-    const query = gql`
-      {
-        hills(
-          filter: { heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }
-          sort: { height: { descending: true } }
-          last: 2
-          before: null
-        ) {
-          nodes {
-            names {
-              primary
-            }
-          }
-          pageInfo {
-            startCursor
-          }
-        }
-      }
-    `;
+    const queryOptions = {
+      filter: gql`{ heightMetres: { eq: 678 }, lists: { id: { inc: MARILYN } } }`,
+      sort: gql`{ height: { descending: true } }`,
+      last: 2,
+    };
 
-    let data = await sendQueryOk(query);
+    let data = await sendQueryOk(createQuery(queryOptions));
 
     // Last page
     expectNames(['Sawel', 'Slieve Snaght'], data);
 
     data = await sendQueryOk(
-      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+      createQuery({ ...queryOptions, before: data.hills.pageInfo.startCursor })
     );
 
     // Penultimate page, before the last
     expectNames(['Creigiau Gleision', 'Baugh Fell - Tarn Rigg Hill'], data);
 
     data = await sendQueryOk(
-      query.replace('before: null', `before: "${data.hills.pageInfo.startCursor}"`)
+      createQuery({ ...queryOptions, before: data.hills.pageInfo.startCursor })
     );
 
     // 2nd-last page, we don't want to see anything we've seen before
@@ -384,7 +326,7 @@ describe('handling invalid arguments', () => {
   });
 });
 
-function createQuery({ filter, first, after, last, before } = {}) {
+function createQuery({ filter, sort, first, after, last, before } = {}) {
   const defaultFilter = gql`{ lists: { id: { inc: WAINWRIGHT } } }`;
 
   const fieldsFragment = gql`
@@ -410,6 +352,7 @@ function createQuery({ filter, first, after, last, before } = {}) {
     {
       hills(
         filter: ${filter || defaultFilter}
+        ${sort == null ? '' : `sort: ${sort}`}
         ${first == null ? '' : `first: ${first}`}
         ${after == null ? '' : `after: "${after}"`}
         ${last == null ? '' : `last: ${last}`}
