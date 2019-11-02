@@ -26,8 +26,8 @@
       sheet
     }
     names {
-      primary
       alternates
+      primary
     }
     number
     parent {

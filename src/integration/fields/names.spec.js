@@ -6,8 +6,8 @@ test('single simple', async () => {
     {
       hill(number: 2319) {
         names {
-          primary
           alternates
+          primary
         }
       }
     }
@@ -24,8 +24,8 @@ test('single with disambiguation', async () => {
     {
       hill(number: 2643) {
         names {
-          primary
           alternates
+          primary
         }
       }
     }
@@ -42,8 +42,8 @@ test('multiple', async () => {
     {
       hill(number: 2374) {
         names {
-          primary
           alternates
+          primary
         }
       }
     }

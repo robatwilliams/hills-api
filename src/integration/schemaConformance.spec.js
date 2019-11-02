@@ -33,8 +33,8 @@ const allFieldsFragment = gql`
         sheet
       }
       names {
-        primary
         alternates
+        primary
       }
       number
       region {
