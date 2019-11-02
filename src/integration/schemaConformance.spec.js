@@ -37,6 +37,9 @@ const allFieldsFragment = gql`
         alternates
       }
       number
+      region {
+        name
+      }
     }
     pageInfo {
       endCursor

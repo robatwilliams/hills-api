@@ -9,10 +9,6 @@ Key:
 
 ## Features: core
 
-### Data
-
-- 🙏 Remainder of key [fields from the hills database](fields-hills-database.md)
-
 ### Queries
 
 - 🙏 Filtering on remainder of key fields

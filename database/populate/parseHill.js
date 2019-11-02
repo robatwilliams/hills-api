@@ -30,6 +30,7 @@ module.exports = function parseHill(row) {
     names: parseNames(row.Name),
     number,
     parentMarilynNumber,
+    rhbSection: row.Section,
   };
 };
 

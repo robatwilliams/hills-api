@@ -14,4 +14,8 @@ module.exports = class RegionsDataSource {
   all() {
     return Object.values(regions);
   }
+
+  byCode(code) {
+    return regions[code];
+  }
 };

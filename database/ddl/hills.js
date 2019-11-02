@@ -12,4 +12,5 @@ module.exports = {
   lists: [STRING],
   number: LONG,
   parentMarilynNumber: LONG,
+  rhbSection: STRING,
 };

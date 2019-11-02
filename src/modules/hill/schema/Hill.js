@@ -10,5 +10,6 @@ module.exports = gql`
     names: Names!
     number: Int!
     parent: Hill
+    region: Region!
   }
 `;

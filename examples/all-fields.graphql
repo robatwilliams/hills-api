@@ -30,5 +30,11 @@
       alternates
     }
     number
+    parent {
+      number
+    }
+    region {
+      name
+    }
   }
 }

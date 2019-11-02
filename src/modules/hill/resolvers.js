@@ -82,6 +82,9 @@ module.exports = {
         parents.find(parent => parent.number === hill.parentMarilynNumber)
       );
     }),
+    region(hill, args, { dataSources }) {
+      return { name: dataSources.regions.byCode(hill.rhbSection) };
+    },
   },
   HillsConnection: {
     edges({ nodes }, args, { rootArgs }) {

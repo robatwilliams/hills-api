@@ -84,6 +84,9 @@ Wainwright hills (of the Lake District), higher than 600m, sorted by height, 50 
           primary
         }
       }
+      region {
+        name
+      }
     }
     pageInfo {
       endCursor
