@@ -1,7 +1,7 @@
 const gql = require('./graphql-tag-raw');
 const { sendQueryOk } = require('./helpers');
 
-test('by primary name', async () => {
+test('by primary name, ascending', async () => {
   const query = gql`
     {
       hills(
@@ -23,17 +23,15 @@ test('by primary name', async () => {
   expect(data.hills.nodes[1].names.primary).toBe('Angletarn Pikes');
 });
 
-test('descending', async () => {
+test('by height, descending', async () => {
   const query = gql`
     {
       hills(
         filter: { lists: { id: { inc: WAINWRIGHT } } }
-        sort: { namePrimary: { descending: true } }
+        sort: { height: { descending: true } }
       ) {
         nodes {
-          names {
-            primary
-          }
+          height(unit: METRES)
         }
       }
     }
@@ -41,6 +39,6 @@ test('descending', async () => {
 
   const data = await sendQueryOk(query);
 
-  expect(data.hills.nodes[0].names.primary).toBe('Yoke');
-  expect(data.hills.nodes[1].names.primary).toBe('Yewbarrow');
+  expect(data.hills.nodes[0].height).toBe(978.07);
+  expect(data.hills.nodes[1].height).toBe(963.9);
 });

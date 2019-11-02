@@ -15,7 +15,6 @@ Key:
 
 ### Queries
 
-- 🙏 Sorting on key fields
 - 🙏 Filtering on remainder of key fields
 
 ## Features: nice to have

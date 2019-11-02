@@ -1,0 +1,12 @@
+{
+  hills(
+    sort: { height: { descending: true } }
+  ) {
+    nodes {
+      height(unit: METRES)
+      names {
+        primary
+      }
+    }
+  }
+}
