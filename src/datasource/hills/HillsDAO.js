@@ -23,7 +23,7 @@ module.exports = class HillsDAO {
     };
 
     const sortExpressions = [
-      sortBy(sort),
+      sortBy(sort, paginate),
 
       // Always include number, for stable pagination
       `number ${paginate.backward ? 'DESC' : 'ASC'}`,

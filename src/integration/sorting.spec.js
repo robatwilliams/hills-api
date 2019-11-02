@@ -43,6 +43,29 @@ test('by height, descending', async () => {
   expect(data.hills.nodes[1].height).toBe(963.9);
 });
 
+test('when paginating backward', async () => {
+  const query = gql`
+    {
+      hills(
+        filter: { lists: { id: { inc: WAINWRIGHT } } }
+        sort: { namePrimary: { descending: false } }
+        last: 2
+      ) {
+        nodes {
+          names {
+            primary
+          }
+        }
+      }
+    }
+  `;
+
+  const data = await sendQueryOk(query);
+
+  expect(data.hills.nodes[0].names.primary).toBe('Yewbarrow');
+  expect(data.hills.nodes[1].names.primary).toBe('Yoke');
+});
+
 test('does not support sorting by multiple fields at once', async () => {
   const query = gql`
     {
