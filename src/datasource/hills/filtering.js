@@ -10,11 +10,11 @@ function filterBy(filter) {
     parameters.country = filter.country;
   }
 
-  if (filter.heightFeet != null) {
+  if (filter.heightFeet) {
     addCriterion({ conjunctions, parameters }, filter.heightFeet, 'heightFeet');
   }
 
-  if (filter.heightMetres != null) {
+  if (filter.heightMetres) {
     addCriterion({ conjunctions, parameters }, filter.heightMetres, 'heightMetres');
   }
 
@@ -23,11 +23,11 @@ function filterBy(filter) {
     parameters.list = filter.list;
   }
 
-  if (filter.numbers != null) {
+  if (filter.numbers) {
     conjunctions.push(makeInListExpression(filter.numbers, 'number'));
   }
 
-  if (filter.region != null) {
+  if (filter.region) {
     addCriterion({ conjunctions, parameters }, filter.region, 'rhbSection');
   }
 
