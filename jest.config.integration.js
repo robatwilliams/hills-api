@@ -9,8 +9,8 @@ module.exports = {
 
   rootDir: './src/integration',
 
-  setupFiles: ['<rootDir>/jestSetup.js'],
-  setupFilesAfterEnv: ['<rootDir>/jestSetupAfterEnv.js'],
+  setupFiles: ['<rootDir>/jest/setup.js'],
+  setupFilesAfterEnv: ['<rootDir>/jest/setupAfterEnv.js'],
 
   // Doesn't need JSDOM
   testEnvironment: 'node',
