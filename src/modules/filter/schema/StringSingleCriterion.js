@@ -1,7 +1,7 @@
 const gql = require('graphql-tag');
 
 module.exports = gql`
-  input CountryFilter {
-    code: StringMultiCriterion
+  input StringSingleCriterion {
+    eq: String
   }
 `;

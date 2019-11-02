@@ -14,5 +14,6 @@ module.exports = {
     require('./schema/Names'),
     require('./schema/Query'),
     require('./schema/Region'),
+    require('./schema/RegionFilter'),
   ],
 };

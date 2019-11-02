@@ -18,4 +18,8 @@ module.exports = class RegionsDataSource {
   byCode(code) {
     return regions[code];
   }
+
+  getCode(name) {
+    return Object.keys(regions).find(code => regions[code] === name);
+  }
 };

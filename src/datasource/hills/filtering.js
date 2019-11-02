@@ -27,6 +27,10 @@ function filterBy(filter) {
     conjunctions.push(makeInListExpression(filter.numbers, 'number'));
   }
 
+  if (filter.region != null) {
+    addCriterion({ conjunctions, parameters }, filter.region, 'rhbSection');
+  }
+
   // Always return an expression, to reduce need for conditionals elsewhere
   const expression =
     conjunctions.length === 0 ? 'TRUE' : `(${conjunctions.join(' AND ')})`;

@@ -29,7 +29,7 @@ module.exports = {
 
       setPaginateDefaults(paginate);
 
-      const dsFilter = buildDataSourceFilter(filter);
+      const dsFilter = buildDataSourceFilter(filter, dataSources);
       const dsPaginate = buildDataSourcePaginate(paginate);
 
       const { entities, hasMore } = await dataSources.hills.query(

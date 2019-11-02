@@ -34,7 +34,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Parent name (Ma)       | -     | 🚫              | 🚫         | 🚫       |
 | Section                | 🔗    |                 |
 | \_Section              | 🔗    | 🚫              | 🚫         | 🚫       |
-| Region                 | 🌍    | ✅              | 🙏         |
+| Region                 | 🌍    | ✅              | ✅         |
 | Area                   | 🌍    |                 |            |
 | Island                 | 🌍    |                 |
 | Topo Section           | 🌍 🔗 |                 |
