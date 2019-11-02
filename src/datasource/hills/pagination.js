@@ -6,13 +6,18 @@ function paginateBy(paginate, sort) {
     return { expression: 'TRUE' };
   }
 
+  const numberExpression = `number ${paginate.after ? '>' : '<'} :number`;
+
   if (sort.height) {
+    // It's a different height...
+    // OR it's the same height AND beyond the previous page
+    const expression = `
+      heightMetres ${sort.height.descending ? '<' : '>'} :height
+      OR (heightMetres = :height AND ${numberExpression})
+    `;
+
     return {
-      expression: `heightMetres ${
-        sort.height.descending ? '<' : '>'
-      } :height OR (heightMetres = :height AND number ${
-        paginate.after ? '>' : '<'
-      } :number)`,
+      expression,
       parameters: {
         height: cursor.height,
         number: cursor.number,
@@ -28,7 +33,7 @@ function paginateBy(paginate, sort) {
   }
 
   return {
-    expression: `number ${paginate.after ? '>' : '<'} :number`,
+    expression: numberExpression,
     parameters: { number: cursor.number },
   };
 }
