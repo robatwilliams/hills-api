@@ -1,7 +1,5 @@
 {
-  hills(
-    sort: { height: { descending: true } }
-  ) {
+  hills(sort: { height: { descending: true } }) {
     nodes {
       height(unit: METRES)
       names {
