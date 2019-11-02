@@ -31,8 +31,8 @@ function filterBy(filter) {
     conjunctions.push(makeInListExpression(filter.numbers, 'number'));
   }
 
-  if (filter.region) {
-    addCriterion({ conjunctions, parameters }, filter.region, 'rhbSection');
+  if (filter.sectionCode) {
+    addCriterion({ conjunctions, parameters }, filter.sectionCode, 'rhbSection');
   }
 
   // Always return an expression, to reduce need for conditionals elsewhere

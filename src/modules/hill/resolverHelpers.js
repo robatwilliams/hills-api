@@ -8,7 +8,7 @@ function buildDataSourceFilter(filter, dataSources) {
     heightMetres: filter.heightMetres,
     list: filter.lists && filter.lists.id.inc,
     names: filter.names,
-    region:
+    sectionCode:
       filter.region &&
       filter.region.name &&
       mapValues(filter.region.name, nameValue => dataSources.regions.getCode(nameValue)),
