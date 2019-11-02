@@ -35,7 +35,7 @@ More information about each field can be found here: http://hills-database.co.uk
 | Section                | 🔗    |                 |
 | \_Section              | 🔗    | 🚫              | 🚫         | 🚫       |
 | Region                 | 🌍    | 🙏              | 🙏         |
-| Area                   | 🌍    | 🙏              | 🙏         |
+| Area                   | 🌍    |                 |            |
 | Island                 | 🌍    |                 |
 | Topo Section           | 🌍 🔗 |                 |
 | County                 | 🌍    |                 |
@@ -49,8 +49,8 @@ More information about each field can be found here: http://hills-database.co.uk
 | Drop [to col]          | 📏    |                 |
 | Col grid ref           | 📌    |                 |
 | Col height             | 📏    |                 |
-| Feature                | ℹ️    | 🙏              |
-| Observations           | ℹ️    | 🙏              |
+| Feature                | ℹ️    |                 |
+| Observations           | ℹ️    |                 |
 | Survey                 | 📝    |                 |
 | Climbed                | -     | 🚫              | 🚫         | 🚫       |
 | Country                | 🌍    | ✅              | ✅         |

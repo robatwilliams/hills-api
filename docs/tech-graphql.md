@@ -95,7 +95,7 @@ Depending on the type of error and what the schema allows to be null, some error
 
 ## Error logging
 
-Errors thrown/returned by `graphql-js` don't include any robust indication of being client or server errors. To choose a log level for logging errors, you must inspect the message. Due to the lack of exposed information, it's not possible to always log 500 errors at the error level and 400 errors at the warning level.
+Errors thrown/returned by `graphql-js` don't include any robust indication of being client or server errors. To choose a log level for logging errors, you must inspect the message. This also makes it difficult to sanitise error messages that should be kept private while continuing to pass useful and appropriate ones to callers. Due to the lack of exposed information, it's not possible to always log 500 errors at the error level and 400 errors at the warning level.
 
 ## No generic types
 

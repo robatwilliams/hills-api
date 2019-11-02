@@ -36,7 +36,7 @@ Key:
 Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse is a problem.
 
 - 🙏 CORS (see https://serverless.com/framework/docs/providers/aws/events/apigateway/#api-gateway)
-- 🙏 Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
+- Sanitise returned error messages (except for helpful GraphQL ones e.g. syntax error in query)
 
 ## Performance
 
