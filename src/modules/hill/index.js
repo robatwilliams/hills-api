@@ -13,5 +13,6 @@ module.exports = {
     require('./schema/ListIdCriterion'),
     require('./schema/Names'),
     require('./schema/Query'),
+    require('./schema/Region'),
   ],
 };

@@ -42,3 +42,18 @@ test('lists', async () => {
     expect(list.name).toMatch(/^[A-Z][a-z]+$/u);
   }
 });
+
+test('regions', async () => {
+  const query = gql`
+    {
+      regions {
+        name
+      }
+    }
+  `;
+
+  const data = await sendQueryOk(query);
+
+  expect(data.regions).toHaveLength(139);
+  expect(data.regions[0].name).toBe('Shetland Islands');
+});

@@ -3,9 +3,12 @@ const graphqlHTTP = require('express-graphql');
 const { formatError: defaultFormatError } = require('graphql');
 const { makeExecutableSchema } = require('graphql-tools');
 
-const CountriesDataSource = require('../../datasource/CountriesDataSource');
-const ListsDataSource = require('../../datasource/ListsDataSource');
-const HillsDataSource = require('../../datasource/hills/HillsDataSource');
+const {
+  CountriesDataSource,
+  HillsDataSource,
+  ListsDataSource,
+  RegionsDataSource,
+} = require('../../datasource');
 const { resolvers, schema, validationRules } = require('../../modules');
 
 const customHttpError = require('./customHttpError');
@@ -16,6 +19,7 @@ const dataSources = {
   countries: new CountriesDataSource(),
   hills: new HillsDataSource(),
   lists: new ListsDataSource(),
+  regions: new RegionsDataSource(),
 };
 
 const executableSchema = makeExecutableSchema({

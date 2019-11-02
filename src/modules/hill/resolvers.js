@@ -47,6 +47,9 @@ module.exports = {
       };
     },
     lists: () => Object.keys(ListId).map(id => ({ id })),
+    regions(object, args, { dataSources }) {
+      return dataSources.regions.all().map(name => ({ name }));
+    },
   },
   Coordinates: {
     geodetic: ({ geodetic }) => geodetic,

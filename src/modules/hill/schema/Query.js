@@ -15,5 +15,6 @@ module.exports = gql`
       before: String
     ): HillsConnection!
     lists: [List!]!
+    regions: [Region!]!
   }
 `;
