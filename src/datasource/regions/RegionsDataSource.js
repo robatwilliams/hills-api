@@ -1,5 +1,3 @@
-const { unique } = require('../../util');
-
 /**
  * Relative Hill of Britain book sections:
  *   1. Copy from Hills database
