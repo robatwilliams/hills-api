@@ -29,7 +29,7 @@ function buildDataSourcePaginate(paginate) {
 
 function computePageInfo({ hasMore, nodes, paginate, sort }) {
   return PageInfo.compute({
-    getNodeCursor: hill => getHillCursor(hill, sort),
+    getNodeCursor: hill => buildHillCursor(hill, sort),
     hasMore,
     nodes,
     paginate,
@@ -48,7 +48,7 @@ function findHillNames(allNames, hill) {
   };
 }
 
-function getHillCursor(hill, sort) {
+function buildHillCursor(hill, sort) {
   return encodeJSONCursor({
     number: hill.number,
     height: sort.height && hill.heightMetres,
@@ -61,5 +61,5 @@ module.exports = {
   buildDataSourcePaginate,
   computePageInfo,
   findHillNames,
-  getHillCursor,
+  buildHillCursor,
 };

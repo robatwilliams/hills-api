@@ -8,9 +8,9 @@ const ListId = require('./model/ListId');
 const {
   buildDataSourceFilter,
   buildDataSourcePaginate,
+  buildHillCursor,
   computePageInfo,
   findHillNames,
-  getHillCursor,
 } = require('./resolverHelpers');
 
 module.exports = {
@@ -88,7 +88,7 @@ module.exports = {
   },
   HillsConnection: {
     edges({ nodes }, args, { rootArgs }) {
-      return buildEdges(nodes, hill => getHillCursor(hill, rootArgs.sort));
+      return buildEdges(nodes, hill => buildHillCursor(hill, rootArgs.sort));
     },
     nodes: ({ nodes }) => nodes,
     pageInfo: ({ pageInfo }) => pageInfo,
