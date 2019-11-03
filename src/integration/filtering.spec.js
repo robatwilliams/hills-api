@@ -157,112 +157,60 @@ test('by list', async () => {
 describe('by names', () => {
   describe('word == term', () => {
     it('includes when name == term', async () => {
-      const query = createQuery('Skiddaw');
+      const response = await sendQuery(createQuery('Skiddaw'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'Skiddaw' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('Skiddaw');
     });
 
     it('includes when first word of name == term', async () => {
-      const query = createQuery('Glyder');
+      const response = await sendQuery(createQuery('Glyder'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'Glyder Fach' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('Glyder Fach');
     });
 
     it('includes when middle word of name == term', async () => {
-      const query = createQuery('Sca');
+      const response = await sendQuery(createQuery('Sca'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'Great Sca Fell' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('Great Sca Fell');
     });
 
     it('includes when last word of name == term', async () => {
-      const query = createQuery('Blisco');
+      const response = await sendQuery(createQuery('Blisco'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'Pike of Blisco' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('Pike of Blisco');
     });
   });
 
   describe('word starts with term', () => {
     it('includes when name starts with term', async () => {
-      const query = createQuery('Skid');
+      const response = await sendQuery(createQuery('Skid'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'Skiddaw' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('Skiddaw');
     });
 
     it('includes when subsequent word of name starts with term', async () => {
-      const query = createQuery('Sund');
+      const response = await sendQuery(createQuery('Sund'));
 
-      const data = await sendQueryOk(query);
-
-      expect(data.hills.nodes).toEqual(
-        expect.arrayContaining([
-          expect.objectContaining({ names: { primary: 'St Sunday Crag' } }),
-        ])
-      );
+      expect(response).toContainHillNamed('St Sunday Crag');
     });
   });
 
   it('includes when match is on alternate name', async () => {
-    const query = createQuery('Eel Crag');
+    const response = await sendQuery(createQuery('Eel Crag'));
 
-    const data = await sendQueryOk(query);
-
-    expect(data.hills.nodes).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ names: { primary: 'Crag Hill' } }),
-      ])
-    );
+    expect(response).toContainHillNamed('Crag Hill');
   });
 
   it('does not include when word includes term later than the start', async () => {
-    const query = createQuery('ben');
+    const response = await sendQuery(createQuery('ill'));
 
-    const data = await sendQueryOk(query);
-
-    expect(data.hills.nodes).not.toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ names: { primary: 'Scaraben' } }),
-      ])
-    );
+    expect(response).not.toContainHillNamed('Loadpot Hill');
   });
 
   it('is not case sensitive', async () => {
-    const query = createQuery('skiddaw');
+    const response = await sendQuery(createQuery('skiddaw'));
 
-    const data = await sendQueryOk(query);
-
-    expect(data.hills.nodes).toEqual(
-      expect.arrayContaining([expect.objectContaining({ names: { primary: 'Skiddaw' } })])
-    );
+    expect(response).toContainHillNamed('Skiddaw');
   });
 
   function createQuery(searchTerm) {
