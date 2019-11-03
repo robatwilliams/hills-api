@@ -15,15 +15,14 @@ function buildDataSourceFilter(filter, dataSources) {
   };
 }
 
-function buildDataSourcePaginate(paginate) {
-  const { first, last } = paginate;
-  const limit = first == null ? last : first;
+function buildDataSourcePaginate({ first, after, last, before }) {
+  const backward = first == null;
 
   return {
-    limit,
-    before: paginate.before && decodeJSONCursor(paginate.before),
-    after: paginate.after && decodeJSONCursor(paginate.after),
-    backward: limit === last,
+    limit: backward ? last : first,
+    before: before && decodeJSONCursor(before),
+    after: after && decodeJSONCursor(after),
+    backward,
   };
 }
 
