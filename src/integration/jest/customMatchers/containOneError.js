@@ -1,7 +1,9 @@
 /* eslint-disable prefer-template */
+const { matcherHint, printExpected, printReceived } = require('jest-matcher-utils');
+
 function toContainOneError(response, expectedMessage) {
-  if (this.isNot || this.promise) {
-    throw new Error('Negation and promises not implemented for this matcher');
+  if (this.isNot) {
+    throw new Error('Negation not implemented for this matcher');
   }
 
   const pass =
@@ -9,14 +11,16 @@ function toContainOneError(response, expectedMessage) {
     response.data.errors.length === 1 &&
     response.data.errors[0].message === expectedMessage;
 
-  return {
-    pass,
-    message: () =>
-      this.utils.matcherHint('toContainOneError') +
-      '\n\n' +
-      `Expected one error with message: ${this.utils.printExpected(expectedMessage)}\n` +
-      `Received errors: ${this.utils.printReceived(response.data.errors)}`,
-  };
+  return { pass, message: () => failMessage(response.data.errors, expectedMessage) };
+}
+
+function failMessage(errors, expectedName) {
+  return (
+    matcherHint('.toContainOneError') +
+    '\n\n' +
+    `Expected one error with message: ${printExpected(expectedName)}\n` +
+    `Received errors: ${printReceived(errors)}`
+  );
 }
 
 module.exports = { toContainOneError };
