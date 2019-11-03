@@ -54,15 +54,21 @@ Filtering is in the style of [MongoDB-style query objects](https://docs.mongodb.
 
 Pagination is [cursor-based](https://graphql.org/learn/pagination/#pagination-and-edges), in the style of [Relay cursor connections](https://facebook.github.io/relay/graphql/connections.htm).
 
+See the schema (the API's self-description) and the example queries for detail.
+
 ## Example query
 
-Wainwright hills (of the Lake District), higher than 600m, sorted by height, 50 per page, with a selection of fields ([more available](docs/fields-hills-database.md)):
+First few hills matching some criteria, sorted by height, with a selection of fields ([more available](docs/fields-hills-database.md)):
 
 ```graphql
 {
   hills(
-    first: 50
-    filter: { heightMetres: { gt: 600 }, lists: { id: { inc: WAINWRIGHT } } }
+    first: 20
+    filter: {
+      heightMetres: { gt: 500 }
+      lists: { id: { inc: WAINWRIGHT } }
+      names: { search: "pike" }
+    }
     sort: { height: { descending: true } }
   ) {
     nodes {
