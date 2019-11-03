@@ -26,24 +26,19 @@ function buildDataSourcePaginate({ first, after, last, before }) {
   };
 }
 
-function computePageInfo({ hasMore, nodes, paginate, sort }) {
+function computePageInfo({ sort, ...rest }) {
   return PageInfo.compute({
     getNodeCursor: hill => buildHillCursor(hill, sort),
-    hasMore,
-    nodes,
-    paginate,
+    ...rest,
   });
 }
 
 function findHillNames(allNames, hill) {
   const names = allNames.filter(name => name.hillNumber === hill.number);
 
-  const primary = names.find(name => name.isPrimary);
-  const alternates = names.filter(name => name !== primary);
-
   return {
-    primary: primary.name,
-    alternates: alternates.map(name => name.name),
+    primary: names.find(name => name.isPrimary).name,
+    alternates: names.filter(name => !name.isPrimary).map(name => name.name),
   };
 }
 
