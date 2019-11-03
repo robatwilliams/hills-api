@@ -55,13 +55,10 @@ test('by country', async () => {
   const data = await sendQueryOk(query);
 
   expect(data.hills.nodes.length).toBeGreaterThan(0);
-
-  for (const hill of data.hills.nodes) {
-    expect(hill.countries).toEqual(
-      // It's ok to be in other countries too - border hills
-      expect.arrayContaining([expect.objectContaining({ name: 'England' })])
-    );
-  }
+  expect(data.hills.nodes).toSatisfyAll(hill =>
+    // It's ok to be in other countries too - border hills
+    hill.countries.some(country => country.name === 'England')
+  );
 });
 
 describe('by height', () => {
@@ -145,13 +142,10 @@ test('by list', async () => {
   const data = await sendQueryOk(query);
 
   expect(data.hills.nodes.length).toBeGreaterThan(0);
-
-  for (const hill of data.hills.nodes) {
-    expect(hill.lists).toEqual(
-      // It's ok to be in other lists too
-      expect.arrayContaining([expect.objectContaining({ id: 'WAINWRIGHT' })])
-    );
-  }
+  expect(data.hills.nodes).toSatisfyAll(hill =>
+    // It's ok to be in other lists too
+    hill.lists.some(list => list.id === 'WAINWRIGHT')
+  );
 });
 
 describe('by names', () => {
@@ -248,10 +242,7 @@ test('by region', async () => {
   const data = await sendQueryOk(query);
 
   expect(data.hills.nodes.length).toBeGreaterThan(0);
-
-  for (const hill of data.hills.nodes) {
-    expect(hill.region).toEqual({ name: 'Lake District N' });
-  }
+  expect(data.hills.nodes).toSatisfyAll(hill => hill.region.name === 'Lake District N');
 });
 
 test('by multiple fields', async () => {
@@ -275,18 +266,11 @@ test('by multiple fields', async () => {
   const data = await sendQueryOk(query);
 
   expect(data.hills.nodes.length).toBeGreaterThan(0);
-
-  for (const hill of data.hills.nodes) {
-    expect(hill.countries).toEqual(
-      // It's ok to be in other countries too - border hills
-      expect.arrayContaining([expect.objectContaining({ name: 'Wales' })])
-    );
-
-    expect(hill.lists).toEqual(
-      // It's ok to be in other lists too
-      expect.arrayContaining([expect.objectContaining({ id: 'HEWITT' })])
-    );
-  }
+  expect(data.hills.nodes).toSatisfyAll(
+    hill =>
+      hill.countries.some(country => country.name === 'Wales') &&
+      hill.lists.some(list => list.id === 'HEWITT')
+  );
 });
 
 test('invalid criterion', async () => {

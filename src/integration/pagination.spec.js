@@ -37,12 +37,9 @@ it('assembles complete connection structure', async () => {
   const data = await sendQueryOk(query);
 
   expect(data.hills.edges.length).toBeGreaterThan(0);
-
-  for (const edge of data.hills.edges) {
-    expect(edge.node).toMatchObject({});
-    expect(edge.cursor).toMatch(/[A-Za-z]+/u);
-  }
-
+  expect(data.hills.edges).toSatisfyAll(
+    edge => edge.node != null && /[A-Za-z]+/u.test(edge.cursor)
+  );
   expect(data.hills.nodes).toHaveLength(data.hills.edges.length);
 });
 

@@ -15,11 +15,9 @@ test('countries', async () => {
 
   expect(data.countries.length).toBeGreaterThan(0);
   expect(data.countries).toContainEqual({ code: 'GB-SCT', name: 'Scotland' });
-
-  for (const country of data.countries) {
-    expect(country.code).toMatch(/^[A-Z-]+$/u);
-    expect(country.name).toMatch(/^[A-Z][\w ]+$/u);
-  }
+  expect(data.countries).toSatisfyAll(
+    country => /^[A-Z-]+$/u.test(country.code) && /^[A-Z][\w ]+$/u.test(country.name)
+  );
 });
 
 test('lists', async () => {
@@ -36,11 +34,9 @@ test('lists', async () => {
 
   expect(data.lists.length).toBeGreaterThan(0);
   expect(data.lists).toContainEqual({ name: 'Munro', id: 'MUNRO' });
-
-  for (const list of data.lists) {
-    expect(list.id).toMatch(/^[A-Z]+$/u);
-    expect(list.name).toMatch(/^[A-Z][a-z]+$/u);
-  }
+  expect(data.lists).toSatisfyAll(
+    list => /^[A-Z]+$/u.test(list.id) && /^[A-Z][a-z]+$/u.test(list.name)
+  );
 });
 
 test('regions', async () => {
