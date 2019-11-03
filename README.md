@@ -12,11 +12,11 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 ⛰️ Major hills and mountains of Britain and Ireland
 
-📝 Key data [fields](docs/fields-hills-database.md) from the hills database
+📝 Key [data fields](docs/fields-hills-database.md) from the hills database
 
-🔍 Filter and sort on some fields
+🔍 Filter and sort on [some fields](docs/fields-hills-database.md)
 
-👪 Query related (parent / ~~child~~<sup>1</sup>) hills in the same query
+👪 Query related (parent, ~~child~~<sup>1</sup>) hills in the same query
 
 🚚 Paginate large result sets
 
@@ -24,7 +24,7 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 👐 Free to use, no API key (at least while it's not costing me much)
 
-<sup>1</sup> There is a [list](docs/backlog.md) of possible future features.
+<sup>1</sup> There is a [list of possible future features](docs/backlog.md).
 
 ## Endpoints
 
