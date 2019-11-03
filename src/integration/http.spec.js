@@ -120,22 +120,10 @@ test('query syntax error', async () => {
     hill(number: 278) { number
   }`;
 
-  expect.assertions(2);
+  const response = await sendQuery(malformedQuery);
 
-  try {
-    await sendQuery(malformedQuery);
-  } catch (error) {
-    const { response } = error;
-
-    expect(response.status).toBe(400);
-    expect(response.data.errors).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          message: expect.stringContaining('Syntax Error'),
-        }),
-      ])
-    );
-  }
+  expect(response.status).toBe(400);
+  expect(response).toContainOneError('Syntax Error: Expected Name, found <EOF>');
 });
 
 test('schema dump as plain text', async () => {
@@ -171,21 +159,15 @@ test('schema introspection is allowed (for playground)', async () => {
 // Test will only pass when Aurora Serverless is paused
 // eslint-disable-next-line jest/no-disabled-tests
 test.skip('service unavailable response when Aurora Serverless is resuming', async () => {
-  expect.assertions(3);
+  const response = await sendQuery(query);
 
-  try {
-    await sendQuery(query);
-  } catch (error) {
-    const { response } = error;
-
-    expect(response.status).toBe(503);
-    expect(response.headers).toEqual(
-      expect.objectContaining({
-        'retry-after': '10',
-      })
-    );
-    expect(response.data.errors).toEqual([
-      { message: 'Temporarily unavailable while the database resumes from sleep' },
-    ]);
-  }
+  expect(response.status).toBe(503);
+  expect(response.headers).toEqual(
+    expect.objectContaining({
+      'retry-after': '10',
+    })
+  );
+  expect(response).toContainOneError(
+    'Temporarily unavailable while the database resumes from sleep'
+  );
 });
