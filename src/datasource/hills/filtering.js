@@ -5,9 +5,9 @@ function filterBy(filter) {
   const parameters = {};
   const conjunctions = [];
 
-  if (filter.country != null) {
+  if (filter.countryCodes) {
     conjunctions.push('FIND_IN_SET(:country, countries)');
-    parameters.country = filter.country;
+    parameters.country = filter.countryCodes.inc;
   }
 
   if (filter.heightFeet) {
@@ -18,9 +18,9 @@ function filterBy(filter) {
     addCriterion({ conjunctions, parameters }, filter.heightMetres, 'heightMetres');
   }
 
-  if (filter.list != null) {
+  if (filter.listIds) {
     conjunctions.push('FIND_IN_SET(:list, lists)');
-    parameters.list = filter.list;
+    parameters.list = filter.listIds.inc;
   }
 
   if (filter.names) {

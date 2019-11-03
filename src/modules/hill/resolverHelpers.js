@@ -2,16 +2,16 @@ const { mapValues } = require('../../util');
 const { decodeJSONCursor, encodeJSONCursor, PageInfo } = require('../paginate');
 
 function buildDataSourceFilter(filter, dataSources) {
+  const { countries, lists, region, ...rest } = filter;
+
   return {
-    country: filter.countries && filter.countries.code.inc,
-    heightFeet: filter.heightFeet,
-    heightMetres: filter.heightMetres,
-    list: filter.lists && filter.lists.id.inc,
-    names: filter.names,
+    ...rest,
+    countryCodes: countries && countries.code,
+    listIds: lists && lists.id,
     sectionCode:
-      filter.region &&
-      filter.region.name &&
-      mapValues(filter.region.name, nameValue => dataSources.regions.getCode(nameValue)),
+      region &&
+      region.name &&
+      mapValues(region.name, name => dataSources.regions.getCode(name)),
   };
 }
 
