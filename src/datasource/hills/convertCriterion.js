@@ -46,8 +46,7 @@ function convertSearchCriterion({ search }, columnName) {
   const paramName = `${columnName}_search`;
 
   const expression = `(
-    ${columnName} = :${paramName}
-    OR ${columnName} LIKE CONCAT(:${paramName}, '%')
+    ${columnName} LIKE CONCAT(:${paramName}, '%')
     OR ${columnName} LIKE CONCAT('% ', :${paramName}, '%')
   )`;
 
