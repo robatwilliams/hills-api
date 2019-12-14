@@ -23,7 +23,6 @@ Key:
 ## Documentation
 
 - Default query in the playground (needs [graphql-playground/866](https://github.com/prisma/graphql-playground/issues/866))
-- ⚠️ 💩 Move some big comments out into docs files (express, API Gateway integration)
 
 ## Security
 

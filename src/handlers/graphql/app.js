@@ -50,18 +50,6 @@ function extensions(info) {
   // Don't return an object, to avoid it appearing in the response
 }
 
-/**
- * Express is only used to allow the express-graphql middleware to be used.
- *
- * Implementing the guidelines for operating GraphQL over HTTP (https://graphql.org/learn/serving-over-http/)
- * doesn't seem onerous, but it's less work not to.
- *
- * Although Express can handle many things (e.g. compression, CORS), as much as possible
- * should be handled in API Gateway. That also leaves open the possibility of removing
- * Express in future, in favour of some general GraphQL HTTP library that might come
- * about (see https://github.com/graphql/express-graphql/issues/559), or implementing the
- * guidelines manually.
- */
 const app = express();
 
 app.use(
