@@ -29,6 +29,7 @@ package:
   excludeDevDependencies: true # default is true; fyi
   include:
     - ./src/**/!(*.spec).js
+    - ./src/**/rhbSections.json
 
 functions:
   graphql:
