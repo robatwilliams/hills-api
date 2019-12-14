@@ -7,6 +7,8 @@ provider:
   stage: ${opt:stage, 'dev'}
   memorySize: 128 # MB, sls default is 1024, aws default is 128
   timeout: 3 # seconds, sls default is 6, aws default is 3
+  apiGateway:
+    minimumCompressionSize: 1024 # bytes, this enables compression
   # Only the graphql lambda needs this, but a single shared role is much easier to configure
   iamRoleStatements:
     - Effect: Allow
