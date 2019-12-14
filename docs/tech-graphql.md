@@ -100,3 +100,9 @@ Errors thrown/returned by `graphql-js` don't include any robust indication of be
 ## No generic types
 
 Lack of generic types means types such as connections/pagination would be repeated in larger projects. There is a [proposal](https://github.com/graphql/graphql-spec/issues/190) to add them to GraphQL. Until then, perhaps they could be generated at runtime.
+
+## Query size limiting
+
+This is needed to prevent massive queries from even being attempted, accidentally or maliciously. For this simple API with pagination only at the root level, a simple page size limit is used. As a secondary defence we have timeouts on the lambdas.
+
+There are various more advanced approaches such as [complexity analysis](https://blog.apollographql.com/securing-your-graphql-api-from-malicious-queries-16130a324a6b), and [more](https://medium.com/workflowgen/graphql-query-timeout-and-complexity-management-fab4d7315d8d)

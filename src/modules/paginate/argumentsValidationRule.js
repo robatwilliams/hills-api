@@ -7,6 +7,10 @@
  */
 const { GraphQLError } = require('graphql');
 
+// Could not be higher than 999 due to AWS Data API limits.
+// See: HillsDataSource, schemaConformance.spec.js
+const MAX_LIMIT = 100;
+
 module.exports = function paginationArgumentsValidationRule(context) {
   const fieldsArgumentsStack = [];
 
@@ -53,8 +57,21 @@ function validateCompatibility({ first, after, last, before }) {
 function validateLimits({ first, last }) {
   const limitNode = first || last;
 
-  if (limitNode && limitNode.value.value.startsWith('-')) {
+  if (!limitNode) {
+    return undefined;
+  }
+
+  if (limitNode.value.kind !== 'IntValue') {
+    // Let default validation against the schema (which happens later) report the problem
+    return undefined;
+  }
+
+  const value = Number(limitNode.value.value);
+
+  if (value < 0) {
     return 'Negative pagination limit given';
+  } else if (value > MAX_LIMIT) {
+    return `Paginaton limit given is above the maximum of ${MAX_LIMIT}`;
   }
 
   return undefined;

@@ -119,6 +119,7 @@
       "files": "*.spec.js",
       "rules": {
         "max-lines-per-function": "off", // for describe() blocks
+        "max-statements": "off", // for describe() blocks
         "unicorn/consistent-function-scoping": "off" // for test-specific helpers
       }
     }

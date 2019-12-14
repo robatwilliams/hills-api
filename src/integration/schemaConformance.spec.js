@@ -53,91 +53,70 @@ const allFieldsFragment = gql`
  * otherwise be quicker to test in one pass, as many hills appear on multiple lists.
  */
 describe('all hill lists', () => {
-  test('Birketts', async () => {
-    const query = createQuery({ list: 'BIRKETT' });
+  // Increase from default 5s, then restore default
+  beforeEach(() => jest.setTimeout(10000));
+  afterEach(() => jest.setTimeout());
 
-    await sendQueryOk(query);
+  test('Birketts', async () => {
+    await traverseEntireDataSet({ list: 'BIRKETT' });
   });
 
   test('Corbetts', async () => {
-    const query = createQuery({ list: 'CORBETT' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'CORBETT' });
   });
 
   test('Donalds', async () => {
-    const query = createQuery({ list: 'DONALD' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'DONALD' });
   });
 
   test('Grahams', async () => {
-    const query = createQuery({ list: 'GRAHAM' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'GRAHAM' });
   });
 
   test('Hewitts', async () => {
-    const query = createQuery({ list: 'HEWITT' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'HEWITT' });
   });
 
   test('Marilyns', async () => {
-    const queryCount = await traverseEntireDataSet({
-      list: 'MARILYN',
-      first: 500,
-    });
+    jest.setTimeout(20000); // There are 2,011 of these
 
-    // There are 2,011 of them
-    expect(queryCount).toBe(5);
+    await traverseEntireDataSet({ list: 'MARILYN' });
   });
 
   test('Munros', async () => {
-    const query = createQuery({ list: 'MUNRO' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'MUNRO' });
   });
 
   test('Nuttalls', async () => {
-    const query = createQuery({ list: 'NUTTALL' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'NUTTALL' });
   });
 
   test('Wainwrights', async () => {
-    const query = createQuery({ list: 'WAINWRIGHT' });
-
-    await sendQueryOk(query);
+    await traverseEntireDataSet({ list: 'WAINWRIGHT' });
   });
 });
 
 /**
- * Avoid breaching RDS API record count (1,000) / data size (1MB) limits.
+ * Avoid breaching API pagination limit.
  */
-async function traverseEntireDataSet(baseQueryOptions) {
-  let queryCount = 0;
+async function traverseEntireDataSet({ list }) {
   let previousPageInfo = { hasNextPage: true };
 
   while (previousPageInfo.hasNextPage) {
-    queryCount++;
-    const queryOptions = {
-      ...baseQueryOptions,
+    const query = createQuery({
+      list,
+      first: 100,
       after: previousPageInfo.endCursor,
-    };
-
-    const query = createQuery(queryOptions);
+    });
 
     // eslint-disable-next-line no-await-in-loop
     const data = await sendQueryOk(query);
 
     previousPageInfo = data.hills.pageInfo;
   }
-
-  return queryCount;
 }
 
-function createQuery({ list, first = 1000, after } = {}) {
+function createQuery({ list, first, after } = {}) {
   return gql`
     {
       hills(

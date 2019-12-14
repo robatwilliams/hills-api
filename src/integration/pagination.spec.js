@@ -206,6 +206,17 @@ describe('handling invalid arguments', () => {
     expect(response).toContainOneError('Negative pagination limit given');
   });
 
+  it('rejects limit above maximum', async () => {
+    const query = createQuery({ first: 777 });
+
+    const response = await sendQuery(query);
+
+    expect(response.status).toBe(400);
+    expect(response).toContainOneError(
+      'Paginaton limit given is above the maximum of 100'
+    );
+  });
+
   it('does not cause internal server error when given an invalid cursor', async () => {
     const query = createQuery({ after: 'hello!' }); // not a valid base64 string
 

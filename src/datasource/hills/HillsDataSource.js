@@ -8,7 +8,14 @@ module.exports = class HillsDataSource {
   async query(filter, sort, paginate) {
     const daoPaginate = {
       ...paginate,
-      limit: paginate.limit + 1, // +1 so we can determine if there are more items
+
+      /*
+       * +1, so we can determine if there are more items.
+       * Aurora Data API's limit is 1000 records, so due to the aforementioned,
+       * our own pagination limit can't be higher than 999.
+       * See paginate/argumentsValidationRule.js
+       */
+      limit: paginate.limit + 1,
     };
 
     const entities = await this.dao.query(filter, sort, daoPaginate);
