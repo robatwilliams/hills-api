@@ -2,10 +2,13 @@ const { print } = require('graphql');
 
 const log = require('../../log');
 
-module.exports = function queryLogger({ document, variables, operationName, result }) {
+module.exports = function queryLogger(info) {
+  const { document, variables, operationName, result, context } = info;
+
   const commonDetails = {
     operationName,
     query: print(document),
+    executionTimeMs: Date.now() - context.startTime,
     variables,
   };
 

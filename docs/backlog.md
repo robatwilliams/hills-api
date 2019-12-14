@@ -66,12 +66,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - ⚠️ 💩 Use secrets manager generated credentials for Aurora cluster
 - 💩 Replace type definitions in population script with type inference (as done on the query side)
 
-### Tests
-
-- 🙏 Key & most-expensive currently-supported queries
-  - Validates resource limits
-  - Verifies total/database response time (maybe use [Server-Timing](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing))
-
 ### Improvements
 
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)

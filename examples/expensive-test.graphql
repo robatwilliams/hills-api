@@ -1,0 +1,57 @@
+{
+  # Expensive query for testing performance, configuration, and limits.
+  # Many hills, perform filtering and sorting, and return many fields.
+  hills(
+    first: 100
+    filter: {
+      heightMetres: { gt: 500 }
+      lists: { id: { inc: MARILYN } }
+      names: { search: "a" }
+    }
+    sort: { height: { descending: true } }
+  ) {
+    pageInfo {
+      endCursor
+      startCursor
+
+      hasNextPage
+      hasPreviousPage
+    }
+    nodes {
+      coordinates {
+        geodetic {
+          latitude
+          longitude
+        }
+        grid {
+          easting
+          northing
+          square
+        }
+      }
+      countries {
+        code
+        name
+      }
+      height(unit: METRES)
+      lists {
+        id
+        name
+      }
+      maps(scale: ONE_25K) {
+        sheet
+      }
+      names {
+        alternates
+        primary
+      }
+      number
+      parent {
+        number
+      }
+      region {
+        name
+      }
+    }
+  }
+}

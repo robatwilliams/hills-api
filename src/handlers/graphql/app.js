@@ -54,8 +54,11 @@ const app = express();
 
 app.use(
   '/',
-  graphqlHTTP({
-    context: { dataSources },
+  graphqlHTTP(() => ({
+    context: {
+      dataSources,
+      startTime: Date.now(), // for queryLogger
+    },
     customFormatErrorFn: customFormatError,
     extensions,
 
@@ -64,7 +67,7 @@ app.use(
 
     schema: executableSchema,
     validationRules,
-  })
+  }))
 );
 
 module.exports = app;
