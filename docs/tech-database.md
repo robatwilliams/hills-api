@@ -54,4 +54,4 @@ Auto-sleep isn't something you'd enable on an important web API due to the slow 
 
 The [Data API](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) allows Aurora Serverless databases to accessed without a persistent connection, making it suitable for short-lived consumers such as lambdas. It also removes the need for a Virtual Private Cloud for the lambdas, eliminating overhead and configuration hassle.
 
-It's currently only available in some regions. It can be enabled via the console/CLI; CloudFormation doesn't currently support doing so.
+It's currently only available in some regions. ~~It can be enabled via the console/CLI; CloudFormation doesn't currently support doing so.~~ As of December 2019, enablable via CloudFormation.

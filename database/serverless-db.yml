@@ -44,6 +44,8 @@ resources:
           MinCapacity: 1
           SecondsUntilAutoPause: 300
         DeletionProtection: true
+        # Enable data API (supported via CloudFormation since December 2019)
+        EnableHttpEndpoint: true
         # Aurora Serverless currently doesn't support IAM Database Authentication
         # EnableIAMDatabaseAuthentication: true
         MasterUsername: admin
