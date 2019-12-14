@@ -12,35 +12,23 @@ beforeEach(() => {
   jest.resetAllMocks();
 });
 
-it('does not log when no errors', () => {
-  errorLogger({ result: {} });
-
-  expect(log.error).not.toHaveBeenCalled();
-});
-
 it('does not log client errors: arising in express-graphql', () => {
   const clientError = new Error('POST body sent invalid JSON.');
   clientError.status = 400;
 
-  errorLogger({
-    result: { errors: [clientError] },
-  });
+  errorLogger(clientError);
 
   expect(log.error).not.toHaveBeenCalled();
 });
 
 it('does not log client errors: syntax error', () => {
-  errorLogger({
-    result: { errors: [syntaxError()] },
-  });
+  errorLogger(syntaxError());
 
   expect(log.error).not.toHaveBeenCalled();
 });
 
 it('does not log error caused by Aurora Serverless being paused', () => {
-  errorLogger({
-    result: { errors: [new Error('Communications link failure\n\nThe last packet')] },
-  });
+  errorLogger(new Error('Communications link failure\n\nThe last packet'));
 
   expect(log.error).not.toHaveBeenCalled();
 });
@@ -49,17 +37,13 @@ it('logs server errors arising in express-graphql', () => {
   const serverError = new Error('Internal Error');
   serverError.status = 500;
 
-  errorLogger({
-    result: { errors: [serverError] },
-  });
+  errorLogger(serverError);
 
   expect(log.error).toHaveBeenCalled();
 });
 
 it('logs errors not having a distinguishing status', () => {
-  errorLogger({
-    result: { errors: [new ReferenceError('foo is not defined')] },
-  });
+  errorLogger(new ReferenceError('foo is not defined'));
 
   expect(log.error).toHaveBeenCalledTimes(1);
 });
