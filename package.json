@@ -10,7 +10,7 @@
     "call": "bash scripts/call.sh",
     "call:local": "bash scripts/call.sh 'http://localhost:3000/graphql'",
     "check": "npm-run-all --continue-on-error --parallel check:*",
-    "check:lint": "eslint ./**/*.js",
+    "check:lint": "eslint .",
     "check:prettier": "prettier --check **/*.{graphql,js,json,md,yml}",
     "ci": "npm-run-all --continue-on-error --parallel audit check test:unit",
     "deploy:all": "npm-run-all \"deploy:db:all -- {@}\" \"deploy:stack -- {@}\" --",
