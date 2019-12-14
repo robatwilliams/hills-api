@@ -4,6 +4,7 @@
 const axios = require('axios').default;
 
 const rootUrl = process.env.TEST_INTEGRATION_ROOT_URL;
+const isServerlessOffline = rootUrl.includes('localhost');
 const endpoint = `${rootUrl}/graphql`;
 const schemaDump = `${rootUrl}/schema`;
 const playground = `${rootUrl}/playground`;
@@ -40,6 +41,7 @@ async function sendQueryOk(query) {
 
 module.exports = {
   endpoint,
+  isServerlessOffline,
   playground,
   schemaDump,
 

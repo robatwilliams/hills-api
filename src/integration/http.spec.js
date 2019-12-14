@@ -7,7 +7,16 @@
 const axios = require('axios').default;
 
 const gql = require('./graphql-tag-raw');
-const { endpoint, playground, schemaDump, sendQuery, sendQueryOk } = require('./helpers');
+const {
+  endpoint,
+  isServerlessOffline,
+  playground,
+  schemaDump,
+  sendQuery,
+  sendQueryOk,
+} = require('./helpers');
+
+const onlyOnAWSIt = isServerlessOffline ? it.skip : it;
 
 const query = gql`
   {
@@ -29,8 +38,7 @@ test('GET', async () => {
 });
 
 // Test will always fail locally because graphql-express pretty printing is enabled
-// eslint-disable-next-line jest/no-disabled-tests
-test.skip('GET: conditional request using ETag', async () => {
+onlyOnAWSIt('GET: conditional request using ETag', async () => {
   expect.assertions(2);
 
   const responseOne = await axios.get(endpoint, {
@@ -71,8 +79,7 @@ test('caching: allowed for GET responses', async () => {
 });
 
 // Test will always fail locally because serverless-offline adds an explicit no-cache
-// eslint-disable-next-line jest/no-disabled-tests
-test.skip('caching: not allowed for POST responses (as by default)', async () => {
+onlyOnAWSIt('caching: not allowed for POST responses (as by default)', async () => {
   const response = await sendQuery(query);
 
   expect(response.status).toBe(200);
@@ -88,7 +95,6 @@ test('disallowed method', async () => {
     });
   } catch (error) {
     const { response } = error;
-    const isServerlessOffline = endpoint.includes('localhost');
 
     if (isServerlessOffline) {
       expect(response.status).toBe(415);
