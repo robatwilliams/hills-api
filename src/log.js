@@ -12,6 +12,7 @@ function createLog(prefix) {
 }
 
 module.exports = {
+  debug: createLog('DEBUG'),
   info: createLog('INFO '),
   warn: createLog('WARN '),
   error: createLog('ERROR'),

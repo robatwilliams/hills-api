@@ -1,5 +1,7 @@
 const RDSDataService = require('aws-sdk/clients/rdsdataservice');
 
+const log = require('../../log');
+
 const { filterBy, makeInListExpression } = require('./filtering');
 const { paginateBy } = require('./pagination');
 const { sortBy } = require('./sorting');
@@ -40,7 +42,7 @@ module.exports = class HillsDAO {
       ORDER BY ${sortExpressions.join(', ')}
       LIMIT :limit`;
 
-    const response = await this.executeStatement({
+    const response = await this.executeStatement('query', {
       parameters: buildParameters(parameters),
       sql: statement,
     });
@@ -51,7 +53,7 @@ module.exports = class HillsDAO {
   }
 
   async queryOne({ number }) {
-    const response = await this.executeStatement({
+    const response = await this.executeStatement('queryOne', {
       parameters: buildParameters({ number }),
       sql: 'SELECT * FROM HILLS WHERE number = :number',
     });
@@ -62,7 +64,7 @@ module.exports = class HillsDAO {
   async queryMaps({ numbers, scale }) {
     const inExpression = makeInListExpression(numbers, 'hillNumber');
 
-    const response = await this.executeStatement({
+    const response = await this.executeStatement('queryMaps', {
       parameters: buildParameters({ scale }),
       sql: `SELECT hillNumber, sheet FROM HILLS_MAPS WHERE scale = :scale AND ${inExpression}`,
     });
@@ -73,14 +75,14 @@ module.exports = class HillsDAO {
   async queryNames({ numbers }) {
     const inExpression = makeInListExpression(numbers, 'hillNumber');
 
-    const response = await this.executeStatement({
+    const response = await this.executeStatement('queryNames', {
       sql: `SELECT hillNumber, isPrimary, name FROM HILLS_NAMES WHERE ${inExpression}`,
     });
 
     return unwrapRecords(response);
   }
 
-  executeStatement(statementParams) {
+  async executeStatement(callerName, statementParams) {
     const params = {
       database: 'HILLS',
       includeResultMetadata: true, // include column names
@@ -89,7 +91,11 @@ module.exports = class HillsDAO {
       ...statementParams,
     };
 
-    return this.client.executeStatement(params).promise();
+    const startTime = Date.now();
+    const response = await this.client.executeStatement(params).promise();
+    log.debug(`Database query for "${callerName}" took ${Date.now() - startTime}ms`);
+
+    return response;
   }
 };
 
