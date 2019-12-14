@@ -38,7 +38,7 @@ functions:
     description: ${self:custom.versionInfo}
     memorySize: 256 # MB, sls default is 1024, aws default is 128
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
-    reservedConcurrency: 1 # low value until API Gateway throttling configured
+    reservedConcurrency: 10
     environment:
       DATABASE_CLUSTER_ARN: arn:cluster
       DATABASE_CLUSTER_SECRET_ARN: arn:secret
@@ -55,7 +55,7 @@ functions:
     handler: src/handlers/playground.fn
     description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
-    reservedConcurrency: 1 # low value until API Gateway throttling configured
+    reservedConcurrency: 10
     events:
       - http:
           path: playground
@@ -64,7 +64,7 @@ functions:
     handler: src/handlers/schemaDump.fn
     description: ${self:custom.versionInfo}
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
-    reservedConcurrency: 1 # low value until API Gateway throttling configured
+    reservedConcurrency: 10
     events:
       - http:
           path: schema

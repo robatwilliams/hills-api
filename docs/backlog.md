@@ -53,8 +53,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
 
 - 🙏 Request throttling (API Gateway)
-- 🙏 Appropriate values for AWS lambda configuration
-  - Concurrency limit
 
 ## Technical
 
