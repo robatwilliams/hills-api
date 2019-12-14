@@ -55,7 +55,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - 🙏 Request throttling (API Gateway)
 - 🙏 Appropriate values for AWS lambda configuration
   - Concurrency limit
-  - Timeout
 
 ## Technical
 
