@@ -51,7 +51,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 ### Move from DynamoDB to Aurora
 
-- ⚠️ 💩 Use cross-stack references to populate ARNs in serverless.yml
 - ⚠️ 💩 Use secrets manager generated credentials for Aurora cluster
 - 💩 Replace type definitions in population script with type inference (as done on the query side)
 

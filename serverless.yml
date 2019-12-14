@@ -14,7 +14,8 @@ provider:
     - Effect: Allow
       Action:
         - rds-data:ExecuteStatement
-      Resource: arn:cluster
+      Resource:
+        - Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterArn
     - Effect: Allow
       Action:
         - secretsmanager:GetSecretValue
@@ -44,7 +45,8 @@ functions:
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 10
     environment:
-      DATABASE_CLUSTER_ARN: arn:cluster
+      DATABASE_CLUSTER_ARN:
+        Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterArn
       DATABASE_CLUSTER_SECRET_ARN: arn:secret
     events:
       - http:

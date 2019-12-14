@@ -16,6 +16,19 @@ plugins:
   - serverless-plugin-scripts
 
 resources:
+  Outputs:
+    HillsApiDatabaseClusterArn:
+      Export:
+        Name: ${self:provider.stage}-HillsApiDatabaseClusterArn
+      Value:
+        # RDS::DBCluster doesn't support Fn::GetAtt for Arn, so assemble it manually
+        Fn::Join:
+          - ':'
+          - - 'arn:aws:rds'
+            - Ref: AWS::Region
+            - Ref: AWS::AccountId
+            - cluster
+            - hills-api-db-${self:provider.stage}
   Resources:
     HillsApiDatabase:
       Type: AWS::RDS::DBCluster
