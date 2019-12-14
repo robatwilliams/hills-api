@@ -19,6 +19,7 @@ provider:
       Resource: arn:secret
 
 plugins:
+  - serverless-api-stage
   - serverless-offline
   - serverless-plugin-git-variables
   - serverless-prune-plugin
@@ -75,4 +76,9 @@ custom:
   prune:
     automatic: true
     number: 3
+  stageSettings:
+    MethodSettings:
+      # https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-request-throttling.html
+      ThrottlingBurstLimit: 20
+      ThrottlingRateLimit: 20
   versionInfo: ${git:branch}:${git:describeLight} isDirty=${git:isDirty} "${git:message}"

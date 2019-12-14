@@ -39,7 +39,8 @@
     "graphql-resolve-batch": "^1.0.2",
     "graphql-tag": "^2.10.1",
     "graphql-tools": "^4.0.5",
-    "lodash.merge": "^4.6.2"
+    "lodash.merge": "^4.6.2",
+    "serverless-api-stage": "^1.4.0"
   },
   "devDependencies": {
     "axios": "^0.19.0",

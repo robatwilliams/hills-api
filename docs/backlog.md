@@ -48,12 +48,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 - ✅ AWS budget alarms
 
-### Resource allocation and limits
-
-Prevent poor usage practices and defend against "cost attacks" (through consumption/scaling).
-
-- 🙏 Request throttling (API Gateway)
-
 ## Technical
 
 ### Move from DynamoDB to Aurora
