@@ -55,7 +55,6 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - 🙏 Request throttling (API Gateway)
 - 🙏 Appropriate values for AWS lambda configuration
   - Concurrency limit
-  - Memory - doesn't need the Serverless Framework's default 1GB (AWS default is 128MB)
   - Timeout
 
 ## Technical

@@ -5,6 +5,7 @@ provider:
   region: ${opt:region, '${file(./serverless-shared.yml):constants.defaultRegion}'}
   runtime: nodejs10.x # matches package.json:engines
   stage: ${opt:stage, 'dev'}
+  memorySize: 128 # MB, sls default is 1024, aws default is 128
   timeout: 6 # seconds, sls default is 6, aws default is 3
   # Only the graphql lambda needs this, but a single shared role is much easier to configure
   iamRoleStatements:
@@ -35,6 +36,7 @@ functions:
   graphql:
     handler: src/handlers/graphql.fn
     description: ${self:custom.versionInfo}
+    memorySize: 256 # MB, sls default is 1024, aws default is 128
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 1 # low value until API Gateway throttling configured
     environment:
