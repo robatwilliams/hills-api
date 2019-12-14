@@ -14,13 +14,12 @@ test('search', () => {
   const criterion = { search: 'pik' };
 
   const expectedExpression = `(
-    myField = :myField_search
-    OR myField LIKE CONCAT(:myField_search, '%')
+    myField LIKE CONCAT(:myField_search, '%')
     OR myField LIKE CONCAT('% ', :myField_search, '%')
   )`;
 
   expect(convertCriterion(criterion, 'myField')).toEqual({
-    expressions: [expectedExpression],
+    expression: expectedExpression,
     parameters: { myField_search: 'pik' },
   });
 });
