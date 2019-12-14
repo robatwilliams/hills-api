@@ -69,6 +69,7 @@ Prevent poor usage practices and defend against "cost attacks" (through consumpt
 - Consider best practice for [nullability](https://graphql.org/learn/best-practices/#nullability)
 - Fully configure rules for ESLint Jest plugin
 - Node.js 12 (LTS) is available on AWS Lambda as of November 2019. Switch to run on it, then convert to ES6 imports/exports (update lint rules), use promisified `fs` module, anything else new.
+- Structured logging into CloudWatch, there must be a way
 
 ### Further future
 
