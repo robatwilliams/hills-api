@@ -6,7 +6,7 @@
   "scripts": {
     "audit": "npm-run-all --continue-on-error --parallel audit:*",
     "audit:legal": "license-checker --summary --production --excludePrivatePackages --failOn UNLICENSED",
-    "audit:security": "npm audit",
+    "audit:security": "npm audit --production",
     "call": "bash scripts/call.sh",
     "call:local": "bash scripts/call.sh 'http://localhost:3000/graphql'",
     "check": "npm-run-all --continue-on-error --parallel check:*",
