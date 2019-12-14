@@ -23,11 +23,32 @@ function ensureSupportedContentType(event, supportedTypes) {
   };
 }
 
+function handlePreflight(event) {
+  if (event.httpMethod !== 'OPTIONS') {
+    return undefined;
+  }
+
+  const response = { statusCode: 200 };
+  addCorsHeaders(response);
+
+  return response;
+}
+
+function addCorsHeaders(response) {
+  if (!response.headers) {
+    response.headers = {};
+  }
+
+  response.headers['Access-Control-Allow-Origin'] = '*';
+}
+
 function isAuroraServerlessPausedError({ message }) {
   return message.startsWith('Communications link failure');
 }
 
 module.exports = {
+  addCorsHeaders,
   ensureSupportedContentType,
+  handlePreflight,
   isAuroraServerlessPausedError,
 };

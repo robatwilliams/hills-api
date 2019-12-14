@@ -1,6 +1,10 @@
 const awsServerlessExpress = require('aws-serverless-express');
 
-const { ensureSupportedContentType } = require('./helpers');
+const {
+  addCorsHeaders,
+  ensureSupportedContentType,
+  handlePreflight,
+} = require('./helpers');
 const app = require('./app');
 
 const REQUEST_MEDIA_TYPES = ['application/json', 'application/graphql'];
@@ -18,7 +22,8 @@ const server = awsServerlessExpress.createServer(app);
  * @param {*} event API Gateway Lambda proxy integration representation of client request
  */
 module.exports = async function handler(event, context) {
-  let response = ensureSupportedContentType(event, REQUEST_MEDIA_TYPES);
+  let response =
+    handlePreflight(event) || ensureSupportedContentType(event, REQUEST_MEDIA_TYPES);
 
   if (response) {
     return response;
@@ -34,6 +39,8 @@ module.exports = async function handler(event, context) {
     // Aurora Serverless is resuming, possibly already, or kicked off by this request.
     response.headers['Retry-After'] = '10';
   }
+
+  addCorsHeaders(response);
 
   return response;
 };
