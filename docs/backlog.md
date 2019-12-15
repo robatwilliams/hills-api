@@ -4,7 +4,7 @@ See also the [ideas backlog](./backlog-ideas.md).
 
 Key:
 
-- 🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>
+- ~~🙏 Target for <abbr title="Minimum Viable Product">MVP</abbr>~~
 - 💩 Technical debt (⚠️ = important)
 
 ## Features: core
@@ -40,7 +40,6 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 
 ### Production
 
-- 🙏 Production deployment (set NODE_ENV for express)
 - Domain
 
 ### Monitoring

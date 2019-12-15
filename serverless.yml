@@ -51,6 +51,7 @@ functions:
         Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterArn
       DATABASE_CLUSTER_SECRET_ARN:
         Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterSecretArn
+      NODE_ENV: production # for Express, and anything else that might care
     events:
       - http:
           path: graphql
