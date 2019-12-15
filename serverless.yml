@@ -46,6 +46,7 @@ functions:
     # reservedConcurrency cannot be specified on the provider - https://github.com/serverless/serverless/issues/5472
     reservedConcurrency: 10
     environment:
+      # Due to lack of support for cross-stack references in Serverless offline, ARNs must be manually copied into here before running
       DATABASE_CLUSTER_ARN:
         Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterArn
       DATABASE_CLUSTER_SECRET_ARN:
