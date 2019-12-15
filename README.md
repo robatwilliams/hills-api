@@ -30,19 +30,19 @@ The data comes from the <abbr title="Database of British and Irish Hills">DoBIH<
 
 ### GraphQL API
 
-> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/graphql
+> https://32ik7cv8v0.execute-api.eu-west-1.amazonaws.com/prod/graphql
 
 ⚠️ 😴 ⏳ To save on running costs, the database behind the API is currently allowed to sleep during periods of inactivity. Error responses will be returned while it wakes up, which can take up to a minute.
 
 ### Schema
 
-> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/schema
+> https://32ik7cv8v0.execute-api.eu-west-1.amazonaws.com/prod/schema
 
 Plain text dump of the API's self-description of available queries and data.
 
 ### Playground
 
-> https://xxxxxxxxxx.execute-api.eu-west-1.amazonaws.com/prod/playground
+> https://32ik7cv8v0.execute-api.eu-west-1.amazonaws.com/prod/playground
 
 Browser-based <abbr title="Integrated Development Environment">IDE</abbr> (query editor), for building and executing queries.
 
