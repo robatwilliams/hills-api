@@ -60,6 +60,7 @@ Keep it unauthenticated; API keys would be a barrier to usage. Revisit if abuse 
 - Fully configure rules for ESLint Jest plugin
 - Node.js 12 (LTS) is available on AWS Lambda as of November 2019. Switch to run on it, then convert to ES6 imports/exports (update lint rules), use promisified `fs` module, anything else new.
 - Structured logging into CloudWatch, there must be a way
+- Remove need to manually copy ARNs into database deployment scripts (needs [serverless-pseudo-parameters#25](https://github.com/svdgraaf/serverless-pseudo-parameters/issues/25))
 
 ### Further future
 

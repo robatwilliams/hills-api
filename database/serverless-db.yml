@@ -54,5 +54,6 @@ resources:
 custom:
   scripts:
     commands:
+      # Due to https://github.com/svdgraaf/serverless-pseudo-parameters/issues/25, ARNs must be manually copied into here before running
       deploy-data: node ./database/populate/populate.js ${self:provider.region} arn:cluster arn:cluster-secret
       deploy-tables: node ./database/createTables.js ${self:provider.region} arn:cluster arn:cluster-secret
