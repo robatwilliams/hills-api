@@ -58,7 +58,7 @@ resources:
           AutoPause: true
           MaxCapacity: 1
           MinCapacity: 1
-          SecondsUntilAutoPause: 300
+          SecondsUntilAutoPause: 600 # 10 minutes
         # Enable data API (supported via CloudFormation since December 2019)
         EnableHttpEndpoint: true
         # Aurora Serverless currently doesn't support IAM Database Authentication
