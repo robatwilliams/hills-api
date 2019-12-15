@@ -29,6 +29,11 @@ resources:
             - Ref: AWS::AccountId
             - cluster
             - hills-api-db-${self:provider.stage}
+    HillsApiDatabaseClusterSecretArn:
+      Export:
+        Name: ${self:provider.stage}-HillsApiDatabaseClusterSecretArn
+      Value:
+        Ref: HillsDatabaseSecret
   Resources:
     HillsDatabaseSecret:
       Type: AWS::SecretsManager::Secret

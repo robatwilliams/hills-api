@@ -19,7 +19,8 @@ provider:
     - Effect: Allow
       Action:
         - secretsmanager:GetSecretValue
-      Resource: arn:secret
+      Resource:
+        - Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterSecretArn
 
 plugins:
   - serverless-api-stage
@@ -47,7 +48,8 @@ functions:
     environment:
       DATABASE_CLUSTER_ARN:
         Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterArn
-      DATABASE_CLUSTER_SECRET_ARN: arn:secret
+      DATABASE_CLUSTER_SECRET_ARN:
+        Fn::ImportValue: ${self:provider.stage}-HillsApiDatabaseClusterSecretArn
     events:
       - http:
           path: graphql
