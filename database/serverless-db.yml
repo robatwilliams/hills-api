@@ -30,6 +30,17 @@ resources:
             - cluster
             - hills-api-db-${self:provider.stage}
   Resources:
+    HillsDatabaseSecret:
+      Type: AWS::SecretsManager::Secret
+      Properties:
+        Name: hills-db-credentials-${self:provider.stage}
+        Description: Hills RDS DB auto-generated user password
+        GenerateSecretString:
+          SecretStringTemplate: '{"username": "admin"}'
+          GenerateStringKey: 'password'
+          PasswordLength: 30
+          ExcludeCharacters: '"@/\'
+
     HillsApiDatabase:
       Type: AWS::RDS::DBCluster
       Properties:
@@ -49,7 +60,12 @@ resources:
         # Aurora Serverless currently doesn't support IAM Database Authentication
         # EnableIAMDatabaseAuthentication: true
         MasterUsername: admin
-        MasterUserPassword: password
+        MasterUserPassword:
+          Fn::Join:
+            - ':'
+            - - '{{resolve:secretsmanager'
+              - Ref: HillsDatabaseSecret
+              - 'SecretString:password}}'
 
 custom:
   scripts:
