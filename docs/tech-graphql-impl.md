@@ -16,7 +16,7 @@ Implementing the guidelines for operating GraphQL over HTTP (https://graphql.org
 
 Although Express can handle many things (e.g. compression, CORS), as much as possible should be handled in API Gateway. That also leaves open the possibility of removing Express in future, in favour of some general GraphQL HTTP library that might come about (see https://github.com/graphql/express-graphql/issues/559), or implementing the guidelines manually.
 
-# AWS API Gateway integration
+## AWS API Gateway integration
 
 "Proxy integration" is used, which is the simplest method and Serverless' default.
 
