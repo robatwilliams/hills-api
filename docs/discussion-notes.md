@@ -1,0 +1,26 @@
+# Discussion notes
+
+- What it is and does - show a query in playground
+- Why I made it - change from frontend, interest in hill walking, database of hills is just a static distribution
+- I'll focus on AWS not GraphQL here
+- Endpoints - graphql, schema, playground
+- Whiteboard
+  - API gateway (proxy integration)
+  - Lambdas (graphql one is the only important one)
+  - Aurora Serverless (with Data API)
+- Serverless framework to deploy
+  - via CloudFormation, makes it pretty easy especially to get started then branch out into other bits as you learn
+  - did not inspire much confidence for use in a real app - missing functionality, bugs, needing 3rd party plugins
+  - separate stacks: database + everything else
+- Lambdas
+  - run lambdas locally with serverless-offline, but use real db on AWS
+  - no problems with slow start
+- Aurora Serverless
+  - why not DynamoDB
+  - why not RDS
+  - slow startup - "leaky serverless"; scaling to zero isn't the selling point though
+  - what Data API is & what for - scaling (no persistent connections from many lambdas), no need to put lambdas in VPC
+ - GraphQL
+   - using `express-graphql`, not Apollo; no need for it
+   - but doesn't really need a "server" at all if there was a pure library available
+   - `aws-serverless-express`
