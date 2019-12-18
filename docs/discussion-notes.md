@@ -16,7 +16,7 @@
   - run lambdas locally with serverless-offline, but use real db on AWS
   - no problems with slow start
 - Aurora Serverless
-  - why not DynamoDB - it doesn't suit most use cases, started with it but removed pretty soon
+  - why not DynamoDB - it doesn't suit most use cases (key value store = design data model for use cases not natural models, makes difficult to evolve, doesn't suit this use case), started with it but removed pretty soon
   - why not RDS
   - slow startup - "leaky serverless"; "capacity unit" == "instance", scaling to zero isn't the selling point though (you'd set a minimum >0 in prod)
   - what Data API is & what for - HTTP JSON, scaling (no persistent connections from many lambdas), no need to put lambdas in VPC any more
