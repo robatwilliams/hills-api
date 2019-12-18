@@ -20,8 +20,8 @@
   - why not RDS
   - slow startup - "leaky serverless"; "capacity unit" == "instance", scaling to zero isn't the selling point though (you'd set a minimum >0 in prod)
   - what Data API is & what for - HTTP JSON, scaling (no persistent connections from many lambdas), no need to put lambdas in VPC any more
- - GraphQL
-   - using `express-graphql`, not Apollo; no need for it (may well be the case for most people that use it?)
-   - but doesn't really need a "server" at all if there was a pure HTTP library available - graphql itself is just a pure function with no awareness of HTTP
-   - `aws-serverless-express`
+- GraphQL
+  - using `express-graphql`, not Apollo; no need for it (may well be the case for most people that use it?)
+  - but doesn't really need a "server" at all if there was a pure HTTP library available - graphql itself is just a pure function with no awareness of HTTP
+  - `aws-serverless-express`
 - Landscape generally confusing, much outdated info (e.g. blog posts), docs for things not yet implemented (!), poor failure/error handling, had to read GitHub threads for quite a few things even in this basic app.
