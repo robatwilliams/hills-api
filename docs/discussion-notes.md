@@ -7,7 +7,7 @@
 - Whiteboard
   - API gateway (proxy integration)
   - Lambdas (graphql one is the only important one)
-  - Aurora Serverless (with Data API)
+  - Aurora Serverless (with Data API) = RDS MySQL/etc. without caring about individual instances
 - Serverless framework to deploy
   - via CloudFormation, makes it pretty easy especially to get started then branch out into other bits as you learn
   - did not inspire much confidence for use in a real app - missing functionality, bugs, needing 3rd party plugins
@@ -16,11 +16,12 @@
   - run lambdas locally with serverless-offline, but use real db on AWS
   - no problems with slow start
 - Aurora Serverless
-  - why not DynamoDB
+  - why not DynamoDB - it doesn't suit most use cases, started with it but removed pretty soon
   - why not RDS
-  - slow startup - "leaky serverless"; scaling to zero isn't the selling point though
-  - what Data API is & what for - scaling (no persistent connections from many lambdas), no need to put lambdas in VPC
+  - slow startup - "leaky serverless"; "capacity unit" == "instance", scaling to zero isn't the selling point though (you'd set a minimum >0 in prod)
+  - what Data API is & what for - HTTP JSON, scaling (no persistent connections from many lambdas), no need to put lambdas in VPC any more
  - GraphQL
-   - using `express-graphql`, not Apollo; no need for it
-   - but doesn't really need a "server" at all if there was a pure library available
+   - using `express-graphql`, not Apollo; no need for it (may well be the case for most people that use it?)
+   - but doesn't really need a "server" at all if there was a pure HTTP library available - graphql itself is just a pure function with no awareness of HTTP
    - `aws-serverless-express`
+- Landscape generally confusing, much outdated info (e.g. blog posts), docs for things not yet implemented (!), poor failure/error handling, had to read GitHub threads for quite a few things even in this basic app.
